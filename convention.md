@@ -2,13 +2,43 @@
 
 ## ✅ Branch
 
+- 구현 기능별 영어 명칭 사용
+
 ## ✅ Code (Lint)
+
+- `npm init @eslint/config`
+- **@eslint/create-config@0.4.2**
+- How would you like to use ESLint? · style
+- What type of modules does your project use? · esm
+- Which framework does your project use? · react
+- Does your project use TypeScript? · No / Yes
+- Where does your code run? · browser
 
 ## ✅ Commit
 
-## ✅ Pull Request & Merge
+#### Udacity Git Commit Message Style Guide
 
-## ✅ Gitmoji
+- feat: 새로 생성한 것
+- fix: 버그 수정
+- docs: 문서, 마크다운, 설정 수정
+- style: 포메팅, 코드 변경 X
+- refactor: 코드 리펙토링
+<!-- - test: 테스트 추가, 리펙토링  -->
+- chore: build task, package manager, configs 등 변경
+
+#### Frontend 추가
+
+- css: UI 추가, 수정으로 인한 코드 변경
+- delete: 파일 삭제, 컴포넌트 제거, 함수 제거
+
+## ✅ Pull Request
+
+- 본명 작업 요약
+- Gitmoji 라벨 추가
+
+## ✅ Merge
+
+- merge: 본명 작업 요약
 
 # 참고 링크
 
