@@ -12,11 +12,11 @@
 - [Project Name](#project-name)
 - [목차](#목차)
 - [프로젝트 개요](#프로젝트-개요)
-  - [1. 서비스 제작 및 필요성](#1-서비스-제작-및-필요성)
-  - [2. 활용 공공데이터](#2-활용-공공데이터)
-  - [3. 개발과정 및 방법](#3-개발과정-및-방법)
-  - [4. IA (Infomation-Architecture)](#4-ia-infomation-architecture)
-  - [5. 화면 및 기능 설명](#5-화면-및-기능-설명)
+    - [1. 서비스 제작 및 필요성](#1-서비스-제작-및-필요성)
+    - [2. 활용 공공데이터](#2-활용-공공데이터)
+    - [3. 개발과정 및 방법](#3-개발과정-및-방법)
+    - [4. IA (Infomation-Architecture)](#4-ia-infomation-architecture)
+    - [5. 화면 및 기능 설명](#5-화면-및-기능-설명)
 - [팀 구성원](#팀-구성원)
 - [역할 분담](#역할-분담)
 - [기술 스택](#기술-스택)
@@ -61,6 +61,6 @@
 
 :computer: **Front-End ( Nextjs / Typescript(TS) / TailwindCSS / Redux-Toolkit )**
 
-:computer: **Back-End ( )**
+:computer: **Back-End ( Spring boot / Spring Data Jpa / MySQL )**
 
 # 참고 문헌
