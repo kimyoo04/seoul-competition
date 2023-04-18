@@ -1,10 +1,10 @@
 import MainLayout from "@layouts/MainLayout";
-import About from "@scenes/About";
+import Board from "@scenes/Board";
 
-export default function AboutPage() {
+export default function BoardPage() {
   return (
     <MainLayout>
-      <About />
+      <Board />
     </MainLayout>
   );
 }

@@ -1,10 +1,10 @@
 import MainLayout from "@layouts/MainLayout";
-import About from "@scenes/About";
+import Home from "@scenes/Home";
 
-export default function AboutPage() {
+export default function HomePage() {
   return (
     <MainLayout>
-      <About />
+      <Home />
     </MainLayout>
   );
 }
