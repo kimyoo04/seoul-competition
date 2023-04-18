@@ -3,10 +3,28 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable-dynamic-subset.css");
+/* ------------------------------------------------------------------ */
+/* Pretandard font setting */
+
+@font-face {
+  font-family: "NotoSerifKR";
+  src: url("../public/fonts/Noto_Serif_KR/NotoSerifKR-Light.otf"),
+    url("../public/fonts/Noto_Serif_KR/NotoSerifKR-Regular.otf"),
+    url("../public/fonts/Noto_Serif_KR/NotoSerifKR-Medium.otf"),
+    url("../public/fonts/Noto_Serif_KR/NotoSerifKR-Bold.otf"),
+    url("../public/fonts/Noto_Serif_KR/NotoSerifKR-Black.otf");
+}
+@font-face {
+  font-family: "NotoSansKR";
+  src: url("../public/fonts/Noto_Sans_KR/NotoSansKR-Light.otf"),
+    url("../public/fonts/Noto_Sans_KR/NotoSansKR-Regular.otf"),
+    url("../public/fonts/Noto_Sans_KR/NotoSansKR-Medium.otf"),
+    url("../public/fonts/Noto_Sans_KR/NotoSansKR-Bold.otf"),
+    url("../public/fonts/Noto_Sans_KR/NotoSansKR-Black.otf");
+}
 
 html {
-  font-family: "Pretendard", ui-sans-serif, system-ui, -apple-system,
+  font-family: "NotoSansKR", ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
@@ -26,33 +44,28 @@ h3,
 h4,
 h5,
 h6 {
-  @apply text-light_font_1 dark:text-night_font_1;
+  @apply text-font_1;
 }
 
 a,
 p,
 i {
-  @apply text-light_font_1 dark:text-night_font_1;
+  @apply text-font_1;
 }
 
 span {
-  @apply text-light_font_1 dark:text-night_font_1;
+  @apply text-font_1;
 }
 
 html,
 body,
 input,
 textarea {
-  @apply bg-light_bg_1 dark:bg-night_bg_1 text-light_font_1 dark:text-night_font_1;
-}
-
-input:focus {
-  outline: none;
-  border-bottom: 0.12rem solid gray;
+  @apply bg-bg_1 text-font_1;
 }
 
 footer {
-  @apply text-gray-900 bg-light_bg_1 dark:text-night_font_1 dark:bg-night_bg_1;
+  @apply text-gray-900 bg-bg_1;
 }
 
 /* ------------------------------------------------------------------ */
@@ -63,12 +76,14 @@ footer {
   justify-content: center;
   align-items: center;
 }
+
 .col-start {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
 }
+
 .col-end {
   display: flex;
   flex-direction: column;
