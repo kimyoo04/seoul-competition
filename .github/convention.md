@@ -2,7 +2,10 @@
 
 ## ✅ Branch
 
-- 구현 기능별 영어 명칭 사용
+- default branch: develop
+- deploy branch: main
+- feature branch: feature/이슈 명
+- hotfix branch: hotfix/이슈 명
 
 ## ✅ Code (Lint)
 
@@ -34,7 +37,6 @@
 ## ✅ Pull Request
 
 - 본명 작업 요약
-- Gitmoji 라벨 추가
 
 ## ✅ Merge
 
