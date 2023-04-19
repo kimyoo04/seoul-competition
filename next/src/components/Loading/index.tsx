@@ -1,5 +1,19 @@
 import { motion } from "framer-motion";
 
+const loadingCircleVariants = {
+  start: {
+    rotate: 0,
+  },
+  end: {
+    rotate: 360,
+    transition: {
+      duration: 1.5,
+      repeat: Infinity,
+      ease: "linear",
+    },
+  },
+};
+
 export default function Loading() {
   if (typeof window !== "undefined") {
     window.document.body.style.overflow = "hidden";
@@ -7,13 +21,13 @@ export default function Loading() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="fixed top-0 left-0 z-50 w-screen h-screen col-center bg-slate-400"
-      key={"loading"}
+      className="flex items-center justify-center h-screen"
+      variants={loadingCircleVariants}
+      animate="end"
+      initial="start"
     >
-      <span className="text-4xl font-bold">loading</span>
+      <div className="w-10 h-10 border-4 border-t-4 border-gray-200 rounded-full border-t-blue-500"></div>
     </motion.div>
   );
 }
