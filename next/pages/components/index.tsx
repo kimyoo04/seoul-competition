@@ -3,7 +3,7 @@ import { alertActions } from "@features/alert/alertSlice";
 import MainLayout from "@layouts/MainLayout";
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 
-export default function BoardPage() {
+export default function ComponentsPage() {
   const dispatch = useAppDispatch();
   const isAlert = useAppSelector((state) => state.alert.isAlert);
   return (
