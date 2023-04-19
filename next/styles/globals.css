@@ -44,24 +44,24 @@ h3,
 h4,
 h5,
 h6 {
-  @apply text-font_1;
+  @apply text-font_black;
 }
 
 a,
 p,
 i {
-  @apply text-font_1;
+  @apply text-font_black;
 }
 
 span {
-  @apply text-font_1;
+  @apply text-font_black;
 }
 
 html,
 body,
 input,
 textarea {
-  @apply bg-bg_1 text-font_1;
+  @apply bg-bg_1 text-font_black;
 }
 
 footer {
@@ -107,4 +107,27 @@ footer {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+}
+
+/* ------------------------------------------------------------------ */
+/* 흰배경, 둥근 모서리, 그림자 */
+
+input,
+.box,
+.card {
+  @apply bg-white shadow-sm shadow-back_color rounded-3xl;
+}
+
+/* ------------------------------------------------------------------ */
+/* 경계 */
+.box,
+.card {
+  @apply border border-gray_2;
+}
+
+/* ------------------------------------------------------------------ */
+.box {
+}
+
+.card {
 }
