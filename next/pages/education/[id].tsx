@@ -1,12 +1,13 @@
 import { useRouter } from "next/router";
+import MainLayout from "@layouts/MainLayout";
 
 export default function EducationDetailPage() {
   const router = useRouter();
   const { id } = router.query;
 
   return (
-    <div>
+    <MainLayout>
       <h1>Education {id}</h1>
-    </div>
+    </MainLayout>
   );
 }
