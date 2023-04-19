@@ -14,6 +14,11 @@ export default function BoardPage() {
           <button className="unaccent_btn_border">unaccent_btn_border</button>
           <button className="round_btn">round_btn</button>
         </div>
+
+        <div className="gap-4 col-center">
+          <h1 className="text-h2">inputs</h1>
+          <input className="textfield" placeholder="텍스트를 입력해주세요." />
+        </div>
       </div>
     </MainLayout>
   );
