@@ -7,6 +7,7 @@ module.exports = {
       colors: {
         main_color: "#2F80ED",
         sub_color: "#96d0f2",
+        back_color: "#c2d1ff",
 
         gray_1: "#303030",
         gray_2: "#808080",
@@ -15,7 +16,9 @@ module.exports = {
 
         bg_1: "#FBFBFB",
 
-        font_1: "#101010",
+        font_black: "#101010",
+        font_white: "#ffffff",
+        font_gray: "#808080",
 
         alert_success: "#219653",
         alert_warning: "#F2C94C",
