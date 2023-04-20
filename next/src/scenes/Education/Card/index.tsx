@@ -1,10 +1,15 @@
-import { IEducation } from "@type/education";
+import { useAppDispatch } from "@toolkit/hook";
+import { IEducationCard } from "@type/education";
+import Link from "next/link";
 
-export default function Card({ data }: { data: IEducation }) {
+export default function Card({ data }: { data: IEducationCard }) {
+  const dispatch = useAppDispatch();
+
   return (
-    <a
-      href={data.link}
+    <Link
+      href={`/educations${data.id}`}
       className="flex flex-col w-full max-w-2xl gap-4 p-4 bg-white rounded-2xl"
+      // onClick={() => dispatch()}
     >
       <div className="">
         <span className="font-bold text-h4">{data.name}</span>
@@ -32,24 +37,6 @@ export default function Card({ data }: { data: IEducation }) {
           </div>
         </div>
       </div>
-
-      <div className="flex justify-between">
-        <div className="col-start">
-          <span className="">등록 시작 및 종료일</span>
-          <div className="gap-4 row-center">
-            <span>{data.registerStart}</span>
-            <span>{data.registerEnd}</span>
-          </div>
-        </div>
-
-        <div className="col-start">
-          <span className="">강좌 시작 및 종료일</span>
-          <div className="gap-4 row-center">
-            <span>{data.educationStart}</span>
-            <span>{data.educationEnd}</span>
-          </div>
-        </div>
-      </div>
-    </a>
+    </Link>
   );
 }
