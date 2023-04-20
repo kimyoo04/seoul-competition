@@ -37,16 +37,16 @@ export default function Card({ data }: { data: IEducation }) {
         <div className="col-start">
           <span className="">등록 시작 및 종료일</span>
           <div className="gap-4 row-center">
-            <span>{data.applyStart}</span>
-            <span>{data.applyEnd}</span>
+            <span>{data.registerStart}</span>
+            <span>{data.registerEnd}</span>
           </div>
         </div>
 
         <div className="col-start">
           <span className="">강좌 시작 및 종료일</span>
           <div className="gap-4 row-center">
-            <span>{data.start}</span>
-            <span>{data.end}</span>
+            <span>{data.educationStart}</span>
+            <span>{data.educationEnd}</span>
           </div>
         </div>
       </div>

@@ -1,10 +1,10 @@
 export interface IEducation {
   id: number;
   name: string;
-  applyStart: string;
-  applyEnd: string;
-  start: string;
-  end: string;
+  registerStart: string;
+  registerEnd: string;
+  educationStart: string;
+  educationEnd: string;
   capacity: number;
   status: string;
   price: number;
