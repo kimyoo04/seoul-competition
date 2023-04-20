@@ -1,5 +1,5 @@
 /* 버튼 공통 */
-button,
+.base_btn,
 .accent_btn_fill,
 .accent_btn_border,
 .border_btn {
@@ -7,7 +7,7 @@ button,
 }
 
 /* 버튼 커스텀 */
-button {
+.base_btn {
 }
 
 .unaccent_btn_fill {
