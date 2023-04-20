@@ -17,6 +17,8 @@
     "rootDir": "./",
     "baseUrl": "./",
     "paths": {
+      "@api": ["./src/api"],
+      "@api/*": ["./src/api/*"],
       "@components": ["./src/components"],
       "@components/*": ["./src/components/*"],
       "@constants": ["./src/constants"],
