@@ -1,4 +1,4 @@
-export interface IEducation {
+export interface IEducationCard {
   id: number;
   name: string;
   registerStart: string;
@@ -9,4 +9,12 @@ export interface IEducation {
   status: string;
   price: number;
   link: string;
+}
+
+export interface IEducationstate {
+  cards: IEducationCard[];
+  status: "idle" | "loading" | "failed";
+  error: string | null;
+  page: number;
+  hasMore: boolean;
 }
