@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPosts } from "@api/fetchPosts;
+import { fetchPosts } from "@api/fetchPosts";
 import { IPostState } from "@type/post";
 
 const initialState: IPostState = {
-  data: [],
+  posts: [],
   status: "idle",
   error: null,
   page: 1,
@@ -21,7 +21,7 @@ export const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = "idle";
-        state.data = [...state.data, ...action.payload];
+        state.posts = [...state.posts, ...action.payload];
         state.hasMore = action.payload.length > 0;
         state.page = state.page + 1;
       })
