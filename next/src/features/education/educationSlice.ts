@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchEducations } from "@api/fetchEducation";
+import { fetchEducations } from "@api/fetchEducations";
 import { IEducationstate } from "@type/education";
 
 const initialState: IEducationstate = {

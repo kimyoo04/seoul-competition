@@ -6,7 +6,7 @@ import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
 
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import { fetchEducations } from "@api/fetchEducation";
+import { fetchEducations } from "@api/fetchEducations";
 
 // import { educationData } from "public/data/educationData";
 
