@@ -12,7 +12,7 @@ export interface IEducationCard {
 }
 
 export interface IEducationstate {
-  cards: IEducationCard[];
+  educations: IEducationCard[];
   status: "idle" | "loading" | "failed";
   error: string | null;
   page: number;
