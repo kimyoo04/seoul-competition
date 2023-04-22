@@ -1,10 +1,10 @@
 import MainLayout from "@layouts/MainLayout";
-import Education from "@scenes/Education";
+import Educations from "@scenes/Educations";
 
-export default function EducationPage() {
+export default function EducationsPage() {
   return (
     <MainLayout>
-      <Education />
+      <Educations />
     </MainLayout>
   );
 }

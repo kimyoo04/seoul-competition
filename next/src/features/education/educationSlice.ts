@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchEducations } from "@api/fetchEducation";
+import { fetchEducations } from "@api/fetchEducations";
 import { IEducationstate } from "@type/education";
 
 const initialState: IEducationstate = {
-  cards: [],
+  educations: [],
   status: "idle",
   error: null,
   page: 1,
@@ -21,7 +21,7 @@ export const educationslice = createSlice({
       })
       .addCase(fetchEducations.fulfilled, (state, action) => {
         state.status = "idle";
-        state.cards = [...state.cards, ...action.payload];
+        state.educations = [...state.educations, ...action.payload];
         state.hasMore = action.payload.length > 0;
         state.page = state.page + 1;
       })
