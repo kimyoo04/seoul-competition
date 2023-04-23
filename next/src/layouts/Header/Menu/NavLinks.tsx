@@ -14,8 +14,8 @@ export default function NavLinks() {
       className={`w-48 gap-4 col-start sm:mt-auto`}
     >
       <NavLink linkpath={"home"} name={"Home"} delay={0.1} />
-      <NavLink linkpath={"board"} name={"Board"} delay={0.2} />
-      <NavLink linkpath={"education"} name={"Education"} delay={0.3} />
+      <NavLink linkpath={"posts"} name={"Posts"} delay={0.2} />
+      <NavLink linkpath={"educations"} name={"Educations"} delay={0.3} />
     </motion.nav>
   );
 }

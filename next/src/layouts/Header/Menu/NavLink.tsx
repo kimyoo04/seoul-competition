@@ -23,17 +23,17 @@ export default function NavLink({
           className={`block w-8 h-[1px] transition-all duration-500 group-hover:w-48 ${
             "/home" === router.pathname && "/home" === link
               ? colorVariants.maincolor.borderActive
-              : "/board" === router.pathname && "/board" === link
+              : "/posts" === router.pathname && "/posts" === link
               ? colorVariants.maincolor.borderActive
-              : router.pathname.includes("/education") && "/education" === link
+              : router.pathname.includes("/educations") && "/educations" === link
               ? colorVariants.maincolor.borderActive
               : null
           } ${
             "/home" === link
               ? colorVariants.maincolor.borderHover
-              : "/board" === link
+              : "/posts" === link
               ? colorVariants.maincolor.borderHover
-              : "/education" === link
+              : "/educations" === link
               ? colorVariants.maincolor.borderHover
               : null
           }`}
@@ -42,18 +42,18 @@ export default function NavLink({
           className={`text-4xl transition-all duration-500  ${
             "/home" === router.pathname && "/home" === link
               ? colorVariants.maincolor.textActive
-              : "/board" === router.pathname && "/board" === link
+              : "/posts" === router.pathname && "/posts" === link
               ? colorVariants.maincolor.textActive
-              : router.pathname.includes("/education") &&
-                "/education" === link
+              : router.pathname.includes("/educations") &&
+                "/educations" === link
               ? colorVariants.maincolor.textActive
               : null
           } ${
             "/home" === link
               ? colorVariants.maincolor.textHover
-              : "/board" === link
+              : "/posts" === link
               ? colorVariants.maincolor.textHover
-              : "/education" === link
+              : "/educations" === link
               ? colorVariants.maincolor.textHover
               : "/contactus" === link
               ? colorVariants.maincolor.textHover
@@ -66,10 +66,10 @@ export default function NavLink({
           className={`block w-8 h-[1px] transition-all duration-500 group-hover:w-48 ${
             "/home" === router.pathname && "/home" === link
               ? colorVariants.maincolor.borderActive
-              : "/board" === router.pathname && "/board" === link
+              : "/posts" === router.pathname && "/posts" === link
               ? colorVariants.maincolor.borderActive
-              : router.pathname.includes("/education") &&
-                "/education" === link
+              : router.pathname.includes("/educations") &&
+                "/educations" === link
               ? colorVariants.maincolor.borderActive
               : "/contactus" === router.pathname && "/contactus" === link
               ? colorVariants.maincolor.borderActive
@@ -77,9 +77,9 @@ export default function NavLink({
           } ${
             "/home" === link
               ? colorVariants.maincolor.borderHover
-              : "/board" === link
+              : "/posts" === link
               ? colorVariants.maincolor.borderHover
-              : "/education" === link
+              : "/educations" === link
               ? colorVariants.maincolor.borderHover
               : "/contactus" === link
               ? colorVariants.maincolor.borderHover
