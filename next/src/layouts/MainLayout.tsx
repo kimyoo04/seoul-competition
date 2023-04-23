@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Header from "./Header";
 
 export default function MainLayout({
   children,
@@ -6,10 +7,11 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <motion.div exit={{ opacity: 0 }}>
-      <div className="flex flex-col items-center justify-center">
-        {children}
-      </div>
-    </motion.div>
+    <>
+      <Header />
+      <motion.div exit={{ opacity: 0 }}>
+        <div className=" mt-20 container px-5 col-center">{children}</div>
+      </motion.div>
+    </>
   );
 }
