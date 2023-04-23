@@ -1,28 +1,28 @@
 import { useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import Card from "./Card";
+import Item from "./Item";
 import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
 
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import { fetchEducations } from "@api/fetchEducation";
+import { fetchPosts } from "@api/fetchPosts";
 
-// import { educationData } from "public/data/educationData";
-
-export default function Education() {
+export default function Posts() {
   const dispatch = useAppDispatch();
-  const { cards, error, hasMore, page, status } = useAppSelector(
-    (state) => state.education
+  const { posts, error, hasMore, page, status } = useAppSelector(
+    (state) => state.post
   );
 
+  // 최초 게시글들 API 요청
   useEffect(() => {
-    dispatch(fetchEducations(page));
+    dispatch(fetchPosts(page));
   }, [dispatch]);
 
-  const fetchMoreCards = () => {
+  // 추가 게시글들 API 요청
+  const fetchMorePosts = () => {
     if (hasMore) {
-      dispatch(fetchEducations(page));
+      dispatch(fetchPosts(page));
     }
   };
 
@@ -30,14 +30,14 @@ export default function Education() {
     <div className="w-screen h-screen px-4 bg-gray_4">
       {/* 교육 무한 스크롤 영역 */}
       <InfiniteScroll
-        dataLength={cards.length}
-        next={fetchMoreCards}
+        dataLength={posts.length}
+        next={fetchMorePosts}
         hasMore={hasMore}
         loader={<Loading />}
       >
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {cards.map((card) => (
-            <Card key={card.id} data={card} />
+          {posts.map((post) => (
+            <Item key={post.id} post={post} />
           ))}
         </div>
       </InfiniteScroll>

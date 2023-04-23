@@ -1,10 +1,10 @@
 import MainLayout from "@layouts/MainLayout";
-import Board from "@scenes/Board";
+import Posts from "@scenes/Posts";
 
-export default function BoardPage() {
+export default function PostsPage() {
   return (
     <MainLayout>
-      <Board />
+      <Posts />
     </MainLayout>
   );
 }
