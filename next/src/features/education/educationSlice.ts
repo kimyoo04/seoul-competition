@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchEducations } from "@api/fetchEducations";
-import { IEducationstate } from "@type/education";
+import { IEducationCard, IEducationstate } from "@type/education";
 
 const initialState: IEducationstate = {
   educations: [],
@@ -19,12 +19,15 @@ export const educationslice = createSlice({
       .addCase(fetchEducations.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchEducations.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.educations = [...state.educations, ...action.payload];
-        state.hasMore = action.payload.length > 0;
-        state.page = state.page + 1;
-      })
+      .addCase(
+        fetchEducations.fulfilled,
+        (state, action: PayloadAction<IEducationCard[]>) => {
+          state.status = "idle";
+          state.educations = [...state.educations, ...action.payload];
+          state.hasMore = action.payload.length > 0;
+          state.page = state.page + 1;
+        }
+      )
       .addCase(fetchEducations.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Something went wrong";
