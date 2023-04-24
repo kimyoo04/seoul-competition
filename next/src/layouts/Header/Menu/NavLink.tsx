@@ -19,73 +19,7 @@ export default function NavLink({
   return (
     <motion.div variants={fadeIn("left", "easeInOut", delay, 0.4)}>
       <Link href={link} className="group">
-        <div
-          className={`block w-8 h-[1px] transition-all duration-500 group-hover:w-48 ${
-            "/home" === router.pathname && "/home" === link
-              ? colorVariants.maincolor.borderActive
-              : "/posts" === router.pathname && "/posts" === link
-              ? colorVariants.maincolor.borderActive
-              : router.pathname.includes("/educations") && "/educations" === link
-              ? colorVariants.maincolor.borderActive
-              : null
-          } ${
-            "/home" === link
-              ? colorVariants.maincolor.borderHover
-              : "/posts" === link
-              ? colorVariants.maincolor.borderHover
-              : "/educations" === link
-              ? colorVariants.maincolor.borderHover
-              : null
-          }`}
-        />
-        <span
-          className={`text-4xl transition-all duration-500  ${
-            "/home" === router.pathname && "/home" === link
-              ? colorVariants.maincolor.textActive
-              : "/posts" === router.pathname && "/posts" === link
-              ? colorVariants.maincolor.textActive
-              : router.pathname.includes("/educations") &&
-                "/educations" === link
-              ? colorVariants.maincolor.textActive
-              : null
-          } ${
-            "/home" === link
-              ? colorVariants.maincolor.textHover
-              : "/posts" === link
-              ? colorVariants.maincolor.textHover
-              : "/educations" === link
-              ? colorVariants.maincolor.textHover
-              : "/contactus" === link
-              ? colorVariants.maincolor.textHover
-              : null
-          }`}
-        >
-          {name}
-        </span>
-        <div
-          className={`block w-8 h-[1px] transition-all duration-500 group-hover:w-48 ${
-            "/home" === router.pathname && "/home" === link
-              ? colorVariants.maincolor.borderActive
-              : "/posts" === router.pathname && "/posts" === link
-              ? colorVariants.maincolor.borderActive
-              : router.pathname.includes("/educations") &&
-                "/educations" === link
-              ? colorVariants.maincolor.borderActive
-              : "/contactus" === router.pathname && "/contactus" === link
-              ? colorVariants.maincolor.borderActive
-              : null
-          } ${
-            "/home" === link
-              ? colorVariants.maincolor.borderHover
-              : "/posts" === link
-              ? colorVariants.maincolor.borderHover
-              : "/educations" === link
-              ? colorVariants.maincolor.borderHover
-              : "/contactus" === link
-              ? colorVariants.maincolor.borderHover
-              : null
-          }`}
-        />
+        <span className={`text-4xl transition-all duration-500`}>{name}</span>
       </Link>
     </motion.div>
   );
