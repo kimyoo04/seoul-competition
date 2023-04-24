@@ -9,7 +9,9 @@ import { fetchPostDetail } from "@api/fetchPostDetail";
 import { postDetail1 } from "public/data/postData";
 
 function timeSince(date: string) {
-  const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
+  const seconds = Math.floor(
+    (new Date().getTime() - new Date(date).getTime()) / 1000
+  );
 
   let interval = seconds / 31536000;
 
@@ -20,7 +22,7 @@ function timeSince(date: string) {
   if (interval > 1) {
     return Math.floor(interval) + "개월 전";
   }
-  interval = seconds / 86400;
+  interval = seconds / 86500;
   if (interval > 1) {
     return Math.floor(interval) + "일 전";
   }
@@ -48,28 +50,78 @@ export default function PostDetail({ id }: { id: string }) {
     <div className="px-4 rounded-2xl shadow-md bg-gray-100">
       <div className="max-w-screen-lg mx-auto my-8">
         <div className="bg-white rounded-2xl shadow-lg p-8">
-          <h2 className="text-2xl font-bold mb-4">{postDetail1.title}</h2>
-          <div className="text-gray-500 mb-4">
-            <span>작성자: {postDetail1.nickname}</span>
-            <span className="mx-2">|</span>
-            <span>작성일: {postDetail1.createdAt.slice(0, 10)}</span>
-            <span className="mx-2">|</span>
-            <span>조회수: {postDetail1.hits}</span>
-          </div>
-          <div className="text-gray-800 mb-8">{postDetail1.content}</div>
-          <h3 className="text-lg font-semibold mb-4">댓글</h3>
-          {postDetail1.comments.map((comment) => (
-            <div key={comment.id} className="bg-gray-100 rounded-lg p-4 mb-4">
-              <div className="text-gray-500 mb-2">
-                <span>{comment.nickname}</span>
-                <span className="mx-2">|</span>
-                <span>{comment.createdAt.slice(0, 10)}</span>
-                <span className="mx-2">|</span>
-                <span>{timeSince(comment.createdAt)}</span>
+          {/* 게시글 영역 */}
+          <div>
+            <div className="flex flex-wrap justify-between">
+              {/* 게시글 제목 */}
+              <h2 className="text-2xl font-bold mb-2">{postDetail1.title}</h2>
+
+              {/* 수정, 삭제 버튼 */}
+              <div className="w-24 text-sm my-2">
+                <button className="m-0.5 px-2 py-1 rounded-lg bg-blue-400 text-font_white">
+                  수정
+                </button>
+                <button className="m-0.5 px-2 py-1 rounded-lg bg-red-400 text-font_white">
+                  삭제
+                </button>
               </div>
-              <div className="text-gray-800">{comment.content}</div>
             </div>
-          ))}
+
+            {/* 작성자, 작성일, 조회수 */}
+            <div className=" text-sm mb-8">
+              <span className=" text-gray-500 ">
+                작성자: {postDetail1.nickname}
+              </span>
+              <span className="text-gray-500 mx-2">|</span>
+              <span className=" text-gray-500 ">
+                작성일: {postDetail1.createdAt.slice(0, 10)}
+              </span>
+              <span className="text-gray-500 mx-2">|</span>
+              <span className=" text-gray-500 ">
+                조회수: {postDetail1.hits}
+              </span>
+            </div>
+
+            {/* 내용 영역*/}
+            <div className=" text-gray-800 mb-16">{postDetail1.content}</div>
+          </div>
+
+          {/* 댓글 영역 */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4">댓글</h3>
+            {postDetail1.comments.map((comment) => (
+              <div
+                key={comment.id}
+                className=" bg-gray-100 rounded-lg px-4 py-2 mb-4"
+              >
+                <div className="flex flex-wrap justify-between">
+                  <div className="text-sm my-2">
+                    <span className=" text-gray-500 ">{comment.nickname}</span>
+                    <span className=" text-gray-500  mx-2">|</span>
+                    <span className=" text-gray-500 ">{comment.createdAt}</span>
+                    <span className=" text-gray-500 mx-2">|</span>
+                    <span className=" text-gray-500 ">
+                      {timeSince(comment.createdAt)}
+                    </span>
+                  </div>
+
+                  {/* 수정, 삭제 버튼 */}
+                  <div className="w-24 text-sm my-2">
+                    <button className="m-0.5 px-2 py-1 rounded-lg bg-blue-400 text-font_white">
+                      수정
+                    </button>
+                    <button className="m-0.5 px-2 py-1 rounded-lg bg-red-400 text-font_white">
+                      삭제
+                    </button>
+                  </div>
+                </div>
+
+                <div className=" mx-2 mb-2 text-gray-800">
+                  {comment.content}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <ScrollButton />
@@ -86,7 +138,7 @@ export default function PostDetail({ id }: { id: string }) {
 // ) : (
 //   // fetch 성공 화면 출력
 //   <div>
-//     {/* 게시글 내용 영역 */}
+// {/* 게시글 내용 영역 */}
 //     <div>{post.id}</div>
 //     <div>{post.nickname}</div>
 //     <div>{post.title}</div>
@@ -94,7 +146,7 @@ export default function PostDetail({ id }: { id: string }) {
 //     <div>{post.createdAt}</div>
 //     <div>{post.hits}</div>
 
-//     {/* 댓글 영역 */}
+// {/* 댓글 영역 */}
 //     <div>
 //       {post.comments.map((comment) => (
 //         <div>

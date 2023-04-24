@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { posts } from "public/data/postData";
+
 import Item from "./Item";
 import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
+
+import {posts} from "public/data/postData"
 
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { fetchPosts } from "@api/fetchPosts";
@@ -14,7 +16,7 @@ export default function Posts() {
   //   (state) => state.posts
   // );
 
-  // // 최초 게시글들 API 요청
+  // 최초 게시글들 API 요청
   // useEffect(() => {
   //   dispatch(fetchPosts(page));
   // }, [dispatch]);
@@ -28,12 +30,22 @@ export default function Posts() {
 
   return (
     <div className="w-full p-4 bg-gray_4 rounded-2xl">
-      <div className="w-full p-4 text-xl font-bold">자유 게시판</div>
-      <div className="gap-4 grid grid-cols-1 ">
-        {posts.map((post) => (
-          <Item key={post.id} post={post} />
-        ))}
-      </div>
+      {/* <InfiniteScroll
+        dataLength={posts.length}
+        next={fetchMorePosts}
+        hasMore={hasMore}
+        loader={<Loading />}
+      > */}
+        <div className="w-full p-4 text-xl font-bold">자유 게시판</div>
+        <div className="gap-4 grid grid-cols-1 ">
+          {posts.map((post) => (
+            <Item key={post.id} post={post} />
+          ))}
+        </div>
+      {/* </InfiniteScroll> */}
+
+      {/* fetch 에러 발생시 화면 출력 */}
+      {/* {error && <p className="text-alert_danger">{error}</p>} */}
 
       {/* 최상단 이동 버튼 */}
       <ScrollButton />
@@ -54,6 +66,3 @@ export default function Posts() {
 //     ))}
 //   </div>
 // </InfiniteScroll>
-
-// {/* fetch 에러 발생시 화면 출력 */}
-// {error && <p className="text-alert_danger">{error}</p>}
