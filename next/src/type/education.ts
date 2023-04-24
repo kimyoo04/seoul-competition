@@ -1,14 +1,14 @@
 export interface IEducationCard {
   id: number;
   name: string;
+  status: string;
+  price: number;
+  capacity: number;
   registerStart: string;
   registerEnd: string;
   educationStart: string;
   educationEnd: string;
-  capacity: number;
-  status: string;
-  price: number;
-  link: string;
+  url: string;
 }
 
 export interface IEducationstate {
