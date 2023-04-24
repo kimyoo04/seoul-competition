@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchPosts } from "@api/fetchPosts";
-import { IPostState } from "@type/post";
+import { IPostsState } from "@type/posts";
 
-const initialState: IPostState = {
+const initialState: IPostsState = {
   posts: [],
   status: "idle",
   error: null,
@@ -20,8 +20,9 @@ export const postsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
+        console.log(...action.payload.data);
         state.status = "idle";
-        state.posts = [...state.posts, ...action.payload];
+        state.posts = [...state.posts, ...action.payload.data];
         state.hasMore = action.payload.length > 0;
         state.page = state.page + 1;
       })

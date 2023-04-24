@@ -2,14 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import alertReducer from "@features/alert/alertSlice";
 import educationReducer from "@features/education/educationSlice";
-import postReducer from "@features/post/postSlice";
+import postsReducer from "@features/post/postsSlice";
 import postDetailReducer from "@features/post/postDetailSlice";
 
 export const store = configureStore({
   reducer: {
     alert: alertReducer,
     education: educationReducer,
-    post: postReducer,
+    posts: postsReducer,
     postDetail: postDetailReducer,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

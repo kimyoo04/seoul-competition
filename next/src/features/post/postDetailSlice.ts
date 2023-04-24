@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchPostDetail } from "@api/fetchPostDetail";
 import { IPostDetailState } from "@type/postDetail";
+import postsSlice from "./postsSlice";
 
 const initialState: IPostDetailState = {
   post: {
@@ -9,15 +10,15 @@ const initialState: IPostDetailState = {
     title: "",
     content: "",
     createdAt: "",
-    count: "",
+    hits: -1,
     comments: [],
   },
   status: "idle",
   error: null,
 };
 
-export const postsSlice = createSlice({
-  name: "posts",
+export const postDetailSlice = createSlice({
+  name: "postDetail",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -36,4 +37,4 @@ export const postsSlice = createSlice({
   },
 });
 
-export default postsSlice.reducer;
+export default postDetailSlice.reducer;
