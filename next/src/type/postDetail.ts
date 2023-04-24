@@ -5,7 +5,7 @@ export interface IPostDetail {
   title: string;
   content: string;
   createdAt: string;
-  count: string;
+  hits: number;
   comments: IPostComment[];
 }
 
@@ -15,6 +15,7 @@ export interface IPostComment {
   post_id: string;
   nickname: string;
   content: string;
+  createdAt: string;
 }
 
 // 게시글 State

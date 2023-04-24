@@ -5,12 +5,12 @@ export interface IPost {
   title: string;
   content: string;
   createdAt: string;
-  count: string;
-  comment_num: number;
+  hits: number;
+  comments_num: number;
 }
 
 // 게시판 State
-export interface IPostState {
+export interface IPostsState {
   posts: IPost[];
   status: "idle" | "loading" | "failed";
   error: string | null;
