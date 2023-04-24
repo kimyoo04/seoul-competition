@@ -9,8 +9,8 @@ export default function MainLayout({
   return (
     <>
       <Header />
-      <motion.div exit={{ opacity: 0 }}>
-        <div className=" mt-20 container px-5 col-center">{children}</div>
+      <motion.div className="col-center mt-20" exit={{ opacity: 0 }}>
+        <div className="container px-5 col-center">{children}</div>
       </motion.div>
     </>
   );
