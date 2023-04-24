@@ -3,6 +3,7 @@ import Link from "next/link";
 
 export default function Item({ post }: { post: IPost }) {
   return (
+    // postDetail로 링크
     <Link
       href={`/posts/${post.id}`}
       className="flex flex-col w-full gap-4 p-4 bg-white shadow-md rounded-2xl"
@@ -12,6 +13,7 @@ export default function Item({ post }: { post: IPost }) {
         <div className="text-sm text-gray-500">{post.nickname}</div>
       </div>
 
+      {/* 제목과 내용 */}
       <div>
         <div className="font-bold text-lg mb-2">{post.title}</div>
         <div className="text-gray-800">{post.content}</div>
@@ -20,11 +22,9 @@ export default function Item({ post }: { post: IPost }) {
       {/* 조회와 댓글 */}
       <div className="flex justify-between mt-4">
         <div className="text-sm text-gray-500">
-          조회 {post.hits} · 댓글 {post.comments_num}
+          조회 {post.hits} · 댓글 {post.commentsCount}
         </div>
-        <div className="text-sm text-gray-500">
-          {post.createdAt.slice(0, 10)}
-        </div>
+        <div className="text-sm text-gray-500">{post.createdAt}</div>
       </div>
     </Link>
   );
