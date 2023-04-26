@@ -4,6 +4,7 @@ import alertReducer from "@features/alert/alertSlice";
 import educationReducer from "@features/education/educationSlice";
 import postsReducer from "@features/post/postsSlice";
 import postDetailReducer from "@features/post/postDetailSlice";
+import sidebarReducer from "@features/sidebar/sidebarSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     education: educationReducer,
     posts: postsReducer,
     postDetail: postDetailReducer,
+    sidebar: sidebarReducer,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
