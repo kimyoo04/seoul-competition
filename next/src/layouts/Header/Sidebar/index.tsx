@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import NavLinks from "./NavLinks";
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { sidebarActions } from "@features/sidebar/sidebarSlice";
-import Portal from "@components/Portal";
+import Portal from "./Portal";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
