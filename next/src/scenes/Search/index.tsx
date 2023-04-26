@@ -2,10 +2,11 @@ import { useEffect } from "react";
 
 import { animate, stagger } from "framer-motion";
 
-import SearchBar from "@components/SearchBar";
 import SearchHistory from "./SearchHistory";
 import SearchRanking from "./SearchRanking";
 import { useAppSelector } from "@toolkit/hook";
+import SearchBar from "./SearchBar";
+import ChooseCategory from "./ChooseCategory";
 
 export default function Search() {
   const searchCategory = useAppSelector((state) => state.search.searchCategory);
@@ -27,6 +28,7 @@ export default function Search() {
       {/* 텍스트 입력 검색 영역 */}
       <li>
         <SearchBar category={searchCategory} />
+        <ChooseCategory />
       </li>
 
       {/* 검색 기록 */}
