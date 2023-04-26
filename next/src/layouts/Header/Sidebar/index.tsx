@@ -3,6 +3,7 @@ import NavLinks from "./NavLinks";
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { sidebarActions } from "@features/sidebar/sidebarSlice";
 import Portal from "./Portal";
+import ButtonWrapper from "@components/Animation/ButtonWrapper";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
@@ -27,15 +28,18 @@ const SideBar = () => {
           animate={{ x: 0 }}
           exit={{ x: 300 }}
           transition={{ duration: 0.2 }}
-          className="fixed right-0 z-40 w-48 h-screen max-w-md p-4 shadow-lg bg-main_color"
+          className="relative right-0 z-40 w-64 h-screen max-w-md p-8 shadow-lg bg-main_color"
         >
-          {/* 닫기 버튼 */}
-          <button onClick={() => dispatch(sidebarActions.toggleSidebar())}>
-            <i className="text-2xl text-font_white ri-close-line" />
-          </button>
-
-          {/* Modal의 Children = NavLinks */}
+          {/* 네비게이션 링크 */}
           <NavLinks />
+
+          {/* 닫기 버튼 */}
+          <button
+            className="absolute bottom-0 right-0 p-8"
+            onClick={() => dispatch(sidebarActions.toggleSidebar())}
+          >
+            <i className="text-4xl text-font_white ri-close-line" />
+          </button>
         </motion.div>
       )}
     </AnimatePresence>
