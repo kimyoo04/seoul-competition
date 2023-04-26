@@ -5,5 +5,5 @@ input {
 
 /* 커스텀 */
 .textfield {
-  @apply border border-gray_2 focus:border-main_color focus:outline-none placeholder:text-sm;
+  @apply border border-gray_2 focus:border-main_color focus:outline-none placeholder:text-sm hover:border-main_color;
 }
