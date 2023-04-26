@@ -10,7 +10,7 @@ export default function Logo() {
         }}
         className="absolute w-[72px] z-20"
       >
-        <span className="text-2xl font-semibold text-main_color dark:text-main_color">
+        <span className="text-2xl font-bold text-main_color dark:text-main_color">
           Senior+
         </span>
       </motion.div>
