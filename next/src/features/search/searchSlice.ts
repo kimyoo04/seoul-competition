@@ -21,7 +21,7 @@ export const searchSlice = createSlice({
       state.isClicked = false;
       state.searchCategory = "";
     },
-    choose: (state, actions: PayloadAction<ISearchCategory>) => {
+    chooseCategory: (state, actions: PayloadAction<ISearchCategory>) => {
       state.isClicked = false;
       state.searchCategory = actions.payload.searchCategory;
     },
