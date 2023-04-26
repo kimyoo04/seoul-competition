@@ -13,7 +13,7 @@ export default function NavLinks() {
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.25 }}
-      className={`w-48 gap-4 col-start sm:mt-auto`}
+      className={`w-48 gap-4 col-start h-full my-auto`}
     >
       <div onClick={() => dispatch(sidebarActions.toggleSidebar())}>
         <NavLink linkpath={""} name={"Home"} delay={0.1} />
@@ -26,4 +26,6 @@ export default function NavLinks() {
       </div>
     </motion.nav>
   );
+
+
 }
