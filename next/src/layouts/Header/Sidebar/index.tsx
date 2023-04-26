@@ -10,10 +10,11 @@ const SideBar = () => {
 
   return (
     <AnimatePresence>
-      {/* 회색 풀 스크린 div가 isSidebar에 토글*/}
+      {/* 회색 오버레이 div가 isSidebar에 토글 */}
       {isSidebar && (
         <div
-          className="fixed top-0 left-0 w-screen h-screen bg-gray-400 opacity-50 z-40"
+          key="backdrop"
+          className="fixed top-0 left-0 z-40 w-screen h-screen bg-black/60"
           onClick={() => dispatch(sidebarActions.toggleSidebar())}
         ></div>
       )}
@@ -21,11 +22,12 @@ const SideBar = () => {
       {/* 사이드바가 isSidebar에 토클 */}
       {isSidebar && (
         <motion.div
+          key="sidebar"
           initial={{ x: 300 }}
           animate={{ x: 0 }}
           exit={{ x: 300 }}
           transition={{ duration: 0.2 }}
-          className="absolute right-0 z-40 w-48 h-screen max-w-md p-4 bg-main_color shadow-lg"
+          className="fixed right-0 z-40 w-48 h-screen max-w-md p-4 shadow-lg bg-main_color"
         >
           {/* 닫기 버튼 */}
           <button onClick={() => dispatch(sidebarActions.toggleSidebar())}>
@@ -33,7 +35,7 @@ const SideBar = () => {
           </button>
 
           {/* Modal의 Children = NavLinks */}
-            <NavLinks />
+          <NavLinks />
         </motion.div>
       )}
     </AnimatePresence>
