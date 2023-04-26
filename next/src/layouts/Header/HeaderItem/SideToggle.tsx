@@ -10,7 +10,7 @@ export default function SideToggle() {
     <div className="w-[72px] h-8 col-end">
       <ButtonWrapper>
     <button
-      className="w-6 h-6 col-center rounded-2xl shadow-md"
+      className="w-6 h-6 col-center"
       onClick={() => dispatch(sidebarActions.toggleSidebar())}
     >
       <i className="text-xl text-main_color ri-menu-3-line" />
