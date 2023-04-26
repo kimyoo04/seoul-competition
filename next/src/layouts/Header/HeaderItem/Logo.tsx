@@ -10,7 +10,7 @@ export default function Logo() {
         }}
         className="col-center w-[72px] h-8"
       >
-        <span className="text-xl font-bold text-main_color dark:text-main_color">
+        <span className="pb-[4px] leading-7 text-xl font-bold text-main_color dark:text-main_color">
           Senior+
         </span>
       </motion.div>
