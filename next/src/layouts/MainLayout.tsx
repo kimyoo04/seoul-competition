@@ -17,11 +17,11 @@ export default function MainLayout({
 
       {/* 메인 영역 */}
       <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <div className="mt-16 container px-5 col-center">{children}</div>
+      initial={{ opacity: 0}}
+      animate={{ opacity: 1}}
+      exit={{ opacity: 0 }}>
+
+        <div className="pt-16 container px-5 col-center">{children}</div>
       </motion.main>
 
       {/* 사이드바 영역 */}
