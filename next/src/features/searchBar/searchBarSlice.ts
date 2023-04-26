@@ -1,8 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { ISearchBarstate } from "@type/searchBar";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { IChoose, ISearchBarstate } from "@type/search";
 
 const initialState: ISearchBarstate = {
   isClicked: false,
+  choose: "",
 };
 
 export const searchBarSlice = createSlice({
@@ -14,9 +15,15 @@ export const searchBarSlice = createSlice({
     },
     open: (state) => {
       state.isClicked = true;
+      state.choose = "";
     },
     close: (state) => {
       state.isClicked = false;
+      state.choose = "";
+    },
+    choose: (state, actions: PayloadAction<IChoose>) => {
+      state.isClicked = false;
+      state.choose = actions.payload.choose;
     },
   },
 });
