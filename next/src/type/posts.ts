@@ -6,7 +6,7 @@ export interface IPost {
   content: string;
   createdAt: string;
   hits: number;
-  comments_num: number;
+  commentsCount: number;
 }
 
 // 게시판 State
