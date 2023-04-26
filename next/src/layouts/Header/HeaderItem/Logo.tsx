@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 
 export default function Logo() {
   return (
-    <Link href={"/"} className="relative h-[32px]">
+    <Link href={"/"}>
       <motion.div
         whileTap={{
           scale: 0.9,
         }}
-        className="absolute w-[72px] z-20"
+        className="col-center w-[72px] h-8"
       >
-        <span className="text-2xl font-bold text-main_color dark:text-main_color">
+        <span className="text-xl font-bold text-main_color dark:text-main_color">
           Senior+
         </span>
       </motion.div>

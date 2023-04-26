@@ -16,7 +16,7 @@ export default function NavLink({
   return (
     <motion.div variants={fadeIn("left", "easeInOut", delay, 0.4)}>
       <Link href={link} className="group">
-        <span className={`text-2xl transition-all duration-500`}>{name}</span>
+        <span className={`text-xl text-font_white transition-all duration-500`}>{name}</span>
       </Link>
     </motion.div>
   );
