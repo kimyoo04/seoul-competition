@@ -11,4 +11,4 @@ export interface ISearchCategory {
   searchCategory: TSearchCategory;
 }
 
-export type TSearchCategory = "" | "educations" | "posts";
+export type TSearchCategory = string;
