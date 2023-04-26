@@ -7,15 +7,13 @@ export default function SideToggle() {
   const dispatch = useAppDispatch();
 
   return (
-    <div className="w-[72px] h-8 col-end">
-      <ButtonWrapper>
-    <button
-      className="w-6 h-6 col-center"
-      onClick={() => dispatch(sidebarActions.toggleSidebar())}
-    >
-      <i className="text-xl text-main_color ri-menu-3-line" />
-    </button>
+    <ButtonWrapper>
+      <button
+        className="w-6 h-6 col-center"
+        onClick={() => dispatch(sidebarActions.toggleSidebar())}
+      >
+        <i className="text-3xl text-main_color ri-menu-3-line" />
+      </button>
     </ButtonWrapper>
-    </div>
   );
 }
