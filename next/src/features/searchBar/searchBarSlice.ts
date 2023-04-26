@@ -9,8 +9,14 @@ export const searchBarSlice = createSlice({
   name: "searchBar",
   initialState,
   reducers: {
-    isClickedToggle: (state) => {
+    toggle: (state) => {
       state.isClicked = !state.isClicked;
+    },
+    open: (state) => {
+      state.isClicked = true;
+    },
+    close: (state) => {
+      state.isClicked = false;
     },
   },
 });
