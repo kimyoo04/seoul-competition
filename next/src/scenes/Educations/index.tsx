@@ -1,11 +1,10 @@
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
 import Card from "./Card";
 import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
-import SearchLink from "@layouts/Header/HeaderItem/SearchLink";
 
 import { fetchEducations } from "@api/fetchEducations";
 import { IEducationDataPerPage } from "@type/education";
@@ -36,7 +35,7 @@ export default function Educations() {
   }, [inView]);
 
   return (
-    <div className="w-full bg-gray_4 px-4">
+    <div className="w-full px-4 bg-gray_4">
       {status === "loading" ? (
         <Loading />
       ) : status === "error" ? (
@@ -44,7 +43,7 @@ export default function Educations() {
       ) : (
         <>
           {/* 교육 데이터 출력 영역 */}
-          <div className="grid-col-1 grid gap-4">
+          <div className="grid gap-4 grid-col-1">
             {data.pages.map((group, indx) => (
               <Fragment key={indx + "page"}>
                 {group.data.map((education) => (
