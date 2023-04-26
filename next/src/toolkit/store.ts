@@ -4,7 +4,7 @@ import alertReducer from "@features/alert/alertSlice";
 import educationReducer from "@features/education/educationSlice";
 import postsReducer from "@features/post/postsSlice";
 import postDetailReducer from "@features/post/postDetailSlice";
-import searchBarReducer from "@features/searchBar/searchBarSlice";
+import searchBarReducer from "@features/search/searchSlice";
 
 export const store = configureStore({
   reducer: {
