@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { animate, motion, stagger } from "framer-motion";
+import { animate, stagger } from "framer-motion";
 
 import SearchBar from "@components/SearchBar";
 import SearchHistory from "./SearchHistory";
