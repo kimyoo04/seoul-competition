@@ -6,7 +6,7 @@ export const posts = [
     content: "네!! ㅎㅎㅎ이제 바로 board 들어가시나요?...",
     createdAt: "2023-04-18T09:00:00Z",
     hits: 5,
-    comments_num: 2,
+    commentsCount: 2,
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const posts = [
     content: "유님께서 도와주신 덕분에 금방 할 수 있었어요 감사해요...",
     createdAt: "2023-04-18T09:00:00Z",
     hits: 3,
-    comments_num: 2,
+    commentsCount: 2,
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const posts = [
     content: "네!! ㅎㅎㅎ이제 바로 board 들어가시나요?...",
     createdAt: "2023-04-18T09:00:00Z",
     hits: 5,
-    comments_num: 2,
+    commentsCount: 2,
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ export const posts = [
     content: "네!! ㅎㅎㅎ이제 바로 board 들어가시나요?...",
     createdAt: "2023-04-18T09:00:00Z",
     hits: 5,
-    comments_num: 2,
+    commentsCount: 2,
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ export const posts = [
     content: "네!! ㅎㅎㅎ이제 바로 board 들어가시나요?...",
     createdAt: "2023-04-18T09:00:00Z",
     hits: 5,
-    comments_num: 2,
+    commentsCount: 2,
   },
 ];
 
@@ -96,5 +96,3 @@ export const postDetail2 = {
     },
   ],
 };
-
-
