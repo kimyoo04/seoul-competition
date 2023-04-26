@@ -21,7 +21,7 @@ export default function MainLayout({
       animate={{ opacity: 1}}
       exit={{ opacity: 0 }}>
 
-        <div className="pt-16 container px-5 col-center">{children}</div>
+        <div className="pt-10 container px-4 mx-auto col-center">{children}</div>
       </motion.main>
 
       {/* 사이드바 영역 */}
