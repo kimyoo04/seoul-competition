@@ -2,11 +2,11 @@ export interface ISearchField {
   search: string;
 }
 
-export interface ISearchBarstate {
+export interface ISearchstate {
   isClicked: boolean;
-  choose: string;
+  searchCategory: string;
 }
 
-export interface IChoose {
-  choose: string;
+export interface ISearchCategory {
+  searchCategory: string;
 }
