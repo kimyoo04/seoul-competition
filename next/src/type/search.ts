@@ -4,9 +4,11 @@ export interface ISearchField {
 
 export interface ISearchstate {
   isClicked: boolean;
-  searchCategory: string;
+  searchCategory: TSearchCategory;
 }
 
 export interface ISearchCategory {
-  searchCategory: string;
+  searchCategory: TSearchCategory;
 }
+
+export type TSearchCategory = "" | "educations" | "posts";
