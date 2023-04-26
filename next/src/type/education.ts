@@ -1,4 +1,4 @@
-export interface IEducationCard {
+export interface IEducationData {
   id: number;
   name: string;
   status: string;
@@ -11,10 +11,8 @@ export interface IEducationCard {
   url: string;
 }
 
-export interface IEducationstate {
-  educations: IEducationCard[];
-  status: "idle" | "loading" | "failed";
-  error: string | null;
-  page: number;
-  hasMore: boolean;
+export interface IEducationDataPerPage {
+  data: IEducationData[];
+  totalPages: number;
+  currentPage: number;
 }

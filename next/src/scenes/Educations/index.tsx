@@ -1,49 +1,72 @@
-import { useEffect } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
+import { Fragment, useEffect, useRef } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInView } from "react-intersection-observer";
 
 import Card from "./Card";
 import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
+import SearchLink from "@layouts/Header/HeaderItem/SearchLink";
 
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { fetchEducations } from "@api/fetchEducations";
+import { IEducationDataPerPage } from "@type/education";
 
 export default function Educations() {
-  const dispatch = useAppDispatch();
-  const { educations, error, hasMore, page, status } = useAppSelector(
-    (state) => state.education
-  );
+  // page 단위로 educationdata GET 요청 및 캐싱
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery<IEducationDataPerPage, { message: string }>({
+    queryKey: ["educations"],
+    queryFn: ({ pageParam = 1 }) => fetchEducations(pageParam),
+    getNextPageParam: (lastPage) => lastPage.totalPages,
+  });
 
-  // 최초 교육들 API 요청
+  // ref가 연결된 태그의 확인
+  // { ref, inView, entry }
+  const { ref, inView } = useInView();
+
+  // 하단 페이지에 도달시 fetchNextPage 요청
   useEffect(() => {
-    dispatch(fetchEducations(page));
-  }, [dispatch]);
-
-  // 추가 교육들 API 요청
-  const fetchMoreCards = () => {
-    if (hasMore) {
-      dispatch(fetchEducations(page));
-    }
-  };
+    if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
+  }, [inView]);
 
   return (
-    <div className="w-screen h-screen px-4 bg-gray_4">
-      {/* 교육 무한 스크롤 영역 */}
-      <InfiniteScroll
-        dataLength={educations.length}
-        next={fetchMoreCards}
-        hasMore={hasMore}
-        loader={<Loading />}
-      >
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {educations.map((education) => (
-            <Card key={education.id} education={education} />
-          ))}
-        </div>
-      </InfiniteScroll>
+    <div className="w-full bg-gray_4 px-4">
+      {status === "loading" ? (
+        <Loading />
+      ) : status === "error" ? (
+        <>{error && <p>Error: {error.message}</p>}</>
+      ) : (
+        <>
+          {/* 교육 데이터 출력 영역 */}
+          <div className="grid-col-1 grid gap-4">
+            {data.pages.map((group, indx) => (
+              <Fragment key={indx + "page"}>
+                {group.data.map((education) => (
+                  <Card key={education.id} education={education} />
+                ))}
+              </Fragment>
+            ))}
+          </div>
 
-      {/* fetch 에러 발생시 화면 출력 */}
-      {error && <p className="text-alert_danger">{error}</p>}
+          {/* fetchNextPage 를 트리거 하기 위한 태그 */}
+          <span ref={ref}>
+            {isFetchingNextPage
+              ? "Loading more..."
+              : hasNextPage
+              ? "Load More"
+              : "Nothing more to load"}
+          </span>
+
+          {/* 첫 fetching 시 로딩 UI */}
+          <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
+        </>
+      )}
 
       {/* 최상단 이동 버튼 */}
       <ScrollButton />

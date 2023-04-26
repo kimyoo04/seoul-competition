@@ -37,9 +37,9 @@ export default function ScrollButton() {
         scale: 0.8,
       }}
       onClick={() => scrollToTop()}
-      className="fixed z-20 w-8 h-8 bg-white rounded-full bottom-6 right-1/2 row-center"
+      className="fixed left-0 right-0 z-10 w-8 h-8 mx-auto rounded-full shadow-md bg-main_color bottom-6 row-center"
     >
-      <i className="text-3xl ri-arrow-up-s-line"></i>
+      <i className="text-3xl text-font_white ri-arrow-up-s-line"></i>
     </motion.button>
   );
 }

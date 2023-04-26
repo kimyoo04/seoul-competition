@@ -4,19 +4,18 @@ import "../styles/textField.css";
 
 import Head from "next/head";
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "next-themes";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import { Provider } from "react-redux";
 import { store } from "@toolkit/store";
-import Axios from "axios";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-
-  Axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL + "/api";
-  Axios.defaults.withCredentials = true;
+  const queryClient = new QueryClient();
 
   return (
     <>
@@ -28,24 +27,16 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
       </Head>
 
-      <ThemeProvider attribute="class">
-        <Provider store={store}>
-          <main>
-            <AnimatePresence mode="wait">
+      <Provider store={store}>
+        <main>
+          <AnimatePresence mode="wait">
+            <QueryClientProvider client={queryClient}>
               <Component {...pageProps} key={router.route} />
-            </AnimatePresence>
-          </main>
-        </Provider>
-      </ThemeProvider>
+              <ReactQueryDevtools initialIsOpen={true} />
+            </QueryClientProvider>
+          </AnimatePresence>
+        </main>
+      </Provider>
     </>
   );
 }
-
-// App.getInitialProps = async (context: NextPageContext) => {
-//   const { req } = context;
-//   let pageProps = {};
-//   pageProps = { refreshToken: req?.headers.refreshToken };
-
-//   // return한 값은 해당 컴포넌트의 props로 들어가게 됩니다.
-//   return { pageProps };
-// };
