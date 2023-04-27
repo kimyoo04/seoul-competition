@@ -1,5 +1,5 @@
 // 게시판 인피니티 스크롤 데이터
-export interface IPost {
+export interface IPostsData {
   id: number;
   nickname: string;
   title: string;
@@ -9,11 +9,9 @@ export interface IPost {
   commentsCount: number;
 }
 
-// 게시판 State
-export interface IPostsState {
-  posts: IPost[];
-  status: "idle" | "loading" | "failed";
-  error: string | null;
-  page: number;
-  hasMore: boolean;
+// 게시판 데이터 페이지별 타입 설정
+export interface IPostsDataPerPage {
+  data: IPostsData[];
+  totalPages: number;
+  currentPage: number;
 }

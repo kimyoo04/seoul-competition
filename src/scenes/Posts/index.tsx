@@ -1,67 +1,74 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInView } from "react-intersection-observer";
 
 import Item from "./Item";
 import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
 
-import { posts } from "public/data/postData";
-
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { fetchPosts } from "@api/fetchPosts";
+import { IPostsDataPerPage } from "@type/posts";
 
 export default function Posts() {
-  // const dispatch = useAppDispatch();
-  // const { posts, error, hasMore, page, status } = useAppSelector(
-  //   (state) => state.posts
-  // );
+  // page 단위로 Postsdata GET 요청 및 캐싱
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery<IPostsDataPerPage, { message: string }>({
+    queryKey: ["Posts"],
+    queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam),
+    getNextPageParam: (lastPage) => lastPage.totalPages,
+  });
 
-  // 최초 게시글들 API 요청
-  // useEffect(() => {
-  //   dispatch(fetchPosts(page));
-  // }, [dispatch]);
+  // ref가 연결된 태그의 확인
+  // { ref, inView}
+  const { ref, inView } = useInView();
 
-  // // 추가 게시글들 API 요청
-  // const fetchMorePosts = () => {
-  //   if (hasMore) {
-  //     dispatch(fetchPosts(page));
-  //   }
-  // };
+  // 하단 페이지에 도달시 fetchNextPage 요청
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
+  }, [inView]);
 
   return (
-    <div className="w-full rounded-2xl bg-gray_4 p-4">
-      {/* <InfiniteScroll
-        dataLength={posts.length}
-        next={fetchMorePosts}
-        hasMore={hasMore}
-        loader={<Loading />}
-      > */}
-      <div className="w-full p-4 text-xl font-bold">자유 게시판</div>
-      <div className="grid grid-cols-1 gap-4 ">
-        {posts.map((post) => (
-          <Item key={post.id} post={post} />
-        ))}
-      </div>
-      {/* </InfiniteScroll> */}
+    <div className="w-full p-4 rounded-2xl bg-gray_4">
+      {status === "loading" ? (
+        <Loading />
+      ) : status === "error" ? (
+        <>{error && <p>Error: {error.message}</p>}</>
+      ) : (
+        <>
+          {/* 게시글 데이터 출력 영역 */}
+          <div className="w-full p-4 text-xl font-bold">자유 게시판</div>
+          <div className="grid grid-cols-1 gap-4 ">
+            {data.pages.map((group, indx) => (
+              <Fragment key={indx + "page"}>
+                {group.data.map((post) => (
+                  <Item key={post.id} post={post} />
+                ))}
+              </Fragment>
+            ))}
+          </div>
+          {/* fetchNextPage 를 트리거 하기 위한 태그 */}
+          <span ref={ref}>
+            {isFetchingNextPage
+              ? "Loading more..."
+              : hasNextPage
+              ? "Load More"
+              : "Nothing more to load"}
+          </span>
 
-      {/* fetch 에러 발생시 화면 출력 */}
-      {/* {error && <p className="text-alert_danger">{error}</p>} */}
+          {/* 첫 fetching 시 로딩 UI */}
+          <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
+        </>
+      )}
 
       {/* 최상단 이동 버튼 */}
       <ScrollButton />
     </div>
   );
 }
-
-// 교육 무한 스크롤 영역
-// <InfiniteScroll
-//   dataLength={posts.length}
-//   next={fetchMorePosts}
-//   hasMore={hasMore}
-//   loader={<Loading />}
-// >
-//   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-//     {posts.map((post) => (
-//       <Item key={post.id} post={post} />
-//     ))}
-//   </div>
-// </InfiniteScroll>
