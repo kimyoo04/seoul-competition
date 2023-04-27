@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
-import { ISearchField, TSearchCategory } from "@type/search";
+import { ISearchField } from "@type/search";
 
-interface ISearchBar {
-  category: TSearchCategory;
-}
+import { useAppDispatch } from "@toolkit/hook";
+import { searchActions } from "@features/search/searchSlice";
 
-export default function SearchBar({ category = "" }: ISearchBar) {
+export default function SearchBar() {
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -23,34 +24,39 @@ export default function SearchBar({ category = "" }: ISearchBar) {
 
     // category에 따라 요청 보내기
     console.log(data.search);
+    dispatch(searchActions.searchName({ searchName: data.search }));
   };
 
   return (
-    <form className="relative w-full group" onSubmit={handleSubmit(onValid)}>
-      {/* 검색어 입력 영역 */}
-      <input
-        {...register("search", {
-          required: "검색어가 필요합니다!",
-        })}
-        className="absolute w-full h-8 pl-4 transition-all textfield"
-        id="search"
-        name="search"
-        placeholder={
-          errors.search ? errors?.search?.message : "검색어를 입력해주세요."
-        }
-        autoComplete="off"
-      />
+    <li>
+      <form className="group relative w-full" onSubmit={handleSubmit(onValid)}>
+        {/* 검색어 입력 영역 */}
+        <input
+          {...register("search", {
+            required: "검색어가 필요합니다!",
+          })}
+          className="textfield absolute h-8 w-full pl-9 transition-all"
+          id="search"
+          name="search"
+          placeholder={
+            errors.search ? errors?.search?.message : "검색어를 입력해주세요."
+          }
+          autoComplete="off"
+        />
 
-      {/* Search Bar 아이콘 */}
-      <button
-        type="submit"
-        className="absolute text-2xl font-bold bottom-4 right-6 col-center "
-      >
-        <i className="absolute transition-all ri-search-line group-hover:text-main_color"></i>
-      </button>
+        {/* Search Icon */}
+        <button
+          type="submit"
+          className="col-center absolute bottom-4 left-5 text-2xl font-bold "
+        >
+          <i className="ri-search-line absolute transition-all group-hover:text-main_color"></i>
+        </button>
 
-      {/* 더미 div 태그 */}
-      <div className="w-full h-8 dummy"> </div>
-    </form>
+        {/* 더미 div 태그 */}
+        <div className="dummy h-8 w-full"> </div>
+      </form>
+    </li>
+
+    //? 추후 연관 검색어 추천 넣기
   );
 }
