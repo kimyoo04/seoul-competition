@@ -8,33 +8,34 @@ import { fetchPostDetail } from "@api/fetchPostDetail";
 
 import { postDetail1 } from "public/data/postData";
 
+// Intl API 활용
 function timeSince(date: string) {
+  // 현재 시각 - 댓글이 쓰인 시각 (초 단위)
   const seconds = Math.floor(
     (new Date().getTime() - new Date(date).getTime()) / 1000
   );
 
-  let interval = seconds / 31536000;
+  // RelativeTimeFormat(): "long" 스타일로 상대적 시간을 표현해줌
+  const rtf = new Intl.RelativeTimeFormat("ko", {
+    style: "long",
+  });
 
-  if (interval > 1) {
-    return Math.floor(interval) + "년 전";
+  // 시간 경과 정도에 따라 상대적 시간 표기
+  if (seconds > 604800) {
+    const weeks = Math.floor(seconds / 604800);
+    return rtf.format(-weeks, "week");
+  } else if (seconds > 86400) {
+    const days = Math.floor(seconds / 86400);
+    return rtf.format(-days, "day");
+  } else if (seconds > 3600) {
+    const hours = Math.floor(seconds / 3600);
+    return rtf.format(-hours, "hour");
+  } else if (seconds > 60) {
+    const minutes = Math.floor(seconds / 60);
+    return rtf.format(-minutes, "minute");
+  } else {
+    return rtf.format(-seconds, "second");
   }
-  interval = seconds / 2592000;
-  if (interval > 1) {
-    return Math.floor(interval) + "개월 전";
-  }
-  interval = seconds / 86500;
-  if (interval > 1) {
-    return Math.floor(interval) + "일 전";
-  }
-  interval = seconds / 3600;
-  if (interval > 1) {
-    return Math.floor(interval) + "시간 전";
-  }
-  interval = seconds / 60;
-  if (interval > 1) {
-    return Math.floor(interval) + "분 전";
-  }
-  return Math.floor(seconds) + "초 전";
 }
 
 export default function PostDetail({ id }: { id: string }) {
@@ -58,10 +59,10 @@ export default function PostDetail({ id }: { id: string }) {
 
               {/* 수정, 삭제 버튼 */}
               <div className="w-24 my-2 text-sm">
-                <button className="m-0.5 px-2 py-1 rounded-lg bg-blue-400 text-font_white">
+                <button className="m-0.5 rounded-lg bg-blue-400 px-2 py-1 text-font_white">
                   수정
                 </button>
-                <button className="m-0.5 px-2 py-1 rounded-lg bg-red-400 text-font_white">
+                <button className="m-0.5 rounded-lg bg-red-400 px-2 py-1 text-font_white">
                   삭제
                 </button>
               </div>
@@ -77,9 +78,7 @@ export default function PostDetail({ id }: { id: string }) {
                 작성일: {postDetail1.createdAt.slice(0, 10)}
               </span>
               <span className="mx-2 text-gray-500">|</span>
-              <span className="text-gray-500 ">
-                조회수: {postDetail1.hits}
-              </span>
+              <span className="text-gray-500 ">조회수: {postDetail1.hits}</span>
             </div>
 
             {/* 내용 영역*/}
@@ -107,10 +106,10 @@ export default function PostDetail({ id }: { id: string }) {
 
                   {/* 수정, 삭제 버튼 */}
                   <div className="w-24 my-2 text-sm">
-                    <button className="m-0.5 px-2 py-1 rounded-lg bg-blue-400 text-font_white">
+                    <button className="m-0.5 rounded-lg bg-blue-400 px-2 py-1 text-font_white">
                       수정
                     </button>
-                    <button className="m-0.5 px-2 py-1 rounded-lg bg-red-400 text-font_white">
+                    <button className="m-0.5 rounded-lg bg-red-400 px-2 py-1 text-font_white">
                       삭제
                     </button>
                   </div>

@@ -1,16 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import alertReducer from "@features/alert/alertSlice";
-import postsReducer from "@features/post/postsSlice";
-import postDetailReducer from "@features/post/postDetailSlice";
 import searchReducer from "@features/search/searchSlice";
 import sidebarReducer from "@features/sidebar/sidebarSlice";
 
 export const store = configureStore({
   reducer: {
     alert: alertReducer,
-    posts: postsReducer,
-    postDetail: postDetailReducer,
     search: searchReducer,
     sidebar: sidebarReducer,
   },
