@@ -9,6 +9,8 @@ export interface IEducationData {
   educationStart: string;
   educationEnd: string;
   url: string;
+  // hits: number;
+  // commentsCount: number;
 }
 
 export interface IEducationDataPerPage {
