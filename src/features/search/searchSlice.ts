@@ -1,29 +1,20 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ISearchCategory, ISearchstate } from "@type/search";
+import { ISearchCategory, ISearchName, ISearchState } from "@type/search";
 
-const initialState: ISearchstate = {
-  isClicked: false,
-  searchCategory: "",
+const initialState: ISearchState = {
+  searchCategory: "educations",
+  searchName: "",
 };
 
 export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    toggle: (state) => {
-      state.isClicked = !state.isClicked;
-    },
-    open: (state) => {
-      state.isClicked = true;
-      state.searchCategory = "";
-    },
-    close: (state) => {
-      state.isClicked = false;
-      state.searchCategory = "";
-    },
     chooseCategory: (state, actions: PayloadAction<ISearchCategory>) => {
-      state.isClicked = false;
       state.searchCategory = actions.payload.searchCategory;
+    },
+    searchName: (state, actions: PayloadAction<ISearchName>) => {
+      state.searchName = actions.payload.searchName;
     },
   },
 });

@@ -1,3 +1,3 @@
 export default function SearchHistory() {
-  return <div className="w-full h-full ">history</div>;
+  return <li className="h-full w-full ">history</li>;
 }
