@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { fadeIn } from "@util/variants";
 
-export default function SearchHistory() {
+export default function SearchKeywordsModal() {
   const dispatch = useAppDispatch();
   const { keywords } = useAppSelector((state) => state.search);
 

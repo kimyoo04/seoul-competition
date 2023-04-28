@@ -3,7 +3,7 @@ import { ISearchField } from "@type/search";
 
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { searchActions } from "@features/search/searchSlice";
-import SearchHistory from "../SearchHistory";
+import SearchHistory from "../SearchKeywordsModal";
 
 export default function SearchBar() {
   const dispatch = useAppDispatch();
