@@ -1,15 +1,21 @@
 import { Fragment, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
+import { useAppSelector } from "@toolkit/hook";
 
-import Item from "./Item";
+import PostItem from "./PostItem";
 import Loading from "@components/Loading";
+import Sidebar from "@components/Sidebar";
+import FilterToggle from "@components/FilterToggle";
 import ScrollButton from "@components/ScrollButton";
 
 import { fetchPosts } from "@api/fetchPosts";
 import { IPostsDataPerPage } from "@type/posts";
 
 export default function Posts() {
+  // 사이드바
+  const isSidebar = useAppSelector((state) => state.sidebar.isSidebar);
+
   // page 단위로 Postsdata GET 요청 및 캐싱
   const {
     data,
@@ -35,40 +41,46 @@ export default function Posts() {
   }, [inView]);
 
   return (
-    <div className="w-full p-4 rounded-2xl bg-gray_4">
-      {status === "loading" ? (
-        <Loading />
-      ) : status === "error" ? (
-        <>{error && <p>Error: {error.message}</p>}</>
-      ) : (
-        <>
-          {/* 게시글 데이터 출력 영역 */}
-          <div className="w-full p-4 text-xl font-bold">자유 게시판</div>
-          <div className="grid grid-cols-1 gap-4 ">
-            {data.pages.map((group, indx) => (
-              <Fragment key={indx + "page"}>
-                {group.data.map((post) => (
-                  <Item key={post.id} post={post} />
-                ))}
-              </Fragment>
-            ))}
-          </div>
-          {/* fetchNextPage 를 트리거 하기 위한 태그 */}
-          <span ref={ref}>
-            {isFetchingNextPage
-              ? "Loading more..."
-              : hasNextPage
-              ? "Load More"
-              : "Nothing more to load"}
-          </span>
+    <>
+      <FilterToggle />
+      {/* 사이드바 영역 */}
+      {isSidebar && <Sidebar />}
 
-          {/* 첫 fetching 시 로딩 UI */}
-          <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
-        </>
-      )}
+      <div className="w-full rounded-2xl bg-gray_4 p-4">
+        {status === "loading" ? (
+          <Loading />
+        ) : status === "error" ? (
+          <>{error && <p>Error: {error.message}</p>}</>
+        ) : (
+          <>
+            {/* 게시글 데이터 출력 영역 */}
+            <div className="w-full p-4 text-xl font-bold">자유 게시판</div>
+            <div className="grid grid-cols-1 gap-4 ">
+              {data.pages.map((group, indx) => (
+                <Fragment key={indx + "page"}>
+                  {group.data.map((post) => (
+                    <PostItem key={post.id} post={post} />
+                  ))}
+                </Fragment>
+              ))}
+            </div>
+            {/* fetchNextPage 를 트리거 하기 위한 태그 */}
+            <span ref={ref}>
+              {isFetchingNextPage
+                ? "Loading more..."
+                : hasNextPage
+                ? "Load More"
+                : "Nothing more to load"}
+            </span>
 
-      {/* 최상단 이동 버튼 */}
-      <ScrollButton />
-    </div>
+            {/* 첫 fetching 시 로딩 UI */}
+            <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
+          </>
+        )}
+
+        {/* 최상단 이동 버튼 */}
+        <ScrollButton />
+      </div>
+    </>
   );
 }
