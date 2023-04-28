@@ -34,7 +34,7 @@ export default function Search() {
       {isFocus && <SearchHistory />}
 
       {/* 검색을 하는 경우 검색 결과 출력 */}
-      {searchKeyword !== "" && <SearchResult />}
+      <SearchResult />
 
       {/* 검색 랭킹 */}
       <SearchRanking />

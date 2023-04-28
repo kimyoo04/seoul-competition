@@ -1,8 +1,10 @@
 import { useInfiniteSearch } from "@api/fetchSearch";
 import { useAppSelector } from "@toolkit/hook";
+import SearchHeader from "./SearchResultItem/header";
 
 export default function SearchResult() {
   const searchKeyword = useAppSelector((state) => state.search.searchKeyword);
+  const searchCategory = useAppSelector((state) => state.search.category);
 
   const educationsResult = [1, 2]; //dummy
   const postsResult = [3, 4]; //dummy
@@ -21,22 +23,26 @@ export default function SearchResult() {
 
   return (
     <section className="col-start w-full gap-4">
-      <h2>
-        <b className="text-xl font-bold">{searchKeyword}</b> 검색 결과입니다.
-      </h2>
+      {/* 검색 정보 헤더 */}
+      <SearchHeader />
 
-      <div>
-        <h2>교육정보</h2>
-        {educationsResult &&
-          educationsResult.map((education) => (
-            <div key={education}>{education}</div>
+      {/* 교육정보 검색결과 무한 스크롤 영역 */}
+      {searchCategory === "educations" && educationsResult && (
+        <ul>
+          {educationsResult.map((education) => (
+            <li key={education}>{education}</li>
           ))}
-      </div>
+        </ul>
+      )}
 
-      <div>
-        <h2>자유게시판</h2>
-        {postsResult && postsResult.map((post) => <div key={post}>{post}</div>)}
-      </div>
+      {searchCategory === "posts" && postsResult && (
+        <ul>
+          {/* 자유게시판  */}
+          {postsResult.map((post) => (
+            <li key={post}>{post}</li>
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
