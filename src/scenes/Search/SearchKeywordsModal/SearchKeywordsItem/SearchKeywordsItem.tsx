@@ -18,7 +18,7 @@ export default function SearchKeywordsItem({
       className="flex items-center justify-between border-b pt-1"
     >
       <button
-        className="flex "
+        className="flex w-full items-start hover:font-bold hover:text-main_color"
         onClick={() =>
           dispatch(searchActions.clickKeyword({ searchKeyword: keyword }))
         }
