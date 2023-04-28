@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
 import { ISearchField } from "@type/search";
 
-import { useAppDispatch } from "@toolkit/hook";
+import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { searchActions } from "@features/search/searchSlice";
+import SearchHistory from "../SearchHistory";
 
 export default function SearchBar() {
   const dispatch = useAppDispatch();
+  const { isFocus, category } = useAppSelector((state) => state.search);
 
   const {
     register,
@@ -22,27 +24,17 @@ export default function SearchBar() {
     // validation
     if (!data.search) return;
 
-    // category에 따라 요청 보내기
     console.log(data.search);
-    dispatch(searchActions.searchName({ searchName: data.search }));
 
-    // 기존 검색기록 받기
-    const oldSearchHistories = localStorage.getItem("search");
+    // category에 따라 요청 보내기
+    dispatch(searchActions.searchKeyword({ searchKeyword: data.search }));
 
-    // 검색기록
-    let searchHistories: string[];
-    if (oldSearchHistories) {
-      searchHistories = [data.search, ...JSON.parse(oldSearchHistories)];
-    } else {
-      searchHistories = [data.search];
-    }
-
-    // 검색기록 저장
-    localStorage.setItem("search", JSON.stringify(searchHistories));
+    // 인풋창 초기화
+    reset({ search: "" });
   };
 
   return (
-    <section>
+    <section className="w-full">
       <form className="group relative w-full" onSubmit={handleSubmit(onValid)}>
         {/* 검색어 입력 영역 */}
         <input
@@ -56,6 +48,8 @@ export default function SearchBar() {
             errors.search ? errors?.search?.message : "검색어를 입력해주세요."
           }
           autoComplete="off"
+          onFocus={() => dispatch(searchActions.onFocus())}
+          onClick={() => dispatch(searchActions.onFocus())}
         />
 
         {/* Search Icon */}
@@ -70,7 +64,5 @@ export default function SearchBar() {
         <div className="dummy h-8 w-full"> </div>
       </form>
     </section>
-
-    //? 추후 연관 검색어 추천 넣기
   );
 }
