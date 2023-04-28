@@ -16,14 +16,14 @@ export default function Search() {
   // li 태그를 기준으로 stagger 애니메이션 실행
   useEffect(() => {
     animate(
-      "li",
+      "section",
       { opacity: [0, 1], y: [100, 0] },
       { duration: 0.3, delay: staggerSearchItems }
     );
   }, []);
 
   return (
-    <ul className="grid-col-1 grid h-full w-full gap-4 py-4">
+    <div className="grid-col-1 grid h-full w-full gap-4 py-4">
       {/* 검색 바 */}
       <SearchBar />
 
@@ -38,6 +38,6 @@ export default function Search() {
 
       {/* 검색 랭킹 */}
       <SearchRanking />
-    </ul>
+    </div>
   );
 }

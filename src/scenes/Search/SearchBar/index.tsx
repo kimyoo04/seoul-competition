@@ -28,7 +28,7 @@ export default function SearchBar() {
   };
 
   return (
-    <li>
+    <section>
       <form className="group relative w-full" onSubmit={handleSubmit(onValid)}>
         {/* 검색어 입력 영역 */}
         <input
@@ -55,7 +55,7 @@ export default function SearchBar() {
         {/* 더미 div 태그 */}
         <div className="dummy h-8 w-full"> </div>
       </form>
-    </li>
+    </section>
 
     //? 추후 연관 검색어 추천 넣기
   );
