@@ -57,11 +57,12 @@ export const fadeIn = (
   direction: Tdirection,
   type: Ttype,
   delay: Tdelay,
-  duration: Tduration
+  duration: Tduration,
+  distance: number
 ) => ({
   hidden: {
-    x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
-    y: direction === "up" ? 100 : direction === "down" ? -100 : 0,
+    x: direction === "left" ? distance : direction === "right" ? -distance : 0,
+    y: direction === "up" ? distance : direction === "down" ? -distance : 0,
     opacity: 0,
   },
   show: {

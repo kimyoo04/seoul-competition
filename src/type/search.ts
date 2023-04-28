@@ -8,8 +8,10 @@ export type TSearchCategory = "educations" | "posts";
 
 // searchSlice에 사용
 export interface ISearchState {
-  searchCategory: TSearchCategory;
-  searchName: string;
+  isFocus: boolean;
+  category: TSearchCategory;
+  searchKeyword: string;
+  keywords: string[];
 }
 
 // searchSlice에 사용
@@ -18,6 +20,11 @@ export interface ISearchCategory {
 }
 
 // searchSlice에 사용
-export interface ISearchName {
-  searchName: string;
+export interface ISearchKeyword {
+  searchKeyword: string;
+}
+
+// searchSlice에 사용
+export interface IKeywordIndex {
+  index: number;
 }

@@ -18,7 +18,7 @@ export default function MainLayout({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <div className="col-center container mx-auto h-full w-full px-4 pt-16 ">
+        <div className="col-center container mx-auto h-screen w-screen px-4 pt-16 ">
           {children}
         </div>
       </motion.div>
