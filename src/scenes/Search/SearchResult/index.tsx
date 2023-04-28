@@ -1,12 +1,8 @@
-import { fetchSearch } from "@api/fetchSearch";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteSearch } from "@api/fetchSearch";
 import { useAppSelector } from "@toolkit/hook";
-import { IEducationDataPerPage } from "@type/education";
 
 export default function SearchResult() {
-  const { searchName, searchCategory } = useAppSelector(
-    (state) => state.search
-  );
+  const searchName = useAppSelector((state) => state.search.searchName);
 
   const educationsResult = [1, 2]; //dummy
   const postsResult = [3, 4]; //dummy
@@ -21,15 +17,10 @@ export default function SearchResult() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery<IEducationDataPerPage, { message: string }>({
-    queryKey: ["search", searchCategory, searchName],
-    queryFn: ({ pageParam = 1 }) =>
-      fetchSearch(searchCategory, pageParam, searchName),
-    getNextPageParam: (lastPage) => lastPage.totalPages,
-  });
+  } = useInfiniteSearch(searchName);
 
   return (
-    <li>
+    <section>
       <div>
         <h2>교육정보</h2>
         {educationsResult &&
@@ -42,6 +33,6 @@ export default function SearchResult() {
         <h2>자유게시판</h2>
         {postsResult && postsResult.map((post) => <div key={post}>{post}</div>)}
       </div>
-    </li>
+    </section>
   );
 }
