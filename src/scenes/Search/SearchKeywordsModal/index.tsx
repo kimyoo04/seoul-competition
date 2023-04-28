@@ -36,7 +36,11 @@ export default function SearchKeywordsModal() {
         <ul className="px-4 py-2">
           {/* 8개만 검색어 노출 */}
           {keywords.slice(0, 8).map((keyword, index) => (
-            <SearchKeywordsItem keyword={keyword} index={index} />
+            <SearchKeywordsItem
+              key={index + keyword}
+              keyword={keyword}
+              index={index}
+            />
           ))}
         </ul>
       </motion.section>
