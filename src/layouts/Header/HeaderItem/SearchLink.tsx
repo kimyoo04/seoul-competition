@@ -5,6 +5,7 @@ import { useAppDispatch } from "@toolkit/hook";
 import { searchActions } from "@features/search/searchSlice";
 
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
+import { motion } from "framer-motion";
 
 export default function SearchLink() {
   const dispatch = useAppDispatch();
@@ -26,9 +27,11 @@ export default function SearchLink() {
       >
         {/* Search Bar 아이콘 */}
         <ButtonWrapper>
-          <button className="col-center">
-            <i className="ri-search-line text-3xl text-main_color"></i>
-          </button>
+          <motion.div>
+            <button className="col-center h-8 w-8">
+              <i className="ri-search-line text-3xl text-main_color"></i>
+            </button>
+          </motion.div>
         </ButtonWrapper>
       </Link>
     )

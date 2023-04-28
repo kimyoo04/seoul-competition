@@ -8,6 +8,10 @@ export default function ButtonWrapper({
 }) {
   return (
     <motion.div
+      whileHover={{
+        scale: 1.1,
+        transition: { duration: 0.05 },
+      }}
       whileTap={{
         scale: 0.8,
         type: "spring",
