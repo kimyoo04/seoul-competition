@@ -37,8 +37,10 @@ const SideBar = () => {
           <button
             className="absolute bottom-0 right-0 p-8"
             onClick={() => dispatch(sidebarActions.toggleSidebar())}
-          >
+            >
+            <ButtonWrapper>
             <i className="text-4xl text-font_white ri-close-line" />
+          </ButtonWrapper>
           </button>
         </motion.div>
       )}
