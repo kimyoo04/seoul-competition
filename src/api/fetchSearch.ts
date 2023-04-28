@@ -6,6 +6,7 @@ import { IEducationDataPerPage } from "@type/education";
 import { IPostsDataPerPage } from "@type/posts";
 import { TSearchCategory } from "@type/search";
 
+// axios GET 요청 함수
 export const fetchSearch = async (
   searchCategory: TSearchCategory,
   page: number,
@@ -20,8 +21,9 @@ export const fetchSearch = async (
   return response.data;
 };
 
+// 검색 결과 useInfiniteQuery 함수
 export const useInfiniteSearch = (searchName: string) => {
-  const searchCategory = useAppSelector((state) => state.search.searchCategory);
+  const searchCategory = useAppSelector((state) => state.search.category);
 
   return useInfiniteQuery<
     IEducationDataPerPage | IPostsDataPerPage,

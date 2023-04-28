@@ -1,20 +1,69 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ISearchCategory, ISearchName, ISearchState } from "@type/search";
+import {
+  IKeywordIndex,
+  ISearchCategory,
+  ISearchKeyword,
+  ISearchState,
+} from "@type/search";
 
 const initialState: ISearchState = {
-  searchCategory: "educations",
-  searchName: "",
+  isFocus: false,
+  category: "educations",
+  searchKeyword: "",
+  keywords: [],
 };
 
 export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    chooseCategory: (state, actions: PayloadAction<ISearchCategory>) => {
-      state.searchCategory = actions.payload.searchCategory;
+    // input focus 설정
+    onFocus: (state) => {
+      state.isFocus = true;
     },
-    searchName: (state, actions: PayloadAction<ISearchName>) => {
-      state.searchName = actions.payload.searchName;
+    // input focus 해제
+    onBlur: (state) => {
+      state.isFocus = false;
+    },
+
+    // 카테고리 선택 및 해당 최근 검색어 전체 조회
+    getAllKeywords: (state) => {
+      state.keywords = JSON.parse(localStorage.getItem(state.category) || "[]");
+    },
+
+    // 카테고리 선택 및 해당 최근 검색어 전체 조회
+    chooseCategory: (state, actions: PayloadAction<ISearchCategory>) => {
+      state.isFocus = false;
+      state.searchKeyword = "";
+      state.category = actions.payload.searchCategory;
+      state.keywords = JSON.parse(localStorage.getItem(state.category) || "[]");
+    },
+
+    // searchKeyword으로 axiso GET 요청 및 최근 검색어 1개 추가
+    searchKeyword: (state, actions: PayloadAction<ISearchKeyword>) => {
+      state.isFocus = false;
+      state.searchKeyword = actions.payload.searchKeyword;
+      state.keywords = [state.searchKeyword, ...state.keywords];
+      localStorage.setItem(state.category, JSON.stringify(state.keywords));
+    },
+
+    clickKeyword: (state, actions: PayloadAction<ISearchKeyword>) => {
+      state.isFocus = false;
+      state.searchKeyword = actions.payload.searchKeyword;
+    },
+
+    // 최근 검색어 1개 제거
+    deleteKeyword: (state, actions: PayloadAction<IKeywordIndex>) => {
+      state.searchKeyword = "";
+      state.keywords.splice(actions.payload.index, 1);
+      localStorage.setItem(state.category, JSON.stringify(state.keywords));
+    },
+
+    // 최근 검색어 전체 제거
+    deleteAllKeywords: (state) => {
+      state.searchKeyword = "";
+      state.keywords = [];
+      localStorage.setItem(state.category, JSON.stringify(state.keywords));
     },
   },
 });

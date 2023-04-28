@@ -9,7 +9,7 @@ export default function ChooseButton({
   children: TSearchCategory;
 }) {
   const dispatch = useAppDispatch();
-  const searchCategory = useAppSelector((state) => state.search.searchCategory);
+  const searchCategory = useAppSelector((state) => state.search.category);
 
   // 일치하는 카테고리 css 활성화
   const activeCategory = classNames({

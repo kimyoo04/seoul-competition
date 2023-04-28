@@ -2,7 +2,7 @@ import { useInfiniteSearch } from "@api/fetchSearch";
 import { useAppSelector } from "@toolkit/hook";
 
 export default function SearchResult() {
-  const searchName = useAppSelector((state) => state.search.searchName);
+  const searchKeyword = useAppSelector((state) => state.search.searchKeyword);
 
   const educationsResult = [1, 2]; //dummy
   const postsResult = [3, 4]; //dummy
@@ -17,10 +17,14 @@ export default function SearchResult() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteSearch(searchName);
+  } = useInfiniteSearch(searchKeyword);
 
   return (
-    <section>
+    <section className="col-start w-full gap-4">
+      <h2>
+        <b className="text-xl font-bold">{searchKeyword}</b> 검색 결과입니다.
+      </h2>
+
       <div>
         <h2>교육정보</h2>
         {educationsResult &&
