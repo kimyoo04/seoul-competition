@@ -11,10 +11,6 @@ export default function SideToggle() {
   return (
     <ButtonWrapper>
       <motion.div
-        whileHover={{
-          scale: 1.1,
-          transition: { duration: 0.05 },
-        }}
       >
         <button
           className="w-8 h-8 col-center"

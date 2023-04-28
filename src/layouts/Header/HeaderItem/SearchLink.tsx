@@ -27,15 +27,9 @@ export default function SearchLink() {
       >
         {/* Search Bar 아이콘 */}
         <ButtonWrapper>
-          <motion.div
-            whileHover={{
-              scale: 1.1,
-              type: "spring",
-              transition: { duration: 0.05 },
-            }}
-          >
-            <button className="w-8 h-8 col-center">
-              <i className="text-3xl text-gray-500 ri-search-line hover:text-main_color"></i>
+          <motion.div>
+            <button className="col-center h-8 w-8">
+              <i className="ri-search-line text-3xl text-main_color"></i>
             </button>
           </motion.div>
         </ButtonWrapper>
