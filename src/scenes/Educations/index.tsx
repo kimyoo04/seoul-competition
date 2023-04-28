@@ -2,7 +2,7 @@ import { Fragment, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 
-import Card from "./Card";
+import EducationItem from "./EducationItem";
 import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
 
@@ -21,8 +21,14 @@ export default function Educations() {
     status,
   } = useInfiniteQuery<IEducationDataPerPage, { message: string }>({
     queryKey: ["educations"],
-    queryFn: ({ pageParam = 1 }) => fetchEducations(pageParam),
-    getNextPageParam: (lastPage) => lastPage.totalPages,
+    queryFn: ({ pageParam = 0 }) => fetchEducations(pageParam),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.currentPage < lastPage.totalPages) {
+        return lastPage.currentPage + 1;
+      } else {
+        return undefined;
+      }
+    },
   });
 
   // ref가 연결된 태그의 확인
@@ -35,7 +41,7 @@ export default function Educations() {
   }, [inView]);
 
   return (
-    <div className="w-full px-4 bg-gray_4">
+    <div className="w-full bg-gray_4 px-4">
       {status === "loading" ? (
         <Loading />
       ) : status === "error" ? (
@@ -43,11 +49,14 @@ export default function Educations() {
       ) : (
         <>
           {/* 교육 데이터 출력 영역 */}
-          <div className="grid gap-4 grid-col-1">
+          <div className="grid-col-1 grid gap-4">
             {data.pages.map((group, indx) => (
               <Fragment key={indx + "page"}>
                 {group.data.map((education) => (
-                  <Card key={education.id} education={education} />
+                  <EducationItem
+                    key={education.id + education.name}
+                    education={education}
+                  />
                 ))}
               </Fragment>
             ))}

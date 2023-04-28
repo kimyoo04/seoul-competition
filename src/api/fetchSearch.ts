@@ -22,17 +22,23 @@ export const fetchSearch = async (
 };
 
 // 검색 결과 useInfiniteQuery 함수
-export const useInfiniteSearch = (searchName: string) => {
+export const useInfiniteSearch = (searchKeyword: string) => {
   const searchCategory = useAppSelector((state) => state.search.category);
 
   return useInfiniteQuery<
     IEducationDataPerPage | IPostsDataPerPage,
     { message: string }
   >({
-    enabled: searchName !== "",
-    queryKey: ["search", searchCategory, searchName],
-    queryFn: ({ pageParam = 1 }) =>
-      fetchSearch(searchCategory, pageParam, searchName),
-    getNextPageParam: (lastPage) => lastPage.totalPages,
+    enabled: searchKeyword !== "",
+    queryKey: ["search", searchCategory, searchKeyword],
+    queryFn: ({ pageParam = 0 }) =>
+      fetchSearch(searchCategory, pageParam, searchKeyword),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.currentPage < lastPage.totalPages) {
+        return lastPage.currentPage + 1;
+      } else {
+        return undefined;
+      }
+    },
   });
 };
