@@ -1,13 +1,23 @@
+import { Fragment, useEffect } from "react";
 import { useInfiniteSearch } from "@api/fetchSearch";
 import { useAppSelector } from "@toolkit/hook";
+import { useInView } from "react-intersection-observer";
+
 import SearchHeader from "./SearchResultItem/header";
+import EducationItem from "@scenes/Educations/EducationItem";
+import PostItem from "@scenes/Posts/Item";
+
+import Loading from "@components/Loading";
+import ScrollButton from "@components/ScrollButton";
+
+import { IPostsData } from "@type/posts";
+import { IEducationData } from "@type/education";
 
 export default function SearchResult() {
   const searchKeyword = useAppSelector((state) => state.search.searchKeyword);
   const searchCategory = useAppSelector((state) => state.search.category);
 
-  const educationsResult = [1, 2]; //dummy
-  const postsResult = [3, 4]; //dummy
+  const { ref, inView } = useInView();
 
   // 카테고리에 따라 검색 GET 요청
   const {
@@ -21,27 +31,71 @@ export default function SearchResult() {
     status,
   } = useInfiniteSearch(searchKeyword);
 
+  // 하단 페이지에 도달시 fetchNextPage 요청
+  useEffect(() => {
+    if (inView && hasNextPage && hasNextPage && !isFetchingNextPage)
+      fetchNextPage();
+  }, [inView]);
+
   return (
     <section className="col-start w-full gap-4">
-      {/* 검색 정보 헤더 */}
-      <SearchHeader />
+      {isFetching ? (
+        <div className="col-center w-full">
+          <Loading />
+        </div>
+      ) : status === "error" ? (
+        <>{error && <p>Error: {error.message}</p>}</>
+      ) : (
+        <>
+          {/* 검색 정보 헤더 */}
+          <SearchHeader />
 
-      {/* 교육정보 검색결과 무한 스크롤 영역 */}
-      {searchCategory === "educations" && educationsResult && (
-        <ul>
-          {educationsResult.map((education) => (
-            <li key={education}>{education}</li>
-          ))}
-        </ul>
-      )}
+          <ul className="grid w-full grid-cols-1 gap-4">
+            {/* 교육정보 검색결과 무한 스크롤 영역 */}
+            {searchCategory === "educations" && data && (
+              <>
+                {data.pages.map((group, indx) => (
+                  <Fragment key={indx + "page" + searchCategory}>
+                    {group.data.map((education) => (
+                      <EducationItem
+                        key={education.id + searchCategory}
+                        education={education as IEducationData}
+                      />
+                    ))}
+                  </Fragment>
+                ))}
+              </>
+            )}
 
-      {searchCategory === "posts" && postsResult && (
-        <ul>
-          {/* 자유게시판  */}
-          {postsResult.map((post) => (
-            <li key={post}>{post}</li>
-          ))}
-        </ul>
+            {/* 자유게시판 검색결과 무한 스크롤 영역 */}
+            {searchCategory === "posts" && data && (
+              <>
+                {data.pages.map((group, indx) => (
+                  <Fragment key={indx + "page" + searchCategory}>
+                    {group.data.map((post) => (
+                      <PostItem
+                        key={post.id + searchCategory}
+                        post={post as IPostsData}
+                      />
+                    ))}
+                  </Fragment>
+                ))}
+              </>
+            )}
+          </ul>
+
+          {/* fetchNextPage 를 트리거 하기 위한 태그 */}
+          <span ref={ref}>
+            {isFetchingNextPage
+              ? "Loading more..."
+              : hasNextPage
+              ? "Load More"
+              : "Nothing more to load"}
+          </span>
+
+          {/* 최상단 이동 버튼 */}
+          <ScrollButton />
+        </>
       )}
     </section>
   );
