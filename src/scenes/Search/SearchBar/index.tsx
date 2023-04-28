@@ -25,6 +25,20 @@ export default function SearchBar() {
     // category에 따라 요청 보내기
     console.log(data.search);
     dispatch(searchActions.searchName({ searchName: data.search }));
+
+    // 기존 검색기록 받기
+    const oldSearchHistories = localStorage.getItem("search");
+
+    // 검색기록
+    let searchHistories: string[];
+    if (oldSearchHistories) {
+      searchHistories = [data.search, ...JSON.parse(oldSearchHistories)];
+    } else {
+      searchHistories = [data.search];
+    }
+
+    // 검색기록 저장
+    localStorage.setItem("search", JSON.stringify(searchHistories));
   };
 
   return (
