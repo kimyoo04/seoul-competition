@@ -9,7 +9,7 @@ import SearchResult from "./SearchResult";
 import SearchRanking from "./SearchRanking";
 
 export default function Search() {
-  const { isFocus, searchKeyword } = useAppSelector((state) => state.search);
+  const { isFocus } = useAppSelector((state) => state.search);
   // stagger 정의
   const staggerSearchItems = stagger(0.3, { startDelay: 0.3 });
 
@@ -23,7 +23,7 @@ export default function Search() {
   }, []);
 
   return (
-    <div className="col-start relative h-full w-full gap-4 py-4">
+    <div className="col-start relative  w-full gap-4 py-4">
       {/* 카테고리 선택 */}
       <ChooseCategory />
 
