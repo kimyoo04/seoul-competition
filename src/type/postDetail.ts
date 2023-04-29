@@ -12,7 +12,7 @@ export interface IPostDetail {
 // 게시글의 댓글
 export interface IPostComment {
   id: number;
-  post_id: string;
+  postId: string;
   nickname: string;
   content: string;
   createdAt: string;
