@@ -85,13 +85,18 @@ export default function SearchResult() {
           </ul>
 
           {/* fetchNextPage 를 트리거 하기 위한 태그 */}
-          <span ref={ref}>
-            {isFetchingNextPage
-              ? "Loading more..."
-              : hasNextPage
-              ? "Load More"
-              : "Nothing more to load"}
-          </span>
+          <div
+            ref={ref}
+            className="col-center w-full rounded-full border px-4 py-1"
+          >
+            <span>
+              {searchKeyword === ""
+                ? "검색하신 결과가 보이는 곳입니다."
+                : hasNextPage
+                ? "더보기"
+                : "마지막 검색 결과입니다."}
+            </span>
+          </div>
 
           {/* 최상단 이동 버튼 */}
           <ScrollButton />
