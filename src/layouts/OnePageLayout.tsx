@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import Header from "./Header";
-import Sidebar from "./Header/Sidebar";
 import { useAppSelector } from "@toolkit/hook";
 
 export default function MainLayout({
@@ -22,9 +21,6 @@ export default function MainLayout({
           {children}
         </div>
       </motion.div>
-
-      {/* 사이드바 영역 */}
-      {isSidebar && <Sidebar />}
     </>
   );
 }
