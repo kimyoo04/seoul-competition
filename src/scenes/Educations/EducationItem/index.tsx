@@ -1,7 +1,11 @@
 import { IEducationData } from "@type/education";
 import Link from "next/link";
 
-export default function Card({ education }: { education: IEducationData }) {
+export default function EducationItem({
+  education,
+}: {
+  education: IEducationData;
+}) {
   return (
     <Link
       href={`/educations/${education.id}`}

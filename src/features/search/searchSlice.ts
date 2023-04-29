@@ -44,7 +44,14 @@ export const searchSlice = createSlice({
       state.isFocus = false;
       state.searchKeyword = actions.payload.searchKeyword;
       state.keywords = [state.searchKeyword, ...state.keywords];
-      localStorage.setItem(state.category, JSON.stringify(state.keywords));
+
+      //  중복 제외
+      if (!state.keywords.includes(state.searchKeyword)) {
+        // 20개 저장 제한
+        if (state.keywords.length > 20)
+          state.keywords.splice(0, state.keywords.length - 20);
+        localStorage.setItem(state.category, JSON.stringify(state.keywords));
+      }
     },
 
     clickKeyword: (state, actions: PayloadAction<ISearchKeyword>) => {

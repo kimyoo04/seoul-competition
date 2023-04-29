@@ -7,8 +7,7 @@ export default function SearchHeader() {
     <>
       {searchKeyword && (
         <h2>
-          <b className="text-xl font-bold">{searchKeyword}</b>
-          검색결과입니다.
+          "<b className="text-xl font-bold">{searchKeyword}</b>" 검색결과입니다.
         </h2>
       )}
     </>
