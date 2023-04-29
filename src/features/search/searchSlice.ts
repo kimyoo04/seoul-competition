@@ -43,13 +43,19 @@ export const searchSlice = createSlice({
     searchKeyword: (state, actions: PayloadAction<ISearchKeyword>) => {
       state.isFocus = false;
       state.searchKeyword = actions.payload.searchKeyword;
-      state.keywords = [state.searchKeyword, ...state.keywords];
+
+      const keywords = JSON.parse(localStorage.getItem(state.category) || "[]");
+      const searchKeyword = state.searchKeyword;
 
       //  중복 제외
-      if (!state.keywords.includes(state.searchKeyword)) {
+      if (!keywords.includes(searchKeyword)) {
+        state.keywords = [state.searchKeyword, ...state.keywords];
+
         // 20개 저장 제한
-        if (state.keywords.length > 20)
+        if (state.keywords.length > 20) {
           state.keywords.splice(0, state.keywords.length - 20);
+        }
+
         localStorage.setItem(state.category, JSON.stringify(state.keywords));
       }
     },
