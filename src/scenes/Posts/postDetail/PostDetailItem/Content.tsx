@@ -47,9 +47,9 @@ export default function Content({ data }: IContentProps) {
     <>
       {/* 게시글 영역 */}
       <div>
-        <div className="flex flex-wrap justify-between">
+        <div className="mb-2 flex flex-wrap justify-between">
           {/* 게시글 제목 */}
-          <h2 className="mb-2 text-2xl font-bold">{data.title}</h2>
+          <h2 className="text-2xl font-bold">{data.title}</h2>
 
           {/* 수정, 삭제 버튼 */}
           <UpDelButtons />

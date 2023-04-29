@@ -61,13 +61,13 @@ export default function Comments({ data }: ICommentsProps) {
             <div className="flex flex-wrap justify-between">
               <div className="my-2 text-sm">
                 {/* 댓글 작성자 닉네임, 작성일, 상대적 시간 */}
-                <span className="text-gray-500 ">{comment.nickname}</span>
-                <span className="mx-2 text-gray-500 ">|</span>
-                <span className="text-gray-500 ">
+                <span className="text-gray_2 ">{comment.nickname}</span>
+                <span className="mx-2 text-gray_2 ">|</span>
+                <span className="text-gray_2 ">
                   {timeYmd(comment.createdAt)}
                 </span>
-                <span className="mx-2 text-gray-500 ">|</span>
-                <span className="text-gray-500 ">
+                <span className="mx-2 text-gray_2 ">|</span>
+                <span className="text-gray_2 ">
                   {timeSince(comment.createdAt)}
                 </span>
               </div>
@@ -76,7 +76,7 @@ export default function Comments({ data }: ICommentsProps) {
               <UpDelButtons />
             </div>
 
-            <div className="mx-2 mb-2 text-gray-800 ">{comment.content}</div>
+            <div className="mx-2 mb-2 text-font_black ">{comment.content}</div>
           </div>
         ))}
     </>
