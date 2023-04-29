@@ -1,19 +1,14 @@
 import Link from "next/link";
-import { motion } from "framer-motion";
+import ButtonWrapper from "@components/Animation/ButtonWrapper";
 
 export default function Logo() {
   return (
     <Link href={"/"}>
-      <motion.div
-        whileTap={{
-          scale: 0.9,
-        }}
-        className="col-center"
-      >
+      <ButtonWrapper>
         <span className="pb-[6px] pl-[4px] text-3xl font-bold text-main_color dark:text-main_color">
           Senior+
         </span>
-      </motion.div>
+      </ButtonWrapper>
     </Link>
   );
 }

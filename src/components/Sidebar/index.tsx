@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import NavLinks from "./NavLinks";
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { sidebarActions } from "@features/sidebar/sidebarSlice";
 import Portal from "./Portal";
@@ -15,7 +14,7 @@ const SideBar = () => {
       {isSidebar && (
         <div
           key="backdrop"
-          className="fixed top-0 left-0 z-40 w-screen h-screen bg-black/60"
+          className="fixed left-0 top-0 z-40 h-screen w-screen bg-black/60"
           onClick={() => dispatch(sidebarActions.toggleSidebar())}
         ></div>
       )}
@@ -28,19 +27,17 @@ const SideBar = () => {
           animate={{ x: 0 }}
           exit={{ x: 300 }}
           transition={{ duration: 0.2 }}
-          className="relative right-0 z-40 w-64 h-screen max-w-md p-8 shadow-lg bg-main_color"
+          className="relative right-0 z-40 h-screen w-64 max-w-md bg-main_color p-8 shadow-lg"
         >
-          {/* 네비게이션 링크 */}
-          <NavLinks />
-
+          <span>Filter</span>
           {/* 닫기 버튼 */}
           <button
-            className="absolute bottom-0 right-0 p-8"
+            className="absolute bottom-0 right-0 p-4"
             onClick={() => dispatch(sidebarActions.toggleSidebar())}
-            >
+          >
             <ButtonWrapper>
-            <i className="text-4xl text-font_white ri-close-line" />
-          </ButtonWrapper>
+              <i className="ri-close-line text-4xl text-font_white" />
+            </ButtonWrapper>
           </button>
         </motion.div>
       )}
