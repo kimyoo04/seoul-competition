@@ -48,7 +48,7 @@ export default function Posts() {
 
   return (
     <>
-      <div className="w-full bg-gray_4 p-4">
+      <div className="w-full p-4">
         {status === "loading" ? (
           <Loading />
         ) : status === "error" ? (
