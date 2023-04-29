@@ -5,22 +5,22 @@ import ButtonWrapper from "@components/Animation/ButtonWrapper";
 export default function NavLinks() {
   return (
     <>
-      <div>
+      <div className="pt-[6px]">
         <Link href={"/posts"}>
           <ButtonWrapper>
             <span className="text-xl font-bold text-main_color dark:text-main_color">
-              자유게시판
+              자유 게시판
             </span>
           </ButtonWrapper>
         </Link>
       </div>
-      <div>
+      <div className="pt-[6px]">
         <Link href={"/educations"}>
           <ButtonWrapper>
-              <span className="text-xl font-bold text-main_color dark:text-main_color">
-                교육
-              </span>
-            </ButtonWrapper>
+            <span className="text-xl font-bold text-main_color dark:text-main_color">
+              교육 정보
+            </span>
+          </ButtonWrapper>
         </Link>
       </div>
     </>

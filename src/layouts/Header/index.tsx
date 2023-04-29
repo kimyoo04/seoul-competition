@@ -45,10 +45,12 @@ export default function Header() {
         transition={{ duration: 0.3 }}
         className="fixed top-0 z-40 w-full bg-white shadow-sm"
       >
-        <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
+        <div className="container mx-auto flex h-16 items-center justify-between gap-20 sm:gap-24 md:gap-36 lg:gap-72 xl:gap-96 px-4">
           <Logo />
-          <NavLinks />
-          <SearchLink />
+          <div className="container flex h-16 items-center justify-between">
+            <NavLinks />
+            <SearchLink />
+          </div>
         </div>
       </motion.header>
     </>
