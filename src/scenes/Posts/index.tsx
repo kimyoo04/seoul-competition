@@ -10,7 +10,7 @@ import FilterToggle from "@components/FilterToggle";
 import ScrollButton from "@components/ScrollButton";
 
 import { fetchPosts } from "@api/fetchPosts";
-import { IPostDataPerPage } from "@type/posts";
+import { IPostsDataPerPage } from "@type/posts";
 
 export default function Posts() {
   // 사이드바
@@ -25,7 +25,7 @@ export default function Posts() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery<IPostDataPerPage, { message: string }>({
+  } = useInfiniteQuery<IPostsDataPerPage, { message: string }>({
     queryKey: ["Posts"],
     queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam),
     getNextPageParam: (lastPage) => {
@@ -35,6 +35,11 @@ export default function Posts() {
         return undefined;
       }
     },
+
+    cacheTime: 300000, // 5분
+    staleTime: 240000, // 4분
+    refetchOnMount: false, //페이지 재방문시 refetch 금지
+    refetchOnWindowFocus: false, // 브라우저 포커징시 refetch 금지
   });
 
   // ref가 연결된 태그의 확인
@@ -48,7 +53,7 @@ export default function Posts() {
 
   return (
     <>
-      <div className="w-full p-4">
+      <div className="w-full px-4">
         {status === "loading" ? (
           <Loading />
         ) : status === "error" ? (
@@ -56,7 +61,7 @@ export default function Posts() {
         ) : (
           <>
             {/* 게시글 데이터 출력 영역 */}
-            <div className="w-full px-4 pb-4 text-xl font-bold">
+            <div className="w-full p-4 text-xl font-bold">
               자유 게시판
             </div>
             <div className="grid grid-cols-1 gap-4 ">

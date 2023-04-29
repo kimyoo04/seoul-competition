@@ -10,7 +10,7 @@ export interface IPostData {
 }
 
 // 게시판 데이터 페이지별 타입 설정
-export interface IPostDataPerPage {
+export interface IPostsDataPerPage {
   data: IPostData[];
   totalPages: number;
   currentPage: number;
