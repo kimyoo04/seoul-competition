@@ -10,7 +10,7 @@ import FilterToggle from "@components/FilterToggle";
 import ScrollButton from "@components/ScrollButton";
 
 import { fetchPosts } from "@api/fetchPosts";
-import { IPostsDataPerPage } from "@type/posts";
+import { IPostDataPerPage } from "@type/posts";
 
 export default function Posts() {
   // 사이드바
@@ -25,10 +25,16 @@ export default function Posts() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery<IPostsDataPerPage, { message: string }>({
+  } = useInfiniteQuery<IPostDataPerPage, { message: string }>({
     queryKey: ["Posts"],
-    queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam),
-    getNextPageParam: (lastPage) => lastPage.totalPages,
+    queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam),
+    getNextPageParam: (lastPage) => {
+      if (lastPage.currentPage < lastPage.totalPages) {
+        return lastPage.currentPage + 1;
+      } else {
+        return undefined;
+      }
+    },
   });
 
   // ref가 연결된 태그의 확인
