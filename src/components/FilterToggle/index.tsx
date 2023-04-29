@@ -13,9 +13,7 @@ export default function FilterToggle() {
       whileHover={{ x: -15 }}
       onClick={() => dispatch(sidebarActions.toggleSidebar())}
     >
-      <button>
-        <i className="ri-equalizer-line text-2xl text-font_white" />
-      </button>
+      <i className="ri-equalizer-line text-2xl text-font_white" />
       <span className="ml-[2.5px] w-6 text-xl font-bold text-font_white">
         골라보기
       </span>

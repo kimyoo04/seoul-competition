@@ -1,7 +1,7 @@
-import { IPostsData } from "@type/posts";
+import { IPostData } from "@type/posts";
 import Link from "next/link";
 
-export default function Item({ post }: { post: IPostsData }) {
+export default function PostItem({ post }: { post: IPostData }) {
   // Intl API 활용
   function timeSince(date: string) {
     // 9시간 더해주기 (UTC - 한국 시간)
