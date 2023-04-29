@@ -29,6 +29,10 @@ export default function Educations() {
         return undefined;
       }
     },
+    cacheTime: 300000, // 5분
+    staleTime: 240000, // 4분
+    refetchOnMount: false, // 페이지 재방문시 refetch 금지
+    refetchOnWindowFocus: false, // 브라우저 포커싱시 refetch 금지
   });
 
   // ref가 연결된 태그의 확인
