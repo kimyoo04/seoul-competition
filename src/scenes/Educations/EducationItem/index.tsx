@@ -9,7 +9,7 @@ export default function EducationItem({
   return (
     <Link
       href={`/educations/${education.id}`}
-      className="flex w-full flex-col gap-4 rounded-2xl bg-white p-4"
+      className="flex w-full flex-col gap-4 rounded-2xl bg-white p-4 shadow-md"
     >
       {/* 교육 이름 */}
       <div className="">

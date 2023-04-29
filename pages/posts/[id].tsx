@@ -5,7 +5,6 @@ import PostDetail from "@scenes/Posts/postDetail";
 export default function PostDetailPage() {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
 
   if (typeof id === "string") {
     return (
@@ -13,5 +12,5 @@ export default function PostDetailPage() {
         <PostDetail id={id} />
       </MainLayout>
     );
-  } 
+  }
 }

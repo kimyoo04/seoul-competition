@@ -29,6 +29,10 @@ export default function Educations() {
         return undefined;
       }
     },
+    cacheTime: 300000, // 5분
+    staleTime: 240000, // 4분
+    refetchOnMount: false, // 페이지 재방문시 refetch 금지
+    refetchOnWindowFocus: false, // 브라우저 포커싱시 refetch 금지
   });
 
   // ref가 연결된 태그의 확인
@@ -41,7 +45,7 @@ export default function Educations() {
   }, [inView]);
 
   return (
-    <div className="w-full bg-gray_4 px-4">
+    <div className="w-full px-4">
       {status === "loading" ? (
         <Loading />
       ) : status === "error" ? (
@@ -49,6 +53,7 @@ export default function Educations() {
       ) : (
         <>
           {/* 교육 데이터 출력 영역 */}
+          <div className="w-full p-4 text-xl font-bold">교육 정보</div>
           <div className="grid-col-1 grid gap-4">
             {data.pages.map((group, indx) => (
               <Fragment key={indx + "page"}>
