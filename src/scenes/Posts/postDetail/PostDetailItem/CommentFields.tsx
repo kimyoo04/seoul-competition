@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import { IPostDetail } from "@type/postDetail";
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
 
 export default function CommentFields() {
