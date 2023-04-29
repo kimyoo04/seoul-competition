@@ -51,9 +51,9 @@ export const searchSlice = createSlice({
       if (!keywords.includes(searchKeyword)) {
         state.keywords = [state.searchKeyword, ...state.keywords];
 
-        // 20개 저장 제한
-        if (state.keywords.length > 20) {
-          state.keywords.splice(0, state.keywords.length - 20);
+        // 15개 저장 제한
+        if (state.keywords.length > 15) {
+          state.keywords.splice(15, state.keywords.length - 15);
         }
 
         localStorage.setItem(state.category, JSON.stringify(state.keywords));
