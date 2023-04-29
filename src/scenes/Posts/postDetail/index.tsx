@@ -7,7 +7,7 @@ import { fetchPostDetail } from "@api/fetchPostDetail";
 import { IPostDetail } from "@type/postDetail";
 import Content from "./PostDetailItem/Content";
 import Comments from "./PostDetailItem/Comments";
-import CommentFields from "./PostDetailItem/CommentFeilds";
+import CommentFields from "./PostDetailItem/CommentFields";
 
 export default function PostDetail({ id }: { id: string }) {
   const { data, isLoading, error } = useQuery<IPostDetail>(
