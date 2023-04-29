@@ -3,7 +3,8 @@ import { ISearchField } from "@type/search";
 
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { searchActions } from "@features/search/searchSlice";
-import SearchHistory from "../SearchKeywordsModal";
+
+import { motion } from "framer-motion";
 
 export default function SearchBar() {
   const dispatch = useAppDispatch();
@@ -57,7 +58,23 @@ export default function SearchBar() {
           type="submit"
           className="col-center absolute bottom-4 left-5 text-2xl font-bold "
         >
-          <i className="ri-search-line absolute transition-all group-hover:text-main_color"></i>
+          <motion.i
+            whileTap={{ scale: 0.8 }}
+            className="ri-search-line absolute text-main_color transition-all"
+          ></motion.i>
+        </button>
+
+        {/* Search Enter Button */}
+        <button
+          type="submit"
+          className="col-center absolute bottom-0 right-0 h-8 rounded-r-2xl bg-main_color px-3 "
+        >
+          <motion.span
+            whileTap={{ scale: 0.8 }}
+            className="text-md font-bold text-font_white"
+          >
+            검색하기
+          </motion.span>
         </button>
 
         {/* 더미 div 태그 */}
