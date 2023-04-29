@@ -34,7 +34,7 @@ export default function CommentFields() {
             id="comment"
             name="comment"
             rows={2}
-            className="rounded-lg bg-white px-4 px-4 py-2 py-2 shadow-sm shadow-gray_3 transition-all duration-300"
+            className="rounded-lg bg-white px-4 py-2 shadow-sm shadow-gray_3 transition-all duration-300"
             placeholder="댓글을 작성해 보세요."
             maxLength={500}
           />
