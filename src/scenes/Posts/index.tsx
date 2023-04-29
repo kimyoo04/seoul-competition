@@ -48,7 +48,7 @@ export default function Posts() {
 
   return (
     <>
-      <div className="w-full rounded-2xl bg-gray_4 p-4">
+      <div className="w-full bg-gray_4 p-4">
         {status === "loading" ? (
           <Loading />
         ) : status === "error" ? (
@@ -56,7 +56,9 @@ export default function Posts() {
         ) : (
           <>
             {/* 게시글 데이터 출력 영역 */}
-            <div className="w-full p-4 text-xl font-bold">자유 게시판</div>
+            <div className="w-full px-4 pb-4 text-xl font-bold">
+              자유 게시판
+            </div>
             <div className="grid grid-cols-1 gap-4 ">
               {data.pages.map((group, indx) => (
                 <Fragment key={indx + "page"}>
