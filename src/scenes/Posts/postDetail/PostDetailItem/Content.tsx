@@ -56,18 +56,16 @@ export default function Content({ data }: IContentProps) {
         </div>
 
         {/* 작성자, 작성일, 조회수 */}
-        <div className="mb-8 text-sm ">
-          <span className="text-gray-500 ">작성자: {data.nickname}</span>
-          <span className="mx-2 text-gray-500">|</span>
-          <span className="text-gray-500 ">
-            작성일: {timeSince(data.createdAt)}
-          </span>
-          <span className="mx-2 text-gray-500">|</span>
-          <span className="text-gray-500 ">조회수: {data.hits}</span>
+        <div className="mb-8 text-sm text-gray_2">
+          <span>작성자: {data.nickname}</span>
+          <span className="mx-2">|</span>
+          <span>작성일: {timeSince(data.createdAt)}</span>
+          <span className="mx-2">|</span>
+          <span>조회수: {data.hits}</span>
         </div>
 
         {/* 내용 영역*/}
-        <div className="mb-16 text-gray-800 ">{data.content}</div>
+        <div className="mb-16 text-font_black ">{data.content}</div>
       </div>
     </>
   );

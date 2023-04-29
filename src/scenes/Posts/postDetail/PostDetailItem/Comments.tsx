@@ -59,17 +59,13 @@ export default function Comments({ data }: ICommentsProps) {
             className="mb-4 rounded-lg bg-gray_4 px-4 py-2 "
           >
             <div className="flex flex-wrap justify-between">
-              <div className="my-2 text-sm">
+              <div className="my-2 text-sm text-gray_2">
                 {/* 댓글 작성자 닉네임, 작성일, 상대적 시간 */}
-                <span className="text-gray_2 ">{comment.nickname}</span>
-                <span className="mx-2 text-gray_2 ">|</span>
-                <span className="text-gray_2 ">
-                  {timeYmd(comment.createdAt)}
-                </span>
-                <span className="mx-2 text-gray_2 ">|</span>
-                <span className="text-gray_2 ">
-                  {timeSince(comment.createdAt)}
-                </span>
+                <span>{comment.nickname}</span>
+                <span className="mx-2 ">|</span>
+                <span>{timeYmd(comment.createdAt)}</span>
+                <span className="mx-2">|</span>
+                <span>{timeSince(comment.createdAt)}</span>
               </div>
 
               {/* 수정, 삭제 버튼 */}
