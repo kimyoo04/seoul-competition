@@ -41,7 +41,7 @@ export default function Educations() {
   }, [inView]);
 
   return (
-    <div className="w-full bg-gray_4 px-4">
+    <div className="w-full px-4">
       {status === "loading" ? (
         <Loading />
       ) : status === "error" ? (
@@ -49,6 +49,7 @@ export default function Educations() {
       ) : (
         <>
           {/* 교육 데이터 출력 영역 */}
+          <div className="w-full p-4 text-xl font-bold">교육 정보</div>
           <div className="grid-col-1 grid gap-4">
             {data.pages.map((group, indx) => (
               <Fragment key={indx + "page"}>
