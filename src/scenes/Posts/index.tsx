@@ -42,10 +42,6 @@ export default function Posts() {
 
   return (
     <>
-      <FilterToggle />
-      {/* 사이드바 영역 */}
-      {isSidebar && <Sidebar />}
-
       <div className="w-full rounded-2xl bg-gray_4 p-4">
         {status === "loading" ? (
           <Loading />
@@ -80,6 +76,10 @@ export default function Posts() {
 
         {/* 최상단 이동 버튼 */}
         <ScrollButton />
+
+        {/* 사이드바 영역 */}
+        <FilterToggle />
+        {isSidebar && <Sidebar />}
       </div>
     </>
   );
