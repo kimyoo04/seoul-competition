@@ -5,12 +5,12 @@ import { useInView } from "react-intersection-observer";
 
 import SearchHeader from "./SearchResultItem/header";
 import EducationItem from "@scenes/Educations/EducationItem";
-import PostItem from "@scenes/Posts/Item";
+import PostItem from "@scenes/Posts/PostItem";
 
 import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
 
-import { IPostsData } from "@type/posts";
+import { IPostData } from "@type/posts";
 import { IEducationData } from "@type/education";
 
 export default function SearchResult() {
@@ -75,7 +75,7 @@ export default function SearchResult() {
                     {group.data.map((post) => (
                       <PostItem
                         key={post.id + searchCategory}
-                        post={post as IPostsData}
+                        post={post as IPostData}
                       />
                     ))}
                   </Fragment>

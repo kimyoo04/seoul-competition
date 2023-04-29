@@ -1,14 +1,13 @@
 import { useForm } from "react-hook-form";
 import { ISearchField } from "@type/search";
 
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
+import { useAppDispatch } from "@toolkit/hook";
 import { searchActions } from "@features/search/searchSlice";
 
 import { motion } from "framer-motion";
 
 export default function SearchBar() {
   const dispatch = useAppDispatch();
-  const { isFocus, category } = useAppSelector((state) => state.search);
 
   const {
     register,
@@ -25,8 +24,6 @@ export default function SearchBar() {
     // validation
     if (!data.search) return;
 
-    console.log(data.search);
-
     // category에 따라 요청 보내기
     dispatch(searchActions.searchKeyword({ searchKeyword: data.search }));
 
@@ -35,7 +32,7 @@ export default function SearchBar() {
   };
 
   return (
-    <section className="w-full">
+    <section className="z-10 w-full">
       <form className="group relative w-full" onSubmit={handleSubmit(onValid)}>
         {/* 검색어 입력 영역 */}
         <input
