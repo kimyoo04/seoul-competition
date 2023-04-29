@@ -27,7 +27,7 @@ export default function SearchKeywordsModal() {
         variants={fadeIn("down", "easeInOut", 0, 0.4, 20)}
         initial="hidden"
         animate="show"
-        className="absolute top-28 h-96 w-full overflow-scroll rounded-2xl border border-gray_2 bg-white shadow-md"
+        className="absolute top-28 h-96 w-full overflow-scroll rounded-2xl border border-main_color bg-white shadow-md shadow-main_color/20"
       >
         {/* 헤더 회색 영역 */}
         <SearchKeywordsHeader />
