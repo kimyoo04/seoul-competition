@@ -1,8 +1,11 @@
-import { searchActions } from "@features/search/searchSlice";
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { useEffect } from "react";
+
+import { useAppDispatch, useAppSelector } from "@toolkit/hook";
+import { searchActions } from "@features/search/searchSlice";
+
 import { motion } from "framer-motion";
 import { fadeIn } from "@util/variants";
+
 import SearchKeywordsItem from "./SearchKeywordsItem/SearchKeywordsItem";
 import SearchKeywordsHeader from "./SearchKeywordsItem/SearchKeywordsHeader";
 

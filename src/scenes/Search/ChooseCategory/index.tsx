@@ -9,7 +9,7 @@ export default function ChooseCategory() {
   const categoriesEng: TSearchCategory[] = ["educations", "posts"];
 
   return (
-    <section className="mt-2 flex w-full items-center justify-between">
+    <section className="z-10 mt-2 flex w-full items-center justify-between">
       {categoriesKor.map((category, index) => {
         return (
           <ChooseButton
