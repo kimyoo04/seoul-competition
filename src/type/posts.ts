@@ -1,5 +1,5 @@
 // 게시판 인피니티 스크롤 데이터
-export interface IPostsData {
+export interface IPostData {
   id: number;
   nickname: string;
   title: string;
@@ -10,8 +10,8 @@ export interface IPostsData {
 }
 
 // 게시판 데이터 페이지별 타입 설정
-export interface IPostsDataPerPage {
-  data: IPostsData[];
+export interface IPostDataPerPage {
+  data: IPostData[];
   totalPages: number;
   currentPage: number;
 }
