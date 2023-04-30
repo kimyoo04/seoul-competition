@@ -12,27 +12,30 @@ export default function Header() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // 현재 스크롤 위치 저장
-      const currentScrollPos = window.pageYOffset;
+    if (window !== undefined) {
+      const handleScroll = () => {
+        // 현재 스크롤 위치 저장
+        const currentScrollPos = window.pageYOffset;
 
-      // isScrollingUp: 현재 스크롤 위치가 이전 스크롤보다 위에 있는 상태
-      const isScrollingUp = currentScrollPos < prevScrollPos;
+        // isScrollingUp: 현재 스크롤 위치가 이전 스크롤보다 위에 있는 상태
+        const isScrollingUp = currentScrollPos < prevScrollPos;
 
-      // 스크롤 방향에 따라 헤더 표시하기
-      setShowHeader(isScrollingUp || currentScrollPos < 10);
+        // 스크롤 방향에 따라 헤더 표시하기
+        setShowHeader(isScrollingUp || currentScrollPos < 10);
 
-      // prevScrollPos -> 현재 스크롤 위치
-      setPrevScrollPos(currentScrollPos);
-    };
+        // prevScrollPos -> 현재 스크롤 위치
+        setPrevScrollPos(currentScrollPos);
+      };
 
-    // 스크롤 할 때마다 handleScroll 실행
-    window.addEventListener("scroll", handleScroll);
+      if (window !== undefined)
+        // 스크롤 할 때마다 handleScroll 실행
+        window.addEventListener("scroll", handleScroll);
 
-    // 이벤트 리스너 해제
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+      // 이벤트 리스너 해제
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
     // prevScrollPos 값이 변경될 때마다 useEffect 실행
   }, [prevScrollPos]);
 
