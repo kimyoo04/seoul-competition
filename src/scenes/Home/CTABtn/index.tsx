@@ -28,7 +28,7 @@ export default function CTABtn() {
           // searchCategory state 변경
           dispatch(
             searchActions.chooseCategory({
-              searchCategory: "educations" as TSearchCategory,
+              searchCategory: "posts" as TSearchCategory,
             })
           );
         }}
