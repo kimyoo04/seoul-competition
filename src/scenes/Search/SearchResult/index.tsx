@@ -12,8 +12,11 @@ import ScrollButton from "@components/ScrollButton";
 
 import { IPostData } from "@type/posts";
 import { IEducationData } from "@type/education";
+import Sidebar from "@components/Sidebar";
+import FilterToggle from "@components/FilterToggle";
 
 export default function SearchResult() {
+  const isSidebar = useAppSelector((state) => state.sidebar.isSidebar); // 사이드바
   const searchKeyword = useAppSelector((state) => state.search.searchKeyword);
   const searchCategory = useAppSelector((state) => state.search.category);
 
@@ -33,16 +36,13 @@ export default function SearchResult() {
 
   // 하단 페이지에 도달시 fetchNextPage 요청
   useEffect(() => {
-    if (inView && hasNextPage && hasNextPage && !isFetchingNextPage)
-      fetchNextPage();
+    if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
   }, [inView]);
 
   return (
-    <section className="col-start w-full gap-4">
-      {isFetching ? (
-        <div className="col-center w-full">
-          <Loading />
-        </div>
+    <section className="col-center w-full gap-4">
+      {status === "loading" && searchKeyword !== "" ? (
+        <Loading />
       ) : status === "error" ? (
         <>{error && <p>Error: {error.message}</p>}</>
       ) : (
@@ -98,10 +98,17 @@ export default function SearchResult() {
             </span>
           </div>
 
-          {/* 최상단 이동 버튼 */}
-          <ScrollButton />
+          {/* fetching 시 로딩 UI */}
+          <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
         </>
       )}
+
+      {/* 최상단 이동 버튼 */}
+      <ScrollButton />
+
+      {/* 사이드바 영역 */}
+      <FilterToggle />
+      {isSidebar && <Sidebar />}
     </section>
   );
 }

@@ -13,7 +13,7 @@ export interface IEducationData {
   // commentsCount: number;
 }
 
-export interface IEducationDataPerPage {
+export interface IEducationsDataPerPage {
   data: IEducationData[];
   totalPages: number;
   currentPage: number;

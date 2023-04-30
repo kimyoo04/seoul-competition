@@ -1,15 +1,19 @@
 import { Fragment, useEffect } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
+import { useAppSelector } from "@toolkit/hook";
 
 import EducationItem from "./EducationItem";
 import Loading from "@components/Loading";
+import Sidebar from "@components/Sidebar";
+import FilterToggle from "@components/FilterToggle";
 import ScrollButton from "@components/ScrollButton";
+import ListPageHeader from "@components/Header/ListPageHeader";
 
-import { fetchEducations } from "@api/fetchEducations";
-import { IEducationDataPerPage } from "@type/education";
+import { useInfiniteEducations } from "@api/fetchEducations";
 
 export default function Educations() {
+  const isSidebar = useAppSelector((state) => state.sidebar.isSidebar); // 사이드바
+
   // page 단위로 educationdata GET 요청 및 캐싱
   const {
     data,
@@ -19,27 +23,10 @@ export default function Educations() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery<IEducationDataPerPage, { message: string }>({
-    queryKey: ["educations"],
-    queryFn: ({ pageParam = 0 }) => fetchEducations(pageParam),
-    getNextPageParam: (lastPage) => {
-      if (lastPage.currentPage < lastPage.totalPages) {
-        return lastPage.currentPage + 1;
-      } else {
-        return undefined;
-      }
-    },
-    cacheTime: 300000, // 5분
-    staleTime: 240000, // 4분
-    refetchOnMount: false, // 페이지 재방문시 refetch 금지
-    refetchOnWindowFocus: false, // 브라우저 포커싱시 refetch 금지
-  });
+  } = useInfiniteEducations();
 
-  // ref가 연결된 태그의 확인
-  // { ref, inView, entry }
+  // ref가 연결된 태그의 확인 + 하단 페이지에 도달시 fetchNextPage 요청
   const { ref, inView } = useInView();
-
-  // 하단 페이지에 도달시 fetchNextPage 요청
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
   }, [inView]);
@@ -52,11 +39,13 @@ export default function Educations() {
         <>{error && <p>Error: {error.message}</p>}</>
       ) : (
         <>
+          {/* 헤더 */}
+          <ListPageHeader headertitle="교육 정보" headerDescription="" />
+
           {/* 교육 데이터 출력 영역 */}
-          <div className="w-full p-4 text-xl font-bold">교육 정보</div>
           <div className="grid-col-1 grid gap-4">
             {data.pages.map((group, indx) => (
-              <Fragment key={indx + "page"}>
+              <Fragment key={indx + "educations page"}>
                 {group.data.map((education) => (
                   <EducationItem
                     key={education.id + education.name}
@@ -68,21 +57,28 @@ export default function Educations() {
           </div>
 
           {/* fetchNextPage 를 트리거 하기 위한 태그 */}
-          <span ref={ref}>
-            {isFetchingNextPage
-              ? "Loading more..."
-              : hasNextPage
-              ? "Load More"
-              : "Nothing more to load"}
-          </span>
+          <div
+            ref={ref}
+            className="col-center w-full rounded-full border px-4 py-1"
+          >
+            {hasNextPage ? (
+              <span>더보기</span>
+            ) : (
+              <span>마지막 검색 결과입니다.</span>
+            )}
+          </div>
 
-          {/* 첫 fetching 시 로딩 UI */}
+          {/* fetching 시 로딩 UI */}
           <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
         </>
       )}
 
       {/* 최상단 이동 버튼 */}
       <ScrollButton />
+
+      {/* 사이드바 영역 */}
+      <FilterToggle />
+      {isSidebar && <Sidebar />}
     </div>
   );
 }
