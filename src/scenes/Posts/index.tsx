@@ -8,6 +8,7 @@ import Loading from "@components/Loading";
 import Sidebar from "@components/Sidebar";
 import FilterToggle from "@components/FilterToggle";
 import ScrollButton from "@components/ScrollButton";
+import ListPageHeader from "@components/Header/ListPageHeader";
 
 import { fetchPosts } from "@api/fetchPosts";
 import { IPostsDataPerPage } from "@type/posts";
@@ -60,10 +61,10 @@ export default function Posts() {
           <>{error && <p>Error: {error.message}</p>}</>
         ) : (
           <>
+            {/* 헤더 */}
+            <ListPageHeader headertitle="자유게시판" headerDescription="" />
+
             {/* 게시글 데이터 출력 영역 */}
-            <div className="w-full p-4 text-xl font-bold">
-              자유 게시판
-            </div>
             <div className="grid grid-cols-1 gap-4 ">
               {data.pages.map((group, indx) => (
                 <Fragment key={indx + "page"}>
@@ -74,13 +75,12 @@ export default function Posts() {
               ))}
             </div>
             {/* fetchNextPage 를 트리거 하기 위한 태그 */}
-            <span ref={ref}>
-              {isFetchingNextPage
-                ? "Loading more..."
-                : hasNextPage
-                ? "Load More"
-                : "Nothing more to load"}
-            </span>
+            <div
+              ref={ref}
+              className="col-center w-full rounded-full border px-4 py-1"
+            >
+              <span>{hasNextPage ? "더보기" : "마지막 검색 결과입니다."}</span>
+            </div>
 
             {/* 첫 fetching 시 로딩 UI */}
             <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>

@@ -1,15 +1,22 @@
 import { Fragment, useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
+import { useAppSelector } from "@toolkit/hook";
 
 import EducationItem from "./EducationItem";
 import Loading from "@components/Loading";
+import Sidebar from "@components/Sidebar";
+import FilterToggle from "@components/FilterToggle";
 import ScrollButton from "@components/ScrollButton";
+import ListPageHeader from "@components/Header/ListPageHeader";
 
 import { fetchEducations } from "@api/fetchEducations";
-import { IEducationDataPerPage } from "@type/education";
+import { IEducationsDataPerPage } from "@type/education";
 
 export default function Educations() {
+  // 사이드바
+  const isSidebar = useAppSelector((state) => state.sidebar.isSidebar);
+
   // page 단위로 educationdata GET 요청 및 캐싱
   const {
     data,
@@ -19,7 +26,7 @@ export default function Educations() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery<IEducationDataPerPage, { message: string }>({
+  } = useInfiniteQuery<IEducationsDataPerPage, { message: string }>({
     queryKey: ["educations"],
     queryFn: ({ pageParam = 0 }) => fetchEducations(pageParam),
     getNextPageParam: (lastPage) => {
@@ -52,8 +59,10 @@ export default function Educations() {
         <>{error && <p>Error: {error.message}</p>}</>
       ) : (
         <>
+          {/* 헤더 */}
+          <ListPageHeader headertitle="교육 정보" headerDescription="" />
+
           {/* 교육 데이터 출력 영역 */}
-          <div className="w-full p-4 text-xl font-bold">교육 정보</div>
           <div className="grid-col-1 grid gap-4">
             {data.pages.map((group, indx) => (
               <Fragment key={indx + "page"}>
@@ -68,13 +77,12 @@ export default function Educations() {
           </div>
 
           {/* fetchNextPage 를 트리거 하기 위한 태그 */}
-          <span ref={ref}>
-            {isFetchingNextPage
-              ? "Loading more..."
-              : hasNextPage
-              ? "Load More"
-              : "Nothing more to load"}
-          </span>
+          <div
+            ref={ref}
+            className="col-center w-full rounded-full border px-4 py-1"
+          >
+            <span>{hasNextPage ? "더보기" : "마지막 검색 결과입니다."}</span>
+          </div>
 
           {/* 첫 fetching 시 로딩 UI */}
           <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
@@ -83,6 +91,10 @@ export default function Educations() {
 
       {/* 최상단 이동 버튼 */}
       <ScrollButton />
+
+      {/* 사이드바 영역 */}
+      <FilterToggle />
+      {isSidebar && <Sidebar />}
     </div>
   );
 }
