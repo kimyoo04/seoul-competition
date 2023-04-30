@@ -10,6 +10,7 @@ import ScrollButton from "@components/ScrollButton";
 import ListPageHeader from "@components/Header/ListPageHeader";
 
 import { useInfinitePosts } from "@api/fetchPosts";
+import SearchLink from "@components/SearchLink";
 
 export default function Posts() {
   const isSidebar = useAppSelector((state) => state.sidebar.isSidebar); // 사이드바
@@ -76,6 +77,9 @@ export default function Posts() {
       {/* 사이드바 영역 */}
       <FilterToggle />
       {isSidebar && <Sidebar />}
+
+      {/* 검색 영역 */}
+      <SearchLink />
     </div>
   );
 }

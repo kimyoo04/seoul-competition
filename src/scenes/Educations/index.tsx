@@ -10,6 +10,7 @@ import ScrollButton from "@components/ScrollButton";
 import ListPageHeader from "@components/Header/ListPageHeader";
 
 import { useInfiniteEducations } from "@api/fetchEducations";
+import SearchLink from "@components/SearchLink";
 
 export default function Educations() {
   const isSidebar = useAppSelector((state) => state.sidebar.isSidebar); // 사이드바
@@ -79,6 +80,9 @@ export default function Educations() {
       {/* 사이드바 영역 */}
       <FilterToggle />
       {isSidebar && <Sidebar />}
+
+      {/* 검색 영역 */}
+      <SearchLink />
     </div>
   );
 }

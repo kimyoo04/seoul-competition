@@ -1,5 +1,4 @@
 import Logo from "./HeaderItem/Logo";
-import SearchLink from "./HeaderItem/SearchLink";
 import NavLinks from "./HeaderItem/NavLinks";
 
 import { useEffect, useState } from "react";
@@ -13,43 +12,56 @@ export default function Header() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // 현재 스크롤 위치 저장
-      const currentScrollPos = window.pageYOffset;
+    if (window !== undefined) {
+      const handleScroll = () => {
+        // 현재 스크롤 위치 저장
+        const currentScrollPos = window.pageYOffset;
 
-      // isScrollingUp: 현재 스크롤 위치가 이전 스크롤보다 위에 있는 상태
-      const isScrollingUp = currentScrollPos < prevScrollPos;
+        // isScrollingUp: 현재 스크롤 위치가 이전 스크롤보다 위에 있는 상태
+        const isScrollingUp = currentScrollPos < prevScrollPos;
 
-      // 스크롤 방향에 따라 헤더 표시하기
-      setShowHeader(isScrollingUp || currentScrollPos < 10);
+        // 스크롤 방향에 따라 헤더 표시하기
+        setShowHeader(isScrollingUp || currentScrollPos < 10);
 
-      // prevScrollPos -> 현재 스크롤 위치
-      setPrevScrollPos(currentScrollPos);
-    };
+        // prevScrollPos -> 현재 스크롤 위치
+        setPrevScrollPos(currentScrollPos);
+      };
 
-    // 스크롤 할 때마다 handleScroll 실행
-    window.addEventListener("scroll", handleScroll);
+      if (window !== undefined)
+        // 스크롤 할 때마다 handleScroll 실행
+        window.addEventListener("scroll", handleScroll);
 
-    // 이벤트 리스너 해제
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+      // 이벤트 리스너 해제
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
     // prevScrollPos 값이 변경될 때마다 useEffect 실행
   }, [prevScrollPos]);
 
+  // 페이지가 로드될 때 한 번 실행하는 코드 추가
+  useEffect(() => {
+    setShowHeader(true);
+  }, []);
+
+  // 새로고침할 때 헤더가 애니메이션 없이 고정됨
+  const headerVariants = {
+    hidden: { y: -100 },
+    visible: { y: 0 },
+  };
+  const animate = showHeader ? "visible" : "hidden";
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: showHeader ? 0 : -100 }}
+        variants={headerVariants}
+        animate={animate}
         transition={{ duration: 0.3 }}
         className="fixed top-0 z-40 w-full bg-white shadow-sm"
       >
-        <div className="container mx-auto flex h-16 items-center justify-between gap-20 sm:gap-24 md:gap-36 lg:gap-72 xl:gap-96 px-4">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <Logo />
-          <div className="container flex h-16 items-center justify-between">
+          <div className="flex gap-6 text-xl ">
             <NavLinks />
-            <SearchLink />
           </div>
         </div>
       </motion.header>
