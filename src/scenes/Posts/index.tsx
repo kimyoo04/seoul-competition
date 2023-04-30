@@ -32,52 +32,50 @@ export default function Posts() {
   }, [inView]);
 
   return (
-    <>
-      <div className="w-full px-4">
-        {status === "loading" ? (
-          <Loading />
-        ) : status === "error" ? (
-          <>{error && <p>Error: {error.message}</p>}</>
-        ) : (
-          <>
-            {/* 헤더 */}
-            <ListPageHeader headertitle="자유게시판" headerDescription="" />
+    <div className="w-full px-4">
+      {status === "loading" ? (
+        <Loading />
+      ) : status === "error" ? (
+        <>{error && <p>Error: {error.message}</p>}</>
+      ) : (
+        <>
+          {/* 헤더 */}
+          <ListPageHeader headertitle="자유게시판" headerDescription="" />
 
-            {/* 게시글 데이터 출력 영역 */}
-            <div className="grid grid-cols-1 gap-4 ">
-              {data.pages.map((group, indx) => (
-                <Fragment key={indx + "posts page"}>
-                  {group.data.map((post) => (
-                    <PostItem key={post.id} post={post} />
-                  ))}
-                </Fragment>
-              ))}
-            </div>
+          {/* 게시글 데이터 출력 영역 */}
+          <div className="grid grid-cols-1 gap-4 ">
+            {data.pages.map((group, indx) => (
+              <Fragment key={indx + "posts page"}>
+                {group.data.map((post) => (
+                  <PostItem key={post.id} post={post} />
+                ))}
+              </Fragment>
+            ))}
+          </div>
 
-            {/* fetchNextPage 를 트리거 하기 위한 태그 */}
-            <div
-              ref={ref}
-              className="col-center w-full rounded-full border px-4 py-1"
-            >
-              {hasNextPage ? (
-                <span>더보기</span>
-              ) : (
-                <span>마지막 검색 결과입니다.</span>
-              )}
-            </div>
+          {/* fetchNextPage 를 트리거 하기 위한 태그 */}
+          <div
+            ref={ref}
+            className="col-center w-full rounded-full border px-4 py-1"
+          >
+            {hasNextPage ? (
+              <span>더보기</span>
+            ) : (
+              <span>마지막 검색 결과입니다.</span>
+            )}
+          </div>
 
-            {/* fetching 시 로딩 UI */}
-            <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
-          </>
-        )}
+          {/* fetching 시 로딩 UI */}
+          <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
+        </>
+      )}
 
-        {/* 최상단 이동 버튼 */}
-        <ScrollButton />
+      {/* 최상단 이동 버튼 */}
+      <ScrollButton />
 
-        {/* 사이드바 영역 */}
-        <FilterToggle />
-        {isSidebar && <Sidebar />}
-      </div>
-    </>
+      {/* 사이드바 영역 */}
+      <FilterToggle />
+      {isSidebar && <Sidebar />}
+    </div>
   );
 }
