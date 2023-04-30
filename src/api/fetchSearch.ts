@@ -2,7 +2,7 @@ import axios from "@api/axiosInstance";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useAppSelector } from "@toolkit/hook";
 
-import { IEducationDataPerPage } from "@type/education";
+import { IEducationsDataPerPage } from "@type/education";
 import { IPostsDataPerPage } from "@type/posts";
 import { TSearchCategory } from "@type/search";
 
@@ -26,7 +26,7 @@ export const useInfiniteSearch = (searchKeyword: string) => {
   const searchCategory = useAppSelector((state) => state.search.category);
 
   return useInfiniteQuery<
-    IEducationDataPerPage | IPostsDataPerPage,
+    IEducationsDataPerPage | IPostsDataPerPage,
     { message: string }
   >({
     enabled: searchKeyword !== "",
@@ -40,5 +40,7 @@ export const useInfiniteSearch = (searchKeyword: string) => {
         return undefined;
       }
     },
+    refetchOnMount: false, //페이지 재방문시 refetch 금지
+    refetchOnWindowFocus: false, // 브라우저 포커징시 refetch 금지
   });
 };
