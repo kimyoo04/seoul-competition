@@ -18,7 +18,7 @@ export default function Loading() {
   return (
     <motion.div
       transition={{ duration: 0.4 }}
-      className="flex h-screen items-center justify-center"
+      className="flex items-center justify-center"
       variants={loadingCircleVariants}
       animate="end"
       initial="start"
