@@ -1,5 +1,4 @@
 import { Fragment, useEffect } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useAppSelector } from "@toolkit/hook";
 
@@ -10,12 +9,10 @@ import FilterToggle from "@components/FilterToggle";
 import ScrollButton from "@components/ScrollButton";
 import ListPageHeader from "@components/Header/ListPageHeader";
 
-import { fetchPosts } from "@api/fetchPosts";
-import { IPostsDataPerPage } from "@type/posts";
+import { useInfinitePosts } from "@api/fetchPosts";
 
 export default function Posts() {
-  // 사이드바
-  const isSidebar = useAppSelector((state) => state.sidebar.isSidebar);
+  const isSidebar = useAppSelector((state) => state.sidebar.isSidebar); // 사이드바
 
   // page 단위로 Postsdata GET 요청 및 캐싱
   const {
@@ -26,28 +23,10 @@ export default function Posts() {
     isFetching,
     isFetchingNextPage,
     status,
-  } = useInfiniteQuery<IPostsDataPerPage, { message: string }>({
-    queryKey: ["Posts"],
-    queryFn: ({ pageParam = 0 }) => fetchPosts(pageParam),
-    getNextPageParam: (lastPage) => {
-      if (lastPage.currentPage < lastPage.totalPages) {
-        return lastPage.currentPage + 1;
-      } else {
-        return undefined;
-      }
-    },
+  } = useInfinitePosts();
 
-    cacheTime: 300000, // 5분
-    staleTime: 240000, // 4분
-    refetchOnMount: false, //페이지 재방문시 refetch 금지
-    refetchOnWindowFocus: false, // 브라우저 포커징시 refetch 금지
-  });
-
-  // ref가 연결된 태그의 확인
-  // { ref, inView}
+  // ref가 연결된 태그의 확인 + 하단 페이지에 도달시 fetchNextPage 요청
   const { ref, inView } = useInView();
-
-  // 하단 페이지에 도달시 fetchNextPage 요청
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
   }, [inView]);
@@ -67,22 +46,27 @@ export default function Posts() {
             {/* 게시글 데이터 출력 영역 */}
             <div className="grid grid-cols-1 gap-4 ">
               {data.pages.map((group, indx) => (
-                <Fragment key={indx + "page"}>
+                <Fragment key={indx + "posts page"}>
                   {group.data.map((post) => (
                     <PostItem key={post.id} post={post} />
                   ))}
                 </Fragment>
               ))}
             </div>
+
             {/* fetchNextPage 를 트리거 하기 위한 태그 */}
             <div
               ref={ref}
               className="col-center w-full rounded-full border px-4 py-1"
             >
-              <span>{hasNextPage ? "더보기" : "마지막 검색 결과입니다."}</span>
+              {hasNextPage ? (
+                <span>더보기</span>
+              ) : (
+                <span>마지막 검색 결과입니다.</span>
+              )}
             </div>
 
-            {/* 첫 fetching 시 로딩 UI */}
+            {/* fetching 시 로딩 UI */}
             <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
           </>
         )}
