@@ -1,3 +1,4 @@
+import ButtonWrapper from "@components/Animation/ButtonWrapper";
 import { searchActions } from "@features/search/searchSlice";
 import { useAppDispatch } from "@toolkit/hook";
 import { TSearchCategory } from "@type/search";
@@ -19,7 +20,9 @@ export default function CTABtn() {
           );
         }}
       >
-        <button className="accent_btn_fill">교육 정보 검색</button>
+        <ButtonWrapper>
+          <button className="accent_btn_fill">교육 정보 검색</button>
+        </ButtonWrapper>
       </Link>
 
       <Link
@@ -33,7 +36,9 @@ export default function CTABtn() {
           );
         }}
       >
-        <button className="accent_btn_fill">자유게시판 검색</button>
+        <ButtonWrapper>
+          <button className="accent_btn_fill">자유게시판 검색</button>
+        </ButtonWrapper>
       </Link>
     </div>
   );
