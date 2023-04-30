@@ -1,5 +1,4 @@
 import Logo from "./HeaderItem/Logo";
-import SearchLink from "./HeaderItem/SearchLink";
 import NavLinks from "./HeaderItem/NavLinks";
 
 import { useEffect, useState } from "react";
@@ -37,19 +36,29 @@ export default function Header() {
     // prevScrollPos 값이 변경될 때마다 useEffect 실행
   }, [prevScrollPos]);
 
+  // 페이지가 로드될 때 한 번 실행하는 코드 추가
+  useEffect(() => {
+    setShowHeader(true);
+  }, []);
+
+  // 새로고침할 때 헤더가 애니메이션 없이 고정됨
+  const headerVariants = {
+    hidden: { y: -100 },
+    visible: { y: 0 },
+  };
+  const animate = showHeader ? "visible" : "hidden";
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: showHeader ? 0 : -100 }}
+        variants={headerVariants}
+        animate={animate}
         transition={{ duration: 0.3 }}
         className="fixed top-0 z-40 w-full bg-white shadow-sm"
       >
-        <div className="container mx-auto flex h-16 items-center justify-between gap-20 sm:gap-24 md:gap-36 lg:gap-72 xl:gap-96 px-4">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <Logo />
-          <div className="container flex h-16 items-center justify-between">
+          <div className="flex gap-6 text-xl ">
             <NavLinks />
-            <SearchLink />
           </div>
         </div>
       </motion.header>
