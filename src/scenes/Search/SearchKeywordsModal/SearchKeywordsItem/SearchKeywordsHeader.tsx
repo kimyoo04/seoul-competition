@@ -9,10 +9,9 @@ export default function SearchKeywordsHeader() {
 
   return (
     <div className="flex items-center justify-between rounded-t-2xl bg-slate-100 px-4 py-2">
-      <span className="text-h4 font-bold">최근 검색어</span>
+      <span className="text-md font-bold">최근 검색어</span>
       {isClicked ? (
-      <div className="row-center gap-4">
-          <span className="font-bold">정말로 삭제하시겠습니까?</span>
+        <div className="row-center gap-4">
           <ButtonWrapper>
             <button
               className="font-bold text-red-600"
@@ -24,26 +23,22 @@ export default function SearchKeywordsHeader() {
               삭제
             </button>
           </ButtonWrapper>
-          <ButtonWrapper>
-            <button
-              className="font-bold"
-              onClick={() => {
-                setIsClicked(false);
-              }}
-            >
-              취소
-            </button>
-          </ButtonWrapper>
+          <button
+            className="font-bold"
+            onClick={() => {
+              setIsClicked(false);
+            }}
+          >
+            <ButtonWrapper>취소</ButtonWrapper>
+          </button>
         </div>
       ) : (
-        <ButtonWrapper>
-          <button
-            className="font-bold text-red-600"
-            onClick={() => setIsClicked(true)}
-          >
-            전체 삭제
-          </button>
-        </ButtonWrapper>
+        <button
+          className="font-bold text-red-600"
+          onClick={() => setIsClicked(true)}
+        >
+          <ButtonWrapper>전체 삭제</ButtonWrapper>
+        </button>
       )}
     </div>
   );
