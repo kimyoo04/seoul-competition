@@ -64,13 +64,13 @@ export default function SearchBar() {
         {/* Search Enter Button */}
         <button
           type="submit"
-          className="col-center absolute bottom-0 right-0 h-8 rounded-r-2xl bg-main_color px-3 "
+          className="col-center absolute bottom-0 right-0 h-8 rounded-r-2xl bg-main_color px-2"
         >
           <motion.span
             whileTap={{ scale: 0.8 }}
             className="text-md font-bold text-font_white"
           >
-            검색하기
+            검색
           </motion.span>
         </button>
 
