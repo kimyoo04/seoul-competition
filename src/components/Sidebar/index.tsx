@@ -5,7 +5,7 @@ import Portal from "./Portal";
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
 import SearchBar from "@scenes/Search/SearchBar";
 import SearchKeywordsModal from "@scenes/Search/SearchKeywordsModal";
-import ShowCategory from "@scenes/Search/ShowCategory";
+import SearchCategory from "@scenes/Search/SearchCategory";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
@@ -34,7 +34,7 @@ const SideBar = () => {
           className="relative right-0 z-40 flex h-screen w-80 flex-col items-center justify-start gap-4 bg-main_color p-4 shadow-lg shadow-black/70"
         >
           {/* 카테고리 노출 */}
-          <ShowCategory />
+          <SearchCategory />
 
           {/* 검색바 */}
           <SearchBar />
