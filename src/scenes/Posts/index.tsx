@@ -77,9 +77,6 @@ export default function Posts() {
       {/* 사이드바 영역 */}
       <FilterToggle />
       {isSidebar && <Sidebar />}
-
-      {/* 검색 영역 */}
-      <SearchLink />
     </div>
   );
 }
