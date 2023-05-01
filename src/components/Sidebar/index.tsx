@@ -3,10 +3,14 @@ import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { sidebarActions } from "@features/sidebar/sidebarSlice";
 import Portal from "./Portal";
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
+import SearchBar from "@scenes/Search/SearchBar";
+import SearchKeywordsModal from "@scenes/Search/SearchKeywordsModal";
+import ShowCategory from "@scenes/Search/ShowCategory";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
   const isSidebar = useAppSelector((state) => state.sidebar.isSidebar);
+  const { isFocus } = useAppSelector((state) => state.search);
 
   return (
     <AnimatePresence>
@@ -27,9 +31,17 @@ const SideBar = () => {
           animate={{ x: 0 }}
           exit={{ x: 300 }}
           transition={{ duration: 0.2 }}
-          className="relative right-0 z-40 h-screen w-64 max-w-md bg-main_color p-8 shadow-lg"
+          className="relative right-0 z-40 flex h-screen w-80 flex-col items-center justify-start gap-4 bg-main_color p-4 shadow-lg shadow-black/70"
         >
-          <span>Filter</span>
+          {/* 카테고리 노출 */}
+          <ShowCategory />
+
+          {/* 검색바 */}
+          <SearchBar />
+
+          {/* 검색기록모달창 오버레이*/}
+          {isFocus && <SearchKeywordsModal />}
+
           {/* 닫기 버튼 */}
           <button
             className="absolute bottom-0 right-0 p-4"
