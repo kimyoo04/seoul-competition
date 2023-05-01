@@ -1,11 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { sidebarActions } from "@features/sidebar/sidebarSlice";
-import Portal from "./Portal";
+
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
-import SearchBar from "@scenes/Search/SearchBar";
-import SearchKeywordsModal from "@scenes/Search/SearchKeywordsModal";
-import SearchCategory from "@scenes/Search/SearchCategory";
+import Portal from "./Portal";
+
+import SearchCategory from "@components/Sidebar/SearchCategory";
+import SearchBar from "./SearchBar";
+import SearchKeywordsModal from "./SearchKeywordsModal";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
