@@ -39,7 +39,7 @@ export default function SearchBar() {
           {...register("search", {
             required: "검색어가 필요합니다!",
           })}
-          className="textfield absolute h-8 w-full pl-9 transition-all"
+          className="textfield absolute h-8 w-full border-none pl-9 shadow-none transition-all"
           id="search"
           name="search"
           placeholder={
@@ -64,11 +64,11 @@ export default function SearchBar() {
         {/* Search Enter Button */}
         <button
           type="submit"
-          className="col-center absolute bottom-0 right-0 h-8 rounded-r-2xl bg-main_color px-2"
+          className="col-center absolute bottom-0 right-0 h-8 rounded-r-2xl bg-sub_color  pl-2 pr-3"
         >
           <motion.span
             whileTap={{ scale: 0.8 }}
-            className="text-md font-bold text-font_white"
+            className="text-md font-bold text-font_black"
           >
             검색
           </motion.span>

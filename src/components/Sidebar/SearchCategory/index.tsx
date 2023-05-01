@@ -1,7 +1,7 @@
 import { TSearchCategory, TSearchCategoryKor } from "@type/search";
 import { useRouter } from "next/router";
 
-export default function ChooseCategory() {
+export default function SearchCategory() {
   const router = useRouter();
 
   const categoriesKor: TSearchCategoryKor[] = [
@@ -15,7 +15,9 @@ export default function ChooseCategory() {
       {categoriesKor.map((category, index) => {
         if (router.pathname.substring(1) === categoriesEng[index]) {
           return (
-            <h2 className="px-3 text-h4 font-bold text-white">{category}</h2>
+            <h2 key={category} className="px-3 text-h4 font-bold text-white">
+              {category}
+            </h2>
           );
         }
       })}
