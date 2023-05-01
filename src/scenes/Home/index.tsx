@@ -1,4 +1,3 @@
-import CTABtn from "./CTABtn";
 import ContentItem from "./ContentItem";
 import { contents } from "./ContentItem/contentData";
 
@@ -10,9 +9,6 @@ export default function Home() {
         <h2 className="pb-4 text-2xl font-bold">
           오늘은 무엇을 하고 싶으신가요?
         </h2>
-
-        {/* 검색 버튼 2가지 */}
-        <CTABtn />
       </div>
 
       {/* 콘텐츠 리스트 */}
