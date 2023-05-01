@@ -26,3 +26,5 @@ export const cities = [
   "경상남도",
   "제주특별자치도",
 ];
+
+export const favorites = ["취업", "교육", "취미", "모임"];
