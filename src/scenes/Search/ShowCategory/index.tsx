@@ -11,11 +11,11 @@ export default function ChooseCategory() {
   const categoriesEng: TSearchCategory[] = ["educations", "posts"];
 
   return (
-    <section className="z-10 mt-2 flex w-full items-center justify-between">
+    <section>
       {categoriesKor.map((category, index) => {
         if (router.pathname.substring(1) === categoriesEng[index]) {
           return (
-            <button className="px-3 font-bold text-white">{category}</button>
+            <h2 className="px-3 text-h4 font-bold text-white">{category}</h2>
           );
         }
       })}
