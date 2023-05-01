@@ -8,6 +8,9 @@ import Portal from "./Portal";
 import SearchCategory from "@components/Sidebar/SearchCategory";
 import SearchBar from "./SearchBar";
 import SearchKeywordsModal from "./SearchKeywordsModal";
+import StatusFilter from "./StatusFilter";
+import PriceFilter from "./PriceFilter";
+import CalendarFilter from "./CalendarFilter";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
@@ -43,6 +46,15 @@ const SideBar = () => {
 
           {/* 검색기록모달창 오버레이*/}
           {isFocus && <SearchKeywordsModal />}
+
+          {/* 교육정보의 기간 범위 필터링 */}
+          <CalendarFilter />
+
+          {/* 교육정보의 상태별 필터링 */}
+          <StatusFilter />
+
+          {/* 가격 범위 필터링 */}
+          <PriceFilter />
 
           {/* 닫기 버튼 */}
           <button
