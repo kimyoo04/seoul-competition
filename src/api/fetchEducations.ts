@@ -1,16 +1,77 @@
 import axios from "@api/axiosInstance";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { IEducationsDataPerPage } from "@type/education";
+import { useAppSelector } from "@toolkit/hook";
+import {
+  IEducationsDataPerPage,
+  IEducationsQueryParams,
+} from "@type/education";
+import { TDate, TPrice, TStatus } from "@type/filter";
+import { TSearchCategory } from "@type/search";
+import { AxiosError } from "axios";
 
-export const fetchEducations = async (pageParam = 0) => {
-  const response = await axios.get(`/educations?page=${pageParam}`);
+//! axios GET 요청 함수
+export const fetchEducations = async (
+  searchCategory: TSearchCategory,
+  page: number,
+  name: string,
+  status: TStatus,
+  startDate: TDate,
+  endDate: TDate,
+  minPrice: TPrice,
+  maxPrice: TPrice
+) => {
+  const params: IEducationsQueryParams = { page };
+
+  //! 쿼리 파람 추가
+  if (name !== "") params.name = name;
+  if (status !== "") params.status = status;
+  if (startDate !== "") params.startDate = startDate;
+  if (endDate !== "") params.endDate = endDate;
+  if (minPrice !== 0) params.minPrice = minPrice;
+  if (maxPrice !== 1000000) params.maxPrice = maxPrice;
+
+  //! 요청 받기
+  const response = await axios.get(`/${searchCategory}`, {
+    params,
+  });
+
   return response.data;
 };
 
+//! 검색 결과 useInfiniteQuery 함수
 export const useInfiniteEducations = () => {
-  return useInfiniteQuery<IEducationsDataPerPage, { message: string }>({
-    queryKey: ["infinite", "educations"],
-    queryFn: ({ pageParam = 0 }) => fetchEducations(pageParam),
+  const searchCategory = "educations";
+
+  //! search state와 filter state 값 받아오기
+  const { searchKeyword } = useAppSelector((state) => state.search);
+  const { status, startDate, endDate, minPrice, maxPrice } = useAppSelector(
+    (state) => state.filter
+  );
+
+  //! react-query hook 반환
+  return useInfiniteQuery<IEducationsDataPerPage, AxiosError>({
+    queryKey: [
+      {
+        category: searchCategory,
+        keyword: searchKeyword,
+        status: status,
+        startDate: startDate,
+        endDate: endDate,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+      },
+    ],
+    queryFn: ({ pageParam = 0 }) =>
+      fetchEducations(
+        searchCategory,
+        pageParam,
+        searchKeyword,
+        status,
+        startDate,
+        endDate,
+        minPrice,
+        maxPrice
+      ),
     getNextPageParam: (lastPage) => {
       if (lastPage.currentPage < lastPage.totalPages) {
         return lastPage.currentPage + 1;
@@ -18,7 +79,6 @@ export const useInfiniteEducations = () => {
         return undefined;
       }
     },
-
     cacheTime: 300000, // 5분
     staleTime: 240000, // 4분
     refetchOnMount: false, //페이지 재방문시 refetch 금지
