@@ -12,10 +12,22 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Provider } from "react-redux";
 import { store } from "@toolkit/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
-  const queryClient = new QueryClient();
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            retry: false,
+            staleTime: 30000,
+          },
+        },
+      })
+  );
 
   return (
     <>

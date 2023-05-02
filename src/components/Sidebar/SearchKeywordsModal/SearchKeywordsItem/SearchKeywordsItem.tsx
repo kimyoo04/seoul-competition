@@ -15,7 +15,7 @@ export default function SearchKeywordsItem({
   return (
     <li
       key={keyword + index}
-      className="flex items-center justify-between border-b pt-1"
+      className="flex items-center justify-between border-b pt-0.5"
     >
       <button
         className="flex w-full items-start hover:font-bold hover:text-main_color"

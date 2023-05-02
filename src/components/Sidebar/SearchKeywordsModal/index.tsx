@@ -30,15 +30,15 @@ export default function SearchKeywordsModal() {
         variants={fadeIn("down", "easeInOut", 0, 0.4, 20)}
         initial="hidden"
         animate="show"
-        className="absolute top-28 h-96 w-full overflow-scroll rounded-2xl border border-main_color bg-white shadow-md shadow-main_color/20"
+        className="absolute top-[100px] h-60 w-72 overflow-scroll rounded-2xl border border-main_color bg-white shadow-md shadow-main_color/20"
       >
         {/* 헤더 회색 영역 */}
         <SearchKeywordsHeader />
 
         {/* 최근 검색어 리스트 */}
-        <ul className="px-4 py-2">
-          {/* 8개만 검색어 노출 */}
-          {keywords.slice(0, 8).map((keyword, index) => (
+        <ul className="px-4">
+          {/* 5개만 검색어 노출 */}
+          {keywords.slice(0, 5).map((keyword, index) => (
             <SearchKeywordsItem
               key={index + keyword}
               keyword={keyword}
