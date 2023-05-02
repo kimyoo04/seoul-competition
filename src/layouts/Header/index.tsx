@@ -50,6 +50,7 @@ export default function Header() {
     visible: { y: 0 },
   };
   const animate = showHeader ? "visible" : "hidden";
+
   return (
     <>
       <motion.header
@@ -60,9 +61,7 @@ export default function Header() {
       >
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <Logo />
-          <div className="flex gap-6 text-xl ">
-            <NavLinks />
-          </div>
+          <NavLinks />
         </div>
       </motion.header>
     </>

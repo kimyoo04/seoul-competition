@@ -3,7 +3,7 @@ export interface IEducationDetail {
   id: number;
   name: string;
   status: string;
-  price: number;
+  price: string;
   capacity: number;
   registerStart: string;
   registerEnd: string;
@@ -11,13 +11,13 @@ export interface IEducationDetail {
   educationEnd: string;
   url: string;
   hits: number;
-  comments: IEducationComment[];
+  reviews: IEducationReview[];
 }
 
 // 교육 정보의 댓글
-export interface IEducationComment {
+export interface IEducationReview {
   id: number;
-  post_id: string;
+  educationId: string;
   nickname: string;
   content: string;
   createdAt: string;
