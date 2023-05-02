@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import alertReducer from "@features/alert/alertSlice";
 import searchReducer from "@features/search/searchSlice";
+import filterReducer from "@features/filter/filterSlice";
 import sidebarReducer from "@features/sidebar/sidebarSlice";
 
 export const store = configureStore({
   reducer: {
     alert: alertReducer,
     search: searchReducer,
+    filter: filterReducer,
     sidebar: sidebarReducer,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

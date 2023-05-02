@@ -1,5 +1,7 @@
 // filterSlice에 사용
 export interface IFilterState {
+  // fetch 실행 유무 판단용
+  isClicked: boolean;
   // 상태 3가지
   status: TStatus;
   // 기간 범위

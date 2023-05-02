@@ -10,6 +10,7 @@ import {
 } from "@type/filter";
 
 const initialState: IFilterState = {
+  isClicked: false,
   status: "",
   startDate: "",
   endDate: "",
@@ -23,27 +24,42 @@ export const filterSlice = createSlice({
   reducers: {
     // 교육 상태 업데이트
     setStatus: (state, action: PayloadAction<IStatus>) => {
+      state.isClicked = true;
       state.status = action.payload.status;
     },
 
     // 교육 기간 업데이트
     setStartDate: (state, action: PayloadAction<IStartDate>) => {
+      state.isClicked = true;
       state.startDate = action.payload.startDate;
     },
     setEndDate: (state, action: PayloadAction<IEndDate>) => {
+      state.isClicked = true;
       state.endDate = action.payload.endDate;
     },
     setBothDate: (state, action: PayloadAction<IBothDate>) => {
+      state.isClicked = true;
       state.startDate = action.payload.startDate;
       state.endDate = action.payload.endDate;
     },
 
     // 교육 가격 업데이트
     setMinPrice: (state, action: PayloadAction<IMinPrice>) => {
+      state.isClicked = true;
       state.minPrice = action.payload.minPrice;
     },
     setMaxPrice: (state, action: PayloadAction<IMaxPrice>) => {
+      state.isClicked = true;
       state.maxPrice = action.payload.maxPrice;
+    },
+
+    resetParams: (state) => {
+      state.isClicked = false;
+      state.status = "";
+      state.startDate = "";
+      state.endDate = "";
+      state.minPrice = 0;
+      state.maxPrice = 1000000;
     },
   },
 });
