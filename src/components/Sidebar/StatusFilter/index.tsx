@@ -23,7 +23,7 @@ export default function StatusFilter() {
                   "bg-white text-font_black shadow-md": nowStatus === status,
                 },
                 {
-                  "border-font_white text-font_white": nowStatus !== status,
+                  "border-sub_color text-font_white": nowStatus !== status,
                 }
               )}`}
             >
