@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useAppDispatch } from "@toolkit/hook";
+import { filterActions } from "@features/filter/filterSlice";
 
 export default function PriceFilter() {
+  const dispatch = useAppDispatch();
+
   const step = 1000; // 금액 간격
   const fixedMinPrice = 0; // 기본 최소 금액
   const fixedMaxPrice = 100000; // 기본 최대 금액
@@ -14,7 +18,7 @@ export default function PriceFilter() {
   const [rightPercent, setRightPercent] = useState(0);
 
   // 2가지 금액, 2가지 확률 상태 dispatch
-  const rangeHandler = () => {
+  function rangeHandler() {
     if (maxPrice - minPrice < step) {
       setMaxPrice(minPrice + step);
       setMinPrice(maxPrice - step);
@@ -22,7 +26,7 @@ export default function PriceFilter() {
       setLeftPercent((minPrice / fixedMaxPrice) * 100);
       setRightPercent(100 - (maxPrice / fixedMaxPrice) * 100);
     }
-  };
+  }
 
   // 숫자 포멧 ,000,000 변환
   function formatCurrency(value: number) {
@@ -32,6 +36,14 @@ export default function PriceFilter() {
         currency: "KRW",
       })
       .replace("₩", "");
+  }
+
+  // RTC price 상태 dispatch
+  function handleMinTouchEnd() {
+    dispatch(filterActions.setMinPrice({ minPrice }));
+  }
+  function handleMaxTouchEnd() {
+    dispatch(filterActions.setMaxPrice({ maxPrice }));
   }
 
   return (
@@ -62,6 +74,8 @@ export default function PriceFilter() {
                 setMinPrice(parseInt(e.target.value));
                 rangeHandler();
               }}
+              onMouseUp={handleMinTouchEnd}
+              onTouchEnd={handleMinTouchEnd}
               className={`price-input`}
             />
             {/* 최대 금액 핸들 */}
@@ -75,6 +89,8 @@ export default function PriceFilter() {
                 setMaxPrice(parseInt(e.target.value));
                 rangeHandler();
               }}
+              onMouseUp={handleMaxTouchEnd}
+              onTouchEnd={handleMaxTouchEnd}
               className={`price-input`}
             />
           </div>
