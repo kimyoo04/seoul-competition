@@ -5,8 +5,8 @@ export default function SearchCategory() {
   const router = useRouter();
 
   const categoriesKor: TSearchCategoryKor[] = [
-    "교육 정보 검색",
-    "자유게시판 검색",
+    "교육 정보 골라보기",
+    "자유게시판 골라보기",
   ];
   const categoriesEng: TSearchCategory[] = ["educations", "posts"];
 
