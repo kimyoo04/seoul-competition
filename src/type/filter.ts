@@ -43,6 +43,6 @@ export interface IMaxPrice {
   maxPrice: TPrice;
 }
 
-export type TStatus = "수강신청중" | "수강신청예정" | "마감" | "";
+export type TStatus = "수강신청중" | "수강신청예정" | "마감" | "전체";
 export type TDate = string;
 export type TPrice = number;
