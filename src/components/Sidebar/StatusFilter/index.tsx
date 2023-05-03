@@ -18,7 +18,7 @@ export default function StatusFilter() {
             <label
               htmlFor={status}
               key={status}
-              className={`col-center w-full rounded-2xl border border-main_color px-1 py-1 font-bold transition-all ${classNames(
+              className={`col-center w-full rounded-2xl border   px-1 py-1 font-bold transition-all ${classNames(
                 {
                   "bg-white text-font_black shadow-md": nowStatus === status,
                 },
