@@ -1,7 +1,7 @@
 import React from "react";
 import { IPostDetail } from "@type/postDetail";
-import UpDelButtons from "./UpDelButtons";
 import { timeSince, timeYmd } from "@util/dateTime";
+import CommentUpDelButtons from "./CommentUpDelButtons";
 
 interface ICommentsProps {
   data: IPostDetail;
@@ -27,7 +27,7 @@ export default function Comments({ data }: ICommentsProps) {
               </div>
 
               {/* 수정, 삭제 버튼 */}
-              <UpDelButtons />
+              <CommentUpDelButtons />
             </div>
 
             <div className="mx-2 mb-2 text-font_black ">{comment.content}</div>
