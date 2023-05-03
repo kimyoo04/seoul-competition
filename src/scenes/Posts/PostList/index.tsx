@@ -2,7 +2,6 @@ import { Fragment, useEffect } from "react";
 import { useAppSelector } from "@toolkit/hook";
 import { useInView } from "react-intersection-observer";
 
-import { useInfinitePosts } from "@api/fetchPosts";
 import { IPostData } from "@type/posts";
 
 import Loading from "@components/Loading";
@@ -10,6 +9,7 @@ import SearchHeader from "@components/Search/SearchHeader";
 import SearchMore from "@components/Search/SearchMore";
 
 import PostItem from "@scenes/Posts/PostItem";
+import { useInfinitePosts } from "@api/posts/fetchPosts";
 
 export default function PostList() {
   const searchCategory = useAppSelector((state) => state.search.category);
