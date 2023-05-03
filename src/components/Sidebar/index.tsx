@@ -15,7 +15,7 @@ import CalendarFilter from "./CalendarFilter";
 const SideBar = () => {
   const dispatch = useAppDispatch();
   const isSidebar = useAppSelector((state) => state.sidebar.isSidebar);
-  const { isFocus } = useAppSelector((state) => state.search);
+  const { isFocus, category } = useAppSelector((state) => state.search);
 
   return (
     <AnimatePresence>
@@ -36,7 +36,7 @@ const SideBar = () => {
           animate={{ x: 0 }}
           exit={{ x: 300 }}
           transition={{ duration: 0.2 }}
-          className="relative right-0 z-40 flex h-screen w-80 flex-col items-center justify-start gap-4 bg-main_color p-4 shadow-lg shadow-black/70"
+          className="relative right-0 z-40 flex h-screen w-80 flex-col items-center gap-12 bg-main_color p-4 shadow-lg shadow-black/70"
         >
           {/* 카테고리 노출 */}
           <SearchCategory />
@@ -50,11 +50,15 @@ const SideBar = () => {
           {/* 교육정보의 기간 범위 필터링 */}
           <CalendarFilter />
 
-          {/* 교육정보의 상태별 필터링 */}
-          <StatusFilter />
+          {category === "educations" && (
+            <>
+              {/* 교육정보의 상태별 필터링 */}
+              <StatusFilter />
 
-          {/* 가격 범위 필터링 */}
-          <PriceFilter />
+              {/* 가격 범위 필터링 */}
+              <PriceFilter />
+            </>
+          )}
 
           {/* 닫기 버튼 */}
           <button

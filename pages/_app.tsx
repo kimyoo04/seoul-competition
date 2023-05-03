@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import "../styles/button.css";
 import "../styles/textField.css";
+import "../styles/filter.css";
 
 import Head from "next/head";
 import type { AppProps } from "next/app";
@@ -39,16 +40,16 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
       </Head>
 
-      <Provider store={store}>
-        <main>
-          <AnimatePresence mode="wait">
-            <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+        <Provider store={store}>
+          <main>
+            <AnimatePresence mode="wait">
               <Component {...pageProps} key={router.route} />
               <ReactQueryDevtools initialIsOpen={true} />
-            </QueryClientProvider>
-          </AnimatePresence>
-        </main>
-      </Provider>
+            </AnimatePresence>
+          </main>
+        </Provider>
+      </QueryClientProvider>
     </>
   );
 }

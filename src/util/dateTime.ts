@@ -38,3 +38,16 @@ export function timeSince(date: string) {
     return rtf.format(-seconds, "second");
   }
 }
+
+export function getBarDate(date: Date) {
+  // Date > String
+  const dateFormatter = new Intl.DateTimeFormat("ko-KR", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const [{ value: year }, , { value: month }, , { value: day }] =
+    dateFormatter.formatToParts(date);
+
+  return `${year}-${month}-${day}`; // 예시 "2023-05-01"
+}

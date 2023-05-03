@@ -24,7 +24,7 @@ export const fetchEducations = async (
 
   //! 쿼리 파람 추가
   if (name !== "") params.name = name;
-  if (status !== "") params.status = status;
+  if (status !== "전체") params.status = status;
   if (startDate !== "") params.startDate = startDate;
   if (endDate !== "") params.endDate = endDate;
   if (minPrice !== 0) params.minPrice = minPrice;

@@ -5,7 +5,7 @@ export interface ISearchField {
 
 // 검색할 카테고리 타입
 export type TSearchCategory = "educations" | "posts";
-export type TSearchCategoryKor = "교육 정보 검색" | "자유게시판 검색";
+export type TSearchCategoryKor = "교육 정보 골라보기" | "자유게시판 골라보기";
 
 // searchSlice에 사용
 export interface ISearchState {
