@@ -5,11 +5,7 @@ import ButtonWrapper from "@components/Animation/ButtonWrapper";
 import ScrollButton from "@components/ScrollButton";
 import { IPostForm } from "@type/posts";
 
-// 함수를 props로 받으면 어려워짐
-// 모든 타입들이 파악이 되어있다면 좋지만, 현 상황에서는 비추하는 방식
-// 빈 문자열일수도 있다면서 계속 에러가 날 수 있고, 이 경우 계속 조건문을 지정해줘야 함
-// react hook form을 활용하는 게 좋을 듯
-
+// 게시물 Create 페이지
 export default function AddPost() {
   const { data, isLoading, mutate, mutateAsync } = useCreateMutation();
 
