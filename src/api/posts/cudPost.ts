@@ -37,3 +37,26 @@ export const useCreateMutation = () => {
     },
   });
 };
+
+
+// useUpdateMutation
+export const useUpdateMutation = () => {
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: updatePost,
+    onSuccess: async (_, variables) => {
+      await queryClient.invalidateQueries({ queryKey: ["post"] });
+
+      router.push(`/posts/${variables.postId}`);
+    },
+    onError: (err) => {
+      console.error(err);
+    },
+    onSettled: () => {
+      console.log("완료");
+    },
+  });
+};
