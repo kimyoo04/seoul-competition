@@ -11,11 +11,11 @@ import {
 
 const initialState: IFilterState = {
   isClicked: false,
-  status: "",
+  status: "전체",
   startDate: "",
   endDate: "",
   minPrice: 0,
-  maxPrice: 1000000,
+  maxPrice: 100000,
 };
 
 export const filterSlice = createSlice({
@@ -23,7 +23,7 @@ export const filterSlice = createSlice({
   initialState,
   reducers: {
     // 교육 상태 업데이트
-    setStatus: (state, action: PayloadAction<IStatus>) => {
+    toggleStatus: (state, action: PayloadAction<IStatus>) => {
       state.isClicked = true;
       state.status = action.payload.status;
     },
@@ -55,11 +55,11 @@ export const filterSlice = createSlice({
 
     resetParams: (state) => {
       state.isClicked = false;
-      state.status = "";
+      state.status = "전체";
       state.startDate = "";
       state.endDate = "";
       state.minPrice = 0;
-      state.maxPrice = 1000000;
+      state.maxPrice = 100000;
     },
   },
 });
