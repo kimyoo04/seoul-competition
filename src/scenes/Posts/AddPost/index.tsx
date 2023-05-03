@@ -1,11 +1,9 @@
-import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createPost } from "@api/createPost";
-import { IPostForm } from "@type/postForm";
+import { useCreateMutation } from "@api/posts/cudPost";
 
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
 import ScrollButton from "@components/ScrollButton";
+import { IPostForm } from "@type/posts";
 
 // 함수를 props로 받으면 어려워짐
 // 모든 타입들이 파악이 되어있다면 좋지만, 현 상황에서는 비추하는 방식
@@ -13,24 +11,7 @@ import ScrollButton from "@components/ScrollButton";
 // react hook form을 활용하는 게 좋을 듯
 
 export default function AddPost() {
-  const router = useRouter();
-
-  const queryClient = useQueryClient();
-
-  const { data, isLoading, mutate, mutateAsync } = useMutation({
-    mutationFn: createPost,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["post"] });
-      reset({ nickname: "", password: "", title: "", content: "" });
-      router.push("/posts");
-    },
-    onError: (err) => {
-      console.error(err);
-    },
-    onSettled: () => {
-      console.log("완료");
-    },
-  });
+  const { data, isLoading, mutate, mutateAsync } = useCreateMutation();
 
   const {
     register,
@@ -46,6 +27,7 @@ export default function AddPost() {
   const onValid: SubmitHandler<IPostForm> = (postData) => {
     if (!postData) return;
     mutate(postData);
+    reset({ nickname: "", password: "", title: "", content: "" });
   };
 
   return (
