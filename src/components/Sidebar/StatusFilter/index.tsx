@@ -32,7 +32,7 @@ export default function StatusFilter() {
                 id={status}
                 name={status}
                 value={status}
-                checked={nowStatus == status}
+                onChange={(e) => nowStatus === e.target.value}
                 onClick={() => dispatch(filterActions.toggleStatus({ status }))}
                 className="hidden"
               />
