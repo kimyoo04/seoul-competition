@@ -37,7 +37,10 @@ export interface IPostForm {
 //게시글 업데이트 폼
 export interface IUpdatePostForm {
   postId: string;
-  post: IPostForm;
+  nickname: string;
+  password: string;
+  title: string;
+  content: string;
 }
 
 //
