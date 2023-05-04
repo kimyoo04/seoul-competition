@@ -1,7 +1,9 @@
 import { IUserForm } from "@type/userForm";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { genders, ages, cities, favorites } from "./userFormData";
+import { genders, ages, locations, interests } from "./userFormData";
 import classNames from "classnames";
+import fetchUser from "@api/user/postUser";
+import { motion } from "framer-motion";
 
 export default function UserForm() {
   const {
@@ -15,10 +17,40 @@ export default function UserForm() {
     defaultValues: {},
   });
 
-  const onValid: SubmitHandler<IUserForm> = (data) => {
-    if (!data.age) return;
+  const onValid: SubmitHandler<IUserForm> = async (data) => {
+    if (
+      !data.age ||
+      !data.gender ||
+      data.location == "" ||
+      data.interest == "" ||
+      !data.confirm
+    ) {
+      const errMsg: { [key: string]: string } = {};
 
-    console.log(data.gender, data.age, data.city, data.favorite, data.confirm);
+      errMsg.gender = "성별을 골라주세요.";
+      errMsg.age = "연령대을 골라주세요.";
+      errMsg.location = "거주 지역을 골라주세요.";
+      errMsg.interest = "관심사를 골라주세요.";
+      errMsg.confirm = "동의를 해주세요";
+
+      const setErrors = (errors: Record<string, string>) => {
+        Object.entries(errors).forEach(([key, value]) => {
+          setError(
+            key as "gender" | "age" | "location" | "interest" | "confirm",
+            {
+              message: value,
+              type: "required",
+            }
+          );
+        });
+      };
+
+      setErrors(errMsg);
+      return;
+    }
+
+    const response = await fetchUser(data);
+    console.log(response);
   };
 
   return (
@@ -27,13 +59,18 @@ export default function UserForm() {
       <div className="fixed left-0 top-0 z-50 h-screen w-screen bg-black/60"></div>
 
       {/* 유저 폼 영역 */}
-      {genders && ages && cities && favorites && (
+      {genders && ages && locations && interests && (
         <form
           className="col-start z-50 gap-4 rounded-2xl bg-white p-8"
           onSubmit={handleSubmit(onValid)}
         >
           <div className="col-start gap-2">
-            <span>성별</span>
+            <div className="row-start gap-4">
+              <span className="font-bold">성별</span>
+              <span className="text-sm text-main_color">
+                {errors.gender?.message}
+              </span>
+            </div>
             <Controller
               name="gender"
               control={control}
@@ -47,7 +84,7 @@ export default function UserForm() {
                           key={gender}
                           className={`undraggable rounded-2xl border border-main_color px-3 py-0.5 transition-all ${classNames(
                             {
-                              "bg-main_color text-font_white shadow-md":
+                              "bg-main_color font-bold text-font_white shadow-md":
                                 field.value == gender,
                             }
                           )}`}
@@ -74,7 +111,12 @@ export default function UserForm() {
           </div>
 
           <div className="col-start gap-2">
-            <span>연령대</span>
+            <div className="row-start gap-4">
+              <span className="font-bold">연령대</span>
+              <span className="text-sm text-main_color">
+                {errors.age?.message}
+              </span>
+            </div>
             <Controller
               name="age"
               control={control}
@@ -88,7 +130,7 @@ export default function UserForm() {
                           key={age}
                           className={`undraggable rounded-2xl border border-main_color px-3 py-0.5 transition-all ${classNames(
                             {
-                              "bg-main_color text-font_white shadow-md":
+                              "bg-main_color font-bold text-font_white shadow-md":
                                 field.value == age,
                             }
                           )}`}
@@ -115,15 +157,20 @@ export default function UserForm() {
           </div>
 
           <div className="col-start relative w-full gap-2">
-            <span>거주 지역</span>
+            <div className="row-start gap-4">
+              <span className="font-bold">거주 지역</span>
+              <span className="text-sm text-main_color">
+                {errors.location?.message}
+              </span>
+            </div>
             <select
-              {...register("city")}
-              className="w-full appearance-none rounded-2xl border border-main_color py-0.5 pl-2"
-              placeholder="나는"
+              {...register("location")}
+              className="w-full appearance-none rounded-2xl border border-main_color py-0.5 pl-2 outline-none"
             >
-              {cities.map((city) => (
-                <option key={city} value={city}>
-                  {city}
+              <option value={""}>- 클릭해주세요. -</option>
+              {locations.map((location) => (
+                <option key={location} value={location}>
+                  {location}
                 </option>
               ))}
             </select>
@@ -133,15 +180,20 @@ export default function UserForm() {
           </div>
 
           <div className="col-start relative w-full gap-2">
-            <span>관심 키워드</span>
+            <div className="row-start gap-4">
+              <span className="font-bold">관심사</span>
+              <span className="text-sm text-main_color">
+                {errors.interest?.message}
+              </span>
+            </div>
             <select
-              {...register("favorite")}
-              className="w-full appearance-none rounded-2xl border border-main_color py-0.5 pl-2"
-              placeholder="나는"
+              {...register("interest")}
+              className="w-full appearance-none rounded-2xl border border-main_color py-0.5 pl-2 outline-none"
             >
-              {favorites.map((city) => (
-                <option key={city} value={city}>
-                  {city}
+              <option value={""}>- 클릭해주세요. -</option>
+              {interests.map((interest) => (
+                <option key={interest} value={interest}>
+                  {interest}
                 </option>
               ))}
             </select>
@@ -155,14 +207,23 @@ export default function UserForm() {
             name="confirm"
             control={control}
             defaultValue={false}
-            rules={{ required: true }}
             render={({ field }) => (
               <>
-                <label {...field} htmlFor="confirm" className="row-center">
+                <label
+                  {...field}
+                  htmlFor="confirm"
+                  className={`row-center ${
+                    field.value
+                      ? "font-bold"
+                      : errors.confirm?.message
+                      ? "text-main_color"
+                      : ""
+                  }`}
+                >
                   <input
                     type="checkbox"
                     id="confirm"
-                    className="mr-3 h-5 w-5"
+                    className="mr-3 h-5 w-5 rounded-xl"
                   />
                   정보의 확인 및 사용에 동의합니다.
                 </label>
@@ -171,9 +232,13 @@ export default function UserForm() {
           />
 
           {/* 확인 버튼 */}
-          <button type="submit" className="base_btn col-center h-8">
+          <motion.button
+            whileTap={{ scale: 0.9, transition: { duration: 0.05 } }}
+            type="submit"
+            className="accent_btn_border col-center h-8 transition-all hover:bg-main_color hover:text-font_white"
+          >
             확인하기
-          </button>
+          </motion.button>
         </form>
       )}
     </>
