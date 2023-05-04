@@ -7,7 +7,7 @@ export const ages = [
   "65 - 69세",
   "70세 이상",
 ];
-export const cities = [
+export const locations = [
   "서울특별시",
   "부산광역시",
   "대구광역시",
@@ -27,4 +27,4 @@ export const cities = [
   "제주특별자치도",
 ];
 
-export const favorites = ["취업", "교육", "취미", "모임"];
+export const interests = ["취업", "교육", "취미", "모임"];
