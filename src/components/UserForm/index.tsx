@@ -238,7 +238,7 @@ export default function UserForm() {
           <motion.button
             whileTap={{ scale: 0.9, transition: { duration: 0.05 } }}
             type="submit"
-            className="accent_btn_border col-center h-8 transition-all hover:bg-main_color hover:text-font_white"
+            className="accent_btn_border col-center h-8 w-full transition-all hover:bg-main_color hover:text-font_white"
           >
             확인하기
           </motion.button>
