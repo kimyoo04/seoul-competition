@@ -17,7 +17,7 @@ export default function Content({ data }: IContentProps) {
           <h2 className="text-2xl font-bold">{data.title}</h2>
 
           {/* 수정, 삭제 버튼 */}
-          <UpDelButtons />
+          <UpDelButtons id={data.id} />
         </div>
 
         {/* 작성자, 작성일, 조회수 */}

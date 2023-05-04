@@ -1,13 +1,31 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useCreateMutation } from "@api/posts/cudPost";
+import axios from "@api/axiosInstance";
 
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useUpdateMutation } from "@api/posts/cudPost";
+import { IPostForm, IUpdatePostForm } from "@type/posts";
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
 import ScrollButton from "@components/ScrollButton";
-import { IPostForm } from "@type/posts";
+import { useRouter } from "next/router";
+import { useQuery } from "@tanstack/react-query";
 
-// 게시물 Create 페이지
-export default function AddPost() {
-  const { data, isLoading, mutate, mutateAsync } = useCreateMutation();
+export default function EditPost() {
+  // router 선언
+  const router = useRouter();
+
+  // 게시글 데이터 불러오기
+  const { data: oldPost } = useQuery(
+    ["posts", router.query.id],
+    async () => {
+      const response = await axios.get(`/posts/${router.query.id}`);
+      return response.data;
+    },
+    { enabled: !!router.query.id }
+  );
+
+  console.log(router.query.id);
+
+  // useUpdateMutation 커스텀 훅 가져오기 (구조분해 할당)
+  const { data, isLoading, mutate, mutateAsync } = useUpdateMutation();
 
   const {
     register,
@@ -15,15 +33,23 @@ export default function AddPost() {
     formState: { errors },
     setError,
     control,
-    reset,
   } = useForm<IPostForm>({
-    defaultValues: { nickname: "", password: "", title: "", content: "" },
+    defaultValues: {
+      nickname: oldPost?.nickname || "",
+      password: oldPost?.password || "",
+      title: oldPost?.title || "",
+      content: oldPost?.content || "",
+    },
   });
 
-  const onValid: SubmitHandler<IPostForm> = (postData) => {
-    if (!postData) return;
-    mutate(postData);
-    reset({ nickname: "", password: "", title: "", content: "" });
+  const onValid: SubmitHandler<IPostForm> = async (data) => {
+    if (!data) return;
+    const updateData: IUpdatePostForm = {
+      postId: router.query.id as string,
+      ...data,
+    };
+    await mutateAsync(updateData);
+    router.push("/posts");
   };
 
   return (

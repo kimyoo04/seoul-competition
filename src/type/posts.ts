@@ -26,3 +26,21 @@ export interface IPostsQueryParams {
   startDate?: TDate;
   endDate?: TDate;
 }
+
+//게시글 업로드 폼
+export interface IPostForm {
+  nickname: string;
+  password: string;
+  title: string;
+  content: string;
+}
+//게시글 업데이트 폼
+export interface IUpdatePostForm {
+  postId: string;
+  nickname: string;
+  password: string;
+  title: string;
+  content: string;
+}
+
+//

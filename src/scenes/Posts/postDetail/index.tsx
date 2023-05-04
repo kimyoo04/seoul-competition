@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
 
-import { fetchPostDetail } from "@api/fetchPostDetail";
+import { fetchPostDetail } from "@api/posts/fetchPostDetail";
 import { IPostDetail } from "@type/postDetail";
 import Content from "./PostDetailItem/Content";
 import Comments from "./PostDetailItem/Comments";
