@@ -1,7 +1,7 @@
 export interface IUserForm {
   gender: string;
   age: string;
-  city: string;
-  favorite: string;
+  location: string;
+  interest: string;
   confirm: boolean;
 }
