@@ -2,7 +2,7 @@ import { IUserForm } from "@type/userForm";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { genders, ages, locations, interests } from "./userFormData";
 import classNames from "classnames";
-import fetchUser from "@api/user/postUser";
+import createUser from "@api/user/createUser";
 import { motion } from "framer-motion";
 
 export default function UserForm() {
@@ -27,11 +27,11 @@ export default function UserForm() {
     ) {
       const errMsg: { [key: string]: string } = {};
 
-      errMsg.gender = "성별을 골라주세요.";
-      errMsg.age = "연령대을 골라주세요.";
-      errMsg.location = "거주 지역을 골라주세요.";
-      errMsg.interest = "관심사를 골라주세요.";
-      errMsg.confirm = "동의를 해주세요";
+      if (!data.gender) errMsg.gender = "성별을 골라주세요.";
+      if (!data.age) errMsg.age = "연령대를 골라주세요.";
+      if (data.location == "") errMsg.location = "거주 지역을 골라주세요.";
+      if (data.interest == "") errMsg.interest = "관심사를 골라주세요.";
+      if (!data.confirm) errMsg.confirm = "동의를 해주세요";
 
       const setErrors = (errors: Record<string, string>) => {
         Object.entries(errors).forEach(([key, value]) => {
@@ -49,7 +49,7 @@ export default function UserForm() {
       return;
     }
 
-    const response = await fetchUser(data);
+    const response = await createUser(data);
     console.log(response);
   };
 
@@ -76,7 +76,7 @@ export default function UserForm() {
               control={control}
               render={({ field }) => {
                 return (
-                  <div {...field} className="grid w-full grid-cols-2 gap-3">
+                  <div {...field} className="grid grid-cols-2 gap-3">
                     {genders.map((gender) => {
                       return (
                         <label
