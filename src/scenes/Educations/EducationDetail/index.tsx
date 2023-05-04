@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchEducationDetail } from "@api/fetchEducationDetail";
+import { readEducationDetail } from "@api/educations/readEducationDetail";
 import { IEducationDetail } from "@type/educationDetail";
 
 import Loading from "@components/Loading";
-import LocationMap from "@components/LocationMap";
 import ScrollButton from "@components/ScrollButton";
 
 import Content from "./EducationDetailItem/content";
@@ -11,7 +10,7 @@ import Content from "./EducationDetailItem/content";
 export default function EducationDetail({ id }: { id: string }) {
   const { data, isLoading, error } = useQuery<IEducationDetail>(
     ["educationDetail", id],
-    () => fetchEducationDetail(id)
+    () => readEducationDetail(id)
   );
 
   return (
@@ -29,9 +28,6 @@ export default function EducationDetail({ id }: { id: string }) {
             <div className="rounded-2xl bg-white p-8 shadow-lg">
               {/* 교육 정보 영역 */}
               <Content data={data} />
-
-              {/* 지도 API 영역 */}
-              <LocationMap />
 
               {/* 댓글 영역 */}
               <div>

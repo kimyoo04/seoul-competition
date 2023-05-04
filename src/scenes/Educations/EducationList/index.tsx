@@ -9,7 +9,7 @@ import SearchHeader from "@components/Search/SearchHeader";
 import SearchMore from "@components/Search/SearchMore";
 
 import EducationItem from "@scenes/Educations/EducationItem";
-import { useInfiniteEducations } from "@api/fetchEducations";
+import { useInfiniteEducations } from "@api/educations/readEducations";
 
 export default function EducationList() {
   const searchCategory = useAppSelector((state) => state.search.category);
