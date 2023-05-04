@@ -76,7 +76,7 @@ export default function UserForm() {
               control={control}
               render={({ field }) => {
                 return (
-                  <div {...field} className="grid grid-cols-3 gap-3">
+                  <div {...field} className="grid w-full grid-cols-2 gap-3">
                     {genders.map((gender) => {
                       return (
                         <label
@@ -122,7 +122,10 @@ export default function UserForm() {
               control={control}
               render={({ field }) => {
                 return (
-                  <div {...field} className="grid grid-cols-3 gap-3">
+                  <div
+                    {...field}
+                    className="grid w-full grid-cols-2 justify-stretch gap-3 sm:grid-cols-3"
+                  >
                     {ages.map((age) => {
                       return (
                         <label
@@ -174,7 +177,7 @@ export default function UserForm() {
                 </option>
               ))}
             </select>
-            <div className="pointer-events-none absolute right-1 top-[26px] flex items-center">
+            <div className="pointer-events-none absolute right-2 top-[27px] flex items-center">
               <i className="ri-arrow-down-s-line text-4xl text-main_color"></i>
             </div>
           </div>
@@ -197,7 +200,7 @@ export default function UserForm() {
                 </option>
               ))}
             </select>
-            <div className="pointer-events-none absolute right-1 top-[26px] flex items-center">
+            <div className="pointer-events-none absolute right-2 top-[27px] flex items-center">
               <i className="ri-arrow-down-s-line text-4xl text-main_color"></i>
             </div>
           </div>
@@ -223,7 +226,7 @@ export default function UserForm() {
                   <input
                     type="checkbox"
                     id="confirm"
-                    className="mr-3 h-5 w-5 rounded-xl"
+                    className="mr-3 h-5 w-5 border-none shadow-none"
                   />
                   정보의 확인 및 사용에 동의합니다.
                 </label>
