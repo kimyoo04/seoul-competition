@@ -8,13 +8,13 @@ import { IPostDetail } from "@type/postDetail";
 import Content from "./PostDetailItem/Content";
 import Comments from "@components/Comment/Comments";
 import CommentInput from "@components/Comment/CommentInput";
+import Header from "./PostDetailItem/Header";
 
 export default function PostDetail({ id }: { id: string }) {
   const { data, isLoading, error } = useQuery<IPostDetail>(
     ["postDetail", id],
     () => readPostDetail(id)
   );
-
   return (
     <>
       {/* 로딩 시 로딩 화면 표시 */}
@@ -28,8 +28,11 @@ export default function PostDetail({ id }: { id: string }) {
         <div className="w-full px-4">
           <div className="mx-auto my-8 max-w-screen-lg">
             <div className="rounded-2xl bg-white p-8 shadow-lg">
-              {/* 게시글 영역 */}
-              <Content data={data} />
+              {/* 게시글 해더 */}
+              <Header data={data} />
+
+              {/* 게시글 내용 */}
+              <Content data={data.content} />
 
               {/* 댓글 영역 */}
               <div>
@@ -37,7 +40,7 @@ export default function PostDetail({ id }: { id: string }) {
                 <CommentInput />
 
                 {/* 댓글 목록 */}
-                <Comments data={data} />
+                <Comments data={data.comments} />
               </div>
             </div>
           </div>
