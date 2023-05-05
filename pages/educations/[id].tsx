@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import MainLayout from "@layouts/MainLayout";
+import DetailPageLayout from "@layouts/DetailPageLayout";
 import EducationDetail from "@scenes/Educations/EducationDetail";
 
 export default function EducationDetailPage() {
@@ -8,9 +8,9 @@ export default function EducationDetailPage() {
 
   if (typeof id === "string") {
     return (
-      <MainLayout>
+      <DetailPageLayout>
         <EducationDetail id={id} />
-      </MainLayout>
+      </DetailPageLayout>
     );
   }
 }

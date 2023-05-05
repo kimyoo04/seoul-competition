@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Header from "./Header";
 
-export default function OnePageLayout({
+export default function DetailPageLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export default function OnePageLayout({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <div className="col-center container mx-auto h-screen w-screen px-0 pt-20  md:px-4 ">
+        <div className="ol-center container mx-auto px-0 pt-20 md:px-4">
           {children}
         </div>
       </motion.div>
