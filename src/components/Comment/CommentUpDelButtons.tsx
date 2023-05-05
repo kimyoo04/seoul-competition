@@ -1,14 +1,28 @@
+import { motion } from "framer-motion";
+
 export default function CommentUpDelButtons() {
+  function handleUpdateComment() {}
+
+  function handleDeleteComment() {}
+
   return (
-    <div className="text-sm">
+    <div className="row-center">
       {/* <Link href="/commentsy"> */}
-      <button className="m-0.5 rounded-lg bg-gray_2 px-2 py-1 text-font_white">
+      <motion.button
+        whileTap={{ scale: 0.8 }}
+        className="update_btn mr-2"
+        onClick={handleUpdateComment}
+      >
         수정
-      </button>
-      {/* </Link> */}
-      <button className="m-0.5 rounded-lg bg-alert_danger px-2 py-1 text-font_white">
+      </motion.button>
+
+      <motion.button
+        whileTap={{ scale: 0.8 }}
+        className="delete_btn"
+        onClick={handleDeleteComment}
+      >
         삭제
-      </button>
+      </motion.button>
     </div>
   );
 }

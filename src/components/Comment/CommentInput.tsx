@@ -39,10 +39,7 @@ export default function CommentInput() {
         </div>
         <div className="flex justify-end">
           <ButtonWrapper>
-            <button
-              type="submit"
-              className="rounded-lg border bg-main_color px-2 py-1 text-sm text-font_white "
-            >
+            <button type="submit" className="create_btn">
               제출
             </button>
           </ButtonWrapper>
