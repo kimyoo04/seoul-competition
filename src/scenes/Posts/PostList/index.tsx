@@ -9,7 +9,7 @@ import SearchHeader from "@components/Search/SearchHeader";
 import SearchMore from "@components/Search/SearchMore";
 
 import PostItem from "@scenes/Posts/PostItem";
-import { useInfinitePosts } from "@api/posts/fetchPosts";
+import { useInfinitePosts } from "@api/posts/readPosts";
 
 export default function PostList() {
   const searchCategory = useAppSelector((state) => state.search.category);

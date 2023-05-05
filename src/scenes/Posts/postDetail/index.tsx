@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
 
-import { fetchPostDetail } from "@api/posts/fetchPostDetail";
+import { readPostDetail } from "@api/posts/readPostDetail";
 import { IPostDetail } from "@type/postDetail";
 import Content from "./PostDetailItem/Content";
 import Comments from "@components/Comment/Comments";
@@ -12,7 +12,7 @@ import CommentInput from "@components/Comment/CommentInput";
 export default function PostDetail({ id }: { id: string }) {
   const { data, isLoading, error } = useQuery<IPostDetail>(
     ["postDetail", id],
-    () => fetchPostDetail(id)
+    () => readPostDetail(id)
   );
 
   return (

@@ -1,12 +1,13 @@
 import axios from "@api/axiosInstance";
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useUpdateMutation } from "@api/posts/cudPost";
-import { IPostForm, IUpdatePostForm } from "@type/posts";
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
 import ScrollButton from "@components/ScrollButton";
+
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IPostForm, IUpdatePostForm } from "@type/posts";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
+import { useUpdateMutation } from "@api/posts/updatePostDetail";
 
 export default function EditPost() {
   // router 선언
@@ -14,7 +15,7 @@ export default function EditPost() {
 
   // 게시글 데이터 불러오기
   const { data: oldPost } = useQuery(
-    ["posts", router.query.id],
+    ["oldpost", router.query.id],
     async () => {
       const response = await axios.get(`/posts/${router.query.id}`);
       return response.data;
@@ -36,7 +37,6 @@ export default function EditPost() {
   } = useForm<IPostForm>({
     defaultValues: {
       nickname: oldPost?.nickname || "",
-      password: oldPost?.password || "",
       title: oldPost?.title || "",
       content: oldPost?.content || "",
     },
@@ -54,43 +54,23 @@ export default function EditPost() {
 
   return (
     <div className="w-full px-4">
-      <div className="mx-auto my-8 max-w-screen-lg"></div>
-      <div className="rounded-2xl bg-white p-4 shadow-lg">
+      <div className="mx-auto my-8 max-w-screen-md rounded-2xl bg-white p-4 shadow-lg">
         <form onSubmit={handleSubmit(onValid)}>
-          <div className="mb-2 flex gap-4">
-            {/* nickname textfield */}
-            <div className="w-1/2">
-              <label htmlFor="nickname" className="p-1 text-sm font-bold">
-                작성자 *
-              </label>
-              <input
-                {...register("nickname")}
-                id="nickname"
-                type="text"
-                name="nickname"
-                autoComplete="off"
-                placeholder="이름 / 별명"
-                maxLength={10}
-                className="textfield w-full rounded-md"
-              />
-            </div>
-
-            {/* password textfield */}
-            <div className="w-1/2">
-              <label htmlFor="password" className="p-1 text-sm font-bold ">
-                비밀번호 *
-              </label>
-              <input
-                {...register("password")}
-                id="password"
-                type="password"
-                name="password"
-                autoComplete="off"
-                placeholder="비밀번호"
-                maxLength={320}
-                className="textfield w-full rounded-md"
-              />
-            </div>
+          {/* nickname textfield */}
+          <div className="col-start mb-2 flex w-40">
+            <label htmlFor="nickname" className="p-1 text-sm font-bold">
+              작성자 *
+            </label>
+            <input
+              {...register("nickname")}
+              id="nickname"
+              type="text"
+              name="nickname"
+              autoComplete="off"
+              placeholder="이름 / 별명"
+              maxLength={10}
+              className="textfield w-full rounded-md"
+            />
           </div>
 
           {/* title textfield */}

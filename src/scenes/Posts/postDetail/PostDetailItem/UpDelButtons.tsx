@@ -1,4 +1,3 @@
-import { IPostDetail } from "@type/postDetail";
 import Link from "next/link";
 
 export default function UpDelButtons({ id }: { id: number }) {
