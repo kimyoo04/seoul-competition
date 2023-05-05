@@ -1,10 +1,4 @@
 export function timeYmd(date: string) {
-  const ymdDate = new Intl.DateTimeFormat("ko-KR").format(new Date(date));
-
-  return ymdDate;
-}
-
-export function timeSince(date: string) {
   // 9시간 더해주기 (UTC - 한국 시간)
   const koreaTimezoneOffset = 9 * 60;
 
@@ -17,25 +11,26 @@ export function timeSince(date: string) {
   );
 
   // RelativeTimeFormat(): "long" 스타일로 상대적 시간을 표현해줌
-  const rtf = new Intl.RelativeTimeFormat("ko", {
+  const rtf = new Intl.RelativeTimeFormat("ko-KR", {
     style: "long",
   });
 
   // 시간 경과 정도에 따라 상대적 시간 표기
-  if (seconds > 604800) {
-    const weeks = Math.floor(seconds / 604800);
-    return rtf.format(-weeks, "week");
-  } else if (seconds > 86400) {
-    const days = Math.floor(seconds / 86400);
-    return rtf.format(-days, "day");
-  } else if (seconds > 3600) {
-    const hours = Math.floor(seconds / 3600);
-    return rtf.format(-hours, "hour");
-  } else if (seconds > 60) {
+  if (seconds <= 60) {
+    // 초전
+    return rtf.format(-seconds, "second");
+  } else if (seconds <= 3600) {
+    // 분전
     const minutes = Math.floor(seconds / 60);
     return rtf.format(-minutes, "minute");
+  } else if (seconds <= 21600) {
+    // 시간전 (6시간까지)
+    const hours = Math.floor(seconds / 3600);
+    return rtf.format(-hours, "hour");
   } else {
-    return rtf.format(-seconds, "second");
+    // 날짜
+    const ymdDate = new Intl.DateTimeFormat("ko-KR").format(new Date(date));
+    return ymdDate;
   }
 }
 
