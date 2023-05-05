@@ -1,17 +1,17 @@
 import React from "react";
-import { IPostDetail } from "@type/postDetail";
 import { timeSince, timeYmd } from "@util/dateTime";
 import CommentUpDelButtons from "./CommentUpDelButtons";
+import { IComment } from "@type/comments";
 
 interface ICommentsProps {
-  data: IPostDetail;
+  data: IComment[];
 }
 
 export default function Comments({ data }: ICommentsProps) {
   return (
     <>
-      {data.comments &&
-        data.comments.map((comment) => (
+      {data &&
+        data.map((comment) => (
           <div
             key={comment.id}
             className="mb-4 rounded-lg bg-gray_4 px-4 py-2 "
