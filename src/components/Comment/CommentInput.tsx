@@ -1,6 +1,6 @@
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
 
-export default function CommentFields() {
+export default function CommentInput() {
   return (
     <div className="mb-2 mt-8 rounded-xl bg-blue-100 p-2 ">
       <form>

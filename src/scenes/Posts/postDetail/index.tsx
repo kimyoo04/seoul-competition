@@ -6,8 +6,8 @@ import ScrollButton from "@components/ScrollButton";
 import { fetchPostDetail } from "@api/posts/fetchPostDetail";
 import { IPostDetail } from "@type/postDetail";
 import Content from "./PostDetailItem/Content";
-import Comments from "./PostDetailItem/Comments";
-import CommentFields from "./PostDetailItem/CommentFields";
+import Comments from "@components/Comment/Comments";
+import CommentInput from "@components/Comment/CommentInput";
 
 export default function PostDetail({ id }: { id: string }) {
   const { data, isLoading, error } = useQuery<IPostDetail>(
@@ -34,7 +34,7 @@ export default function PostDetail({ id }: { id: string }) {
               {/* 댓글 영역 */}
               <div>
                 {/* 댓글 입력 필드 */}
-                <CommentFields />
+                <CommentInput />
 
                 {/* 댓글 목록 */}
                 <Comments data={data} />
