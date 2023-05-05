@@ -8,6 +8,7 @@ import { IPostForm, IUpdatePostForm } from "@type/posts";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import { useUpdateMutation } from "@api/posts/updatePostDetail";
+import ErrorMsg from "@components/TextField/ErrorMsg";
 
 export default function EditPost() {
   // router 선언
@@ -43,7 +44,24 @@ export default function EditPost() {
   });
 
   const onValid: SubmitHandler<IPostForm> = async (data) => {
-    if (!data) return;
+    if (!data.nickname || !data.title || !data.content) {
+      const errMsg: { [key: string]: string } = {};
+
+      if (!data.nickname) errMsg.nickname = "이름 또는 닉네임을 입력해 주세요.";
+      if (!data.title) errMsg.title = "제목을 입력해 주세요.";
+      if (!data.content) errMsg.content = "내용을 입력해 주세요.";
+      const setErrors = (errors: Record<string, string>) => {
+        Object.entries(errors).forEach(([key, value]) => {
+          setError(key as "nickname" | "title" | "content", {
+            message: value,
+            type: "required",
+          });
+        });
+      };
+      setErrors(errMsg);
+      return;
+    }
+
     const updateData: IUpdatePostForm = {
       postId: router.query.id as string,
       ...data,
@@ -57,20 +75,32 @@ export default function EditPost() {
       <div className="mx-auto my-8 max-w-screen-md rounded-2xl bg-white p-4 shadow-lg">
         <form onSubmit={handleSubmit(onValid)}>
           {/* nickname textfield */}
-          <div className="col-start mb-2 flex w-40">
+          <div className="col-start mb-2 flex w-44">
             <label htmlFor="nickname" className="p-1 text-sm font-bold">
               작성자 *
             </label>
             <input
-              {...register("nickname")}
+              {...register("nickname", {
+                minLength: {
+                  value: 2,
+                  message: "최소 2 글자 이상 입력해주세요.",
+                },
+                maxLength: {
+                  value: 10,
+                  message: "최대 10 글자까지 입력 가능합니다.",
+                },
+              })}
               id="nickname"
               type="text"
               name="nickname"
               autoComplete="off"
               placeholder="이름 / 별명"
-              maxLength={10}
+              maxLength={11}
               className="textfield w-full rounded-md"
             />
+            <span>
+              <ErrorMsg>{errors?.nickname?.message}</ErrorMsg>
+            </span>
           </div>
 
           {/* title textfield */}
@@ -79,15 +109,27 @@ export default function EditPost() {
               제목 *
             </label>
             <input
-              {...register("title")}
+              {...register("title", {
+                minLength: {
+                  value: 2,
+                  message: "최소 2 글자 이상 입력해주세요.",
+                },
+                maxLength: {
+                  value: 50,
+                  message: "최대 50 글자까지 입력 가능합니다.",
+                },
+              })}
               id="title"
               type="text"
               name="title"
               autoComplete="off"
               placeholder="제목을 입력해주세요."
-              maxLength={50}
+              maxLength={51}
               className="textfield w-full rounded-md"
             />
+            <span>
+              <ErrorMsg>{errors?.title?.message}</ErrorMsg>
+            </span>
           </div>
 
           {/* content textarea */}
@@ -96,17 +138,30 @@ export default function EditPost() {
               내용 *
             </label>
             <textarea
-              {...register("content")}
+              {...register("content", {
+                minLength: {
+                  value: 4,
+                  message: "최소 4 글자 이상 입력해주세요.",
+                },
+                maxLength: {
+                  value: 1000,
+                  message: "최대 1000 글자까지 입력 가능합니다.",
+                },
+              })}
               id="content"
               typeof="text"
               name="content"
               placeholder="자유롭게 글을 작성해 보세요."
+              maxLength={1001}
               className="textfield h-48 w-full rounded-md px-3 py-1 leading-8 placeholder:pt-1"
             />
+            <span>
+              <ErrorMsg>{errors?.content?.message}</ErrorMsg>
+            </span>
           </div>
 
           {/* submit button */}
-          <div className="col-center mt-4">
+          <div className="col-center mb-3 mt-4">
             <ButtonWrapper>
               <button
                 type="submit"

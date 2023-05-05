@@ -4,6 +4,7 @@ import { useCreateMutation } from "@api/posts/createPostDetail";
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
 import ScrollButton from "@components/ScrollButton";
 import { IPostForm } from "@type/posts";
+import ErrorMsg from "@components/TextField/ErrorMsg";
 
 // 게시물 Create 페이지
 export default function AddPost() {
@@ -21,7 +22,24 @@ export default function AddPost() {
   });
 
   const onValid: SubmitHandler<IPostForm> = (data) => {
-    if (!data) return;
+    if (!data.nickname || !data.password || !data.title || !data.content) {
+      const errMsg: { [key: string]: string } = {};
+
+      if (!data.nickname) errMsg.nickname = "이름 또는 닉네임을 입력해 주세요.";
+      if (!data.password) errMsg.password = "비밀번호를 입력해 주세요.";
+      if (!data.title) errMsg.title = "제목을 입력해 주세요.";
+      if (!data.content) errMsg.content = "내용을 입력해 주세요.";
+      const setErrors = (errors: Record<string, string>) => {
+        Object.entries(errors).forEach(([key, value]) => {
+          setError(key as "nickname" | "password" | "title" | "content", {
+            message: value,
+            type: "required",
+          });
+        });
+      };
+      setErrors(errMsg);
+      return;
+    }
     mutate(data);
     reset({ nickname: "", password: "", title: "", content: "" });
   };
@@ -38,15 +56,27 @@ export default function AddPost() {
                 작성자 *
               </label>
               <input
-                {...register("nickname")}
+                {...register("nickname", {
+                  minLength: {
+                    value: 2,
+                    message: "최소 2 글자 이상 입력해주세요.",
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: "최대 10 글자까지 입력 가능합니다.",
+                  },
+                })}
                 id="nickname"
                 type="text"
                 name="nickname"
                 autoComplete="off"
                 placeholder="이름 / 별명"
-                maxLength={10}
+                maxLength={11}
                 className="textfield w-full rounded-md"
               />
+              <span>
+                <ErrorMsg>{errors?.nickname?.message}</ErrorMsg>
+              </span>
             </div>
 
             {/* password textfield */}
@@ -55,15 +85,27 @@ export default function AddPost() {
                 비밀번호 *
               </label>
               <input
-                {...register("password")}
+                {...register("password", {
+                  minLength: {
+                    value: 4,
+                    message: "최소 4 글자 이상 입력해주세요.",
+                  },
+                  maxLength: {
+                    value: 12,
+                    message: "최대 12 글자까지 입력 가능합니다.",
+                  },
+                })}
                 id="password"
                 type="password"
                 name="password"
                 autoComplete="off"
                 placeholder="비밀번호"
-                maxLength={320}
+                maxLength={13}
                 className="textfield w-full rounded-md"
               />
+              <span>
+                <ErrorMsg>{errors?.password?.message}</ErrorMsg>
+              </span>
             </div>
           </div>
 
@@ -73,15 +115,27 @@ export default function AddPost() {
               제목 *
             </label>
             <input
-              {...register("title")}
+              {...register("title", {
+                minLength: {
+                  value: 2,
+                  message: "최소 2 글자 이상 입력해주세요.",
+                },
+                maxLength: {
+                  value: 50,
+                  message: "최대 50 글자까지 입력 가능합니다.",
+                },
+              })}
               id="title"
               type="text"
               name="title"
               autoComplete="off"
               placeholder="제목을 입력해주세요."
-              maxLength={50}
+              maxLength={51}
               className="textfield w-full rounded-md"
             />
+            <span>
+              <ErrorMsg>{errors?.title?.message}</ErrorMsg>
+            </span>
           </div>
 
           {/* content textarea */}
@@ -90,13 +144,26 @@ export default function AddPost() {
               내용 *
             </label>
             <textarea
-              {...register("content")}
+              {...register("content", {
+                minLength: {
+                  value: 4,
+                  message: "최소 4 글자 이상 입력해주세요.",
+                },
+                maxLength: {
+                  value: 1000,
+                  message: "최대 1000 글자까지 입력 가능합니다.",
+                },
+              })}
               id="content"
               typeof="text"
               name="content"
               placeholder="자유롭게 글을 작성해 보세요."
+              maxLength={1001}
               className="textfield h-48 w-full rounded-md px-3 py-1 leading-8 placeholder:pt-1"
             />
+            <span>
+              <ErrorMsg>{errors?.content?.message}</ErrorMsg>
+            </span>
           </div>
 
           {/* submit button */}
