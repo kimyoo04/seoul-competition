@@ -2,7 +2,7 @@ import { Fragment, useEffect } from "react";
 import { useAppSelector } from "@toolkit/hook";
 import { useInView } from "react-intersection-observer";
 
-import { IEducationData } from "@type/education";
+import { IEducationData } from "@type/educations";
 
 import Loading from "@components/Loading";
 import SearchHeader from "@components/Search/SearchHeader";

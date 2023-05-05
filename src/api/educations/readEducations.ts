@@ -4,7 +4,7 @@ import { useAppSelector } from "@toolkit/hook";
 import {
   IEducationsDataPerPage,
   IEducationsQueryParams,
-} from "@type/education";
+} from "@type/educations";
 import { TDate, TPrice, TStatus } from "@type/filter";
 import { TSearchCategory } from "@type/search";
 import { AxiosError } from "axios";

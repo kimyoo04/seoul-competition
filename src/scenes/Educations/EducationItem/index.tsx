@@ -1,4 +1,4 @@
-import { IEducationData } from "@type/education";
+import { IEducationData } from "@type/educations";
 import Link from "next/link";
 
 export default function EducationItem({
