@@ -17,9 +17,9 @@ export default function Header({ data }: IHeaderProps) {
 
       {/* 작성자, 작성일, 조회수 */}
       <div className="mb-8 text-sm text-gray_2">
-        <span>작성자: {data.nickname}</span>
+        <span>{data.nickname}</span>
         <span className="mx-2">|</span>
-        <span>작성일: {timeYmd(data.createdAt)}</span>
+        <span>{timeYmd(data.createdAt)}</span>
         <span className="mx-2">|</span>
         <span>조회수: {data.hits}</span>
       </div>
