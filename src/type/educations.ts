@@ -2,18 +2,18 @@ import { TDate, TPrice, TStatus } from "./filter";
 
 // 교육 정보 데이터
 export interface IEducationData {
-  id: number;
-  name: string;
-  status: string;
-  price: string;
-  capacity: number;
-  registerStart: string;
-  registerEnd: string;
-  educationStart: string;
-  educationEnd: string;
-  url: string;
-  hits: number;
-  reviewsCount: number;
+  id: TId;
+  name: TName;
+  status: TStatus;
+  price: TPrice;
+  capacity: TCapacity;
+  registerStart: TEducationStart;
+  registerEnd: TRegisterEnd;
+  educationStart: TEducationStart;
+  educationEnd: TEducationEnd;
+  url: TUrl;
+  hits: THits;
+  reviewsCount: TReviewsCount;
 }
 
 // 교육 정보 인피니티 스크롤 데이터
@@ -35,3 +35,15 @@ export interface IEducationsQueryParams {
   minPrice?: TPrice;
   maxPrice?: TPrice;
 }
+
+export type TId = number;
+export type TEducationId = string;
+export type TName = string;
+export type TCapacity = number;
+export type TRegisterStart = string;
+export type TRegisterEnd = string;
+export type TEducationStart = string;
+export type TEducationEnd = string;
+export type TUrl = string;
+export type THits = number;
+export type TReviewsCount = number;

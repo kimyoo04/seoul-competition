@@ -1,3 +1,5 @@
+import { IComment } from "./comments";
+
 // 게시글 데이터
 export interface IPostDetail {
   id: number;
@@ -6,16 +8,7 @@ export interface IPostDetail {
   content: string;
   createdAt: string;
   hits: number;
-  comments: IPostComment[];
-}
-
-// 게시글의 댓글
-export interface IPostComment {
-  id: number;
-  postId: string;
-  nickname: string;
-  content: string;
-  createdAt: string;
+  comments: IComment[];
 }
 
 // 게시글 State
