@@ -14,7 +14,12 @@ export default function Comments({ data }: ICommentsProps) {
       <CommentInput />
 
       {/* 댓글 목록 */}
-      {data && data.map((commentData) => <CommentItem data={commentData} />)}
+      <div className="overflow-hidden rounded-lg bg-gray_4">
+        {data &&
+          data.map((commentData, index) => (
+            <CommentItem data={commentData} index={index} />
+          ))}
+      </div>
     </div>
   );
 }
