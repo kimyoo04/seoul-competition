@@ -15,7 +15,7 @@ export default function EditPost() {
 
   // 게시글 데이터 불러오기
   const { data: oldPost } = useQuery(
-    ["posts", router.query.id],
+    ["oldpost", router.query.id],
     async () => {
       const response = await axios.get(`/posts/${router.query.id}`);
       return response.data;

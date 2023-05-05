@@ -19,7 +19,7 @@ export const useUpdateMutation = () => {
   return useMutation({
     mutationFn: updatePostDetail,
     onSuccess: async (_, variables) => {
-      await queryClient.invalidateQueries({ queryKey: ["post"] });
+      await queryClient.invalidateQueries({ queryKey: ["updatedpost"] });
 
       router.push(`/posts/${variables.postId}`);
     },
