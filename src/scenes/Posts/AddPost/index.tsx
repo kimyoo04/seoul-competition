@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useCreateMutation } from "@api/posts/cudPost";
+import { useCreateMutation } from "@api/posts/createPostDetail";
 
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
 import ScrollButton from "@components/ScrollButton";
@@ -20,9 +20,9 @@ export default function AddPost() {
     defaultValues: { nickname: "", password: "", title: "", content: "" },
   });
 
-  const onValid: SubmitHandler<IPostForm> = (postData) => {
-    if (!postData) return;
-    mutate(postData);
+  const onValid: SubmitHandler<IPostForm> = (data) => {
+    if (!data) return;
+    mutate(data);
     reset({ nickname: "", password: "", title: "", content: "" });
   };
 

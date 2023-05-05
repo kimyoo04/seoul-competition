@@ -1,12 +1,13 @@
 import axios from "@api/axiosInstance";
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useUpdateMutation } from "@api/posts/cudPost";
-import { IPostForm, IUpdatePostForm } from "@type/posts";
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
 import ScrollButton from "@components/ScrollButton";
+
+import { SubmitHandler, useForm } from "react-hook-form";
+import { IPostForm, IUpdatePostForm } from "@type/posts";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
+import { useUpdateMutation } from "@api/posts/updatePostDetail";
 
 export default function EditPost() {
   // router 선언

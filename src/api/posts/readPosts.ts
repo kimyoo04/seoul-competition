@@ -7,7 +7,7 @@ import { TSearchCategory } from "@type/search";
 import { AxiosError } from "axios";
 
 //! axios GET 요청 함수
-export const fetchPosts = async (
+export const readPosts = async (
   searchCategory: TSearchCategory,
   page: number,
   name: string,
@@ -48,7 +48,7 @@ export const useInfinitePosts = () => {
       },
     ],
     queryFn: ({ pageParam = 0 }) =>
-      fetchPosts(searchCategory, pageParam, searchKeyword, startDate, endDate),
+      readPosts(searchCategory, pageParam, searchKeyword, startDate, endDate),
     getNextPageParam: (lastPage) => {
       if (lastPage.currentPage < lastPage.totalPages) {
         return lastPage.currentPage + 1;
