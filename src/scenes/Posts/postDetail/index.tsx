@@ -6,8 +6,7 @@ import ScrollButton from "@components/ScrollButton";
 import { readPostDetail } from "@api/posts/readPostDetail";
 import { IPostDetail } from "@type/postDetail";
 import Content from "./PostDetailItem/Content";
-import Comments from "@components/Comment/Comments";
-import CommentInput from "@components/Comment/CommentInput";
+import Comments from "@components/Comments";
 import Header from "./PostDetailItem/Header";
 
 export default function PostDetail({ id }: { id: string }) {
@@ -35,13 +34,7 @@ export default function PostDetail({ id }: { id: string }) {
               <Content data={data.content} />
 
               {/* 댓글 영역 */}
-              <div>
-                {/* 댓글 입력 필드 */}
-                <CommentInput />
-
-                {/* 댓글 목록 */}
-                <Comments data={data.comments} />
-              </div>
+              <Comments data={data.comments} />
             </div>
           </div>
           {/* 최상단 이동 버튼 */}
