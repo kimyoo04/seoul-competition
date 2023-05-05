@@ -1,5 +1,5 @@
 import { IPostData } from "@type/posts";
-import { timeSince } from "@util/dateTime";
+import { timeYmd } from "@util/dateTime";
 import Link from "next/link";
 
 export default function PostItem({ post }: { post: IPostData }) {
@@ -25,7 +25,7 @@ export default function PostItem({ post }: { post: IPostData }) {
         <div className="text-sm text-gray-500">
           조회 {post.hits} · 댓글 {post.commentsCount}
         </div>
-        <div className="text-sm text-gray-500">{timeSince(post.createdAt)}</div>
+        <div className="text-sm text-gray-500">{timeYmd(post.createdAt)}</div>
       </div>
     </Link>
   );
