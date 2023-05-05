@@ -3,7 +3,7 @@
 .accent_btn_fill,
 .accent_btn_border,
 .border_btn {
-  @apply px-4 py-2 font-bold bg-white shadow-md text-font_black rounded-3xl;
+  @apply rounded-3xl bg-white px-4 py-2 font-bold text-font_black shadow-md;
 }
 
 /* 버튼 커스텀 */
@@ -23,7 +23,7 @@
 }
 
 .accent_btn_border {
-  @apply border text-main_color border-main_color shadow-back_color;
+  @apply border border-main_color text-main_color shadow-back_color;
 }
 
 .border_btn {
@@ -31,5 +31,19 @@
 }
 
 .round_btn {
-  @apply p-2 rounded-full;
+  @apply rounded-full p-2;
+}
+
+/* 컴포넌트용 */
+
+.create_btn {
+  @apply rounded-lg border bg-main_color px-3 py-1 text-sm text-font_white;
+}
+
+.delete_btn {
+  @apply rounded-lg bg-alert_danger px-3 py-1 text-sm text-font_white;
+}
+
+.update_btn {
+  @apply rounded-lg bg-gray_2 px-3 py-1 text-sm text-font_white;
 }
