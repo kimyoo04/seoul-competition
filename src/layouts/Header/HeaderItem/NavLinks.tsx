@@ -4,7 +4,7 @@ import ButtonWrapper from "@components/Animation/ButtonWrapper";
 // isClicked를 기준으로 Menu 토글
 export default function NavLinks() {
   return (
-    <div className="flex gap-6 text-xl font-bold">
+    <div className="flex gap-2 text-xl font-bold md:gap-4">
       <Link href={"/educations"} className="col-center w-[92px] pt-[6px]">
         <ButtonWrapper>
           <span className="text-main_color">교육 정보</span>
