@@ -1,18 +1,44 @@
-import { ICreateCommentForm } from "@type/comments";
+import { useRouter } from "next/router";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
+import { createComment } from "@api/comment/createComment";
+import { createReview } from "@api/review/createReview";
+
+import { ICommentOrReviewForm } from "@type/commentOrReview";
+
 export default function CommentInput() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
     control,
-    reset,
-  } = useForm<ICreateCommentForm>({
+  } = useForm<ICommentOrReviewForm>({
     defaultValues: {},
   });
-  const onValid: SubmitHandler<ICreateCommentForm> = async (data) => {};
+
+  const onValid: SubmitHandler<ICommentOrReviewForm> = async (data) => {
+    // console.log(data);
+
+    if (router.pathname.split("/")[1] === "post") {
+      const commentData = {
+        postId: router.query.id as string,
+        ...data,
+      };
+
+      // 자유게시판의 댓글 생성
+      await createComment(commentData);
+    } else {
+      const reviewData = {
+        educationId: router.query.id as string,
+        ...data,
+      };
+
+      // 교육 정보의 리뷰 생성
+      await createReview(reviewData);
+    }
+  };
 
   return (
     <div className="mb-2 mt-8 rounded-xl bg-blue-100 p-4 ">

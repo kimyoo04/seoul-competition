@@ -1,9 +1,9 @@
-import { IComment } from "@type/comments";
+import { ICommentOrReview } from "@type/commentOrReview";
 import CommentItem from "./CommentItem";
 import CommentInput from "./CommentInput";
 
 interface ICommentsProps {
-  data: IComment[];
+  data: ICommentOrReview[];
 }
 
 // 댓글 영역 전체 컴포넌트

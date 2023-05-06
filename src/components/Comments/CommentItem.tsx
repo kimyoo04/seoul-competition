@@ -1,10 +1,10 @@
 import React from "react";
 import { timeYmd } from "@util/dateTime";
 import CommentUpDelButtons from "./CommentUpDelButtons";
-import { IComment } from "@type/comments";
+import { ICommentOrReview } from "@type/commentOrReview";
 
 interface ICommentProps {
-  data: IComment;
+  data: ICommentOrReview;
   index: number;
 }
 const color = ["bg-[#FBFBFB]", "bg-[#F5F5F5}"];
