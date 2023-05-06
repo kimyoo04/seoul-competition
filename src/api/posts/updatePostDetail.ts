@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAppDispatch } from "@toolkit/hook";
 import { IUpdatePostCheck, IUpdatePostForm } from "@type/posts";
 import { useRouter } from "next/router";
+import { Dispatch, SetStateAction } from "react";
 
 // 게시글 Update
 
@@ -14,11 +15,14 @@ export const updatePostDetail = async (updatedPost: IUpdatePostForm) => {
 
 // 게시글 Update Password Check
 export const updatePostPwd = async (postIdPwd: IUpdatePostCheck) => {
-  const response = await axios.post(
-    `/posts/${postIdPwd.postId}/matchcheck`,
-    postIdPwd.password
-  );
-  return response;
+  try {
+    const response = await axios.post(`/posts/${postIdPwd.postId}/matchCheck`, {
+      password: postIdPwd.password,
+    });
+    return "success";
+  } catch (err) {
+    return "fail";
+  }
 };
 
 // useUpdateMutation
@@ -43,29 +47,17 @@ export const useUpdateMutation = () => {
   });
 };
 
-// useUpdateMutation
+// useUpdatePostPwdMutation
 export const useUpdatePostPwdMutation = () => {
-  const router = useRouter();
-
-  const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: updatePostPwd,
     onSuccess: async (_, variables) => {
       await queryClient.invalidateQueries({ queryKey: ["checkedPost"] });
-
-      router.push(`/posts/modify/${variables.postId}`);
     },
     onError: (err) => {
       console.error(err);
-
-      dispatch(
-        alertActions.alert({
-          alertType: "Warning",
-          content: "비밀번호가 일치하지 않습니다. 다시 입력해주세요.",
-        })
-      );
     },
     onSettled: () => {
       console.log("완료");
