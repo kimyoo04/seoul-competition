@@ -4,9 +4,9 @@ import { TDate } from "./filter";
 export interface IPostData {
   id: TId;
   nickname: TNickname;
-  title: TPassword;
-  content: TTitle;
-  createdAt: TContent;
+  title: TTitle;
+  content: TContent;
+  createdAt: TCreatedAt;
   hits: THits;
   commentsCount: TCommentsCount;
 }
@@ -59,5 +59,6 @@ export type TNickname = string;
 export type TPassword = string;
 export type TTitle = string;
 export type TContent = string;
+export type TCreatedAt = string;
 export type THits = number;
 export type TCommentsCount = number;

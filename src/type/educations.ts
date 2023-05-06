@@ -7,7 +7,7 @@ export interface IEducationData {
   status: TStatus;
   price: TPrice;
   capacity: TCapacity;
-  registerStart: TEducationStart;
+  registerStart: TRegisterStart;
   registerEnd: TRegisterEnd;
   educationStart: TEducationStart;
   educationEnd: TEducationEnd;

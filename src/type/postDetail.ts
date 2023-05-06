@@ -1,13 +1,14 @@
-import { IComment } from "./comments";
+import { IComment } from "./commentOrReview";
+import { TContent, TCreatedAt, THits, TId, TNickname, TTitle } from "./posts";
 
 // 게시글 데이터
 export interface IPostDetail {
-  id: number;
-  nickname: string;
-  title: string;
-  content: string;
-  createdAt: string;
-  hits: number;
+  id: TId;
+  nickname: TNickname;
+  title: TTitle;
+  content: TContent;
+  createdAt: TCreatedAt;
+  hits: THits;
   comments: IComment[];
 }
 
