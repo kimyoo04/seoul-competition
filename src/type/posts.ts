@@ -43,6 +43,16 @@ export interface IUpdatePostForm {
   content: TContent;
 }
 
+// 게시글 비밀번호 확인 시 전송할 데이터
+export interface IUpdatePostCheck {
+  postId: TPostId;
+  password: TPassword;
+}
+// 게시글 비밀번호 확인 폼
+export interface IUpdatePostCheckForm {
+  password: TPassword;
+}
+
 export type TId = number;
 export type TPostId = string;
 export type TNickname = string;
