@@ -1,15 +1,21 @@
 import { motion } from "framer-motion";
 import Header from "./Header";
+import Alert from "@components/Alert";
+import { useAppSelector } from "@toolkit/hook";
 
 export default function MainLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const isAlert = useAppSelector((state) => state.alert.isAlert);
   return (
     <>
       {/* 해더 영역 */}
       <Header />
+
+      {/* Alert */}
+      {isAlert && <Alert />}
 
       {/* 메인 영역 */}
       <motion.main
