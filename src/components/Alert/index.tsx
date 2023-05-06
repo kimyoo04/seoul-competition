@@ -26,23 +26,23 @@ export const AlertComponent = () => {
       case "Success":
         setAlertIcon(
           <i
-            className={`text-3xl ri-checkbox-circle-fill ${alertTextColor}`}
+            className={`ri-checkbox-circle-fill text-3xl ${alertTextColor}`}
           ></i>
         );
         break;
       case "Warning":
         setAlertIcon(
-          <i className={`text-3xl ri-error-warning-fill ${alertTextColor}`}></i>
+          <i className={`ri-error-warning-fill text-3xl ${alertTextColor}`}></i>
         );
         break;
       case "Danger":
         setAlertIcon(
-          <i className={`text-3xl ri-close-circle-fill ${alertTextColor}`}></i>
+          <i className={`ri-close-circle-fill text-3xl ${alertTextColor}`}></i>
         );
         break;
       case "Infomation":
         setAlertIcon(
-          <i className={`text-3xl ri-information-fill ${alertTextColor}`}></i>
+          <i className={`ri-information-fill text-3xl ${alertTextColor}`}></i>
         );
         break;
       default:
@@ -67,20 +67,20 @@ export const AlertComponent = () => {
   );
 
   return (
-    <div className="relative w-screen h-screen">
+    <div className="col-center relative h-screen w-screen">
       {isAlert ? (
         <>
           {/* 오버레이 영역 */}
           <Overlay />
 
           {/* 알람 영역 */}
-          <div className="absolute px-4 transform -translate-y-1/2 top-1/2 md:-translate-x-1/2 md:left-1/2">
+          <div className=" left-0 right-0 top-1/2 -translate-y-1/2 transform  px-4">
             <div className="max-w-xl ">
               <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
-                className={`gap-4 px-4 py-3 bg-white shadow-md row-center rounded-2xl ${alertShadowColor}`}
+                className={`row-center gap-4 rounded-2xl bg-white px-4 py-3 shadow-md ${alertShadowColor}`}
               >
                 <div className="row-center">{alertIcon}</div>
 
@@ -92,7 +92,7 @@ export const AlertComponent = () => {
                 </div>
                 <div className="">
                   <i
-                    className="text-2xl ri-close-fill"
+                    className="ri-close-fill text-2xl"
                     onClick={() => dispatch(alertActions.alertClose())}
                   ></i>
                 </div>
