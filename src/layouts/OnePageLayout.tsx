@@ -3,14 +3,14 @@ import Header from "./Header";
 import { useAppSelector } from "@toolkit/hook";
 import Alert from "@components/Alert";
 
-export default function MainLayout({
+export default function OnePageLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const isSidebar = useAppSelector((state) => state.sidebar.isSidebar);
   const isAlert = useAppSelector((state) => state.alert.isAlert);
-
+  
   return (
     <>
       <Header />
@@ -22,7 +22,7 @@ export default function MainLayout({
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
       >
-        <div className="col-center container mx-auto h-screen w-screen px-4 pt-16 ">
+        <div className="col-center container mx-auto h-screen w-screen px-0 pt-20  md:px-4 ">
           {children}
         </div>
       </motion.div>

@@ -6,8 +6,7 @@ import ScrollButton from "@components/ScrollButton";
 import { readPostDetail } from "@api/posts/readPostDetail";
 import { IPostDetail } from "@type/postDetail";
 import Content from "./PostDetailItem/Content";
-import Comments from "@components/Comment/Comments";
-import CommentInput from "@components/Comment/CommentInput";
+import Comments from "@components/Comments";
 import Header from "./PostDetailItem/Header";
 
 export default function PostDetail({ id }: { id: string }) {
@@ -25,25 +24,18 @@ export default function PostDetail({ id }: { id: string }) {
 
       {/* 데이터가 있을 경우 화면 표시 */}
       {data && (
-        <div className="w-full px-4">
-          <div className="mx-auto my-8 max-w-screen-lg">
-            <div className="rounded-2xl bg-white p-8 shadow-lg">
-              {/* 게시글 해더 */}
-              <Header data={data} />
+        <div className="w-full">
+          <div className="mx-auto max-w-screen-lg rounded-2xl bg-white p-6 shadow-lg">
+            {/* 게시글 해더 */}
+            <Header data={data} />
 
-              {/* 게시글 내용 */}
-              <Content data={data.content} />
+            {/* 게시글 내용 */}
+            <Content data={data.content} />
 
-              {/* 댓글 영역 */}
-              <div>
-                {/* 댓글 입력 필드 */}
-                <CommentInput />
-
-                {/* 댓글 목록 */}
-                <Comments data={data.comments} />
-              </div>
-            </div>
+            {/* 댓글 영역 */}
+            <Comments data={data.comments} />
           </div>
+
           {/* 최상단 이동 버튼 */}
           <ScrollButton />
         </div>

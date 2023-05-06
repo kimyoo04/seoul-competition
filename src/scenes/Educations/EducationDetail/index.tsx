@@ -6,6 +6,7 @@ import Loading from "@components/Loading";
 import ScrollButton from "@components/ScrollButton";
 
 import Content from "./EducationDetailItem/content";
+import Comments from "@components/Comments";
 
 export default function EducationDetail({ id }: { id: string }) {
   const { data, isLoading, error } = useQuery<IEducationDetail>(
@@ -30,13 +31,7 @@ export default function EducationDetail({ id }: { id: string }) {
               <Content data={data} />
 
               {/* 댓글 영역 */}
-              <div>
-                {/* 댓글 입력 필드 */}
-                {/* <CommentFields /> */}
-
-                {/* 댓글 목록 */}
-                {/* <Comments data={data} /> */}
-              </div>
+              <Comments data={data.reviews} />
             </div>
           </div>
           {/* 최상단 이동 버튼 */}

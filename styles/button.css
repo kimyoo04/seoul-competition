@@ -37,13 +37,13 @@
 /* 컴포넌트용 */
 
 .create_btn {
-  @apply rounded-lg border bg-main_color px-3 py-1 text-sm text-font_white;
+  @apply rounded-lg border-2 border-main_color bg-main_color/20 px-2 text-sm;
 }
 
 .delete_btn {
-  @apply rounded-lg bg-alert_danger px-3 py-1 text-sm text-font_white;
+  @apply rounded-lg border-2 border-alert_danger bg-alert_danger/20 px-2 text-sm;
 }
 
 .update_btn {
-  @apply rounded-lg bg-gray_2 px-3 py-1 text-sm text-font_white;
+  @apply rounded-lg border-2 border-gray_2 bg-gray_2/20 px-2 text-sm;
 }
