@@ -2,6 +2,12 @@ import axios from "@api/axiosInstance";
 import { IUpdateCommentOrReview } from "@type/commentOrReview";
 
 export const updateComment = async (data: IUpdateCommentOrReview) => {
-  const { id, ...postData } = data;
-  return await axios.put(`/comment/${id}`, { ...postData });
+  try {
+    const { id, ...putData } = data;
+    await axios.put(`/comment/${id}`, { ...putData });
+
+    return true;
+  } catch (err) {
+    return false;
+  }
 };
