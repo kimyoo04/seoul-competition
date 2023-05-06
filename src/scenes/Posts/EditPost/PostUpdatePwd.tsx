@@ -1,13 +1,21 @@
-import { useUpdatePostPwdMutation } from "@api/posts/updatePostDetail";
+import { updatePostPwd } from "@api/posts/updatePostDetail";
+import ErrorMsg from "@components/TextField/ErrorMsg";
 import { IUpdatePostCheck, IUpdatePostCheckForm } from "@type/posts";
-import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Dispatch, SetStateAction } from "react";
+import { useAppDispatch } from "@toolkit/hook";
+import { alertActions } from "@features/alert/alertSlice";
 
-export default function PostUpdatePwd({ id }: { id: string }) {
+export default function PostUpdatePwd({
+  id,
+  setPwdChecked,
+}: {
+  id: string;
+  setPwdChecked: Dispatch<SetStateAction<boolean>>;
+}) {
+  const dispatch = useAppDispatch();
+
   // useForm 활용
-  const router = useRouter();
-  const { data, isLoading, mutate, mutateAsync } = useUpdatePostPwdMutation();
-
   const {
     register,
     handleSubmit,
@@ -42,8 +50,19 @@ export default function PostUpdatePwd({ id }: { id: string }) {
       ...data,
     };
 
-    await mutateAsync(checkedData);
-    router.push(`/posts/modify/${id}`);
+    const status = await updatePostPwd(checkedData);
+    console.log(status);
+
+    if (status === "success") {
+      setPwdChecked(false);
+    } else {
+      dispatch(
+        alertActions.alert({
+          alertType: "Warning",
+          content: "비밀번호가 일치하지 않습니다. 다시 입력해주세요.",
+        })
+      );
+    }
   };
 
   return (
@@ -62,10 +81,21 @@ export default function PostUpdatePwd({ id }: { id: string }) {
                 비밀번호를 입력해 주세요.
               </label>
               <input
+                {...register("password", {
+                  minLength: {
+                    value: 4,
+                    message: "최소 4 글자 이상 입력해주세요.",
+                  },
+                  maxLength: {
+                    value: 12,
+                    message: "최대 12 글자까지 입력 가능합니다.",
+                  },
+                })}
                 type="password"
                 id="password"
                 className="w-full rounded-md border-2 border-gray-400 p-2"
               />
+              <ErrorMsg>{errors?.password?.message}</ErrorMsg>
             </div>
             <div className="flex items-center justify-center">
               <button

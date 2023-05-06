@@ -14,14 +14,8 @@ import PostUpdatePwd from "./PostUpdatePwd";
 import { useState } from "react";
 
 export default function EditPost({ id }: { id: string }) {
-
   // pwdChecked 상태 지정
   const [pwdChecked, setPwdChecked] = useState(true);
-
-  
-
-  // router 선언
-  const router = useRouter();
 
   // 게시글 데이터 불러오기
   const { data: oldPost, isLoading: isReadLoading } = useQuery(
@@ -76,14 +70,13 @@ export default function EditPost({ id }: { id: string }) {
       ...data,
     };
     await mutateAsync(updateData);
-    router.push("/posts");
   };
 
   return (
     <>
       {isReadLoading && <Loading />}
       {pwdChecked ? (
-        <PostUpdatePwd id={id} />
+        <PostUpdatePwd id={id} setPwdChecked={setPwdChecked} />
       ) : (
         oldPost && (
           <div className="w-full px-4">
