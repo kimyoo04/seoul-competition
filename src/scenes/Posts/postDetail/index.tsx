@@ -1,19 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
-
 import Loading from "@components/Loading";
-import ScrollButton from "@components/ScrollButton";
-
-import { readPostDetail } from "@api/posts/readPostDetail";
-import { IPostDetail } from "@type/postDetail";
+import Header from "./PostDetailItem/Header";
 import Content from "./PostDetailItem/Content";
 import Comments from "@components/Comments";
-import Header from "./PostDetailItem/Header";
+import ScrollButton from "@components/ScrollButton";
+import UserForm from "@components/UserForm";
+
+import { useReadPostDetail } from "@api/posts/readPostDetail";
+import { useAppSelector } from "@toolkit/hook";
 
 export default function PostDetail({ id }: { id: string }) {
-  const { data, isLoading, error } = useQuery<IPostDetail>(
-    ["postDetail", id],
-    () => readPostDetail(id)
-  );
+  const showModal = useAppSelector((state) => state.userForm.showModal);
+
+  const { data, isLoading, error } = useReadPostDetail(id);
+
   return (
     <>
       {/* 로딩 시 로딩 화면 표시 */}
@@ -38,6 +37,9 @@ export default function PostDetail({ id }: { id: string }) {
 
           {/* 최상단 이동 버튼 */}
           <ScrollButton />
+
+          {/* 유저폼 모달 */}
+          {showModal && <UserForm />}
         </div>
       )}
     </>

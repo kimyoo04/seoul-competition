@@ -1,18 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import { readEducationDetail } from "@api/educations/readEducationDetail";
-import { IEducationDetail } from "@type/educationDetail";
-
 import Loading from "@components/Loading";
-import ScrollButton from "@components/ScrollButton";
-
 import Content from "./EducationDetailItem/content";
 import Comments from "@components/Comments";
+import ScrollButton from "@components/ScrollButton";
+import UserForm from "@components/UserForm";
+
+import { useAppSelector } from "@toolkit/hook";
+import { useReadEductionDetail } from "@api/educations/readEducationDetail";
 
 export default function EducationDetail({ id }: { id: string }) {
-  const { data, isLoading, error } = useQuery<IEducationDetail>(
-    ["educationDetail", id],
-    () => readEducationDetail(id)
-  );
+  const showModal = useAppSelector((state) => state.userForm.showModal);
+
+  const { data, isLoading, error } = useReadEductionDetail(id);
 
   return (
     <>
@@ -36,6 +34,9 @@ export default function EducationDetail({ id }: { id: string }) {
           </div>
           {/* 최상단 이동 버튼 */}
           <ScrollButton />
+
+          {/* 유저폼 모달 */}
+          {showModal && <UserForm />}
         </div>
       )}
     </>
