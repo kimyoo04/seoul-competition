@@ -26,4 +26,7 @@ export interface IEducationDetail {
   url: TUrl;
   hits: THits;
   reviews: IComment[];
+  user: TUser;
 }
+
+export type TUser = boolean;

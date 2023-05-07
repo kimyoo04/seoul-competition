@@ -10,6 +10,7 @@ export interface IPostDetail {
   createdAt: TCreatedAt;
   hits: THits;
   comments: IComment[];
+  user: TUser;
 }
 
 // 게시글 State
@@ -18,3 +19,5 @@ export interface IPostDetailState {
   status: "idle" | "loading" | "failed";
   error: string | null;
 }
+
+export type TUser = boolean;

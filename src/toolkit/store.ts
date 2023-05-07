@@ -4,6 +4,7 @@ import alertReducer from "@features/alert/alertSlice";
 import searchReducer from "@features/search/searchSlice";
 import filterReducer from "@features/filter/filterSlice";
 import sidebarReducer from "@features/sidebar/sidebarSlice";
+import userFormReducer from "@features/userForm/userFormSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     search: searchReducer,
     filter: filterReducer,
     sidebar: sidebarReducer,
+    userForm: userFormReducer,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

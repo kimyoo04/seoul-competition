@@ -5,3 +5,7 @@ export interface IUserForm {
   interest: string;
   confirm: boolean;
 }
+
+export interface IUserFormState {
+  showModal: boolean;
+}

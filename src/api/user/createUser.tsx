@@ -3,8 +3,13 @@ import { IUserForm } from "@type/userForm";
 
 // jwt를 쿠키에 저장 요청
 export default async function creatUser(formData: IUserForm) {
-  const { gender, age, location, interest } = formData;
-  const data = { gender, age, location, interest };
-  const response = await axios.post("/user", data);
-  return response.data;
+  try {
+    const { gender, age, location, interest } = formData;
+    const data = { gender, age, location, interest };
+    await axios.post("/user", data);
+    return true;
+  } catch (err) {
+    console.log("🚀createUser.tsx:13 ~ creatUser ~ err:", err);
+    return false;
+  }
 }
