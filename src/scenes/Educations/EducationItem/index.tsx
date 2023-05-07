@@ -28,7 +28,9 @@ export default function EducationItem({
         <div className="col-start">
           <div className="col-start gap-2">
             <span className="">강좌 비용</span>
-            <span className="">{education.price}</span>
+            <span className="">
+              {education.price === "0" ? "무료" : `${education.price} 원`}
+            </span>
           </div>
         </div>
 

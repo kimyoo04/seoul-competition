@@ -1,17 +1,29 @@
-import { IComment } from "./comments";
+import { IComment } from "./commentOrReview";
+import {
+  TCapacity,
+  TEducationEnd,
+  TEducationStart,
+  THits,
+  TId,
+  TName,
+  TRegisterEnd,
+  TRegisterStart,
+  TUrl,
+} from "./educations";
+import { TPrice, TStatus } from "./filter";
 
-// 교육 정보 데이터
+// 교육 정보 디테일 데이터
 export interface IEducationDetail {
-  id: number;
-  name: string;
-  status: string;
-  price: string;
-  capacity: number;
-  registerStart: string;
-  registerEnd: string;
-  educationStart: string;
-  educationEnd: string;
-  url: string;
-  hits: number;
+  id: TId;
+  name: TName;
+  status: TStatus;
+  price: TPrice;
+  capacity: TCapacity;
+  registerStart: TRegisterStart;
+  registerEnd: TRegisterEnd;
+  educationStart: TEducationStart;
+  educationEnd: TEducationEnd;
+  url: TUrl;
+  hits: THits;
   reviews: IComment[];
 }
