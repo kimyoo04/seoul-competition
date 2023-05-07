@@ -44,6 +44,13 @@ export default function UpDelButtons({ id }: { id: TId }) {
     } else {
       // 삭제 요청
       await deletePostDetail({ id: id, password: data.password });
+
+      dispatch(
+        alertActions.alert({
+          alertType: "Success",
+          content: "게시물이 삭제되었습니다.",
+        })
+      );
       // 목록 페이지 이동
       router.push("/posts");
       // 캐시 삭제 필요?
