@@ -50,10 +50,8 @@ export default function PostUpdatePwd({
       ...data,
     };
 
-    const status = await updatePostPwd(checkedData);
-    console.log(status);
-
-    if (status === "success") {
+    const isSuccess = await updatePostPwd(checkedData);
+    if (isSuccess) {
       setPwdChecked(false);
     } else {
       dispatch(
