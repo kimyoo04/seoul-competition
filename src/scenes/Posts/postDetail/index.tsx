@@ -23,25 +23,23 @@ export default function PostDetail({ id }: { id: string }) {
 
       {/* 데이터가 있을 경우 화면 표시 */}
       {data && (
-        <div className="w-full">
-          <div className="mx-auto max-w-screen-lg rounded-2xl bg-white p-6 shadow-lg">
-            {/* 게시글 해더 */}
-            <Header data={data} />
+        <div className="mx-auto w-full max-w-screen-lg rounded-2xl bg-white p-6 shadow-lg">
+          {/* 게시글 해더 */}
+          <Header data={data} />
 
-            {/* 게시글 내용 */}
-            <Content data={data.content} />
+          {/* 게시글 내용 */}
+          <Content data={data.content} />
 
-            {/* 댓글 영역 */}
-            <Comments data={data.comments} />
-          </div>
-
-          {/* 최상단 이동 버튼 */}
-          <ScrollButton />
-
-          {/* 유저폼 모달 */}
-          {showModal && <UserForm />}
+          {/* 댓글 영역 */}
+          <Comments data={data.comments} />
         </div>
       )}
+
+      {/* 최상단 이동 버튼 */}
+      <ScrollButton />
+
+      {/* 유저폼 모달 */}
+      {showModal && <UserForm />}
     </>
   );
 }
