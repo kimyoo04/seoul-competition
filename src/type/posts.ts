@@ -53,6 +53,24 @@ export interface IUpdatePostCheckForm {
   password: TPassword;
 }
 
+// 게시글 삭제 시 전송할 데이터
+export interface IDeletePostDetail extends IDeletePostDetailForm {
+  id: TId;
+}
+// 게시글 삭제 폼
+export interface IDeletePostDetailForm {
+  password: TPassword;
+}
+
+// 게시글 삭제 시 전송할 데이터
+export interface IMatchCheckPostDetail extends IMatchCheckPostDetailForm {
+  id: TId;
+}
+// 게시글 비밀번호 확인 폼
+export interface IMatchCheckPostDetailForm {
+  password: TPassword;
+}
+
 export type TId = number;
 export type TPostId = string;
 export type TNickname = string;

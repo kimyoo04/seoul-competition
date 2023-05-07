@@ -16,12 +16,12 @@ export const updatePostDetail = async (updatedPost: IUpdatePostForm) => {
 // 게시글 Update Password Check
 export const updatePostPwd = async (postIdPwd: IUpdatePostCheck) => {
   try {
-    const response = await axios.post(`/posts/${postIdPwd.postId}/matchCheck`, {
+    await axios.post(`/posts/${postIdPwd.postId}/matchCheck`, {
       password: postIdPwd.password,
     });
-    return "success";
+    return true;
   } catch (err) {
-    return "fail";
+    return false;
   }
 };
 
