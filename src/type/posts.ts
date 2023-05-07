@@ -66,7 +66,7 @@ export interface IDeletePostDetailForm {
 export interface IMatchCheckPostDetail extends IMatchCheckPostDetailForm {
   id: TId;
 }
-// 게시글 삭제 폼
+// 게시글 비밀번호 확인 폼
 export interface IMatchCheckPostDetailForm {
   password: TPassword;
 }

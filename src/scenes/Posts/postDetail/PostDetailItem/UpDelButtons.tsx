@@ -42,7 +42,7 @@ export default function UpDelButtons({ id }: { id: TId }) {
       );
       return;
     } else {
-      // 삭제 용청
+      // 삭제 요청
       await deletePostDetail({ id: id, password: data.password });
       // 목록 페이지 이동
       router.push("/posts");
