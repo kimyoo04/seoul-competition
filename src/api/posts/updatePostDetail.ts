@@ -1,10 +1,7 @@
 import axios from "@api/axiosInstance";
-import { alertActions } from "@features/alert/alertSlice";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useAppDispatch } from "@toolkit/hook";
 import { IUpdatePostCheck, IUpdatePostForm } from "@type/posts";
 import { useRouter } from "next/router";
-import { Dispatch, SetStateAction } from "react";
 
 // 게시글 Update
 
