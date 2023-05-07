@@ -12,10 +12,16 @@ import ErrorMsg from "@components/TextField/ErrorMsg";
 import Loading from "@components/Loading";
 import PostUpdatePwd from "./PostUpdatePwd";
 import { useState } from "react";
+import { TPassword } from "@type/commentOrReview";
 
 export default function EditPost({ id }: { id: string }) {
   // pwdChecked 상태 지정
   const [pwdChecked, setPwdChecked] = useState(true);
+  const [password, setPassword] = useState("");
+
+  const handlePassword = (password: string) => {
+    setPassword(password);
+  };
 
   // 게시글 데이터 불러오기
   const { data: oldPost, isLoading: isReadLoading } = useQuery(
@@ -25,8 +31,6 @@ export default function EditPost({ id }: { id: string }) {
       return response.data;
     }
   );
-
-  console.log(oldPost);
 
   // useUpdateMutation 커스텀 훅 가져오기 (구조분해 할당)
   const { data, isLoading, mutate, mutateAsync } = useUpdateMutation();
@@ -47,6 +51,10 @@ export default function EditPost({ id }: { id: string }) {
   });
 
   const onValid: SubmitHandler<IPostForm> = async (data) => {
+    if (!data.password) {
+      // password가 undefined인 경우, 비밀번호 체크 시 입력 받은 password를 data.password에 할당
+      data.password = password;
+    }
     if (!data.nickname || !data.title || !data.content) {
       const errMsg: { [key: string]: string } = {};
 
@@ -76,7 +84,12 @@ export default function EditPost({ id }: { id: string }) {
     <>
       {isReadLoading && <Loading />}
       {pwdChecked ? (
-        <PostUpdatePwd id={id} setPwdChecked={setPwdChecked} />
+        <PostUpdatePwd
+          id={id}
+          setPwdChecked={setPwdChecked}
+          // handlePassword 함수를 인자로 할당
+          handlePassword={handlePassword}
+        />
       ) : (
         oldPost && (
           <div className="w-full px-4">

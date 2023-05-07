@@ -6,13 +6,17 @@ import { Dispatch, SetStateAction } from "react";
 import { useAppDispatch } from "@toolkit/hook";
 import { alertActions } from "@features/alert/alertSlice";
 
+interface PostUpdatePwdProps {
+  id: string;
+  setPwdChecked: Dispatch<SetStateAction<boolean>>;
+  handlePassword: (password: string) => void;
+}
+
 export default function PostUpdatePwd({
   id,
   setPwdChecked,
-}: {
-  id: string;
-  setPwdChecked: Dispatch<SetStateAction<boolean>>;
-}) {
+  handlePassword,
+}: PostUpdatePwdProps) {
   const dispatch = useAppDispatch();
 
   // useForm 활용
@@ -52,6 +56,7 @@ export default function PostUpdatePwd({
 
     const isSuccess = await updatePostPwd(checkedData);
     if (isSuccess) {
+      handlePassword(data.password); 
       setPwdChecked(false);
     } else {
       dispatch(
