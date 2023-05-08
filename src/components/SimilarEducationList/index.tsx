@@ -1,5 +1,5 @@
 import { useAppSelector } from "@toolkit/hook";
-import { useReadSimilarByKeyword } from "@api/similar/readSimilarByKeyword";
+import { useReadSimilarEducationsByKeyword } from "@api/similar/readSimilarEducationsByKeyword";
 import EducationItem from "@scenes/Educations/EducationItem";
 import Loading from "@components/Loading";
 
@@ -7,7 +7,8 @@ export default function SimilarList() {
   const searchCategory = useAppSelector((state) => state.search.category);
   const searchKeyword = useAppSelector((state) => state.search.searchKeyword);
 
-  const { data, isLoading, error } = useReadSimilarByKeyword(searchKeyword);
+  const { data, isLoading, error } =
+    useReadSimilarEducationsByKeyword(searchKeyword);
 
   return (
     <>

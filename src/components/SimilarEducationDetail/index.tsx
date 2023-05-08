@@ -1,4 +1,4 @@
-import { useReadSimilarByEducationId } from "@api/similar/readSimilarByEducation";
+import { useReadSimilarEducationsById } from "@api/similar/readSimilarEducationsById";
 import { useAppSelector } from "@toolkit/hook";
 import { TEducationId } from "@type/educations";
 import EducationItem from "@scenes/Educations/EducationItem";
@@ -7,7 +7,7 @@ import Loading from "@components/Loading";
 export default function SimilarEducationDetail({ id }: { id: TEducationId }) {
   const searchCategory = useAppSelector((state) => state.search.category);
 
-  const { data, isLoading, error } = useReadSimilarByEducationId(id);
+  const { data, isLoading, error } = useReadSimilarEducationsById(id);
 
   return (
     <>
