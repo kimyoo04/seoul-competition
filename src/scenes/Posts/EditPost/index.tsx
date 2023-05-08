@@ -81,11 +81,7 @@ export default function EditPost({ id }: { id: string }) {
     <>
       {isReadLoading && <Loading />}
       {pwdChecked ? (
-        <PostUpdatePwd
-          id={id}
-          // handlePassword 함수를 인자로 할당
-          handlePassword={handlePassword}
-        />
+        <PostUpdatePwd id={id} handlePassword={handlePassword} />
       ) : (
         oldPost && (
           <div className="w-full px-4">
