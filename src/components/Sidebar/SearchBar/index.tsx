@@ -22,8 +22,10 @@ export default function SearchBar() {
     // validation
     if (!data.search) return;
 
-    // category에 따라 요청 보내기
-    dispatch(searchActions.searchKeyword({ searchKeyword: data.search }));
+    // category에 따라 검색어를 추가해서 요청보내기 (trim()으로 공백 제거)
+    dispatch(
+      searchActions.searchKeyword({ searchKeyword: data.search.trim() })
+    );
 
     // 인풋창 초기화
     reset({ search: "" });
