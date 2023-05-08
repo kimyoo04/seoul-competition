@@ -29,6 +29,10 @@ module.exports = {
       fontFamily: {
         base: "IBM Plex Sans KR, system-ui, sans-serif",
       },
+      fontWeight: {
+        bold: "500",
+        black: "700",
+      },
       fontSize: {
         h1: "68px",
         h2: "42px",

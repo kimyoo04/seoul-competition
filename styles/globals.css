@@ -11,9 +11,7 @@
   font-display: swap;
   font-style: normal;
   font-weight: 300;
-  src: url(../public/fonts/NotoSansKr/NotoSansKR-Light-subset.otf)
-      format("opentype"),
-    url(../public/fonts/NotoSansKr/NotoSansKR-Light.woff2) format("woff2"),
+  src: url(../public/fonts/NotoSansKr/NotoSansKR-Light.woff2) format("woff2"),
     url(../public/fonts/NotoSansKr/NotoSansKR-Light.woff) format("woff"),
     url(../public/fonts/NotoSansKr/NotoSansKR-Light.otf) format("opentype");
 }
@@ -22,11 +20,18 @@
   font-display: swap;
   font-style: normal;
   font-weight: 400;
-  src: url(../public/fonts/NotoSansKr/NotoSansKR-Regular-subset.otf)
-      format("opentype"),
-    url(../public/fonts/NotoSansKr/NotoSansKR-Regular.woff2) format("woff2"),
+  src: url(../public/fonts/NotoSansKr/NotoSansKR-Regular.woff2) format("woff2"),
     url(../public/fonts/NotoSansKr/NotoSansKR-Regular.woff) format("woff"),
     url(../public/fonts/NotoSansKr/NotoSansKR-Regular.otf) format("opentype");
+}
+@font-face {
+  font-family: "Noto Sans KR";
+  font-display: swap;
+  font-style: normal;
+  font-weight: 500;
+  src: url(../public/fonts/NotoSansKr/NotoSansKR-Medium.woff2) format("woff2"),
+    url(../public/fonts/NotoSansKr/NotoSansKR-Medium.woff) format("woff"),
+    url(../public/fonts/NotoSansKr/NotoSansKR-Medium.otf) format("opentype");
 }
 
 @font-face {
@@ -34,9 +39,7 @@
   font-display: swap;
   font-style: normal;
   font-weight: 700;
-  src: url(../public/fonts/NotoSansKr/NotoSansKR-Bold-subset.otf)
-      format("opentype"),
-    url(../public/fonts/NotoSansKr/NotoSansKR-Bold.woff2) format("woff2"),
+  src: url(../public/fonts/NotoSansKr/NotoSansKR-Bold.woff2) format("woff2"),
     url(../public/fonts/NotoSansKr/NotoSansKR-Bold.woff) format("woff"),
     url(../public/fonts/NotoSansKr/NotoSansKR-Bold.otf) format("opentype");
 }
@@ -46,6 +49,7 @@ html {
     BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
+  font-weight: 300;
 }
 
 /* ------------------------------------------------------------------ */
