@@ -18,7 +18,16 @@ export const useCreateMutation = () => {
   return useMutation({
     mutationFn: createPostDetail,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["post"] });
+      await queryClient.invalidateQueries({
+        queryKey: [
+          {
+            category: "posts",
+            keyword: "",
+            startDate: "",
+            endDate: "",
+          },
+        ],
+      });
 
       router.push("/posts");
     },

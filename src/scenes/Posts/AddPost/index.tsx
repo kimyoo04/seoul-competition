@@ -8,7 +8,7 @@ import ErrorMsg from "@components/TextField/ErrorMsg";
 
 // 게시물 Create 페이지
 export default function AddPost() {
-  const { data, isLoading, mutate, mutateAsync } = useCreateMutation();
+  const { mutateAsync } = useCreateMutation();
 
   const {
     register,
@@ -45,7 +45,7 @@ export default function AddPost() {
       return;
     }
     // 서버에 데이터 전송 후 폼 데이터 reset
-    mutate(data);
+    mutateAsync(data);
     reset({ nickname: "", password: "", title: "", content: "" });
   };
 

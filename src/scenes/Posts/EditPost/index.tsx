@@ -5,14 +5,12 @@ import ScrollButton from "@components/ScrollButton";
 
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IPostForm, IUpdatePostForm } from "@type/posts";
-import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import { useUpdateMutation } from "@api/posts/updatePostDetail";
 import ErrorMsg from "@components/TextField/ErrorMsg";
 import Loading from "@components/Loading";
 import PostUpdatePwd from "./PostUpdatePwd";
 import { useState } from "react";
-import { TPassword } from "@type/commentOrReview";
 
 export default function EditPost({ id }: { id: string }) {
   // pwdChecked 상태 지정
@@ -20,6 +18,7 @@ export default function EditPost({ id }: { id: string }) {
   const [password, setPassword] = useState("");
 
   const handlePassword = (password: string) => {
+    setPwdChecked(false);
     setPassword(password);
   };
 
@@ -33,15 +32,13 @@ export default function EditPost({ id }: { id: string }) {
   );
 
   // useUpdateMutation 커스텀 훅 가져오기 (구조분해 할당)
-  const { data, isLoading, mutate, mutateAsync } = useUpdateMutation();
+  const { mutateAsync } = useUpdateMutation();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     setError,
-    setValue,
-    control,
   } = useForm<IPostForm>({
     defaultValues: {
       nickname: oldPost?.nickname || "",
@@ -84,12 +81,7 @@ export default function EditPost({ id }: { id: string }) {
     <>
       {isReadLoading && <Loading />}
       {pwdChecked ? (
-        <PostUpdatePwd
-          id={id}
-          setPwdChecked={setPwdChecked}
-          // handlePassword 함수를 인자로 할당
-          handlePassword={handlePassword}
-        />
+        <PostUpdatePwd id={id} handlePassword={handlePassword} />
       ) : (
         oldPost && (
           <div className="w-full px-4">
