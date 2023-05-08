@@ -18,10 +18,13 @@ export default function AddPost() {
     control,
     reset,
   } = useForm<IPostForm>({
+    // 초기값으로 빈 문자열 지정
     defaultValues: { nickname: "", password: "", title: "", content: "" },
   });
 
+  //  handleSubmit에서 호출할 onValid 함수 선언
   const onValid: SubmitHandler<IPostForm> = (data) => {
+    // 폼 데이터 유효성 검사
     if (!data.nickname || !data.password || !data.title || !data.content) {
       const errMsg: { [key: string]: string } = {};
 
@@ -31,15 +34,18 @@ export default function AddPost() {
       if (!data.content) errMsg.content = "내용을 입력해 주세요.";
       const setErrors = (errors: Record<string, string>) => {
         Object.entries(errors).forEach(([key, value]) => {
+          // 폼 구성 요소 이름 및 에러 메시지 전달
           setError(key as "nickname" | "password" | "title" | "content", {
             message: value,
             type: "required",
           });
         });
       };
+      // 데이터가 유효하지 않을 경우의 에러 메시지 설정
       setErrors(errMsg);
       return;
     }
+    // 서버에 데이터 전송 후 폼 데이터 reset
     mutate(data);
     reset({ nickname: "", password: "", title: "", content: "" });
   };
@@ -70,7 +76,7 @@ export default function AddPost() {
                 type="text"
                 name="nickname"
                 autoComplete="off"
-                placeholder="이름 / 별명"
+                placeholder="이름 / 닉네임"
                 maxLength={11}
                 className="textfield w-full rounded-md"
               />
