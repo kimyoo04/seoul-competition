@@ -20,8 +20,10 @@ export default function CommentInput() {
 
   const onValid: SubmitHandler<ICommentOrReviewForm> = async (data) => {
     // console.log(data);
+    // console.log(router.pathname);
+    // console.log(router.pathname.split("/")[1])  >>> "posts"
 
-    if (router.pathname.split("/")[1] === "post") {
+    if (router.pathname.split("/")[1] === "posts") {
       const commentData = {
         postId: router.query.id as string,
         ...data,
@@ -53,12 +55,21 @@ export default function CommentInput() {
             <input
               {...register("nickname", {
                 required: "이름이 필요해요.",
+                minLength: {
+                  value: 2,
+                  message: "최소 두 글자 이상 입력해 주세요.",
+                },
+                maxLength: {
+                  value: 10,
+                  message: "최대 10 글자까지 입력할 수 있어요.",
+                },
               })}
               id="nickname"
-              name="nickname"
-              placeholder="별명"
               type="text"
+              name="nickname"
               autoComplete="off"
+              placeholder="별명"
+              maxLength={11}
               className="h-8 w-full rounded-lg placeholder:text-sm"
             />
 
@@ -76,12 +87,21 @@ export default function CommentInput() {
             <input
               {...register("password", {
                 required: "비밀번호가 필요해요.",
+                minLength: {
+                  value: 4,
+                  message: "최소 네 글자 이상 입력해 주세요.",
+                },
+                maxLength: {
+                  value: 12,
+                  message: "최대 12 글자까지 입력할 수 있어요.",
+                },
               })}
               id="password"
-              name="password"
               type="password"
-              placeholder="4자 이상"
+              name="password"
               autoComplete="off"
+              placeholder="4 자 이상"
+              maxLength={13}
               className="h-8 w-full rounded-lg placeholder:text-sm"
             />
 
@@ -95,10 +115,14 @@ export default function CommentInput() {
         <div className="my-2 flex flex-col">
           <Controller
             {...register("content", {
-              required: "댓글을 작성해주세요.",
+              required: "댓글을 작성해 주세요.",
               minLength: {
                 value: 3,
-                message: "최소 세글자 이상 입력해주세요.",
+                message: "최소 세 글자 이상 입력해 주세요.",
+              },
+              maxLength: {
+                value: 500,
+                message: "최대 500 글자까지 입력할 수 있어요.",
               },
             })}
             name="content"
@@ -110,8 +134,8 @@ export default function CommentInput() {
                 name="content"
                 rows={2}
                 className="resize-none rounded-lg bg-white px-4 py-2 shadow-sm shadow-gray_3 transition-all duration-300 placeholder:text-sm"
-                placeholder="댓글 내용"
-                maxLength={500}
+                placeholder="자유롭게 댓글을 작성해 보세요."
+                maxLength={501}
               />
             )}
           />

@@ -92,7 +92,8 @@ export default function PostUpdatePwd({
                 id="password"
                 className="w-full rounded-md border-2 border-gray-400 p-2"
               />
-              <ErrorMsg>{errors?.password?.message}</ErrorMsg>
+              <span className="mt-1 text-xs font-bold text-red-500">
+              <ErrorMsg>{errors?.password?.message}</ErrorMsg></span>
             </div>
             <div className="flex items-center justify-center">
               <button
