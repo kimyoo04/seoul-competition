@@ -11,6 +11,7 @@ import SearchMore from "@components/Search/SearchMore";
 import EducationItem from "@scenes/Educations/EducationItem";
 import { useInfiniteEducations } from "@api/educations/readEducations";
 import SimilarEducationList from "@components/SimilarEducationList";
+import EducationListLoader from "./EducationListLoader";
 
 export default function EducationList() {
   const searchCategory = useAppSelector((state) => state.search.category);
@@ -22,6 +23,7 @@ export default function EducationList() {
     error,
     fetchNextPage,
     hasNextPage,
+    isFetching,
     isFetchingNextPage,
     status,
   } = useInfiniteEducations();
@@ -35,7 +37,7 @@ export default function EducationList() {
   return (
     <section className="col-center w-full gap-4">
       {status === "loading" ? (
-        <Loading />
+        <EducationListLoader />
       ) : status === "error" ? (
         <>{error && <p>Error: {error.message}</p>}</>
       ) : (
@@ -63,6 +65,8 @@ export default function EducationList() {
               </>
             )}
           </ul>
+
+          <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
 
           {/* //! fetchNextPage 를 트리거 하기 위한 태그 */}
           <SearchMore inViewRef={ref} hasNextPage={hasNextPage} />
