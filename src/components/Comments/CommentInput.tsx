@@ -14,21 +14,45 @@ export default function CommentInput() {
     handleSubmit,
     formState: { errors },
     control,
+    setError,
   } = useForm<ICommentOrReviewForm>({
-    defaultValues: {},
+    // 초기값 지정
+    defaultValues: { nickname: "", password: "", content: "" },
   });
 
   const onValid: SubmitHandler<ICommentOrReviewForm> = async (data) => {
-    // console.log(data);
-    // console.log(router.pathname);
-    // console.log(router.pathname.split("/")[1])  >>> "posts"
-
     if (router.pathname.split("/")[1] === "posts") {
       const commentData = {
         postId: router.query.id as string,
         ...data,
       };
 
+      // 자유게시판 댓글 폼 데이터 유효성 검사
+      if (
+        !commentData.nickname ||
+        !commentData.password ||
+        !commentData.content
+      ) {
+        const errMsg: { [key: string]: string } = {};
+
+        if (!commentData.nickname)
+          errMsg.nickname = "이름 또는 닉네임을 입력해 주세요.";
+        if (!commentData.password)
+          errMsg.password = "비밀번호를 입력해 주세요.";
+        if (!commentData.content) errMsg.content = "내용을 입력해 주세요.";
+        const setErrors = (errors: Record<string, string>) => {
+          Object.entries(errors).forEach(([key, value]) => {
+            // 폼 구성 요소 이름 및 에러 메시지 전달
+            setError(key as "nickname" | "password" | "content", {
+              message: value,
+              type: "required",
+            });
+          });
+        };
+        // 데이터가 유효하지 않을 경우의 에러 메시지 설정
+        setErrors(errMsg);
+        return;
+      }
       // 자유게시판의 댓글 생성
       await createComment(commentData);
     } else {
@@ -36,7 +60,27 @@ export default function CommentInput() {
         educationId: router.query.id as string,
         ...data,
       };
+      //  폼 데이터 유효성 검사
+      if (!reviewData.nickname || !reviewData.password || !reviewData.content) {
+        const errMsg: { [key: string]: string } = {};
 
+        if (!reviewData.nickname)
+          errMsg.nickname = "이름 또는 닉네임을 입력해 주세요.";
+        if (!reviewData.password) errMsg.password = "비밀번호를 입력해 주세요.";
+        if (!reviewData.content) errMsg.content = "내용을 입력해 주세요.";
+        const setErrors = (errors: Record<string, string>) => {
+          Object.entries(errors).forEach(([key, value]) => {
+            // 폼 구성 요소 이름 및 에러 메시지 전달
+            setError(key as "nickname" | "password" | "content", {
+              message: value,
+              type: "required",
+            });
+          });
+        };
+        // 데이터가 유효하지 않을 경우의 에러 메시지 설정
+        setErrors(errMsg);
+        return;
+      }
       // 교육 정보의 리뷰 생성
       await createReview(reviewData);
     }
