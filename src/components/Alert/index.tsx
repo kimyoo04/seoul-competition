@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { alertActions } from "@features/alert/alertSlice";
 import Overlay from "./Overlay";
-import Portal from "@components/Portal";
+import AlertPortal from "@components/Alert/AlertPortal";
 import classNames from "classnames";
 
 //--------------------------------------------------------------------------------
@@ -19,6 +19,22 @@ export const AlertComponent = () => {
     (state) => state.alert
   );
   const [alertIcon, setAlertIcon] = useState(<div></div>);
+
+  const alertShadowColor = classNames(
+    { "shadow-alert_success": alertType == "Success" },
+    { "shadow-alert_warning": alertType == "Warning" },
+    { "shadow-alert_danger": alertType == "Danger" },
+    { "shadow-alert_info": alertType == "Infomation" },
+    { "": alertType == "" }
+  );
+
+  const alertTextColor = classNames(
+    { "text-alert_success": alertType == "Success" },
+    { "text-alert_warning": alertType == "Warning" },
+    { "text-alert_danger": alertType == "Danger" },
+    { "text-alert_info": alertType == "Infomation" },
+    { "": alertType == "" }
+  );
 
   // message.alertType 별 분기 처리 및 컴포넌트 할당
   useEffect(() => {
@@ -48,23 +64,7 @@ export const AlertComponent = () => {
       default:
         setAlertIcon(<i className="text-3xl">?</i>);
     }
-  }, [alertType]);
-
-  const alertShadowColor = classNames(
-    { "shadow-alert_success": alertType == "Success" },
-    { "shadow-alert_warning": alertType == "Warning" },
-    { "shadow-alert_danger": alertType == "Danger" },
-    { "shadow-alert_info": alertType == "Infomation" },
-    { "": alertType == "" }
-  );
-
-  const alertTextColor = classNames(
-    { "text-alert_success": alertType == "Success" },
-    { "text-alert_warning": alertType == "Warning" },
-    { "text-alert_danger": alertType == "Danger" },
-    { "text-alert_info": alertType == "Infomation" },
-    { "": alertType == "" }
-  );
+  }, [alertType, alertTextColor]);
 
   return (
     <div className="col-center relative h-screen w-screen">
@@ -106,4 +106,4 @@ export const AlertComponent = () => {
 };
 
 // HOC 적용
-export default Portal(AlertComponent);
+export default AlertPortal(AlertComponent);

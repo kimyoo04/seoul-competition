@@ -8,11 +8,11 @@ export default function StaggerWrapper({
 }) {
   return (
     <motion.div
-      variants={staggerContainer}
+      variants={staggerContainer(0.1, 0.1)}
       initial="hidden"
       whileInView="show"
       viewport={{ once: false, amount: 0.25 }}
-      className={` mx-auto col-center`}
+      className={` col-center mx-auto`}
     >
       {children}
     </motion.div>

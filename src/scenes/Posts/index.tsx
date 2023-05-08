@@ -17,7 +17,7 @@ export default function Posts() {
   useEffect(() => {
     dispatch(searchActions.chooseCategory({ searchCategory: "posts" }));
     dispatch(filterActions.resetParams());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="w-full px-4">

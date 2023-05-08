@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { sidebarActions } from "@features/sidebar/sidebarSlice";
 
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
-import Portal from "./Portal";
+import SidebarPortal from "./SidebarPortal";
 
 import SearchCategory from "@components/Sidebar/SearchCategory";
 import SearchBar from "./SearchBar";
@@ -75,4 +75,4 @@ const SideBar = () => {
   );
 };
 
-export default Portal(SideBar);
+export default SidebarPortal(SideBar);

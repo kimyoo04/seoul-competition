@@ -8,9 +8,8 @@ export default function OnePageLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isSidebar = useAppSelector((state) => state.sidebar.isSidebar);
   const isAlert = useAppSelector((state) => state.alert.isAlert);
-  
+
   return (
     <>
       <Header />

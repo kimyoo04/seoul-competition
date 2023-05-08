@@ -15,7 +15,7 @@ export const useReadPostDetail = (id: string) => {
   return useQuery<IPostDetail>({
     queryKey: ["postDetail", id],
     queryFn: () => readPostDetail(id),
-    onSettled: (data, error) => {
+    onSettled: (data) => {
       // 쿠키 정보가 없을 경우 모달 표시
       if (data && data.user === false) {
         const timeout = setTimeout(() => {

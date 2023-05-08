@@ -17,7 +17,6 @@ export default function UserForm() {
     formState: { errors },
     setError,
     control,
-    reset,
   } = useForm<IUserForm>({
     defaultValues: {},
   });

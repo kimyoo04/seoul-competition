@@ -20,7 +20,6 @@ export default function PostList() {
     error,
     fetchNextPage,
     hasNextPage,
-    isFetching,
     isFetchingNextPage,
     status,
   } = useInfinitePosts();

@@ -17,7 +17,7 @@ export default function Educations() {
   useEffect(() => {
     dispatch(searchActions.chooseCategory({ searchCategory: "educations" }));
     dispatch(filterActions.resetParams());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="w-full px-4">

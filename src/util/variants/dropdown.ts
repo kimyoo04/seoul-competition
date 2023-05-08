@@ -1,5 +1,3 @@
-import { Tdelay, Tduration } from "@type/variants";
-
 export const fadeDownIn = {
   init: {
     y: -20,

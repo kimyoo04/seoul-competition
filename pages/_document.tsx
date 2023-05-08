@@ -90,8 +90,8 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <div className="fixed top-0 left-0 z-40 " id="portal"></div>
-        <div className="fixed top-0 right-0 z-40" id="sidebar"></div>
+        <div className="fixed left-0 top-0 z-40 " id="alert"></div>
+        <div className="fixed right-0 top-0 z-40" id="sidebar"></div>
       </body>
     </Html>
   );
