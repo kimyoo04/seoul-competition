@@ -10,6 +10,7 @@ import SearchMore from "@components/Search/SearchMore";
 
 import PostItem from "@scenes/Posts/PostItem";
 import { useInfinitePosts } from "@api/posts/readPosts";
+import PostListLoader from "./PostListLoader";
 
 export default function PostList() {
   const searchCategory = useAppSelector((state) => state.search.category);
@@ -33,7 +34,7 @@ export default function PostList() {
   return (
     <section className="col-center w-full gap-4">
       {status === "loading" ? (
-        <Loading />
+        <PostListLoader />
       ) : status === "error" ? (
         <>{error && <p>Error: {error.message}</p>}</>
       ) : (
