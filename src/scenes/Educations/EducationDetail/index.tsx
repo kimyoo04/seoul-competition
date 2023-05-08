@@ -6,8 +6,10 @@ import UserForm from "@components/UserForm";
 
 import { useAppSelector } from "@toolkit/hook";
 import { useReadEductionDetail } from "@api/educations/readEducationDetail";
+import SimilarEducationDetail from "@components/SimilarEducationDetail";
+import { TEducationId } from "@type/educations";
 
-export default function EducationDetail({ id }: { id: string }) {
+export default function EducationDetail({ id }: { id: TEducationId }) {
   const showModal = useAppSelector((state) => state.userForm.showModal);
 
   const { data, isLoading, error } = useReadEductionDetail(id);
@@ -22,23 +24,23 @@ export default function EducationDetail({ id }: { id: string }) {
 
       {/* 데이터가 있을 경우 화면 표시 */}
       {data && (
-        <div className="w-full px-4">
-          <div className="mx-auto my-8 max-w-screen-lg">
-            <div className="rounded-2xl bg-white p-8 shadow-lg">
-              {/* 교육 정보 영역 */}
-              <Content data={data} />
+        <div className="mx-auto w-full max-w-screen-lg rounded-2xl bg-white p-6 shadow-lg">
+          {/* 교육 정보 영역 */}
+          <Content data={data} />
 
-              {/* 댓글 영역 */}
-              <Comments data={data.reviews} />
-            </div>
-          </div>
-          {/* 최상단 이동 버튼 */}
-          <ScrollButton />
+          {/* 댓글 영역 */}
+          <Comments data={data.reviews} />
 
-          {/* 유저폼 모달 */}
-          {showModal && <UserForm />}
+          {/* 관련 교육 정보 게시글 5개 */}
+          <SimilarEducationDetail id={id} />
         </div>
       )}
+
+      {/* 최상단 이동 버튼 */}
+      <ScrollButton />
+
+      {/* 유저폼 모달 */}
+      {showModal && <UserForm />}
     </>
   );
 }

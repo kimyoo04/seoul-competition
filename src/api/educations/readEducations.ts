@@ -27,8 +27,8 @@ export const fetchEducations = async (
   if (status !== "전체") params.status = status;
   if (startDate !== "") params.startDate = startDate;
   if (endDate !== "") params.endDate = endDate;
-  if (minPrice !== 0) params.minPrice = minPrice;
-  if (maxPrice !== 1000000) params.maxPrice = maxPrice;
+  if (minPrice !== "0") params.minPrice = minPrice;
+  if (maxPrice !== "100000") params.maxPrice = maxPrice;
 
   //! 요청 받기
   const response = await axios.get(`/${searchCategory}`, {

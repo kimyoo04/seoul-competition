@@ -10,9 +10,11 @@ import SearchMore from "@components/Search/SearchMore";
 
 import EducationItem from "@scenes/Educations/EducationItem";
 import { useInfiniteEducations } from "@api/educations/readEducations";
+import SimilarEducationList from "@components/SimilarEducationList";
 
 export default function EducationList() {
   const searchCategory = useAppSelector((state) => state.search.category);
+  const searchKeyword = useAppSelector((state) => state.search.searchKeyword);
 
   // page 단위로 educationdata GET 요청 및 캐싱
   const {
@@ -41,6 +43,9 @@ export default function EducationList() {
         <>
           {/* //! 검색 정보 헤더 */}
           <SearchHeader />
+
+          {/* //! 검색결과가 유사한 게시물 먼저 출력 */}
+          {searchKeyword !== "" && <SimilarEducationList />}
 
           {/* //! 교육정보 검색결과 무한 스크롤 영역 */}
           <ul className="grid w-full grid-cols-1 gap-4">

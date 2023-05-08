@@ -1,18 +1,18 @@
-// 검색 react-hook-form에 사용
-export interface ISearchField {
-  search: string;
-}
-
-// 검색할 카테고리 타입
 export type TSearchCategory = "educations" | "posts";
 export type TSearchCategoryKor = "교육 정보 골라보기" | "자유게시판 골라보기";
+export type TSearchKeyword = string;
+// 검색 react-hook-form에 사용
+
+export interface ISearchField {
+  search: TSearchKeyword;
+}
 
 // searchSlice에 사용
 export interface ISearchState {
   isFocus: boolean;
   category: TSearchCategory;
-  searchKeyword: string;
-  keywords: string[];
+  searchKeyword: TSearchKeyword;
+  keywords: string[]; // localstorage에 저장되는 최근 검색어
 }
 
 // searchSlice에 사용
@@ -22,7 +22,7 @@ export interface ISearchCategory {
 
 // searchSlice에 사용
 export interface ISearchKeyword {
-  searchKeyword: string;
+  searchKeyword: TSearchKeyword;
 }
 
 // searchSlice에 사용
