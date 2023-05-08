@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom";
 
 // HOC
-const Portal = (Component: React.FunctionComponent<any>) => (props: any) => {
+const SidebarPortal = (Component: React.FunctionComponent) => () => {
   return ReactDOM.createPortal(
-    <Component {...props} />,
+    <Component />,
     document.getElementById("sidebar") as HTMLElement
   );
 };
 
-export default Portal;
+export default SidebarPortal;

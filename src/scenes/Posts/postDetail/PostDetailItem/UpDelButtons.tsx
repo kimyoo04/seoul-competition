@@ -18,11 +18,7 @@ export default function UpDelButtons({ id }: { id: TId }) {
   // 삭제 버튼 활성화 state
   const [isDel, setIsDel] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IMatchCheckPostDetailForm>({
+  const { register, handleSubmit } = useForm<IMatchCheckPostDetailForm>({
     defaultValues: {},
   });
 

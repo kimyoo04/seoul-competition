@@ -25,8 +25,6 @@ export default function PostUpdatePwd({
     handleSubmit,
     formState: { errors },
     setError,
-    setValue,
-    control,
   } = useForm<IUpdatePostCheckForm>({
     defaultValues: {},
   });

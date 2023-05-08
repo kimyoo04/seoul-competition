@@ -13,8 +13,6 @@ export default function SearchBar() {
     register,
     handleSubmit,
     formState: { errors },
-    setError,
-    control,
     reset,
   } = useForm<ISearchField>({
     defaultValues: {},

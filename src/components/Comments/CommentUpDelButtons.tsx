@@ -1,9 +1,13 @@
 import { motion } from "framer-motion";
 
 export default function CommentUpDelButtons() {
-  function handleUpdateComment() {}
+  function handleUpdateComment() {
+    console.log("임시"); // 빌드에러 방지용
+  }
 
-  function handleDeleteComment() {}
+  function handleDeleteComment() {
+    console.log("임시"); // 빌드에러 방지용
+  }
 
   return (
     <div className="row-center">

@@ -15,7 +15,7 @@ export default function SearchKeywordsModal() {
 
   useEffect(() => {
     dispatch(searchActions.getAllKeywords());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

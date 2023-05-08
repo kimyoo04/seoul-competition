@@ -40,10 +40,10 @@ export default function PriceFilter() {
 
   // RTC price 상태 dispatch
   function handleMinTouchEnd() {
-    dispatch(filterActions.setMinPrice({ minPrice }));
+    dispatch(filterActions.setMinPrice({ minPrice: minPrice.toString() }));
   }
   function handleMaxTouchEnd() {
-    dispatch(filterActions.setMaxPrice({ maxPrice }));
+    dispatch(filterActions.setMaxPrice({ maxPrice: maxPrice.toString() }));
   }
 
   return (

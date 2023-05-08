@@ -15,7 +15,6 @@ export default function AddPost() {
     handleSubmit,
     formState: { errors },
     setError,
-    control,
     reset,
   } = useForm<IPostForm>({
     // 초기값으로 빈 문자열 지정

@@ -22,7 +22,6 @@ export default function EducationList() {
     error,
     fetchNextPage,
     hasNextPage,
-    isFetching,
     isFetchingNextPage,
     status,
   } = useInfiniteEducations();

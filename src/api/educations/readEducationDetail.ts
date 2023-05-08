@@ -15,7 +15,7 @@ export const useReadEductionDetail = (id: string) => {
   return useQuery<IEducationDetail>({
     queryKey: ["educationDetail", id],
     queryFn: () => readEducationDetail(id),
-    onSettled: (data, error) => {
+    onSettled: (data) => {
       // 쿠키 정보가 없을 경우 모달 표시
       if (data && data.user === false) {
         const timeout = setTimeout(() => {

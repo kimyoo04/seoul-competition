@@ -14,8 +14,8 @@ const initialState: IFilterState = {
   status: "전체",
   startDate: "",
   endDate: "",
-  minPrice: 0,
-  maxPrice: 100000,
+  minPrice: "0",
+  maxPrice: "100000",
 };
 
 export const filterSlice = createSlice({
@@ -58,8 +58,8 @@ export const filterSlice = createSlice({
       state.status = "전체";
       state.startDate = "";
       state.endDate = "";
-      state.minPrice = 0;
-      state.maxPrice = 100000;
+      state.minPrice = "0";
+      state.maxPrice = "100000";
     },
   },
 });

@@ -1,6 +1,7 @@
 import axios from "@api/axiosInstance";
+import { IDeletePostDetail } from "@type/posts";
 
-export const deletePostDetail = async (data: any) => {
+export const deletePostDetail = async (data: IDeletePostDetail) => {
   try {
     await axios.delete(`/posts/${data.id}`, {
       data: { password: data.password },
