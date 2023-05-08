@@ -18,7 +18,7 @@ const SideBar = () => {
   const { isFocus, category } = useAppSelector((state) => state.search);
 
   return (
-    <AnimatePresence>
+    <>
       {/* 회색 오버레이 div가 isSidebar에 토글 */}
       {isSidebar && (
         <div
@@ -71,7 +71,7 @@ const SideBar = () => {
           </button>
         </motion.div>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 
