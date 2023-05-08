@@ -17,7 +17,11 @@ export default function Comments({ data }: ICommentsProps) {
       <div className="overflow-hidden rounded-lg bg-gray_4">
         {data &&
           data.map((commentData, index) => (
-            <CommentItem data={commentData} index={index} />
+            <CommentItem
+              key={index + commentData.createdAt}
+              data={commentData}
+              index={index}
+            />
           ))}
       </div>
     </div>
