@@ -40,16 +40,16 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
       </Head>
 
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <main>
-            <AnimatePresence mode="wait">
+      <Provider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <AnimatePresence mode="wait">
+            <main>
               <Component {...pageProps} key={router.route} />
-              <ReactQueryDevtools initialIsOpen={true} />
-            </AnimatePresence>
-          </main>
-        </Provider>
-      </QueryClientProvider>
+            </main>
+            <ReactQueryDevtools initialIsOpen={true} />
+          </AnimatePresence>
+        </QueryClientProvider>
+      </Provider>
     </>
   );
 }
