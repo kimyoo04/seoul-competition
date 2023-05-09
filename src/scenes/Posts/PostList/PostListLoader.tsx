@@ -12,17 +12,17 @@ export default function PostListLoader() {
         >
           {/* 작성자명과 작성일자 */}
           <div className="flex items-center justify-between">
-            <ContentLoader width={100} height={26}>
+            <ContentLoader uniqueKey="post-nickname" width={100} height={26}>
               <rect x="0" y="0" rx="5" ry="5" width="100%" height="100%" />
             </ContentLoader>
           </div>
 
           {/* 제목과 내용 */}
           <div className="col-start gap-2">
-            <ContentLoader width={200} height={34}>
+            <ContentLoader uniqueKey="post-title" width={200} height={34}>
               <rect x="0" y="0" rx="5" ry="5" width="100%" height="100%" />
             </ContentLoader>
-            <ContentLoader width={450} height={26}>
+            <ContentLoader uniqueKey="post-content" width={450} height={26}>
               <rect x="0" y="0" rx="5" ry="5" width="100%" height="100%" />
             </ContentLoader>
           </div>
@@ -30,14 +30,14 @@ export default function PostListLoader() {
           {/* 조회와 댓글 */}
           <div className="mt-4 flex justify-between">
             <div className="row-center gap-2">
-              <ContentLoader width={60} height={26}>
+              <ContentLoader uniqueKey="post-hits" width={60} height={26}>
                 <rect x="0" y="0" rx="5" ry="5" width="100%" height="100%" />
               </ContentLoader>
-              <ContentLoader width={60} height={26}>
+              <ContentLoader uniqueKey="post-comments" width={60} height={26}>
                 <rect x="0" y="0" rx="5" ry="5" width="100%" height="100%" />
               </ContentLoader>
             </div>
-            <ContentLoader width={60} height={26}>
+            <ContentLoader uniqueKey="post-date" width={60} height={26}>
               <rect x="0" y="0" rx="5" ry="5" width="100%" height="100%" />
             </ContentLoader>
           </div>

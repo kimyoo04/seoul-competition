@@ -4,13 +4,13 @@ import { useInView } from "react-intersection-observer";
 
 import { IPostData } from "@type/posts";
 
-import Loading from "@components/Loading";
 import SearchHeader from "@components/Search/SearchHeader";
 import SearchMore from "@components/Search/SearchMore";
 
 import PostItem from "@scenes/Posts/PostItem";
-import { useInfinitePosts } from "@api/posts/readPosts";
 import PostListLoader from "./PostListLoader";
+
+import { useInfinitePosts } from "@api/posts/readPosts";
 
 export default function PostList() {
   const searchCategory = useAppSelector((state) => state.search.category);

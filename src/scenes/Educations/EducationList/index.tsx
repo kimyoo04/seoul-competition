@@ -4,14 +4,14 @@ import { useInView } from "react-intersection-observer";
 
 import { IEducationData } from "@type/educations";
 
-import Loading from "@components/Loading";
 import SearchHeader from "@components/Search/SearchHeader";
 import SearchMore from "@components/Search/SearchMore";
 
 import EducationItem from "@scenes/Educations/EducationItem";
+import EducationListLoader from "./EducationListLoader";
+
 import { useInfiniteEducations } from "@api/educations/readEducations";
 import SimilarEducationList from "@components/SimilarEducationList";
-import EducationListLoader from "./EducationListLoader";
 
 export default function EducationList() {
   const searchCategory = useAppSelector((state) => state.search.category);
@@ -23,7 +23,6 @@ export default function EducationList() {
     error,
     fetchNextPage,
     hasNextPage,
-    isFetching,
     isFetchingNextPage,
     status,
   } = useInfiniteEducations();
@@ -65,8 +64,6 @@ export default function EducationList() {
               </>
             )}
           </ul>
-
-          <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
 
           {/* //! fetchNextPage 를 트리거 하기 위한 태그 */}
           <SearchMore inViewRef={ref} hasNextPage={hasNextPage} />
