@@ -38,7 +38,7 @@ export default function PostList() {
     if (data) {
       dispatch(
         filterActions.setTotalCounts({
-          totalCounts: data?.pages[0].totalPages || 0,
+          totalCounts: data?.pages[0].totalCounts || 0,
         })
       );
     }
