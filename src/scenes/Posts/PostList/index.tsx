@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import { useAppSelector } from "@toolkit/hook";
+import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { useInView } from "react-intersection-observer";
 
 import { IPostData } from "@type/posts";
@@ -11,8 +11,10 @@ import PostItem from "@scenes/Posts/PostItem";
 import PostListLoader from "./PostListLoader";
 
 import { useInfinitePosts } from "@api/posts/readPosts";
+import { filterActions } from "@features/filter/filterSlice";
 
 export default function PostList() {
+  const dispatch = useAppDispatch();
   const searchCategory = useAppSelector((state) => state.search.category);
 
   // page 단위로 educationdata GET 요청 및 캐싱
@@ -30,6 +32,17 @@ export default function PostList() {
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
   }, [inView]);
+
+  // 필터링된 총 개수 dispatch
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        filterActions.setTotalCounts({
+          totalCounts: data?.pages[0].totalPages || 0,
+        })
+      );
+    }
+  }, [data, dispatch]);
 
   return (
     <section className="col-center w-full gap-4">
