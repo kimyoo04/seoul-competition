@@ -31,7 +31,7 @@ export const useUpdateMutation = () => {
   return useMutation({
     mutationFn: updatePostDetail,
     onSuccess: async (_, variables) => {
-      await queryClient.invalidateQueries({ queryKey: ["updatedpost"] });
+      await queryClient.invalidateQueries({ queryKey: ["postDetail"] });
 
       router.push(`/posts/${variables.postId}`);
     },
@@ -50,8 +50,8 @@ export const useUpdatePostPwdMutation = () => {
 
   return useMutation({
     mutationFn: updatePostPwd,
-    onSuccess: async (_, variables) => {
-      await queryClient.invalidateQueries({ queryKey: ["checkedPost"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["postDetail"] });
     },
     onError: (err) => {
       console.error(err);

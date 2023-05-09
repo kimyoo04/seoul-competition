@@ -1,5 +1,7 @@
 import axios from "@api/axiosInstance";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ICreateComment, ICreateReview } from "@type/commentOrReview";
+import { useRouter } from "next/router";
 
 // 자유 게시판 댓글
 export const createComment = async (data: ICreateComment) => {
@@ -10,6 +12,32 @@ export const createComment = async (data: ICreateComment) => {
     return false;
   }
 };
+
+// 자유 게시판 댓글 Mutation
+export const useCreateCommentMutation = () => {
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createComment,
+    onSuccess: async (_,variables) => {
+      await queryClient.invalidateQueries({
+        queryKey: ["postDetail"],
+      });
+
+      router.push(`/posts/${variables.postId}`);
+    },
+    onError: (err) => {
+      console.error(err);
+    },
+    onSettled: () => {
+      console.log("완료");
+    },
+  });
+};
+
+
 
 // 교육 게시판 리뷰
 export const createReview = async (data: ICreateReview) => {
