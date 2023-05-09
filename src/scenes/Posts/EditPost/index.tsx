@@ -6,7 +6,7 @@ import ScrollButton from "@components/ScrollButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IPostForm, IUpdatePostForm } from "@type/posts";
 import { useQuery } from "@tanstack/react-query";
-import { useUpdateMutation } from "@api/posts/updatePostDetail";
+import { useUpdatePostMutation } from "@api/posts/updatePostDetail";
 import ErrorMsg from "@components/TextField/ErrorMsg";
 import Loading from "@components/Loading";
 import PostUpdatePwd from "./PostUpdatePwd";
@@ -32,7 +32,7 @@ export default function EditPost({ id }: { id: string }) {
   );
 
   // useUpdateMutation 커스텀 훅 가져오기 (구조분해 할당)
-  const { mutateAsync } = useUpdateMutation();
+  const { mutateAsync } = useUpdatePostMutation();
 
   const {
     register,
@@ -40,11 +40,7 @@ export default function EditPost({ id }: { id: string }) {
     formState: { errors },
     setError,
   } = useForm<IPostForm>({
-    defaultValues: {
-      nickname: oldPost?.nickname || "",
-      title: oldPost?.title || "",
-      content: oldPost?.content || "",
-    },
+    defaultValues: {},
   });
 
   const onValid: SubmitHandler<IPostForm> = async (data) => {
@@ -108,6 +104,7 @@ export default function EditPost({ id }: { id: string }) {
                     type="text"
                     name="nickname"
                     autoComplete="off"
+                    defaultValue={oldPost.nickname || ""}
                     placeholder="별명"
                     maxLength={11}
                     className="textfield w-full rounded-md"
@@ -139,6 +136,7 @@ export default function EditPost({ id }: { id: string }) {
                     type="text"
                     name="title"
                     autoComplete="off"
+                    defaultValue={oldPost.title || ""}
                     placeholder="제목을 입력해주세요."
                     maxLength={51}
                     className="textfield w-full rounded-md"
@@ -169,6 +167,7 @@ export default function EditPost({ id }: { id: string }) {
                     id="content"
                     typeof="text"
                     name="content"
+                    defaultValue={oldPost.content || ""}
                     placeholder="자유롭게 글을 작성해 보세요."
                     maxLength={1001}
                     className="textfield h-48 w-full rounded-md px-3 py-1 leading-8 placeholder:pt-1"

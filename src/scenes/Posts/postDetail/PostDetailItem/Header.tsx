@@ -12,6 +12,7 @@ export default function Header({ data }: IHeaderProps) {
       {/* 게시글 제목 -- 수정, 삭제 버튼 */}
       <div className="mb-2 flex flex-wrap justify-between">
         <h2 className="text-2xl font-bold">{data.title}</h2>
+
         <UpDelButtons id={data.id} />
       </div>
 
