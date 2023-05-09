@@ -31,27 +31,21 @@ export const useUpdateMutation = () => {
   return useMutation({
     mutationFn: updatePostDetail,
     onSuccess: async (_, variables) => {
-      await queryClient.invalidateQueries({ queryKey: ["postDetail"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["postDetail", variables.postId],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: [
+          {
+            category: "posts",
+            keyword: "",
+            startDate: "",
+            endDate: "",
+          },
+        ],
+      });
 
       router.push(`/posts/${variables.postId}`);
-    },
-    onError: (err) => {
-      console.error(err);
-    },
-    onSettled: () => {
-      console.log("완료");
-    },
-  });
-};
-
-// useUpdatePostPwdMutation
-export const useUpdatePostPwdMutation = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: updatePostPwd,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["postDetail"] });
     },
     onError: (err) => {
       console.error(err);

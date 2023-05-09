@@ -23,7 +23,7 @@ export const useCreateCommentMutation = () => {
     mutationFn: createComment,
     onSuccess: async (_, variables) => {
       await queryClient.invalidateQueries({
-        queryKey: ["postDetail"],
+        queryKey: ["postDetail", variables.postId],
       });
 
       router.push(`/posts/${variables.postId}`);
@@ -58,7 +58,7 @@ export const useCreateReviewMutation = () => {
     mutationFn: createReview,
     onSuccess: async (_, variables) => {
       await queryClient.invalidateQueries({
-        queryKey: ["educationDetail"],
+        queryKey: ["educationDetail", variables.educationId],
       });
 
       router.push(`/educations/${variables.educationId}`);
