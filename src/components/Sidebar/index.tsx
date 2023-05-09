@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { sidebarActions } from "@features/sidebar/sidebarSlice";
 
@@ -11,6 +11,7 @@ import SearchKeywordsModal from "./SearchKeywordsModal";
 import StatusFilter from "./StatusFilter";
 import PriceFilter from "./PriceFilter";
 import CalendarFilter from "./CalendarFilter";
+import ShowTotalCounts from "./ShowTotalCounts/indext";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
@@ -59,6 +60,9 @@ const SideBar = () => {
               <PriceFilter />
             </>
           )}
+
+          {/*  */}
+          <ShowTotalCounts />
 
           {/* 닫기 버튼 */}
           <button
