@@ -22,8 +22,8 @@ export const updatePostPwd = async (postIdPwd: IUpdatePostCheck) => {
   }
 };
 
-// useUpdateMutation
-export const useUpdateMutation = () => {
+// useUpdatePostMutation
+export const useUpdatePostMutation = () => {
   const router = useRouter();
 
   const queryClient = useQueryClient();
