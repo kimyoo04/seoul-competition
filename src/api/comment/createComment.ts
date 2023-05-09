@@ -21,7 +21,7 @@ export const useCreateCommentMutation = () => {
 
   return useMutation({
     mutationFn: createComment,
-    onSuccess: async (_,variables) => {
+    onSuccess: async (_, variables) => {
       await queryClient.invalidateQueries({
         queryKey: ["postDetail"],
       });
@@ -37,8 +37,6 @@ export const useCreateCommentMutation = () => {
   });
 };
 
-
-
 // 교육 게시판 리뷰
 export const createReview = async (data: ICreateReview) => {
   try {
@@ -48,4 +46,28 @@ export const createReview = async (data: ICreateReview) => {
   } catch (err) {
     return false;
   }
+};
+
+// 교육 게시판 리뷰 Mutation
+export const useCreateReviewMutation = () => {
+  const router = useRouter();
+
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createReview,
+    onSuccess: async (_, variables) => {
+      await queryClient.invalidateQueries({
+        queryKey: ["educationDetail"],
+      });
+
+      router.push(`/educations/${variables.educationId}`);
+    },
+    onError: (err) => {
+      console.error(err);
+    },
+    onSettled: () => {
+      console.log("완료");
+    },
+  });
 };
