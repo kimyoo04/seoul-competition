@@ -1,19 +1,21 @@
 import { Fragment, useEffect } from "react";
-import { useAppSelector } from "@toolkit/hook";
+import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { useInView } from "react-intersection-observer";
 
 import { IEducationData } from "@type/educations";
 
-import Loading from "@components/Loading";
 import SearchHeader from "@components/Search/SearchHeader";
 import SearchMore from "@components/Search/SearchMore";
 
 import EducationItem from "@scenes/Educations/EducationItem";
-import { useInfiniteEducations } from "@api/educations/readEducations";
-import SimilarEducationList from "@components/SimilarEducationList";
 import EducationListLoader from "./EducationListLoader";
 
+import { useInfiniteEducations } from "@api/educations/readEducations";
+import SimilarEducationList from "@components/SimilarEducationList";
+import { filterActions } from "@features/filter/filterSlice";
+
 export default function EducationList() {
+  const dispatch = useAppDispatch();
   const searchCategory = useAppSelector((state) => state.search.category);
   const searchKeyword = useAppSelector((state) => state.search.searchKeyword);
 
@@ -23,7 +25,6 @@ export default function EducationList() {
     error,
     fetchNextPage,
     hasNextPage,
-    isFetching,
     isFetchingNextPage,
     status,
   } = useInfiniteEducations();
@@ -33,6 +34,17 @@ export default function EducationList() {
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) fetchNextPage();
   }, [inView]);
+
+  // 필터링된 총 개수 dispatch
+  useEffect(() => {
+    if (data) {
+      dispatch(
+        filterActions.setTotalCounts({
+          totalCounts: data?.pages[0].totalCounts || 0,
+        })
+      );
+    }
+  }, [data, dispatch]);
 
   return (
     <section className="col-center w-full gap-4">
@@ -65,8 +77,6 @@ export default function EducationList() {
               </>
             )}
           </ul>
-
-          <div>{isFetching && !isFetchingNextPage ? <Loading /> : null}</div>
 
           {/* //! fetchNextPage 를 트리거 하기 위한 태그 */}
           <SearchMore inViewRef={ref} hasNextPage={hasNextPage} />

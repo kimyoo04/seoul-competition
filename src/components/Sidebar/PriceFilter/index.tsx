@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { useAppDispatch } from "@toolkit/hook";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { filterActions } from "@features/filter/filterSlice";
 
 export default function PriceFilter() {
   const dispatch = useAppDispatch();
+  const { minPrice: minPriceStr, maxPrice: maxPriceStr } = useAppSelector(
+    (state) => state.filter
+  );
 
   const step = 1000; // 금액 간격
   const fixedMinPrice = 0; // 기본 최소 금액
@@ -46,11 +49,24 @@ export default function PriceFilter() {
     dispatch(filterActions.setMaxPrice({ maxPrice: maxPrice.toString() }));
   }
 
+  // 초기화 버튼을 클릭했을 때를 고려해서 useEffect로 상태를 업데이트
+  useEffect(() => {
+    const minPriceNum = parseInt(minPriceStr);
+    const maxPriceNum = parseInt(maxPriceStr);
+
+    // 최소 금액, 최대 금액 상태 업데이트
+    setMinPrice(minPriceNum);
+    setMaxPrice(maxPriceNum);
+    // 회색 바 위치 업데이트
+    setLeftPercent((minPriceNum / fixedMaxPrice) * 100);
+    setRightPercent(100 - (maxPriceNum / fixedMaxPrice) * 100);
+  }, [minPriceStr, maxPriceStr]);
+
   return (
     <div className="w-full">
       {/* 헤더 */}
       <div className="col-center">
-        <span className="font-bold text-font_white">수강료 설정</span>
+        <span className="font-medium text-font_white">수강료 설정</span>
       </div>
 
       <div className="mt-6">
@@ -76,7 +92,7 @@ export default function PriceFilter() {
               }}
               onMouseUp={handleMinTouchEnd}
               onTouchEnd={handleMinTouchEnd}
-              className={`price-input`}
+              className="price-input price-input_left"
             />
             {/* 최대 금액 핸들 */}
             <input
@@ -91,7 +107,7 @@ export default function PriceFilter() {
               }}
               onMouseUp={handleMaxTouchEnd}
               onTouchEnd={handleMaxTouchEnd}
-              className={`price-input`}
+              className="price-input price-input_right"
             />
           </div>
 

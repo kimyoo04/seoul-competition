@@ -22,7 +22,7 @@ export interface IEducationsDataPerPage {
   data: IEducationData[];
   totalPages: number;
   currentPage: number;
-  totalCount: number;
+  totalCounts: number;
 }
 
 // fetchEducation.ts에 사용

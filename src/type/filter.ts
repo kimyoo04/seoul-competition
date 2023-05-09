@@ -10,6 +10,8 @@ export interface IFilterState {
   // 가격 범위
   minPrice: TPrice;
   maxPrice: TPrice;
+  // 총 필터링 된 개수
+  totalCounts: number;
 }
 
 // filterSlice에 사용
@@ -41,6 +43,11 @@ export interface IMinPrice {
 // filterSlice에 사용
 export interface IMaxPrice {
   maxPrice: TPrice;
+}
+
+// filterSlice에 사용
+export interface ITotalCounts {
+  totalCounts: number;
 }
 
 export type TStatus = "수강신청중" | "수강신청예정" | "마감" | "전체";

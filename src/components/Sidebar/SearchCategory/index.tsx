@@ -15,7 +15,7 @@ export default function SearchCategory() {
       {categoriesKor.map((category, index) => {
         if (router.pathname.substring(1) === categoriesEng[index]) {
           return (
-            <h2 key={category} className="px-3 text-h4 font-bold text-white">
+            <h2 key={category} className="px-3 text-h4 font-medium text-white">
               {category}
             </h2>
           );
