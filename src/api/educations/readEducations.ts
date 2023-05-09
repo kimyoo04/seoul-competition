@@ -1,6 +1,7 @@
 import axios from "@api/axiosInstance";
+import { filterActions } from "@features/filter/filterSlice";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useAppSelector } from "@toolkit/hook";
+import { useAppSelector, useAppDispatch } from "@toolkit/hook";
 import {
   IEducationsDataPerPage,
   IEducationsQueryParams,
@@ -40,6 +41,7 @@ export const fetchEducations = async (
 
 //! 검색 결과 useInfiniteQuery 함수
 export const useInfiniteEducations = () => {
+  const dispatch = useAppDispatch();
   const searchCategory = "educations";
 
   //! search state와 filter state 값 받아오기
@@ -78,6 +80,14 @@ export const useInfiniteEducations = () => {
       } else {
         return undefined;
       }
+    },
+    onSettled: (data) => {
+      // 필터링된 총 개수 dispatch
+      dispatch(
+        filterActions.setTotalCounts({
+          totalCounts: data?.pages[0].totalPages || 0,
+        })
+      );
     },
     cacheTime: 300000, // 5분
     staleTime: 240000, // 4분
