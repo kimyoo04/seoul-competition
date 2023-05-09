@@ -62,7 +62,7 @@ const SideBar = () => {
             </>
           )}
 
-          {/*  */}
+          {/* 검색된 총 개수 출력 */}
           <ShowTotalCounts />
 
           <div className="flex w-full items-center justify-between">
