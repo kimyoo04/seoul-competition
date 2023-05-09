@@ -7,6 +7,7 @@ import {
   IBothDate,
   IMinPrice,
   IMaxPrice,
+  ITotalCounts,
 } from "@type/filter";
 
 const initialState: IFilterState = {
@@ -16,6 +17,7 @@ const initialState: IFilterState = {
   endDate: "",
   minPrice: "0",
   maxPrice: "100000",
+  totalCounts: 0,
 };
 
 export const filterSlice = createSlice({
@@ -53,6 +55,11 @@ export const filterSlice = createSlice({
       state.maxPrice = action.payload.maxPrice;
     },
 
+    // 필터링 된 개수 업데이트
+    setTotalCounts: (state, action: PayloadAction<ITotalCounts>) => {
+      state.totalCounts = action.payload.totalCounts;
+    },
+
     resetParams: (state) => {
       state.isClicked = false;
       state.status = "전체";
@@ -60,6 +67,7 @@ export const filterSlice = createSlice({
       state.endDate = "";
       state.minPrice = "0";
       state.maxPrice = "100000";
+      state.totalCounts = 0;
     },
   },
 });

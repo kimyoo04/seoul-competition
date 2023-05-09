@@ -17,6 +17,7 @@ export interface IPostsDataPerPage {
   data: IPostData[];
   totalPages: number;
   currentPage: number;
+  totalCounts: number;
 }
 
 // readPosts.ts에 사용
