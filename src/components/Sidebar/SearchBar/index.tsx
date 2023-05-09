@@ -53,7 +53,7 @@ export default function SearchBar() {
         {/* Search Icon */}
         <button
           type="submit"
-          className="col-center absolute bottom-4 left-5 text-2xl font-bold "
+          className="col-center absolute bottom-4 left-5 text-2xl font-medium "
         >
           <motion.i
             whileTap={{ scale: 0.8 }}
@@ -68,7 +68,7 @@ export default function SearchBar() {
         >
           <motion.span
             whileTap={{ scale: 0.8 }}
-            className="text-md font-bold text-font_black"
+            className="text-md font-medium text-font_black"
           >
             검색
           </motion.span>

@@ -9,12 +9,12 @@ export default function SearchKeywordsHeader() {
 
   return (
     <div className="flex items-center justify-between rounded-t-2xl bg-slate-100 px-4 py-2">
-      <span className="text-md font-bold">최근 검색어</span>
+      <span className="text-md font-medium">최근 검색어</span>
       {isClicked ? (
         <div className="row-center gap-4">
           <ButtonWrapper>
             <button
-              className="font-bold text-red-600"
+              className="font-medium text-red-600"
               onClick={() => {
                 dispatch(searchActions.deleteAllKeywords());
                 setIsClicked(false);
@@ -24,7 +24,7 @@ export default function SearchKeywordsHeader() {
             </button>
           </ButtonWrapper>
           <button
-            className="font-bold"
+            className="font-medium"
             onClick={() => {
               setIsClicked(false);
             }}
@@ -34,7 +34,7 @@ export default function SearchKeywordsHeader() {
         </div>
       ) : (
         <button
-          className="font-bold text-red-600"
+          className="font-medium text-red-600"
           onClick={() => setIsClicked(true)}
         >
           <ButtonWrapper>전체 삭제</ButtonWrapper>

@@ -10,7 +10,7 @@ export default function StatusFilter() {
 
   return (
     <div className="col-center w-full gap-2">
-      <span className="font-bold text-font_white">강좌 상태 선택</span>
+      <span className="font-medium text-font_white">강좌 상태 선택</span>
 
       <div className="grid w-full grid-cols-2 gap-3">
         {statuses.map((status) => {
@@ -18,7 +18,7 @@ export default function StatusFilter() {
             <label
               htmlFor={status}
               key={status}
-              className={`col-center w-full rounded-2xl border   px-1 py-1 font-bold transition-all ${classNames(
+              className={`col-center w-full rounded-2xl border   px-1 py-1 font-medium transition-all ${classNames(
                 {
                   "bg-white text-font_black shadow-md": nowStatus === status,
                 },
