@@ -22,8 +22,8 @@ export const updatePostPwd = async (postIdPwd: IUpdatePostCheck) => {
   }
 };
 
-// useUpdateMutation
-export const useUpdateMutation = () => {
+// useUpdatePostMutation
+export const useUpdatePostMutation = () => {
   const router = useRouter();
 
   const queryClient = useQueryClient();
@@ -31,27 +31,21 @@ export const useUpdateMutation = () => {
   return useMutation({
     mutationFn: updatePostDetail,
     onSuccess: async (_, variables) => {
-      await queryClient.invalidateQueries({ queryKey: ["updatedpost"] });
+      await queryClient.invalidateQueries({
+        queryKey: ["postDetail", variables.postId],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: [
+          {
+            category: "posts",
+            keyword: "",
+            startDate: "",
+            endDate: "",
+          },
+        ],
+      });
 
       router.push(`/posts/${variables.postId}`);
-    },
-    onError: (err) => {
-      console.error(err);
-    },
-    onSettled: () => {
-      console.log("완료");
-    },
-  });
-};
-
-// useUpdatePostPwdMutation
-export const useUpdatePostPwdMutation = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: updatePostPwd,
-    onSuccess: async (_, variables) => {
-      await queryClient.invalidateQueries({ queryKey: ["checkedPost"] });
     },
     onError: (err) => {
       console.error(err);

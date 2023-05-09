@@ -55,108 +55,114 @@ export default function AddPost() {
       <div className="rounded-2xl bg-white p-4 shadow-lg">
         <form onSubmit={handleSubmit(onValid)}>
           <div className="mb-2 flex gap-4">
-            {/* nickname textfield */}
+            {/* 닉네임 필드 */}
             <div className="w-1/2">
-              <label htmlFor="nickname" className="p-1 text-sm font-bold">
-                작성자 *
+              <label htmlFor="nickname" className="mb-1 font-bold">
+                닉네임 *
               </label>
               <input
                 {...register("nickname", {
+                  required: "이름이 필요해요.",
                   minLength: {
                     value: 2,
-                    message: "최소 2 글자 이상 입력해주세요.",
+                    message: "최소 두 글자 이상 입력해 주세요.",
                   },
                   maxLength: {
                     value: 10,
-                    message: "최대 10 글자까지 입력 가능합니다.",
+                    message: "최대 10 글자까지 입력할 수 있어요.",
                   },
                 })}
                 id="nickname"
                 type="text"
                 name="nickname"
                 autoComplete="off"
-                placeholder="이름 / 닉네임"
+                placeholder="별명"
                 maxLength={11}
                 className="textfield w-full rounded-md"
               />
-              <span>
+              <span className="mt-1 text-xs font-bold text-red-500">
                 <ErrorMsg>{errors?.nickname?.message}</ErrorMsg>
               </span>
             </div>
 
-            {/* password textfield */}
+            {/* 비밀번호 필드 */}
             <div className="w-1/2">
-              <label htmlFor="password" className="p-1 text-sm font-bold ">
+              <label htmlFor="password" className="mb-1 font-bold ">
                 비밀번호 *
               </label>
               <input
                 {...register("password", {
+                  required: "비밀번호가 필요해요.",
                   minLength: {
                     value: 4,
-                    message: "최소 4 글자 이상 입력해주세요.",
+                    message: "최소 네 글자 이상 입력해 주세요.",
                   },
                   maxLength: {
                     value: 12,
-                    message: "최대 12 글자까지 입력 가능합니다.",
+                    message: "최대 12 글자까지 입력할 수 있어요.",
                   },
                 })}
                 id="password"
                 type="password"
                 name="password"
                 autoComplete="off"
-                placeholder="비밀번호"
+                placeholder="4 자 이상"
                 maxLength={13}
                 className="textfield w-full rounded-md"
               />
-              <span>
+              <span className="mt-1 text-xs font-bold text-red-500">
                 <ErrorMsg>{errors?.password?.message}</ErrorMsg>
               </span>
             </div>
           </div>
 
-          {/* title textfield */}
+          {/* 제목 필드 */}
           <div className="mb-4">
-            <label htmlFor="title" className="p-1 text-sm font-bold ">
+            <label htmlFor="title" className="mb-1 font-bold ">
               제목 *
             </label>
             <input
               {...register("title", {
+                required: "제목이 필요해요.",
+
                 minLength: {
                   value: 2,
-                  message: "최소 2 글자 이상 입력해주세요.",
+                  message: "최소 두 글자 이상 입력해 주세요.",
                 },
                 maxLength: {
                   value: 50,
-                  message: "최대 50 글자까지 입력 가능합니다.",
+                  message: "최대 50 글자까지 입력할 수 있어요.",
                 },
               })}
               id="title"
               type="text"
               name="title"
               autoComplete="off"
-              placeholder="제목을 입력해주세요."
+              placeholder="제목을 입력해 주세요."
               maxLength={51}
               className="textfield w-full rounded-md"
             />
-            <span>
+            <span className="mt-1 text-xs font-bold text-red-500">
               <ErrorMsg>{errors?.title?.message}</ErrorMsg>
             </span>
           </div>
 
-          {/* content textarea */}
+          {/* 내용 필드 */}
           <div className="mb-4">
-            <label htmlFor="content" className="p-1 text-sm font-bold ">
+            <label htmlFor="content" className="mb-1 font-bold ">
               내용 *
             </label>
             <textarea
               {...register("content", {
+                required: "내용이 필요해요.",
+
                 minLength: {
                   value: 4,
-                  message: "최소 4 글자 이상 입력해주세요.",
+                  message: "최소 네 글자 이상 입력해 주세요.",
                 },
                 maxLength: {
                   value: 1000,
-                  message: "최대 1000 글자까지 입력 가능합니다.",
+                  message: "최대 1000 글자까지 입력할 수 있어요.",
                 },
               })}
               id="content"
@@ -166,12 +172,12 @@ export default function AddPost() {
               maxLength={1001}
               className="textfield h-48 w-full rounded-md px-3 py-1 leading-8 placeholder:pt-1"
             />
-            <span>
+            <span className="mt-1 text-xs font-bold text-red-500">
               <ErrorMsg>{errors?.content?.message}</ErrorMsg>
             </span>
           </div>
 
-          {/* submit button */}
+          {/* 제출 버튼 */}
           <div className="col-center mt-4">
             <ButtonWrapper>
               <button

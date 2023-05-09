@@ -59,17 +59,34 @@ export default function UpDelButtons({ id }: { id: TId }) {
       {/* 게시글 삭제 버튼 */}
       {isDel ? (
         <>
-          <form onSubmit={handleSubmit(onValid)} className="row-center gap-2">
-            <input
-              {...register("password", {
-                required: "비밀번호를 입력해주세요.",
-              })}
-              id="password"
-              name="password"
-              type="password"
-              placeholder="비밀번호를 입력해주세요."
-              className="h-8 rounded-lg placeholder:text-sm placeholder:font-bold placeholder:text-gray_2"
-            />
+          <form
+            onSubmit={handleSubmit(onValid)}
+            className="row-center relative gap-2"
+          >
+            <div className="absolute right-0 top-8">
+              <label>비밀번호</label>
+              <input
+                {...register("password", {
+                  required: "비밀번호를 입력해 주세요.",
+
+                  minLength: {
+                    value: 4,
+                    message: "최소 4 글자 이상 입력해 주세요.",
+                  },
+                  maxLength: {
+                    value: 12,
+                    message: "최대 12 글자까지 입력할 수 있어요.",
+                  },
+                })}
+                id="password"
+                type="password"
+                name="password"
+                autoComplete="off"
+                placeholder="4 자 이상"
+                maxLength={13}
+                className=" h-8 w-[100px] rounded-lg placeholder:text-sm placeholder:font-bold placeholder:text-gray_2"
+              />
+            </div>
 
             {/* 게시글 삭제 확인 버튼 */}
             <button type="submit" className="delete_btn">

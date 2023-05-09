@@ -6,7 +6,7 @@ import ScrollButton from "@components/ScrollButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IPostForm, IUpdatePostForm } from "@type/posts";
 import { useQuery } from "@tanstack/react-query";
-import { useUpdateMutation } from "@api/posts/updatePostDetail";
+import { useUpdatePostMutation } from "@api/posts/updatePostDetail";
 import ErrorMsg from "@components/TextField/ErrorMsg";
 import Loading from "@components/Loading";
 import PostUpdatePwd from "./PostUpdatePwd";
@@ -32,7 +32,7 @@ export default function EditPost({ id }: { id: string }) {
   );
 
   // useUpdateMutation 커스텀 훅 가져오기 (구조분해 할당)
-  const { mutateAsync } = useUpdateMutation();
+  const { mutateAsync } = useUpdatePostMutation();
 
   const {
     register,
@@ -40,11 +40,7 @@ export default function EditPost({ id }: { id: string }) {
     formState: { errors },
     setError,
   } = useForm<IPostForm>({
-    defaultValues: {
-      nickname: oldPost?.nickname || "",
-      title: oldPost?.title || "",
-      content: oldPost?.content || "",
-    },
+    defaultValues: {},
   });
 
   const onValid: SubmitHandler<IPostForm> = async (data) => {
@@ -87,94 +83,108 @@ export default function EditPost({ id }: { id: string }) {
           <div className="w-full px-4">
             <div className="mx-auto my-8 max-w-screen-md rounded-2xl bg-white p-4 shadow-lg">
               <form onSubmit={handleSubmit(onValid)}>
-                {/* nickname textfield */}
+                {/* 닉네임 필드 */}
                 <div className="col-start mb-2 w-44 gap-1">
                   <label htmlFor="nickname" className="font-bold">
-                    작성자 *
+                    닉네임 *
                   </label>
                   <input
                     {...register("nickname", {
+                      required: "이름이 필요해요.",
                       minLength: {
                         value: 2,
-                        message: "최소 2 글자 이상 입력해주세요.",
+                        message: "최소 두 글자 이상 입력해 주세요.",
                       },
                       maxLength: {
                         value: 10,
-                        message: "최대 10 글자까지 입력 가능합니다.",
+                        message: "최대 10 글자까지 입력할 수 있어요.",
                       },
                     })}
                     id="nickname"
                     type="text"
                     name="nickname"
                     autoComplete="off"
-                    placeholder="이름 / 별명"
+                    defaultValue={oldPost.nickname || ""}
+                    placeholder="별명"
                     maxLength={11}
                     className="textfield w-full rounded-md"
                   />
-                  <ErrorMsg>{errors?.nickname?.message}</ErrorMsg>
+                  <span className="mt-1 text-xs font-bold text-red-500">
+                    <ErrorMsg>{errors?.nickname?.message}</ErrorMsg>
+                  </span>
                 </div>
 
-                {/* title textfield */}
+                {/* 제목 필드 */}
                 <div className="col-start mb-4  gap-1">
                   <label htmlFor="title" className="font-bold ">
                     제목 *
                   </label>
                   <input
                     {...register("title", {
+                      required: "제목이 필요해요.",
+
                       minLength: {
                         value: 2,
-                        message: "최소 2 글자 이상 입력해주세요.",
+                        message: "최소 두 글자 이상 입력해 주세요.",
                       },
                       maxLength: {
                         value: 50,
-                        message: "최대 50 글자까지 입력 가능합니다.",
+                        message: "최대 50 글자까지 입력할 수 있어요.",
                       },
                     })}
                     id="title"
                     type="text"
                     name="title"
                     autoComplete="off"
+                    defaultValue={oldPost.title || ""}
                     placeholder="제목을 입력해주세요."
                     maxLength={51}
                     className="textfield w-full rounded-md"
                   />
-                  <ErrorMsg>{errors?.title?.message}</ErrorMsg>
+                  <span className="mt-1 text-xs font-bold text-red-500">
+                    <ErrorMsg>{errors?.title?.message}</ErrorMsg>
+                  </span>
                 </div>
 
-                {/* content textarea */}
+                {/* 내용 필드 */}
                 <div className=" col-start  mb-4 gap-1">
                   <label htmlFor="content" className="font-bold ">
                     내용 *
                   </label>
                   <textarea
                     {...register("content", {
+                      required: "내용이 필요해요.",
+
                       minLength: {
                         value: 4,
-                        message: "최소 4 글자 이상 입력해주세요.",
+                        message: "최소 네 글자 이상 입력해 주세요.",
                       },
                       maxLength: {
                         value: 1000,
-                        message: "최대 1000 글자까지 입력 가능합니다.",
+                        message: "최대 1000 글자까지 입력할 수 있어요.",
                       },
                     })}
                     id="content"
                     typeof="text"
                     name="content"
+                    defaultValue={oldPost.content || ""}
                     placeholder="자유롭게 글을 작성해 보세요."
                     maxLength={1001}
                     className="textfield h-48 w-full rounded-md px-3 py-1 leading-8 placeholder:pt-1"
                   />
-                  <ErrorMsg>{errors?.content?.message}</ErrorMsg>
+                  <span className="mt-1 text-xs font-bold text-red-500">
+                    <ErrorMsg>{errors?.content?.message}</ErrorMsg>
+                  </span>
                 </div>
 
-                {/* submit button */}
+                {/* 제출 버튼 */}
                 <div className="col-center mb-3 mt-4">
                   <ButtonWrapper>
                     <button
                       type="submit"
                       className="rounded-lg bg-main_color px-2 py-1 text-font_white"
                     >
-                      작성 완료
+                      수정 완료
                     </button>
                   </ButtonWrapper>
                 </div>
