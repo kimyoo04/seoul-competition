@@ -11,7 +11,7 @@ import SearchKeywordsModal from "./SearchKeywordsModal";
 import StatusFilter from "./StatusFilter";
 import PriceFilter from "./PriceFilter";
 import CalendarFilter from "./CalendarFilter";
-import ShowTotalCounts from "./ShowTotalCounts/indext";
+import ShowTotalCounts from "./ShowTotalCounts";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
