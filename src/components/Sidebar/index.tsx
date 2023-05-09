@@ -12,6 +12,7 @@ import StatusFilter from "./StatusFilter";
 import PriceFilter from "./PriceFilter";
 import CalendarFilter from "./CalendarFilter";
 import ShowTotalCounts from "./ShowTotalCounts";
+import { filterActions } from "@features/filter/filterSlice";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
@@ -64,15 +65,31 @@ const SideBar = () => {
           {/*  */}
           <ShowTotalCounts />
 
-          {/* 닫기 버튼 */}
-          <button
-            className="absolute bottom-0 right-0 p-4"
-            onClick={() => dispatch(sidebarActions.toggleSidebar())}
-          >
-            <ButtonWrapper>
-              <i className="ri-close-line text-4xl text-font_white" />
-            </ButtonWrapper>
-          </button>
+          <div className="flex w-full items-center justify-between">
+            {/* 초기화 버튼 */}
+            <button onClick={() => dispatch(filterActions.resetParams())}>
+              <ButtonWrapper>
+                <div className="row-center h-10 gap-2 rounded-full border border-sub_color px-3">
+                  <i className="ri-restart-line text-2xl text-font_white" />
+                  <span className="text-xl font-medium text-font_white">
+                    초기화
+                  </span>
+                </div>
+              </ButtonWrapper>
+            </button>
+
+            {/* 닫기 버튼 */}
+            <button onClick={() => dispatch(sidebarActions.toggleSidebar())}>
+              <ButtonWrapper>
+                <div className="row-center h-10 gap-1 rounded-full border border-sub_color px-3">
+                  <i className="ri-close-fill text-3xl text-font_white" />
+                  <span className="text-xl font-medium text-font_white">
+                    닫기
+                  </span>
+                </div>
+              </ButtonWrapper>
+            </button>
+          </div>
         </motion.div>
       )}
     </>
