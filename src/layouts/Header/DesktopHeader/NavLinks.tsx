@@ -8,7 +8,7 @@ export default function NavLinks() {
 
   return (
     <div className="flex gap-2 text-xl font-medium  md:gap-4">
-      <Link href={"/educations"} className="col-end w-[84px] pt-[6px]">
+      <Link href={"/educations"} className="col-end pt-[6px]">
         <ButtonWrapper>
           <span
             className={`text-lg ${
@@ -19,7 +19,7 @@ export default function NavLinks() {
           </span>
         </ButtonWrapper>
       </Link>
-      <Link href={"/posts"} className="col-end w-[98px] pt-[6px]">
+      <Link href={"/posts"} className="col-end pt-[6px]">
         <ButtonWrapper>
           <span
             className={`text-lg ${
@@ -30,7 +30,7 @@ export default function NavLinks() {
           </span>
         </ButtonWrapper>
       </Link>
-      <Link href={"/chatbot"} className="col-end w-[40px] pt-[6px]">
+      <Link href={"/chatbot"} className="col-end pt-[6px]">
         <ButtonWrapper>
           <span
             className={`text-lg ${
