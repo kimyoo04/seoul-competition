@@ -1,12 +1,15 @@
-import Logo from "./HeaderItem/Logo";
-import NavLinks from "./HeaderItem/NavLinks";
-
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+
+import DesktopHeader from "./DesktopHeader";
+import MobileHeader from "./MobileHeader";
 
 export default function Header() {
   // 헤더가 나타나는지, 사라지는지 추적
   const [showHeader, setShowHeader] = useState(true);
+
+  // 모바일 헤더의 메뉴가 나타나는지, 사라지는지 추적
+  const [showMenu, setShowMenu] = useState(false);
 
   // 직전 스크롤의 위치 추적
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -27,9 +30,11 @@ export default function Header() {
         setPrevScrollPos(currentScrollPos);
       };
 
-      if (window !== undefined)
+      if (window !== undefined) {
         // 스크롤 할 때마다 handleScroll 실행
         window.addEventListener("scroll", handleScroll);
+        setShowMenu(false);
+      }
 
       // 이벤트 리스너 해제
       return () => {
@@ -59,9 +64,14 @@ export default function Header() {
         transition={{ duration: 0.3 }}
         className="fixed top-0 z-40 w-full bg-white shadow-sm"
       >
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
-          <Logo />
-          <NavLinks />
+        {/* 데스크탑용 헤더 */}
+        <div className="hidden w-full md:block">
+          <DesktopHeader />
+        </div>
+
+        {/* 모바일용 헤더 */}
+        <div className="block w-full md:hidden">
+          <MobileHeader showMenu={showMenu} setShowMenu={setShowMenu} />
         </div>
       </motion.header>
     </>
