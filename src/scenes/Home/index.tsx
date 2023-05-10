@@ -1,5 +1,5 @@
 import ContentItem from "./ContentItem";
-import { contents } from "./ContentItem/contentData";
+import { contents } from "@constants/home/contents";
 
 export default function Home() {
   return (
