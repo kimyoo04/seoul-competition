@@ -16,7 +16,7 @@ export default function Menu() {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.2 }}
-        className="absolute left-0 top-16 w-screen bg-white shadow-sm"
+        className="absolute left-0 top-16 w-screen bg-white font-medium shadow-sm"
       >
         <div className="col-center border-t border-main_color/30">
           <Link
