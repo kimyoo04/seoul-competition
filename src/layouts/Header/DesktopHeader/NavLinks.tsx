@@ -30,17 +30,11 @@ export default function NavLinks() {
           </span>
         </ButtonWrapper>
       </Link>
-      <Link href={"/chatbot"} className="col-end pt-[6px]">
+      <div className="col-end pt-[6px]">
         <ButtonWrapper>
-          <span
-            className={`text-lg ${
-              pathsArr.includes("chatbot") ? "font-bold text-main_color" : ""
-            }`}
-          >
-            챗봇
-          </span>
+          <span className={`text-lg`}>챗봇</span>
         </ButtonWrapper>
-      </Link>
+      </div>
     </div>
   );
 }
