@@ -54,14 +54,14 @@ export default function MobileHeader({
           </div>
 
           <div className="flex items-center justify-end">
-            <MenuToggle setShowMenu={setShowMenu} />
+            <MenuToggle showMenu={showMenu} setShowMenu={setShowMenu} />
           </div>
         </div>
       ) : (
         <div className="container relative mx-auto flex h-16 items-center justify-between px-4">
           {/* 일반 페이지 헤더 */}
           <Logo />
-          <MenuToggle setShowMenu={setShowMenu} />
+          <MenuToggle showMenu={showMenu} setShowMenu={setShowMenu} />
         </div>
       )}
 
