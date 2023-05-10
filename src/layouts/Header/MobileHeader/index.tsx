@@ -5,6 +5,8 @@ import Logo from "@components/Logo";
 import Menu from "./menu";
 import MenuToggle from "./menuToggle";
 
+import { ICurrentPage } from "@type/link";
+
 export default function MobileHeader({
   showMenu,
   setShowMenu,
@@ -13,8 +15,14 @@ export default function MobileHeader({
   setShowMenu: Dispatch<SetStateAction<boolean>>;
 }) {
   const router = useRouter();
+
   const pathsArr = router.asPath.split("/");
   const isDetailPage = router.query.id ? true : false;
+  const currentPage: ICurrentPage = {
+    educations: pathsArr.includes("educations"),
+    posts: pathsArr.includes("posts"),
+    chatbot: pathsArr.includes("chatbot"),
+  };
 
   return (
     <>
@@ -22,18 +30,26 @@ export default function MobileHeader({
       {isDetailPage ? (
         <div className="container relative mx-auto grid h-16 grid-cols-3 justify-between px-4">
           {/* 디테일 페이지 헤더 */}
-          <button className="flex items-center justify-start">
+          <button
+            className="flex items-center justify-start"
+            onClick={
+              () => router.back()
+              // router.push(`/${pathsArr[1]}`, undefined, { scroll: false })
+            }
+          >
             <i className="ri-arrow-left-s-line text-4xl text-main_color"></i>
             <span className="text-lg font-bold text-main_color">뒤로</span>
           </button>
 
           <div className="col-center">
             <h2 className="text-xl font-medium text-main_color">
-              {pathsArr.includes("educations")
+              {currentPage.educations
                 ? "교육 정보"
-                : pathsArr.includes("posts")
+                : currentPage.posts
                 ? "자유게시판"
-                : "챗봇"}
+                : currentPage.chatbot
+                ? "챗봇"
+                : ""}
             </h2>
           </div>
 
@@ -50,7 +66,7 @@ export default function MobileHeader({
       )}
 
       {/* 링크 영역 */}
-      {showMenu && <Menu />}
+      {showMenu && <Menu currentPage={currentPage} />}
     </>
   );
 }

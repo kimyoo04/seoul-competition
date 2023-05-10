@@ -1,13 +1,10 @@
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
-import Link from "next/link";
+import { ICurrentPage } from "@type/link";
 
-export default function Menu() {
-  const router = useRouter();
-  const pathsArr = router.asPath.split("/");
-
+export default function Menu({ currentPage }: { currentPage: ICurrentPage }) {
   return (
     <>
       <motion.div
@@ -26,9 +23,7 @@ export default function Menu() {
             <ButtonWrapper>
               <span
                 className={`text-lg ${
-                  pathsArr.includes("educations")
-                    ? "font-bold text-main_color"
-                    : ""
+                  currentPage.educations ? "font-bold text-main_color" : ""
                 }`}
               >
                 교육 정보
@@ -42,7 +37,7 @@ export default function Menu() {
             <ButtonWrapper>
               <span
                 className={`text-lg ${
-                  pathsArr.includes("posts") ? "font-bold text-main_color" : ""
+                  currentPage.posts ? "font-bold text-main_color" : ""
                 }`}
               >
                 자유게시판
@@ -56,9 +51,7 @@ export default function Menu() {
             <ButtonWrapper>
               <span
                 className={`text-lg ${
-                  pathsArr.includes("chatbot")
-                    ? "font-bold text-main_color"
-                    : ""
+                  currentPage.chatbot ? "font-bold text-main_color" : ""
                 }`}
               >
                 챗봇
