@@ -32,14 +32,14 @@ export default function ScrollButton() {
     <motion.button
       variants={scrollTo.top}
       animate={scrollTopAni}
-      whileHover={{ scale: 1.1, transition: { duration: 0.05 } }}
+      whileHover={{ scale: 1.1 }}
       whileTap={{
         scale: 0.8,
       }}
       onClick={() => scrollToTop()}
-      className="fixed left-0 right-0 z-10 w-8 h-8 mx-auto rounded-full shadow-md bg-main_color bottom-6 row-center"
+      className="col-center group fixed bottom-20 right-4 z-10 h-10 w-10 rounded-full bg-white shadow-sm shadow-gray-400 transition-all "
     >
-      <i className="text-3xl text-font_white ri-arrow-up-s-line"></i>
+      <i className="ri-arrow-up-s-line text-3xl text-font_black transition-all "></i>
     </motion.button>
   );
 }
