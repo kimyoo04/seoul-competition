@@ -21,7 +21,7 @@ export default function CommentItem({ data, index }: ICommentProps) {
         </div>
 
         {/* 수정, 삭제 버튼 */}
-        <CommentUpDelButtons />
+        <CommentUpDelButtons id={data.id} />
       </div>
 
       <div className="text-font_black ">{data.content}</div>
