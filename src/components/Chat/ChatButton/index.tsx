@@ -18,7 +18,7 @@ export default function ChatButton() {
         scale: 0.9,
         rotate: -10,
       }}
-      className={`row-center fixed bottom-4 right-4 h-8  w-8 gap-0.5 rounded-2xl rounded-br-none shadow-sm  ${chatBtnBg}`}
+      className={`row-center fixed bottom-6 right-4 h-10  w-10 gap-0.5 rounded-full  rounded-br-none shadow-sm  ${chatBtnBg}`}
       onClick={() => dispatch(chatActions.toggleChat())}
     >
       {/* 점 3개 표현 */}

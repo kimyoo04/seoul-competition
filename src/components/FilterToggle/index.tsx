@@ -9,7 +9,7 @@ export default function FilterToggle() {
 
   return (
     <motion.button
-      className="col-start fixed -right-6 bottom-6 h-40 w-16 rounded-l-2xl bg-main_color pl-2"
+      className="col-start fixed -right-6 top-24 h-40 w-16 rounded-l-2xl bg-main_color pl-2"
       whileHover={{ x: -8 }}
       onClick={() => dispatch(sidebarActions.toggleSidebar())}
     >
