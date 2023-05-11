@@ -62,3 +62,8 @@ export interface IMatchCheckCommentOrReview {
   id: TId;
   password: TPassword;
 }
+
+// 댓글과 리뷰의 matchCheck 요청 Form 유니온 타입
+export interface IMatchCheckCommentOrReviewForm {
+  password: TPassword;
+}
