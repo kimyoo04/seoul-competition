@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 import ButtonWrapper from "@components/Animation/ButtonWrapper";
-import ChatButton from "@components/Chat/ChatButton";
 
 export default function NavLinks() {
   const router = useRouter();
@@ -9,11 +8,6 @@ export default function NavLinks() {
 
   return (
     <div className="flex gap-2 text-xl font-medium  md:gap-4">
-      {/* 챗봇 버튼 */}
-      <div className="">
-        <ChatButton />
-      </div>
-
       {/* 링크들 */}
       <Link href={"/educations"} className="">
         <ButtonWrapper>

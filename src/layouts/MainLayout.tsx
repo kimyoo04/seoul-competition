@@ -3,6 +3,7 @@ import Header from "./Header";
 import Alert from "@components/Alert";
 import { useAppSelector } from "@toolkit/hook";
 import Chat from "@components/Chat";
+import ChatButton from "@components/Chat/ChatButton";
 
 export default function MainLayout({
   children,
@@ -20,6 +21,7 @@ export default function MainLayout({
 
       {/* 채팅창 */}
       <Chat />
+      <ChatButton />
 
       {/* 메인 영역 */}
       <motion.main

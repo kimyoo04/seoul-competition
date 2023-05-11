@@ -3,6 +3,7 @@ import Header from "./Header";
 import { useAppSelector } from "@toolkit/hook";
 import Alert from "@components/Alert";
 import Chat from "@components/Chat";
+import ChatButton from "@components/Chat/ChatButton";
 
 export default function OnePageLayout({
   children,
@@ -21,6 +22,7 @@ export default function OnePageLayout({
 
       {/* 채팅창 */}
       <Chat />
+      <ChatButton />
 
       {/* 메인 영역 */}
       <motion.div
