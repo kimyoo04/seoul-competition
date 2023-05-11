@@ -8,7 +8,8 @@ export default function NavLinks() {
 
   return (
     <div className="flex gap-2 text-xl font-medium  md:gap-4">
-      <Link href={"/educations"} className="col-end pt-[6px]">
+      {/* 링크들 */}
+      <Link href={"/educations"} className="">
         <ButtonWrapper>
           <span
             className={`text-lg ${
@@ -19,7 +20,7 @@ export default function NavLinks() {
           </span>
         </ButtonWrapper>
       </Link>
-      <Link href={"/posts"} className="col-end pt-[6px]">
+      <Link href={"/posts"} className="">
         <ButtonWrapper>
           <span
             className={`text-lg ${
@@ -27,17 +28,6 @@ export default function NavLinks() {
             }`}
           >
             자유게시판
-          </span>
-        </ButtonWrapper>
-      </Link>
-      <Link href={"/chatbot"} className="col-end pt-[6px]">
-        <ButtonWrapper>
-          <span
-            className={`text-lg ${
-              pathsArr.includes("chatbot") ? "font-bold text-main_color" : ""
-            }`}
-          >
-            챗봇
           </span>
         </ButtonWrapper>
       </Link>
