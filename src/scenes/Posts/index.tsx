@@ -8,6 +8,7 @@ import Sidebar from "@components/Sidebar";
 import FilterToggle from "@components/FilterToggle";
 import ScrollButton from "@components/ScrollButton";
 import PostList from "./PostList";
+import CreateButton from "./CreateButton";
 
 export default function Posts() {
   const dispatch = useAppDispatch();
@@ -23,6 +24,9 @@ export default function Posts() {
     <div className="w-full px-4">
       {/* 자유게시판 fetch 결과 출력 */}
       <PostList />
+
+      {/* 게시글 추가 버튼 */}
+      <CreateButton />
 
       {/* 최상단 이동 버튼 */}
       <ScrollButton />
