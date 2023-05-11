@@ -6,6 +6,7 @@ import Menu from "./menu";
 import MenuToggle from "./menuToggle";
 
 import { ICurrentPage } from "@type/link";
+import ChatButton from "@components/Chat/ChatButton";
 
 export default function MobileHeader({
   showMenu,
@@ -50,7 +51,9 @@ export default function MobileHeader({
             </h2>
           </div>
 
-          <div className="flex items-center justify-end">
+          {/* 챗봇 토글 과 메뉴 토글 */}
+          <div className="flex items-center justify-end gap-2">
+            <ChatButton />
             <MenuToggle showMenu={showMenu} setShowMenu={setShowMenu} />
           </div>
         </div>

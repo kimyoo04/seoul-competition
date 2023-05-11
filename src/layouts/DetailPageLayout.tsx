@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Header from "./Header";
 import Alert from "@components/Alert";
 import { useAppSelector } from "@toolkit/hook";
+import Chat from "@components/Chat";
 
 export default function DetailPageLayout({
   children,
@@ -11,11 +12,16 @@ export default function DetailPageLayout({
   const isAlert = useAppSelector((state) => state.alert.isAlert);
   return (
     <>
+      {/* 해더 영역 */}
       <Header />
 
       {/* Alert */}
       {isAlert && <Alert />}
 
+      {/* 채팅창 */}
+      <Chat />
+
+      {/* 메인 영역 */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
