@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import "../styles/button.css";
 import "../styles/textField.css";
 import "../styles/filter.css";
+import "../styles/chat.css";
 
 import Head from "next/head";
 import type { AppProps } from "next/app";
@@ -33,7 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Title here</title>
+        <title>Senior+</title>
         <meta name="description" content="description here" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="msapplication-TileColor" content="#ffffff" />
