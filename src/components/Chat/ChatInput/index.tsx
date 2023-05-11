@@ -13,19 +13,23 @@ export default function ChatInput() {
     if (data.question === "") return; // 빈칸 예외처리
 
     // 질문 전송 및 답변 받는 로직
-    const answer = await sendQuestion(data.question);
-    if (answer) {
-      // 질문 저장 // 답변 저장
+    const answerData = await sendQuestion(data.question);
+    if (answerData) {
+      // 질문 저장
       dispatch(
         chatActions.sendQuestion({ id: "client", question: data.question })
       );
-      dispatch(chatActions.getAnswer({ ...answer }));
+      // 답변 저장
+      dispatch(
+        chatActions.getAnswer({ id: answerData.id, answer: answerData.answer })
+      );
     } else {
+      // 알람 활성화
       dispatch(
         chatActions.getAlert({
           alertMsg: "챗봇이 답변을 하지 못했습니다.",
         })
-      ); // 알람 활성화
+      );
       return; // 예외처리
     }
 
