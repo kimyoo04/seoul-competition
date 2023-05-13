@@ -14,7 +14,7 @@ const buttonSlice = createSlice({
     setBeforeUpdate: (state, action: PayloadAction<boolean>) => {
       state.beforeUpdate = action.payload;
     },
-    setBeforDelete: (state, action: PayloadAction<boolean>) => {
+    setBeforeDelete: (state, action: PayloadAction<boolean>) => {
       state.beforeDelete = action.payload;
     },
     updatePwdCheck: (state, action: PayloadAction<string>) => {
