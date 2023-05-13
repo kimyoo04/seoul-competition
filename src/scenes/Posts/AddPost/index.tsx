@@ -57,7 +57,7 @@ export default function AddPost() {
           <div className="mb-2 flex gap-4">
             {/* 닉네임 필드 */}
             <div className="w-1/2">
-              <label htmlFor="nickname" className="mb-1 font-bold">
+              <label htmlFor="nickname" className="mb-1 font-medium">
                 닉네임 *
               </label>
               <input
@@ -80,14 +80,14 @@ export default function AddPost() {
                 maxLength={11}
                 className="textfield w-full rounded-md"
               />
-              <span className="mt-1 text-xs font-bold text-red-500">
+              <span className="mt-1 text-xs font-medium text-red-500">
                 <ErrorMsg>{errors?.nickname?.message}</ErrorMsg>
               </span>
             </div>
 
             {/* 비밀번호 필드 */}
             <div className="w-1/2">
-              <label htmlFor="password" className="mb-1 font-bold ">
+              <label htmlFor="password" className="mb-1 font-medium ">
                 비밀번호 *
               </label>
               <input
@@ -110,7 +110,7 @@ export default function AddPost() {
                 maxLength={13}
                 className="textfield w-full rounded-md"
               />
-              <span className="mt-1 text-xs font-bold text-red-500">
+              <span className="mt-1 text-xs font-medium text-red-500">
                 <ErrorMsg>{errors?.password?.message}</ErrorMsg>
               </span>
             </div>
@@ -118,7 +118,7 @@ export default function AddPost() {
 
           {/* 제목 필드 */}
           <div className="mb-4">
-            <label htmlFor="title" className="mb-1 font-bold ">
+            <label htmlFor="title" className="mb-1 font-medium ">
               제목 *
             </label>
             <input
@@ -142,14 +142,14 @@ export default function AddPost() {
               maxLength={51}
               className="textfield w-full rounded-md"
             />
-            <span className="mt-1 text-xs font-bold text-red-500">
+            <span className="mt-1 text-xs font-medium text-red-500">
               <ErrorMsg>{errors?.title?.message}</ErrorMsg>
             </span>
           </div>
 
           {/* 내용 필드 */}
           <div className="mb-4">
-            <label htmlFor="content" className="mb-1 font-bold ">
+            <label htmlFor="content" className="mb-1 font-medium ">
               내용 *
             </label>
             <textarea
@@ -172,7 +172,7 @@ export default function AddPost() {
               maxLength={1001}
               className="textfield h-48 w-full rounded-md px-3 py-1 leading-8 placeholder:pt-1"
             />
-            <span className="mt-1 text-xs font-bold text-red-500">
+            <span className="mt-1 text-xs font-medium text-red-500">
               <ErrorMsg>{errors?.content?.message}</ErrorMsg>
             </span>
           </div>

@@ -66,14 +66,14 @@ export default function PostUpdatePwd({
     <div className="w-full px-4">
       <div className="col-center mx-auto my-16 flex max-w-md">
         <div className="rounded-2xl bg-white p-8 shadow-lg">
-          <div className="mb-4 text-xl font-bold text-alert_info">
+          <div className="mb-4 text-xl font-medium text-alert_info">
             * 작성 시 입력한 비밀번호와 일치해야 합니다.
           </div>
           <form onSubmit={handleSubmit(onValid)}>
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="mb-2 block font-bold text-gray-700"
+                className="mb-2 block font-medium text-gray-700"
               >
                 비밀번호를 입력해 주세요.
               </label>
@@ -92,8 +92,9 @@ export default function PostUpdatePwd({
                 id="password"
                 className="w-full rounded-md border-2 border-gray-400 p-2"
               />
-              <span className="mt-1 text-xs font-bold text-red-500">
-              <ErrorMsg>{errors?.password?.message}</ErrorMsg></span>
+              <span className="mt-1 text-xs font-medium text-red-500">
+                <ErrorMsg>{errors?.password?.message}</ErrorMsg>
+              </span>
             </div>
             <div className="flex items-center justify-center">
               <button
