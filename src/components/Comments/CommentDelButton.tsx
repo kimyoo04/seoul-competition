@@ -88,7 +88,7 @@ export default function CommentDelButton({ id }: { id: TId }) {
 
   return (
     <>
-      {beforeUpdate && beforeDelete ? (
+      {beforeDelete ? (
         <form
           onSubmit={handleSubmit(onValid)}
           className="row-center relative gap-2"
@@ -134,7 +134,10 @@ export default function CommentDelButton({ id }: { id: TId }) {
         <motion.button
           whileTap={{ scale: 0.8 }}
           className="delete_btn"
-          onClick={() => dispatch(buttonActions.setBeforeDelete(true))}
+          onClick={() => {
+            dispatch(buttonActions.setBeforeDelete(true));
+            dispatch(buttonActions.setBeforeUpdate(false));
+          }}
         >
           삭제
         </motion.button>

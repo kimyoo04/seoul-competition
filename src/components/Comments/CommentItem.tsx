@@ -26,6 +26,10 @@ export default function CommentItem({ data, index }: ICommentProps) {
 
   const updatePwd = useAppSelector((state) => state.button.updatePwd);
 
+  const { beforeUpdate, beforeDelete } = useAppSelector(
+    (state) => state.button
+  );
+
   const id = data.id;
   const password = data.password;
 
@@ -203,8 +207,8 @@ export default function CommentItem({ data, index }: ICommentProps) {
 
             {/* 수정, 삭제 버튼 */}
             <div className="row-center">
-              <CommentUpdatePwd data={data} />
-              <CommentDelButton id={data.id} />
+              {!beforeDelete && <CommentUpdatePwd data={data} />}
+              {!beforeUpdate && <CommentDelButton id={data.id} />}
             </div>
           </div>
 

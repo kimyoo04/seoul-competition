@@ -11,12 +11,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { buttonActions } from "@features/button/buttonSlice";
 import { matchCheckReview } from "@api/review/matchCheckReview";
 
+// 기존 commnet, review 데이터와 pwd 체크 시 입력 받은 password
 export default function CommentUpdatePwd({ data }: { data: ICommentOrReview }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { beforeDelete, beforeUpdate } = useAppSelector(
-    (state) => state.button
-  );
+  const beforeUpdate = useAppSelector((state) => state.button.beforeUpdate);
 
   const { register, handleSubmit } = useForm<IMatchCheckCommentOrReviewForm>({
     defaultValues: {},
@@ -41,24 +40,11 @@ export default function CommentUpdatePwd({ data }: { data: ICommentOrReview }) {
         return;
       } else {
         dispatch(buttonActions.updatePwdCheck(password));
-
-        // // 성공 알람 활성화
-        // dispatch(
-        //   alertActions.alert({
-        //     alertType: "Success",
-        //     content: "댓글이 수정되었습니다.",
-        //   })
-        // );
       }
     } else {
-      const reviewData = {
-        educationId: router.query.id as string,
+      const isReviewMatch = await matchCheckReview({
         id: data.id,
         password,
-      };
-      const isReviewMatch = await matchCheckReview({
-        id: reviewData.id,
-        password: reviewData.password,
       });
 
       if (!isReviewMatch) {
@@ -72,21 +58,13 @@ export default function CommentUpdatePwd({ data }: { data: ICommentOrReview }) {
         return;
       } else {
         dispatch(buttonActions.updatePwdCheck(password));
-
-        // // 성공 알람 활성화
-        // dispatch(
-        //   alertActions.alert({
-        //     alertType: "Success",
-        //     content: "댓글이 수정되었습니다.",
-        //   })
-        // );
       }
     }
   };
 
   return (
     <>
-      {beforeDelete && beforeUpdate ? (
+      {beforeUpdate ? (
         <form
           onSubmit={handleSubmit(onValid)}
           className="row-center relative gap-2"
@@ -121,18 +99,21 @@ export default function CommentUpdatePwd({ data }: { data: ICommentOrReview }) {
           </button>
 
           {/* 댓글 수정 취소 버튼 */}
-          <div
+          <button
             className="create_btn cursor-pointer"
-            onClick={() => dispatch(buttonActions.setBeforeDelete(false))}
+            onClick={() => dispatch(buttonActions.setBeforeUpdate(false))}
           >
             취소
-          </div>
+          </button>
         </form>
       ) : (
         <motion.button
           whileTap={{ scale: 0.8 }}
           className="update_btn mr-2"
-          onClick={() => dispatch(buttonActions.setBeforeUpdate(true))}
+          onClick={() => {
+            dispatch(buttonActions.setBeforeUpdate(true));
+            dispatch(buttonActions.setBeforeDelete(false));
+          }}
         >
           수정
         </motion.button>
