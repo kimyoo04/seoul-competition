@@ -52,15 +52,14 @@ export interface IUpdateCommentOrReview {
 }
 
 // 댓글과 리뷰의 delete 요청 유니온 타입
-export interface IDeleteCommentOrReview {
+export interface IDeleteCommentOrReview extends IMatchCheckCommentOrReviewForm {
   id: TId;
-  password: TPassword;
 }
 
 // 댓글과 리뷰의 matchCheck 요청 유니온 타입
-export interface IMatchCheckCommentOrReview {
+export interface IMatchCheckCommentOrReview
+  extends IMatchCheckCommentOrReviewForm {
   id: TId;
-  password: TPassword;
 }
 
 // 댓글과 리뷰의 matchCheck 요청 Form 유니온 타입
