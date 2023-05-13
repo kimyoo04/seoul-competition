@@ -5,6 +5,7 @@ import searchReducer from "@features/search/searchSlice";
 import filterReducer from "@features/filter/filterSlice";
 import sidebarReducer from "@features/sidebar/sidebarSlice";
 import userFormReducer from "@features/userForm/userFormSlice";
+import buttonReducer from "@features/button/buttonSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     filter: filterReducer,
     sidebar: sidebarReducer,
     userForm: userFormReducer,
+    button: buttonReducer,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
