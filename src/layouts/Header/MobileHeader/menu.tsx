@@ -44,11 +44,6 @@ export default function Menu({ currentPage }: { currentPage: ICurrentPage }) {
               </span>
             </ButtonWrapper>
           </Link>
-          <div className="col-center w-full border-b border-main_color/30 py-2">
-            <ButtonWrapper>
-              <span className={`text-lg`}>챗봇</span>
-            </ButtonWrapper>
-          </div>
         </div>
       </motion.div>
     </>
