@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { timeYmd } from "@util/dateTime";
 import {
   ICommentOrReview,
   IUpdateCommentOrReview,
+  IUpdateCommentOrReviewForm,
 } from "@type/commentOrReview";
 import CommentDelButton from "./CommentDelButton";
 import CommentUpdatePwd from "./CommentUpdatePwd";
@@ -12,29 +13,21 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { alertActions } from "@features/alert/alertSlice";
 import { updateReview } from "@api/review/updateReview";
-import { buttonActions } from "@features/button/buttonSlice";
+import { commentActions } from "@features/comment/commentSlice";
 
 interface ICommentProps {
   data: ICommentOrReview;
   index: number;
 }
+
 const color = ["bg-[#FBFBFB]", "bg-[#F5F5F5}"];
 
 export default function CommentItem({ data, index }: ICommentProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
-
-  const [password, setPassword] = useState("");
-  const handlePassword = (password: string) => {
-    setPassword(password);
-  };
-
-  const updatePwd = useAppSelector((state) => state.button.updatePwd);
-
-  const { beforeUpdate, beforeDelete } = useAppSelector(
-    (state) => state.button
+  const { updatePwd, commentId, beforeUpdate, beforeDelete } = useAppSelector(
+    (state) => state.comment
   );
-  const id = data.id;
 
   const {
     register,
@@ -43,22 +36,16 @@ export default function CommentItem({ data, index }: ICommentProps) {
     control,
     setError,
     reset,
-  } = useForm<IUpdateCommentOrReview>({
+  } = useForm<IUpdateCommentOrReviewForm>({
     // 초기값 지정
     defaultValues: { nickname: data.nickname, content: data.content },
   });
 
-  const onvalid: SubmitHandler<IUpdateCommentOrReview> = async (data) => {
+  const onvalid: SubmitHandler<IUpdateCommentOrReviewForm> = async (
+    formData
+  ) => {
     //  폼 데이터 유효성 검사
-    if (!data.password) {
-      data.password = password;
-    }
-
-    if (!data.id) {
-      data.id = id;
-    }
-
-    if (!data.nickname || !data.content) {
+    if (!formData.nickname || !formData.content) {
       const errMsg: { [key: string]: string } = {};
 
       if (!data.nickname) errMsg.nickname = "이름 또는 닉네임을 입력해 주세요.";
@@ -78,14 +65,17 @@ export default function CommentItem({ data, index }: ICommentProps) {
     }
     if (router.pathname.split("/")[1] === "posts") {
       // 자유게시판의 댓글 수정
-      const commentData = {
-        postId: router.query.id as string,
-        ...data,
+      const commentData: IUpdateCommentOrReview = {
+        id: data.id,
+        password: updatePwd,
+        ...formData,
       };
+
+      console.log(commentData);
+
       await updateComment(commentData);
       reset({ nickname: "", content: "" });
       // 성공 알람 활성화
-      console.log(data);
       dispatch(
         alertActions.alert({
           alertType: "Success",
@@ -93,9 +83,10 @@ export default function CommentItem({ data, index }: ICommentProps) {
         })
       );
     } else {
-      const reviewData = {
-        educationId: router.query.id as string,
-        ...data,
+      const reviewData: IUpdateCommentOrReview = {
+        id: data.id,
+        password: updatePwd,
+        ...formData,
       };
       // 교육 정보의 리뷰 수정
       await updateReview(reviewData);
@@ -112,7 +103,7 @@ export default function CommentItem({ data, index }: ICommentProps) {
 
   return (
     <>
-      {updatePwd ? (
+      {updatePwd !== "" ? (
         <form
           className={`p-4 ${color[Math.round(index % 2)]}`}
           onSubmit={handleSubmit(onvalid)}
@@ -155,8 +146,7 @@ export default function CommentItem({ data, index }: ICommentProps) {
               <button
                 className="update_btn cursor-pointer"
                 onClick={() => {
-                  dispatch(buttonActions.updatePwdCheck(""));
-                  dispatch(buttonActions.setBeforeUpdate(false));
+                  dispatch(commentActions.resetComment());
                 }}
               >
                 취소
@@ -210,10 +200,8 @@ export default function CommentItem({ data, index }: ICommentProps) {
 
             {/* 수정, 삭제 버튼 */}
             <div className="row-center">
-              {!beforeDelete && (
-                <CommentUpdatePwd data={data} handlePassword={handlePassword} />
-              )}
-              {!beforeUpdate && <CommentDelButton id={data.id} />}
+                <CommentUpdatePwd id={data.id} />
+                <CommentDelButton id={data.id} />
             </div>
           </div>
 

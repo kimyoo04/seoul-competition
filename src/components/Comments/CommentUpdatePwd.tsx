@@ -1,29 +1,20 @@
 import { matchCheckComment } from "@api/comment/matchCheckComment";
 import { alertActions } from "@features/alert/alertSlice";
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import {
-  ICommentOrReview,
-  IMatchCheckCommentOrReviewForm,
-} from "@type/commentOrReview";
+import { IMatchCheckCommentOrReviewForm, TId } from "@type/commentOrReview";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { buttonActions } from "@features/button/buttonSlice";
+import { commentActions } from "@features/comment/commentSlice";
 import { matchCheckReview } from "@api/review/matchCheckReview";
 
-interface CommentUpdatePwdProps {
-  data: ICommentOrReview;
-  handlePassword: (password: string) => void;
-}
-
 // 기존 commnet, review 데이터와 pwd 체크 시 입력 받은 password
-export default function CommentUpdatePwd({
-  data,
-  handlePassword,
-}: CommentUpdatePwdProps) {
+export default function CommentUpdatePwd({ id }: { id: TId }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const beforeUpdate = useAppSelector((state) => state.button.beforeUpdate);
+  const { beforeDelete, beforeUpdate, commentId } = useAppSelector(
+    (state) => state.comment
+  );
 
   const { register, handleSubmit } = useForm<IMatchCheckCommentOrReviewForm>({
     defaultValues: {},
@@ -34,7 +25,7 @@ export default function CommentUpdatePwd({
   }) => {
     if (router.pathname.split("/")[1] === "posts") {
       const isCommentMatch = await matchCheckComment({
-        id: data.id,
+        id,
         password,
       });
       if (!isCommentMatch) {
@@ -47,12 +38,11 @@ export default function CommentUpdatePwd({
         );
         return;
       } else {
-        handlePassword(password);
-        dispatch(buttonActions.updatePwdCheck(password));
+        dispatch(commentActions.updatePwdCheck(password));
       }
     } else {
       const isReviewMatch = await matchCheckReview({
-        id: data.id,
+        id,
         password,
       });
 
@@ -66,15 +56,14 @@ export default function CommentUpdatePwd({
         );
         return;
       } else {
-        handlePassword(password);
-        dispatch(buttonActions.updatePwdCheck(password));
+        dispatch(commentActions.updatePwdCheck(password));
       }
     }
   };
 
   return (
     <>
-      {beforeUpdate ? (
+      {beforeUpdate && commentId === id ? (
         <form
           onSubmit={handleSubmit(onValid)}
           className="row-center relative gap-2"
@@ -111,19 +100,25 @@ export default function CommentUpdatePwd({
           {/* 댓글 수정 취소 버튼 */}
           <button
             className="create_btn cursor-pointer"
-            onClick={() => dispatch(buttonActions.setBeforeUpdate(false))}
+            onClick={() => dispatch(commentActions.resetComment())}
           >
             취소
           </button>
         </form>
       ) : (
-        <motion.button
-          whileTap={{ scale: 0.8 }}
-          className="update_btn mr-2"
-          onClick={() => dispatch(buttonActions.setBeforeUpdate(true))}
-        >
-          수정
-        </motion.button>
+        <>
+          {/*  */}
+          {!beforeDelete ||
+            (commentId !== id && (
+              <motion.button
+                whileTap={{ scale: 0.8 }}
+                className="update_btn mr-2"
+                onClick={() => dispatch(commentActions.clickUpdate(id))}
+              >
+                수정
+              </motion.button>
+            ))}
+        </>
       )}
     </>
   );

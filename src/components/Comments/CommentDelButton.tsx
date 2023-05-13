@@ -7,12 +7,14 @@ import { matchCheckComment } from "@api/comment/matchCheckComment";
 import { alertActions } from "@features/alert/alertSlice";
 import { deleteComment } from "@api/comment/deleteComment";
 import { deleteReview } from "@api/review/deleteReview";
-import { buttonActions } from "@features/button/buttonSlice";
+import { commentActions } from "@features/comment/commentSlice";
 
 export default function CommentDelButton({ id }: { id: TId }) {
   const dispatch = useAppDispatch();
-  const { beforeDelete } = useAppSelector((state) => state.button);
   const router = useRouter();
+  const { beforeDelete, beforeUpdate, commentId } = useAppSelector(
+    (state) => state.comment
+  );
 
   const { register, handleSubmit } = useForm<IMatchCheckCommentOrReviewForm>({
     defaultValues: {},
@@ -86,7 +88,7 @@ export default function CommentDelButton({ id }: { id: TId }) {
 
   return (
     <>
-      {beforeDelete ? (
+      {beforeDelete && commentId === id ? (
         <form
           onSubmit={handleSubmit(onValid)}
           className="row-center relative gap-2"
@@ -123,7 +125,7 @@ export default function CommentDelButton({ id }: { id: TId }) {
           {/* 댓글 삭제 취소 버튼 */}
           <div
             className="create_btn cursor-pointer"
-            onClick={() => dispatch(buttonActions.setBeforeDelete(false))}
+            onClick={() => dispatch(commentActions.clickCancel())}
           >
             취소
           </div>
@@ -132,7 +134,7 @@ export default function CommentDelButton({ id }: { id: TId }) {
         <motion.button
           whileTap={{ scale: 0.8 }}
           className="delete_btn"
-          onClick={() => dispatch(buttonActions.setBeforeDelete(true))}
+          onClick={() => dispatch(commentActions.clickDelete(id))}
         >
           삭제
         </motion.button>
