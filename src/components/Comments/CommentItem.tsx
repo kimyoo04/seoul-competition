@@ -1,32 +1,41 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { timeYmd } from "@util/dateTime";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+
+import CommentDelButton from "./CommentDelButton";
+import CommentUpdatePwd from "./CommentUpdatePwd";
+
+import { useAppDispatch, useAppSelector } from "@toolkit/hook";
+import { alertActions } from "@features/alert/alertSlice";
+import { commentActions } from "@features/comment/commentSlice";
+
+import { useUpdateComment } from "@api/comment/updateComment";
+import { useUpdateReview } from "@api/review/updateReview";
+
 import {
   ICommentOrReview,
   IUpdateCommentOrReview,
   IUpdateCommentOrReviewForm,
 } from "@type/commentOrReview";
-import CommentDelButton from "./CommentDelButton";
-import CommentUpdatePwd from "./CommentUpdatePwd";
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import { updateComment } from "@api/comment/updateComment";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { useRouter } from "next/router";
-import { alertActions } from "@features/alert/alertSlice";
-import { updateReview } from "@api/review/updateReview";
-import { commentActions } from "@features/comment/commentSlice";
 
 interface ICommentProps {
   data: ICommentOrReview;
   index: number;
 }
 
+// 댓글 배경 컬러
 const color = ["bg-[#FBFBFB]", "bg-[#F5F5F5}"];
 
 export default function CommentItem({ data, index }: ICommentProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { updatePwd, commentId, beforeUpdate, beforeDelete } = useAppSelector(
-    (state) => state.comment
+  const { updatePwd, commentId } = useAppSelector((state) => state.comment);
+  const { mutateAsync: CommentmutateAsync } = useUpdateComment(
+    router.query.id as string
+  );
+  const { mutateAsync: ReviewmutateAsync } = useUpdateReview(
+    router.query.id as string
   );
 
   const {
@@ -64,17 +73,19 @@ export default function CommentItem({ data, index }: ICommentProps) {
       return;
     }
     if (router.pathname.split("/")[1] === "posts") {
-      // 자유게시판의 댓글 수정
       const commentData: IUpdateCommentOrReview = {
         id: data.id,
         password: updatePwd,
         ...formData,
       };
 
-      console.log(commentData);
-
-      await updateComment(commentData);
+      // 자유게시판의 댓글 수정
+      await CommentmutateAsync(commentData);
       reset({ nickname: "", content: "" });
+
+      // commentState 초기화
+      dispatch(commentActions.resetComment());
+
       // 성공 알람 활성화
       dispatch(
         alertActions.alert({
@@ -88,9 +99,14 @@ export default function CommentItem({ data, index }: ICommentProps) {
         password: updatePwd,
         ...formData,
       };
+
       // 교육 정보의 리뷰 수정
-      await updateReview(reviewData);
+      await ReviewmutateAsync(reviewData);
       reset({ nickname: "", content: "" });
+
+      // commentState 초기화
+      dispatch(commentActions.resetComment());
+
       // 성공 알람 활성화
       dispatch(
         alertActions.alert({
@@ -103,7 +119,7 @@ export default function CommentItem({ data, index }: ICommentProps) {
 
   return (
     <>
-      {updatePwd !== "" ? (
+      {updatePwd !== "" && commentId == data.id ? (
         <form
           className={`p-4 ${color[Math.round(index % 2)]}`}
           onSubmit={handleSubmit(onvalid)}
@@ -132,7 +148,7 @@ export default function CommentItem({ data, index }: ICommentProps) {
                 className="h-8 w-full rounded-lg placeholder:text-sm"
               />
 
-              <span className="mt-1 text-xs font-bold text-red-500">
+              <span className="mt-1 text-xs font-medium text-red-500">
                 {errors?.nickname?.message}
               </span>
             </div>
@@ -183,7 +199,7 @@ export default function CommentItem({ data, index }: ICommentProps) {
               )}
             />
 
-            <span className="mt-1 text-xs font-bold text-red-500">
+            <span className="mt-1 text-xs font-medium text-red-500">
               {errors?.content?.message}
             </span>
           </div>
@@ -200,8 +216,8 @@ export default function CommentItem({ data, index }: ICommentProps) {
 
             {/* 수정, 삭제 버튼 */}
             <div className="row-center">
-                <CommentUpdatePwd id={data.id} />
-                <CommentDelButton id={data.id} />
+              <CommentUpdatePwd id={data.id} />
+              <CommentDelButton id={data.id} />
             </div>
           </div>
 

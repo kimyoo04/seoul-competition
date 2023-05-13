@@ -4,7 +4,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useCreateCommentMutation } from "@api/comment/createComment";
 import { useCreateReviewMutation } from "@api/review/createReview";
 
-import { ICommentOrReviewForm } from "@type/commentOrReview";
+import { ICreateCommentOrReviewForm } from "@type/commentOrReview";
 import Loading from "@components/Loading";
 
 export default function CommentInput() {
@@ -21,12 +21,12 @@ export default function CommentInput() {
     control,
     setError,
     reset,
-  } = useForm<ICommentOrReviewForm>({
+  } = useForm<ICreateCommentOrReviewForm>({
     // 초기값 지정
     defaultValues: { nickname: "", password: "", content: "" },
   });
 
-  const onValid: SubmitHandler<ICommentOrReviewForm> = async (data) => {
+  const onValid: SubmitHandler<ICreateCommentOrReviewForm> = async (data) => {
     //  폼 데이터 유효성 검사
     if (!data.nickname || !data.password || !data.content) {
       const errMsg: { [key: string]: string } = {};
@@ -79,7 +79,7 @@ export default function CommentInput() {
           <div className="row-start w-full gap-4">
             {/* 닉네임 필드 */}
             <div className="col-start w-full">
-              <label htmlFor="nickname" className="mb-1 font-bold">
+              <label htmlFor="nickname" className="mb-1 font-medium">
                 닉네임
               </label>
 
@@ -104,14 +104,14 @@ export default function CommentInput() {
                 className="h-8 w-full rounded-lg placeholder:text-sm"
               />
 
-              <span className="mt-1 text-xs font-bold text-red-500">
+              <span className="mt-1 text-xs font-medium text-red-500">
                 {errors?.nickname?.message}
               </span>
             </div>
 
             {/* 비밀번호 필드 */}
             <div className="col-start w-full">
-              <label htmlFor="password" className="mb-1 font-bold">
+              <label htmlFor="password" className="mb-1 font-medium">
                 비밀번호
               </label>
 
@@ -136,7 +136,7 @@ export default function CommentInput() {
                 className="h-8 w-full rounded-lg placeholder:text-sm"
               />
 
-              <span className="mt-1 text-xs font-bold text-red-500">
+              <span className="mt-1 text-xs font-medium text-red-500">
                 {errors?.password?.message}
               </span>
             </div>
@@ -171,7 +171,7 @@ export default function CommentInput() {
               )}
             />
 
-            <span className="mt-1 text-xs font-bold text-red-500">
+            <span className="mt-1 text-xs font-medium text-red-500">
               {errors?.content?.message}
             </span>
           </div>

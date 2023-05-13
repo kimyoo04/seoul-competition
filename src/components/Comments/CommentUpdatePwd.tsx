@@ -1,18 +1,21 @@
-import { matchCheckComment } from "@api/comment/matchCheckComment";
-import { alertActions } from "@features/alert/alertSlice";
-import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import { IMatchCheckCommentOrReviewForm, TId } from "@type/commentOrReview";
-import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { motion } from "framer-motion";
+
+import { useAppDispatch, useAppSelector } from "@toolkit/hook";
 import { commentActions } from "@features/comment/commentSlice";
+import { alertActions } from "@features/alert/alertSlice";
+
+import { matchCheckComment } from "@api/comment/matchCheckComment";
 import { matchCheckReview } from "@api/review/matchCheckReview";
+
+import { IMatchCheckCommentOrReviewForm, TId } from "@type/commentOrReview";
 
 // 기존 commnet, review 데이터와 pwd 체크 시 입력 받은 password
 export default function CommentUpdatePwd({ id }: { id: TId }) {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const { beforeDelete, beforeUpdate, commentId } = useAppSelector(
+  const { beforeUpdate, commentId, updatePwd } = useAppSelector(
     (state) => state.comment
   );
 
@@ -28,6 +31,7 @@ export default function CommentUpdatePwd({ id }: { id: TId }) {
         id,
         password,
       });
+
       if (!isCommentMatch) {
         // 경고창 활성화
         dispatch(
@@ -38,6 +42,7 @@ export default function CommentUpdatePwd({ id }: { id: TId }) {
         );
         return;
       } else {
+        // password를 state에 저장
         dispatch(commentActions.updatePwdCheck(password));
       }
     } else {
@@ -56,6 +61,7 @@ export default function CommentUpdatePwd({ id }: { id: TId }) {
         );
         return;
       } else {
+        // password를 state에 저장
         dispatch(commentActions.updatePwdCheck(password));
       }
     }
@@ -86,9 +92,9 @@ export default function CommentUpdatePwd({ id }: { id: TId }) {
               type="password"
               name="password"
               autoComplete="off"
-              placeholder="4 자 이상"
+              placeholder="비밀번호"
               maxLength={13}
-              className=" h-8 w-[100px] rounded-lg placeholder:text-sm placeholder:font-bold placeholder:text-gray_2"
+              className=" h-8 w-[100px] rounded-lg placeholder:text-sm placeholder:font-medium placeholder:text-gray_2"
             />
           </div>
 
@@ -107,17 +113,18 @@ export default function CommentUpdatePwd({ id }: { id: TId }) {
         </form>
       ) : (
         <>
-          {/*  */}
-          {!beforeDelete ||
-            (commentId !== id && (
-              <motion.button
-                whileTap={{ scale: 0.8 }}
-                className="update_btn mr-2"
-                onClick={() => dispatch(commentActions.clickUpdate(id))}
-              >
-                수정
-              </motion.button>
-            ))}
+          {/* id불일치 */}
+          {commentId !== id && (
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              className="update_btn mr-2"
+              onClick={() => {
+                if (updatePwd === "") dispatch(commentActions.clickUpdate(id));
+              }}
+            >
+              수정
+            </motion.button>
+          )}
         </>
       )}
     </>
