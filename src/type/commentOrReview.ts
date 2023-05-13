@@ -44,10 +44,13 @@ export interface ICommentOrReviewForm {
 }
 
 // 댓글과 리뷰의 update 요청 유니온 타입
-export interface IUpdateCommentOrReview {
+export interface IUpdateCommentOrReview extends IUpdateCommentOrReviewForm {
   id: TId;
-  nickname?: TNickname;
   password?: TPassword;
+}
+// 댓글과 리뷰의 update 요청 유니온 타입
+export interface IUpdateCommentOrReviewForm {
+  nickname?: TNickname;
   content?: TContent;
 }
 
