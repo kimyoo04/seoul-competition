@@ -1,7 +1,6 @@
 import axios from "@api/axiosInstance";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ICreateComment } from "@type/commentOrReview";
-import { useRouter } from "next/router";
 
 // 자유 게시판 댓글
 export const createComment = async (data: ICreateComment) => {
@@ -15,8 +14,6 @@ export const createComment = async (data: ICreateComment) => {
 
 // 자유 게시판 댓글 Mutation
 export const useCreateCommentMutation = () => {
-  const router = useRouter();
-
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -25,13 +22,9 @@ export const useCreateCommentMutation = () => {
       await queryClient.invalidateQueries({
         queryKey: ["postDetail", variables.postId],
       });
-      router.push(`/posts/${variables.postId}`);
     },
     onError: (err) => {
       console.error(err);
-    },
-    onSettled: () => {
-      console.log("완료");
     },
   });
 };

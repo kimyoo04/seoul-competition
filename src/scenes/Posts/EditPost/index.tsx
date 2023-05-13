@@ -85,7 +85,7 @@ export default function EditPost({ id }: { id: string }) {
               <form onSubmit={handleSubmit(onValid)}>
                 {/* 닉네임 필드 */}
                 <div className="col-start mb-2 w-44 gap-1">
-                  <label htmlFor="nickname" className="font-bold">
+                  <label htmlFor="nickname" className="font-medium">
                     닉네임 *
                   </label>
                   <input
@@ -109,14 +109,14 @@ export default function EditPost({ id }: { id: string }) {
                     maxLength={11}
                     className="textfield w-full rounded-md"
                   />
-                  <span className="mt-1 text-xs font-bold text-red-500">
+                  <span className="mt-1 text-xs font-medium text-red-500">
                     <ErrorMsg>{errors?.nickname?.message}</ErrorMsg>
                   </span>
                 </div>
 
                 {/* 제목 필드 */}
                 <div className="col-start mb-4  gap-1">
-                  <label htmlFor="title" className="font-bold ">
+                  <label htmlFor="title" className="font-medium ">
                     제목 *
                   </label>
                   <input
@@ -141,14 +141,14 @@ export default function EditPost({ id }: { id: string }) {
                     maxLength={51}
                     className="textfield w-full rounded-md"
                   />
-                  <span className="mt-1 text-xs font-bold text-red-500">
+                  <span className="mt-1 text-xs font-medium text-red-500">
                     <ErrorMsg>{errors?.title?.message}</ErrorMsg>
                   </span>
                 </div>
 
                 {/* 내용 필드 */}
                 <div className=" col-start  mb-4 gap-1">
-                  <label htmlFor="content" className="font-bold ">
+                  <label htmlFor="content" className="font-medium ">
                     내용 *
                   </label>
                   <textarea
@@ -172,7 +172,7 @@ export default function EditPost({ id }: { id: string }) {
                     maxLength={1001}
                     className="textfield h-48 w-full rounded-md px-3 py-1 leading-8 placeholder:pt-1"
                   />
-                  <span className="mt-1 text-xs font-bold text-red-500">
+                  <span className="mt-1 text-xs font-medium text-red-500">
                     <ErrorMsg>{errors?.content?.message}</ErrorMsg>
                   </span>
                 </div>

@@ -1,24 +1,33 @@
+import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IMatchCheckCommentOrReviewForm, TId } from "@type/commentOrReview";
-import { useRouter } from "next/router";
+
 import { useAppDispatch, useAppSelector } from "@toolkit/hook";
-import { matchCheckComment } from "@api/comment/matchCheckComment";
 import { alertActions } from "@features/alert/alertSlice";
-import { deleteComment } from "@api/comment/deleteComment";
-import { deleteReview } from "@api/review/deleteReview";
 import { commentActions } from "@features/comment/commentSlice";
+
+import { matchCheckComment } from "@api/comment/matchCheckComment";
+import { matchCheckReview } from "@api/review/matchCheckReview";
+
+import { useDeleteComment } from "@api/comment/deleteComment";
+import { useDeleteReview } from "@api/review/deleteReview";
+
+import { IMatchCheckCommentOrReviewForm, TId } from "@type/commentOrReview";
 
 export default function CommentDelButton({ id }: { id: TId }) {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { beforeDelete, beforeUpdate, commentId } = useAppSelector(
+  const { beforeDelete, commentId, updatePwd } = useAppSelector(
     (state) => state.comment
   );
+  const { mutateAsync: CommentmutateAsync } = useDeleteComment(
+    router.query.id as string
+  );
+  const { mutateAsync: ReviewmutateAsync } = useDeleteReview(
+    router.query.id as string
+  );
 
-  const { register, handleSubmit } = useForm<IMatchCheckCommentOrReviewForm>({
-    defaultValues: {},
-  });
+  const { register, handleSubmit } = useForm<IMatchCheckCommentOrReviewForm>();
 
   const onValid: SubmitHandler<IMatchCheckCommentOrReviewForm> = async (
     data
@@ -39,7 +48,7 @@ export default function CommentDelButton({ id }: { id: TId }) {
         return;
       } else {
         // 삭제 요청
-        await deleteComment({ id: id, password: data.password });
+        await CommentmutateAsync({ id: id, password: data.password });
 
         // 성공 알람 활성화
         dispatch(
@@ -55,7 +64,7 @@ export default function CommentDelButton({ id }: { id: TId }) {
         id: id,
         ...data,
       };
-      const isMatch = await matchCheckComment({
+      const isMatch = await matchCheckReview({
         id: reviewData.id,
         password: reviewData.password,
       });
@@ -70,24 +79,22 @@ export default function CommentDelButton({ id }: { id: TId }) {
         return;
       } else {
         // 삭제 요청
-        await deleteReview({ id: id, password: data.password });
+        await ReviewmutateAsync({ id: id, password: data.password });
 
+        // 성공 알람 활성화
         dispatch(
           alertActions.alert({
             alertType: "Success",
             content: "댓글이 삭제되었습니다.",
           })
         );
-        // 목록 페이지 이동
-        router.push(`/educations/${reviewData.educationId}`);
       }
     }
-
-    // 비밀 번호 확인
   };
 
   return (
     <>
+      {/* false && true -> false */}
       {beforeDelete && commentId === id ? (
         <form
           onSubmit={handleSubmit(onValid)}
@@ -111,9 +118,9 @@ export default function CommentDelButton({ id }: { id: TId }) {
               type="password"
               name="password"
               autoComplete="off"
-              placeholder="4 자 이상"
+              placeholder="비밀번호"
               maxLength={13}
-              className=" h-8 w-[100px] rounded-lg placeholder:text-sm placeholder:font-bold placeholder:text-gray_2"
+              className=" h-8 w-[100px] rounded-lg placeholder:text-sm placeholder:font-medium placeholder:text-gray_2"
             />
           </div>
 
@@ -131,13 +138,19 @@ export default function CommentDelButton({ id }: { id: TId }) {
           </div>
         </form>
       ) : (
-        <motion.button
-          whileTap={{ scale: 0.8 }}
-          className="delete_btn"
-          onClick={() => dispatch(commentActions.clickDelete(id))}
-        >
-          삭제
-        </motion.button>
+        <>
+          {commentId !== id && (
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              className="delete_btn"
+              onClick={() => {
+                if (updatePwd === "") dispatch(commentActions.clickDelete(id));
+              }}
+            >
+              삭제
+            </motion.button>
+          )}
+        </>
       )}
     </>
   );

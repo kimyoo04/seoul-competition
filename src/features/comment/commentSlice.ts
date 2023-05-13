@@ -5,7 +5,7 @@ const initialState: ICommentState = {
   beforeUpdate: false,
   beforeDelete: false,
   updatePwd: "",
-  commentId: null,
+  commentId: -1,
 };
 
 const commentSlice = createSlice({
@@ -14,19 +14,23 @@ const commentSlice = createSlice({
   reducers: {
     // 수정 버튼 클릭했을 때
     clickUpdate: (state, action: PayloadAction<number>) => {
-      state.beforeUpdate = true
-      state.commentId = action.payload
+      state.beforeUpdate = true;
+      state.beforeDelete = false;
+      state.commentId = action.payload;
     },
+
     // 삭제 버튼 클릭했을 때
     clickDelete: (state, action: PayloadAction<number>) => {
-      state.beforeDelete = true
-      state.commentId = action.payload
+      state.beforeDelete = true;
+      state.beforeUpdate = false;
+      state.commentId = action.payload;
     },
 
     // 취소 버튼을 클릭했을 때
     clickCancel: (state) => {
-      state.beforeDelete = false
-      state.beforeUpdate = false
+      state.beforeDelete = false;
+      state.beforeUpdate = false;
+      state.commentId = -1;
     },
 
     // 패스워드를 입력 성공했을 때
@@ -39,7 +43,7 @@ const commentSlice = createSlice({
       state.beforeUpdate = false;
       state.beforeDelete = false;
       state.updatePwd = "";
-      state.commentId = null;
+      state.commentId = -1;
     },
   },
 });
