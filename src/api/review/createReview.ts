@@ -1,7 +1,6 @@
 import axios from "@api/axiosInstance";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ICreateReview } from "@type/commentOrReview";
-import { useRouter } from "next/router";
 
 // 교육 게시판 리뷰
 export const createReview = async (data: ICreateReview) => {
@@ -15,8 +14,6 @@ export const createReview = async (data: ICreateReview) => {
 
 // 교육 게시판 리뷰 Mutation
 export const useCreateReviewMutation = () => {
-  const router = useRouter();
-
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -25,14 +22,9 @@ export const useCreateReviewMutation = () => {
       await queryClient.invalidateQueries({
         queryKey: ["educationDetail", variables.educationId],
       });
-
-      router.push(`/educations/${variables.educationId}`);
     },
     onError: (err) => {
       console.error(err);
-    },
-    onSettled: () => {
-      console.log("완료");
     },
   });
 };
