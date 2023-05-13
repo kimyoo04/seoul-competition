@@ -11,9 +11,7 @@ import { buttonActions } from "@features/button/buttonSlice";
 
 export default function CommentDelButton({ id }: { id: TId }) {
   const dispatch = useAppDispatch();
-  const { beforeDelete, beforeUpdate } = useAppSelector(
-    (state) => state.button
-  );
+  const { beforeDelete } = useAppSelector((state) => state.button);
   const router = useRouter();
 
   const { register, handleSubmit } = useForm<IMatchCheckCommentOrReviewForm>({
@@ -134,10 +132,7 @@ export default function CommentDelButton({ id }: { id: TId }) {
         <motion.button
           whileTap={{ scale: 0.8 }}
           className="delete_btn"
-          onClick={() => {
-            dispatch(buttonActions.setBeforeDelete(true));
-            dispatch(buttonActions.setBeforeUpdate(false));
-          }}
+          onClick={() => dispatch(buttonActions.setBeforeDelete(true))}
         >
           삭제
         </motion.button>

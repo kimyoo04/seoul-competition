@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { timeYmd } from "@util/dateTime";
 import {
   ICommentOrReview,
@@ -24,14 +24,17 @@ export default function CommentItem({ data, index }: ICommentProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
+  const [password, setPassword] = useState("");
+  const handlePassword = (password: string) => {
+    setPassword(password);
+  };
+
   const updatePwd = useAppSelector((state) => state.button.updatePwd);
 
   const { beforeUpdate, beforeDelete } = useAppSelector(
     (state) => state.button
   );
-
   const id = data.id;
-  const password = data.password;
 
   const {
     register,
@@ -82,6 +85,7 @@ export default function CommentItem({ data, index }: ICommentProps) {
       await updateComment(commentData);
       reset({ nickname: "", content: "" });
       // 성공 알람 활성화
+      console.log(data);
       dispatch(
         alertActions.alert({
           alertType: "Success",
@@ -110,7 +114,6 @@ export default function CommentItem({ data, index }: ICommentProps) {
     <>
       {updatePwd ? (
         <form
-          key={data.id}
           className={`p-4 ${color[Math.round(index % 2)]}`}
           onSubmit={handleSubmit(onvalid)}
         >
@@ -207,7 +210,9 @@ export default function CommentItem({ data, index }: ICommentProps) {
 
             {/* 수정, 삭제 버튼 */}
             <div className="row-center">
-              {!beforeDelete && <CommentUpdatePwd data={data} />}
+              {!beforeDelete && (
+                <CommentUpdatePwd data={data} handlePassword={handlePassword} />
+              )}
               {!beforeUpdate && <CommentDelButton id={data.id} />}
             </div>
           </div>

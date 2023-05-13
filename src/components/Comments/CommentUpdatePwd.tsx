@@ -11,8 +11,16 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { buttonActions } from "@features/button/buttonSlice";
 import { matchCheckReview } from "@api/review/matchCheckReview";
 
+interface CommentUpdatePwdProps {
+  data: ICommentOrReview;
+  handlePassword: (password: string) => void;
+}
+
 // 기존 commnet, review 데이터와 pwd 체크 시 입력 받은 password
-export default function CommentUpdatePwd({ data }: { data: ICommentOrReview }) {
+export default function CommentUpdatePwd({
+  data,
+  handlePassword,
+}: CommentUpdatePwdProps) {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const beforeUpdate = useAppSelector((state) => state.button.beforeUpdate);
@@ -39,6 +47,7 @@ export default function CommentUpdatePwd({ data }: { data: ICommentOrReview }) {
         );
         return;
       } else {
+        handlePassword(password);
         dispatch(buttonActions.updatePwdCheck(password));
       }
     } else {
@@ -57,6 +66,7 @@ export default function CommentUpdatePwd({ data }: { data: ICommentOrReview }) {
         );
         return;
       } else {
+        handlePassword(password);
         dispatch(buttonActions.updatePwdCheck(password));
       }
     }
@@ -110,10 +120,7 @@ export default function CommentUpdatePwd({ data }: { data: ICommentOrReview }) {
         <motion.button
           whileTap={{ scale: 0.8 }}
           className="update_btn mr-2"
-          onClick={() => {
-            dispatch(buttonActions.setBeforeUpdate(true));
-            dispatch(buttonActions.setBeforeDelete(false));
-          }}
+          onClick={() => dispatch(buttonActions.setBeforeUpdate(true))}
         >
           수정
         </motion.button>
