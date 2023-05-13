@@ -54,11 +54,11 @@ export default function EducationList() {
         <>{error && <p>Error: {error.message}</p>}</>
       ) : (
         <>
-          {/* //! 검색 정보 헤더 */}
-          <SearchHeader />
-
           {/* //! 검색결과가 유사한 게시물 먼저 출력 */}
           {searchKeyword !== "" && <SimilarEducationList />}
+
+          {/* //! 검색 정보 헤더 */}
+          <SearchHeader />
 
           {/* //! 교육정보 검색결과 무한 스크롤 영역 */}
           <ul className="grid w-full grid-cols-1 gap-4">

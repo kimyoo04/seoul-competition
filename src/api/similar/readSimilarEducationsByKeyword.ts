@@ -8,10 +8,15 @@ import { TSearchKeyword } from "@type/search";
 export const readSimilarEducationsByKeyword = async (
   keyword: TSearchKeyword
 ) => {
-  const response = await axios.get("/educations/similar", {
-    params: { keyword },
-  });
-  return response.data;
+  try {
+    const { data } = await axios.get("/educations/similar", {
+      params: { keyword },
+    });
+    return data.data;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
 };
 
 export const useReadSimilarEducationsByKeyword = (keyword: TSearchKeyword) => {
