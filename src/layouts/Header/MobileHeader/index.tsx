@@ -21,7 +21,6 @@ export default function MobileHeader({
   const currentPage: ICurrentPage = {
     educations: pathsArr.includes("educations"),
     posts: pathsArr.includes("posts"),
-    chatbot: pathsArr.includes("chatbot"),
   };
 
   return (
@@ -33,8 +32,8 @@ export default function MobileHeader({
           <button
             className="flex items-center justify-start"
             onClick={
-              () => router.back()
-              // router.push(`/${pathsArr[1]}`, undefined, { scroll: false })
+              () => router.push(`/${pathsArr[1]}`, undefined, { scroll: false })
+              // router.back()
             }
           >
             <i className="ri-arrow-left-s-line text-4xl text-main_color"></i>
@@ -47,13 +46,12 @@ export default function MobileHeader({
                 ? "교육 정보"
                 : currentPage.posts
                 ? "자유게시판"
-                : currentPage.chatbot
-                ? "챗봇"
                 : ""}
             </h2>
           </div>
 
-          <div className="flex items-center justify-end">
+          {/* 챗봇 토글 과 메뉴 토글 */}
+          <div className="flex items-center justify-end gap-2">
             <MenuToggle showMenu={showMenu} setShowMenu={setShowMenu} />
           </div>
         </div>

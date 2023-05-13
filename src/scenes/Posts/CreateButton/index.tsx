@@ -8,7 +8,7 @@ export default function CreateButton() {
       whileTap={{
         scale: 0.8,
       }}
-      className="row-center fixed  bottom-4 left-16 z-10 mx-auto h-12 w-12 rounded-full bg-main_color shadow-md"
+      className="row-center fixed bottom-6 left-0 right-0 z-10 mx-auto h-10 w-20 rounded-full bg-main_color shadow-md"
     >
       <Link href="/posts/new">
         <i className="ri-pencil-line text-2xl  text-font_white"></i>
