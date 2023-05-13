@@ -5,10 +5,15 @@ import axios from "@api/axiosInstance";
 import { IEducationData, TEducationId } from "@type/educations";
 
 export const readSimilarEducationsById = async (educationId: TEducationId) => {
-  const response = await axios.get("/educations/similar", {
-    params: { educationId },
-  });
-  return response.data;
+  try {
+    const { data } = await axios.get("/educations/similar", {
+      params: { educationId },
+    });
+    return data.data;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
 };
 
 export const useReadSimilarEducationsById = (educationId: TEducationId) => {
