@@ -10,7 +10,7 @@ export default function EducationItem({
 
   const capacityBg =
     education.status === "마감"
-      ? "text-gray_4 shadow-gray_4"
+      ? "text-gray_2 shadow-gray_2"
       : education.capacity >= 100
       ? "text-[#4A00CC] shadow-[#4A00CC]"
       : "text-font_black shadow-font_black";
@@ -19,7 +19,7 @@ export default function EducationItem({
 
   const priceBg =
     education.status === "마감"
-      ? "text-gray_4"
+      ? "text-gray_2 shadow-gray_2"
       : priceNum >= 20000
       ? "text-[#05B600] shadow-[#05B600]"
       : priceNum > 0
