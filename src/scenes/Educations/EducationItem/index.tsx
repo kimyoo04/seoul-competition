@@ -6,39 +6,76 @@ export default function EducationItem({
 }: {
   education: IEducationData;
 }) {
+  const padCapacity = education.capacity.toString().padStart(2, "0");
+
+  const capacityBg =
+    education.status === "마감"
+      ? "text-gray_4 shadow-gray_4"
+      : education.capacity >= 100
+      ? "text-[#4A00CC] shadow-[#4A00CC]"
+      : "text-font_black shadow-font_black";
+
+  const priceNum = parseInt(education.price.replaceAll(",", ""));
+
+  const priceBg =
+    education.status === "마감"
+      ? "text-gray_4"
+      : priceNum >= 20000
+      ? "text-[#05B600] shadow-[#05B600]"
+      : priceNum > 0
+      ? "text-[#00B2D0] shadow-[#00B2D0]"
+      : "text-[#0056C8] shadow-[#0056C8]";
+
+  const statusBorder =
+    education.status === "수강신청중"
+      ? "border-l-main_color text-font_white"
+      : education.status === "수강신청예정"
+      ? "border-l-sub_color"
+      : education.status === "마감"
+      ? "border-l-gray-200"
+      : "";
+
+  const statusBg =
+    education.status === "수강신청중"
+      ? "bg-main_color text-font_white"
+      : education.status === "수강신청예정"
+      ? "bg-sub_color"
+      : education.status === "마감"
+      ? "bg-gray_4"
+      : "";
+
   return (
     <Link
       href={`/educations/${education.id}`}
-      className="flex w-full flex-col gap-4 rounded-2xl bg-white p-4 shadow-md"
+      className={`group overflow-hidden rounded-2xl shadow-md transition-all hover:scale-105`}
     >
-      {/* 교육 이름 */}
-      <div className="">
-        <span className="text-h4 font-bold">{education.name}</span>
-      </div>
-
-      {/* 교육 정보 */}
-      <div className="flex justify-between gap-4">
-        <div className="col-start">
-          <div className="col-start gap-2">
-            <span className="">정원</span>
-            <span className="">{education.capacity}</span>
-          </div>
+      <div
+        className={`flex h-full flex-col justify-between gap-4 border-l-[5px] bg-white py-4 pl-4 ${statusBorder}`}
+      >
+        {/* 교육 이름 */}
+        <div className="pr-4">
+          <span className="text-h4 font-medium">{education.name}</span>
         </div>
 
-        <div className="col-start">
-          <div className="col-start gap-2">
-            <span className="">강좌 비용</span>
-            <span className="">
+        {/* 교육 정보 */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span
+              className={`row-center gap-1 ${capacityBg} h-9 rounded-lg px-2 text-sm font-medium shadow-sm shadow-black/50`}
+            >
+              정원: {padCapacity} 명
+            </span>
+
+            <span
+              className={`row-center gap-1 ${priceBg} h-9 rounded-lg px-2 text-sm font-medium shadow-sm shadow-black/50`}
+            >
               {education.price === "0" ? "무료" : `${education.price} 원`}
             </span>
           </div>
-        </div>
 
-        <div className="col-start">
-          <div className="col-start gap-2">
-            <span className="">강좌 상태</span>
-            <span className="">{education.status}</span>
-          </div>
+          <span className={`row-center ${statusBg} h-9 w-28 rounded-l-lg`}>
+            {education.status}
+          </span>
         </div>
       </div>
     </Link>
