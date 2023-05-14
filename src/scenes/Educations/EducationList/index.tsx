@@ -61,7 +61,7 @@ export default function EducationList() {
           <SearchHeader />
 
           {/* //! 교육정보 검색결과 무한 스크롤 영역 */}
-          <ul className="grid w-full grid-cols-1 gap-4">
+          <ul className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
             {searchCategory === "educations" && data && (
               <>
                 {data.pages.map((group, indx) => (
