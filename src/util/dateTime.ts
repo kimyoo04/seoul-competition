@@ -1,48 +1,50 @@
 export function timeYmd(date: string) {
-  // 9시간 더해주기 (UTC - 한국 시간)
-  const koreaTimezoneOffset = 9 * 60;
-
   // 현재 시각 - 댓글이 쓰인 시각 (초 단위)
   const seconds = Math.floor(
-    (new Date().getTime() -
-      new Date(date).getTime() -
-      koreaTimezoneOffset * 60 * 1000) /
-      1000
+    (new Date().getTime() - new Date(date).getTime()) / 1000
   );
-
-  // RelativeTimeFormat(): "long" 스타일로 상대적 시간을 표현해줌
-  const rtf = new Intl.RelativeTimeFormat("ko-KR", {
-    style: "long",
-  });
-
   // 시간 경과 정도에 따라 상대적 시간 표기
   if (seconds <= 60) {
     // 초전
-    return rtf.format(-seconds, "second");
+    return formatRelativeTime(seconds, "초");
   } else if (seconds <= 3600) {
     // 분전
-    const minutes = Math.floor(seconds / 60);
-    return rtf.format(-minutes, "minute");
+    return formatRelativeTime(seconds, "분");
   } else if (seconds <= 21600) {
     // 시간전 (6시간까지)
-    const hours = Math.floor(seconds / 3600);
-    return rtf.format(-hours, "hour");
+    return formatRelativeTime(seconds, "시간");
   } else {
     // 날짜
-    const ymdDate = new Intl.DateTimeFormat("ko-KR").format(new Date(date));
+    const ymdDate = getDotDate(new Date(date));
     return ymdDate;
   }
 }
 
+function formatRelativeTime(value: number, unit: "초" | "분" | "시간") {
+  const timeMeasurements = {
+    초: 1,
+    분: 60,
+    시간: 3600,
+  };
+  const roundedValue = Math.round(Math.abs(value));
+  const measurement = timeMeasurements[unit];
+
+  return `${Math.round(roundedValue / measurement)} ${unit} 전`;
+}
+
+function getDotDate(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}.${month}.${day}`;
+}
+
 export function getBarDate(date: Date) {
   // Date > String
-  const dateFormatter = new Intl.DateTimeFormat("ko-KR", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-  const [{ value: year }, , { value: month }, , { value: day }] =
-    dateFormatter.formatToParts(date);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
 
-  return `${year}-${month}-${day}`; // 예시 "2023-05-01"
+  return `${year}-${month}-${day}`; // Example: "2023-05-01"
 }
