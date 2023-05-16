@@ -46,8 +46,8 @@ export default function App({ Component, pageProps }: AppProps) {
           <AnimatePresence mode="wait">
             <main>
               <Component {...pageProps} key={router.route} />
+              <ReactQueryDevtools initialIsOpen={true} />
             </main>
-            <ReactQueryDevtools initialIsOpen={true} />
           </AnimatePresence>
         </QueryClientProvider>
       </Provider>

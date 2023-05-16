@@ -1,22 +1,11 @@
-const { PHASE_DEVELOPMENT_SERVER } = require("next/dist/shared/lib/constants");
-
 /** @type {import('next').NextConfig} */
-const nextConfig = (phase) => {
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    return {
-      reactStrictMode: false,
-      env: {
-        markdownPath: "",
-      },
-    };
-  }
-
-  return {
-    reactStrictMode: false,
-    env: {
-      markdownPath: "",
-    },
-  };
+const nextConfig = {
+  reactStrictMode: false,
+  output: "standalone",
+  images: {
+    loader: "custom",
+    loaderFile: "./src/util/localImageLoader.ts",
+  },
 };
 
 module.exports = nextConfig;
