@@ -39,7 +39,7 @@ export default function SearchBar() {
           {...register("search", {
             required: "검색어가 필요합니다!",
           })}
-          className="textfield absolute h-8 w-full border-none pl-9 shadow-none transition-all"
+          className="textfield absolute h-8 w-full border-none pl-9 transition-all "
           id="search"
           name="search"
           placeholder={

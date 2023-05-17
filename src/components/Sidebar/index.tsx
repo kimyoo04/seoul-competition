@@ -13,6 +13,7 @@ import PriceFilter from "./PriceFilter";
 import CalendarFilter from "./CalendarFilter";
 import ShowTotalCounts from "./ShowTotalCounts";
 import { filterActions } from "@features/filter/filterSlice";
+import { searchActions } from "@features/search/searchSlice";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
@@ -67,7 +68,12 @@ const SideBar = () => {
 
           <div className="flex w-full items-center justify-between">
             {/* 초기화 버튼 */}
-            <button onClick={() => dispatch(filterActions.resetParams())}>
+            <button
+              onClick={() => {
+                dispatch(filterActions.resetParams());
+                dispatch(searchActions.resetKeyword());
+              }}
+            >
               <ButtonWrapper>
                 <div className="row-center h-10 gap-2 rounded-full border border-sub_color px-3">
                   <i className="ri-restart-line text-2xl text-font_white" />

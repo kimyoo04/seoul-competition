@@ -60,6 +60,7 @@ export const searchSlice = createSlice({
       }
     },
 
+    // 최근 검색어 1개 클릭
     clickKeyword: (state, actions: PayloadAction<ISearchKeyword>) => {
       state.isFocus = false;
       state.searchKeyword = actions.payload.searchKeyword;
@@ -77,6 +78,11 @@ export const searchSlice = createSlice({
       state.searchKeyword = "";
       state.keywords = [];
       localStorage.setItem(state.category, JSON.stringify(state.keywords));
+    },
+
+    // 검색어 초기화
+    resetKeyword: (state) => {
+      state.searchKeyword = "";
     },
   },
 });

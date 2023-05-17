@@ -67,7 +67,6 @@ export const filterSlice = createSlice({
       state.endDate = "";
       state.minPrice = "0";
       state.maxPrice = "100000";
-      state.totalCounts = 0;
     },
   },
 });

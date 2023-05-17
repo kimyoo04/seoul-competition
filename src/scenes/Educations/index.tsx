@@ -20,7 +20,7 @@ export default function Educations() {
   }, [dispatch]);
 
   return (
-    <div className="w-full px-4">
+    <div className="w-full">
       {/* 교육 정보 fetch 결과 출력 */}
       <EducationList />
 

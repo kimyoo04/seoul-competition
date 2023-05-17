@@ -37,7 +37,7 @@ export default function MobileHeader({
             }
           >
             <i className="ri-arrow-left-s-line text-4xl text-main_color"></i>
-            <span className="text-lg font-bold text-main_color">뒤로</span>
+            <span className="text-lg font-medium text-main_color">목록</span>
           </button>
 
           <div className="col-center">
