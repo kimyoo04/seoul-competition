@@ -11,7 +11,7 @@ export default function ChatMessage({ message }: { message: IMessage }) {
       {/* 챗봇의 프로필 이미지 */}
       {isChatbot && (
         <Image
-          src={"chatbot.png"}
+          src={"/images/chatbot.png"}
           className="rounded-xl"
           width={36}
           height={36}
