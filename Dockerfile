@@ -1,5 +1,7 @@
 FROM node:18-alpine AS base
 
+LABEL maintainer="https://kyportfolio.tistory.com/"
+
 FROM base AS builder
 
 ARG NEXT_PUBLIC_ENV_API_DOMAIN
