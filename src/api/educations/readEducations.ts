@@ -35,7 +35,6 @@ export const fetchEducations = async (
     const response = await axios.get(`/${searchCategory}`, {
       params,
     });
-    console.log(response.data);
 
     return response.data;
   } catch (err) {
@@ -86,7 +85,7 @@ export const useInfiniteEducations = () => {
     },
     cacheTime: 300000, // 5분
     staleTime: 240000, // 4분
-    refetchOnMount: false, //페이지 재방문시 refetch 금지
+    refetchOnMount: true, //페이지 재방문시 refetch 금지
     refetchOnWindowFocus: false, // 브라우저 포커징시 refetch 금지
   });
 };

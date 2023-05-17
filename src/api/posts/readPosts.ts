@@ -62,7 +62,7 @@ export const useInfinitePosts = () => {
     },
     cacheTime: 300000, // 5분
     staleTime: 240000, // 4분
-    refetchOnMount: false, //페이지 재방문시 refetch 금지
+    refetchOnMount: true, //페이지 재방문시 refetch 적용
     refetchOnWindowFocus: false, // 브라우저 포커징시 refetch 금지
   });
 };
