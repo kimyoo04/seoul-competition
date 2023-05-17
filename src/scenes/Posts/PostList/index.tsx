@@ -12,6 +12,7 @@ import PostListLoader from "./PostListLoader";
 
 import { useInfinitePosts } from "@api/posts/readPosts";
 import { filterActions } from "@features/filter/filterSlice";
+import SearchNotFound from "@components/Search/SearchNotFound";
 
 export default function PostList() {
   const dispatch = useAppDispatch();
@@ -50,7 +51,7 @@ export default function PostList() {
         <PostListLoader />
       ) : status === "error" ? (
         <>{error && <p>Error: {error.message}</p>}</>
-      ) : (
+      ) : data.pages[0].data.length !== 0 ? (
         <>
           {/* //! 검색 정보 헤더 */}
           <SearchHeader />
@@ -76,6 +77,8 @@ export default function PostList() {
           {/* //! fetchNextPage 를 트리거 하기 위한 태그 */}
           <SearchMore inViewRef={ref} hasNextPage={hasNextPage} />
         </>
+      ) : (
+        <SearchNotFound />
       )}
     </section>
   );
