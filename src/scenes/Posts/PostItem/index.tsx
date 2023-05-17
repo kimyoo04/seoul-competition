@@ -16,7 +16,7 @@ export default function PostItem({ post }: { post: IPostData }) {
 
       {/* 제목과 내용 */}
       <div>
-        <div className="mb-2 text-lg font-bold">{post.title}</div>
+        <div className="mb-2 text-lg">{post.title}</div>
         <div className="text-gray-800">{post.content}</div>
       </div>
 
