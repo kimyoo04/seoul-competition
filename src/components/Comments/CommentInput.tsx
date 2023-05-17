@@ -78,7 +78,7 @@ export default function CommentInput() {
         <form onSubmit={handleSubmit(onValid)}>
           <div className="row-start w-full gap-4">
             {/* 닉네임 필드 */}
-            <div className="col-start w-full">
+            <div className="col-start w-full gap-1">
               <label htmlFor="nickname" className="mb-1 font-medium">
                 닉네임
               </label>
@@ -101,7 +101,7 @@ export default function CommentInput() {
                 autoComplete="off"
                 placeholder="별명"
                 maxLength={11}
-                className="h-8 w-full rounded-lg placeholder:text-sm"
+                className="textfield h-8 w-full rounded-lg pl-3 placeholder:text-sm"
               />
 
               <span className="mt-1 text-xs font-medium text-red-500">
@@ -110,7 +110,7 @@ export default function CommentInput() {
             </div>
 
             {/* 비밀번호 필드 */}
-            <div className="col-start w-full">
+            <div className="col-start w-full gap-1">
               <label htmlFor="password" className="mb-1 font-medium">
                 비밀번호
               </label>
@@ -133,7 +133,7 @@ export default function CommentInput() {
                 autoComplete="off"
                 placeholder="4 자 이상"
                 maxLength={13}
-                className="h-8 w-full rounded-lg placeholder:text-sm"
+                className="textfield h-8 w-full rounded-lg pl-3 placeholder:text-sm"
               />
 
               <span className="mt-1 text-xs font-medium text-red-500">
@@ -164,7 +164,7 @@ export default function CommentInput() {
                   id="content"
                   name="content"
                   rows={2}
-                  className="resize-none rounded-lg bg-white px-4 py-2 shadow-sm shadow-gray_3 transition-all duration-300 placeholder:text-sm"
+                  className="textfield resize-none rounded-lg bg-white px-4 py-2 pl-3 shadow-sm shadow-gray_3 transition-all duration-300 placeholder:text-sm"
                   placeholder="자유롭게 댓글을 작성해 보세요."
                   maxLength={501}
                 />

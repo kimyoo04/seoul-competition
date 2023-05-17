@@ -120,7 +120,7 @@ export default function CommentDelButton({ id }: { id: TId }) {
               autoComplete="off"
               placeholder="비밀번호"
               maxLength={13}
-              className=" h-8 w-[100px] rounded-lg placeholder:text-sm placeholder:font-medium placeholder:text-gray_2"
+              className="textfield h-8 w-[100px] rounded-lg placeholder:text-sm placeholder:font-medium placeholder:text-gray_2"
             />
           </div>
 
