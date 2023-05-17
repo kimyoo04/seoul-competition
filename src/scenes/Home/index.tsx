@@ -1,3 +1,4 @@
+import Chart from "@components/Chart";
 import ContentItem from "./ContentItem";
 import { contents } from "@constants/home/contents";
 
@@ -18,6 +19,7 @@ export default function Home() {
             <ContentItem key={index + content.title} data={content} />
           ))}
       </div>
+      <Chart/>
     </div>
   );
 }
