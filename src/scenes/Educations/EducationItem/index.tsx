@@ -57,15 +57,17 @@ export default function EducationItem({
           <span className="text-h4 font-medium">{education.name}</span>
         </div>
 
-        {/* 교육 정보 */}
+        {/* 교육 정보 내용 */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
+            {/* 교육 정보 정원 */}
             <span
               className={`row-center gap-1 ${capacityBg} h-9 rounded-lg px-2 text-sm font-medium shadow-sm shadow-black/50`}
             >
               정원: {padCapacity} 명
             </span>
 
+            {/* 교육 정보 수강료 */}
             <span
               className={`row-center gap-1 ${priceBg} h-9 rounded-lg px-2 text-sm font-medium shadow-sm shadow-black/50`}
             >
@@ -73,6 +75,7 @@ export default function EducationItem({
             </span>
           </div>
 
+          {/* 교육 정보 상태 */}
           <span className={`row-center ${statusBg} h-9 w-28 rounded-l-lg`}>
             {education.status}
           </span>
