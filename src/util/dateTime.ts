@@ -48,3 +48,9 @@ export function getBarDate(date: Date) {
 
   return `${year}-${month}-${day}`; // Example: "2023-05-01"
 }
+
+export function getKorDate(dateString: string): string {
+  const [year, month, day] = dateString.split(".").map(Number);
+  const formattedDate = `${Math.round(year % 100)}년 ${month}월 ${day}일`;
+  return formattedDate;
+}
