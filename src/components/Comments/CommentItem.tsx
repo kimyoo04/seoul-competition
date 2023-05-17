@@ -124,7 +124,7 @@ export default function CommentItem({ data, index }: ICommentProps) {
           className={`p-4 ${color[Math.round(index % 2)]}`}
           onSubmit={handleSubmit(onvalid)}
         >
-          <div className="flex justify-between">
+          <div className="flex items-center justify-between">
             {/* 닉네임 필드 */}
             <div className="mb-2 flex w-1/2 items-center gap-2">
               <div className="relative">
