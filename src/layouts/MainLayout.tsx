@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
+import { useAppSelector } from "@toolkit/hook";
+
 import Header from "./Header";
 import Alert from "@components/Alert";
-import { useAppSelector } from "@toolkit/hook";
 import Chat from "@components/Chat";
 import ChatButton from "@components/Chat/ChatButton";
 
@@ -13,16 +14,6 @@ export default function MainLayout({
   const isAlert = useAppSelector((state) => state.alert.isAlert);
   return (
     <>
-      {/* 해더 영역 */}
-      <Header />
-
-      {/* Alert */}
-      {isAlert && <Alert />}
-
-      {/* 채팅창 */}
-      <Chat />
-      <ChatButton />
-
       {/* 메인 영역 */}
       <motion.main
         initial={{ opacity: 0 }}
@@ -33,6 +24,16 @@ export default function MainLayout({
           {children}
         </div>
       </motion.main>
+
+      {/* 해더 영역 */}
+      <Header />
+
+      {/* Alert */}
+      {isAlert && <Alert />}
+
+      {/* 채팅창 */}
+      <Chat />
+      <ChatButton />
     </>
   );
 }

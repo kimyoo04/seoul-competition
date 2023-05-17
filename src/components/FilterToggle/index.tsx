@@ -7,7 +7,7 @@ export default function FilterToggle() {
 
   return (
     <button
-      className="col-start fixed bottom-[136px] right-4 h-40 w-10 rounded-full bg-white pl-2 shadow-sm shadow-gray-300 transition-all hover:scale-110"
+      className="col-center fixed bottom-[136px] right-4 h-40 w-10 rounded-full bg-white shadow-sm shadow-gray_1 transition-all hover:scale-110"
       onClick={() => dispatch(sidebarActions.toggleSidebar())}
     >
       <i className="ri-equalizer-line text-2xl text-main_color" />

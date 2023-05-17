@@ -6,9 +6,9 @@ export default function ChatButton() {
   const dispatch = useAppDispatch();
   const isChat = useAppSelector((state) => state.chat.isChat);
   const chatBtnBg = isChat
-    ? "bg-main_color shadow-main_color/50"
-    : "bg-white shadow-gray-400";
-  const chatBtnDot = isChat ? "bg-font_white" : "bg-main_color";
+    ? "bg-main_color shadow-gray_1"
+    : "bg-white shadow-gray_1";
+  const chatBtnDot = isChat ? "text-font_white" : "text-main_color";
 
   return (
     <button
@@ -16,9 +16,7 @@ export default function ChatButton() {
       onClick={() => dispatch(chatActions.toggleChat())}
     >
       {/* 점 3개 표현 */}
-      <div className={`h-1.5 w-1.5 rounded-full ${chatBtnDot}`}></div>
-      <div className={`h-1.5 w-1.5 rounded-full ${chatBtnDot}`}></div>
-      <div className={`h-1.5 w-1.5 rounded-full ${chatBtnDot}`}></div>
+      <div className={`text-3xl font-bold ${chatBtnDot}`}>?</div>
     </button>
   );
 }
