@@ -126,27 +126,36 @@ export default function CommentItem({ data, index }: ICommentProps) {
         >
           <div className="flex justify-between">
             {/* 닉네임 필드 */}
-            <div className="col-start mb-2 w-1/2">
-              <input
-                {...register("nickname", {
-                  required: "이름이 필요해요.",
-                  minLength: {
-                    value: 2,
-                    message: "최소 두 글자 이상 입력해 주세요.",
-                  },
-                  maxLength: {
-                    value: 10,
-                    message: "최대 10 글자까지 입력할 수 있어요.",
-                  },
-                })}
-                id="nickname"
-                type="text"
-                name="nickname"
-                autoComplete="off"
-                placeholder="별명"
-                maxLength={11}
-                className="h-8 w-full rounded-lg placeholder:text-sm"
-              />
+            <div className="mb-2 flex w-1/2 items-center gap-2">
+              <div className="relative">
+                <label
+                  htmlFor="nickname-update"
+                  className="absolute left-4 top-1 font-medium"
+                >
+                  닉네임 :
+                </label>
+
+                <input
+                  {...register("nickname", {
+                    required: "이름이 필요해요.",
+                    minLength: {
+                      value: 2,
+                      message: "최소 두 글자 이상 입력해 주세요.",
+                    },
+                    maxLength: {
+                      value: 10,
+                      message: "최대 10 글자까지 입력할 수 있어요.",
+                    },
+                  })}
+                  id="nickname-update"
+                  type="text"
+                  name="nickname"
+                  autoComplete="off"
+                  placeholder="별명"
+                  maxLength={11}
+                  className="textfield h-8 w-52 rounded-lg pl-20 placeholder:text-sm"
+                />
+              </div>
 
               <span className="mt-1 text-xs font-medium text-red-500">
                 {errors?.nickname?.message}
@@ -192,7 +201,7 @@ export default function CommentItem({ data, index }: ICommentProps) {
                   id="content"
                   name="content"
                   rows={2}
-                  className="w-full resize-none rounded-lg bg-white px-4 py-2 shadow-sm shadow-gray_3 transition-all duration-300 placeholder:text-sm"
+                  className="textfield w-full resize-none rounded-lg bg-white px-4 py-2 shadow-sm shadow-gray_3 transition-all duration-300 placeholder:text-sm"
                   placeholder="자유롭게 댓글을 작성해 보세요."
                   maxLength={501}
                 />
