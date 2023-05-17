@@ -1,12 +1,13 @@
 import Loading from "@components/Loading";
+import Header from "./EducationDetailItem/Header";
 import Content from "./EducationDetailItem/content";
 import Comments from "@components/Comments";
 import ScrollButton from "@components/ScrollButton";
 import UserForm from "@components/UserForm";
+import SimilarEducationDetail from "@components/SimilarEducationDetail";
 
 import { useAppSelector } from "@toolkit/hook";
 import { useReadEductionDetail } from "@api/educations/readEducationDetail";
-import SimilarEducationDetail from "@components/SimilarEducationDetail";
 import { TEducationId } from "@type/educations";
 
 export default function EducationDetail({ id }: { id: TEducationId }) {
@@ -25,6 +26,9 @@ export default function EducationDetail({ id }: { id: TEducationId }) {
       {/* 데이터가 있을 경우 화면 표시 */}
       {data && (
         <div className="mx-auto w-full max-w-screen-lg rounded-2xl bg-white p-6 shadow-lg">
+          {/* 게시글 해더 */}
+          <Header data={data} />
+
           {/* 교육 정보 영역 */}
           <Content data={data} />
 
