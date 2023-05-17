@@ -31,11 +31,16 @@ export const fetchEducations = async (
   if (maxPrice !== "100000") params.maxPrice = maxPrice;
 
   //! 요청 받기
-  const response = await axios.get(`/${searchCategory}`, {
-    params,
-  });
+  try {
+    const response = await axios.get(`/${searchCategory}`, {
+      params,
+    });
+    console.log(response.data);
 
-  return response.data;
+    return response.data;
+  } catch (err) {
+    return { data: [], currentPage: 0, totalPages: 0, totalElements: 0 };
+  }
 };
 
 //! 검색 결과 useInfiniteQuery 함수
