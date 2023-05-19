@@ -6,9 +6,10 @@ export interface IChatState {
 }
 
 export interface IMessage {
-  id: number | "client";
+  id: TId;
   question?: TQuestion;
   answer?: TAnswer;
+  feedback?: TFeedback;
 }
 
 export interface ISendForm {
@@ -18,6 +19,13 @@ export interface IChatAlert {
   alertMsg: TAlertMsg;
 }
 
+export interface IFeedback {
+  id: TId;
+  feedback: TFeedback;
+}
+
 export type TQuestion = string;
 export type TAnswer = string;
 export type TAlertMsg = string;
+export type TId = number | "client";
+export type TFeedback = boolean | null;
