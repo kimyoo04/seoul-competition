@@ -6,6 +6,12 @@ export interface IRankPostData {
   commentsCount: number;
 }
 
+// 자유게시판 최다 조회 랭킹 데이터 : 유저 정보 포함
+export interface IRankPostUserData {
+  data: IRankPostData;
+  user: boolean;
+}
+
 // 교육 정보 최다 조회 랭킹 데이터 : 디폴트
 export interface IRankEducationData {
   id: number;
@@ -41,20 +47,13 @@ export interface IRankKeywordsUserData {
   user: boolean;
 }
 
-// 관심사
-export interface IInterest {
-  interest: string;
-}
-
-// 연령대
-export interface IAges {
+// 연령대별 데이터
+export interface IAgesMinMax extends IMinMax {
   age: string;
 }
 
-// 연령대 : minAge, maxAge 포함
-export interface IAgesMinMax {
-  age: string;
+// 연령대별 데이터 불러오기
+export interface IMinMax {
   minAge: number;
   maxAge: number;
 }
-[];

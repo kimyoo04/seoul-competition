@@ -1,6 +1,11 @@
+import { rankPostData } from "public/data/rankingData";
 import PostRankList from "./PostRankList";
 
 export default function PostRank() {
+
+  // 더미 데이터
+  const data = rankPostData;
+
   return (
     <div className="mb-8 rounded-2xl bg-main_color/5 p-4 shadow-md">
       <div className="mb-4 text-center text-lg font-medium">
@@ -8,7 +13,7 @@ export default function PostRank() {
       </div>
 
       {/* 자유게시판 최다조회 게시글 Top5 리스트 */}
-      <PostRankList />
+      <PostRankList data={data}/>
     </div>
   );
 }

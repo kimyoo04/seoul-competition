@@ -1,7 +1,7 @@
-import { IPostData } from "@type/posts";
+import { IRankPostData } from "@type/rank";
 import Link from "next/link";
 
-export default function PostRankItem({ post }: { post: IPostData }) {
+export default function PostRankItem({ post }: { post: IRankPostData }) {
   const cutTitle =
     post.title.length > 15 ? post.title.slice(0, 15) + "..." : post.title;
   return (

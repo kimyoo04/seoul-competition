@@ -1,16 +1,14 @@
-import { IPostData } from "@type/posts";
-import { topPostData } from "public/data/rankingData";
 import PostRankItem from "../PostRankItem";
+import { IRankPostData } from "@type/rank";
 
-export default function PostRankList() {
-  // 더미 데이터
-  const data = topPostData;
+export default function PostRankList({ data }: { data: IRankPostData[] }) {
+  // 데이터 user 정보 받아서 변수에 할당 ->
 
   return (
     <div className="col-center w-full gap-4">
       <ul className="grid w-full grid-cols-1">
         {data.map((post) => (
-          <PostRankItem key={post.id} post={post as IPostData} />
+          <PostRankItem key={post.id} post={post as IRankPostData} />
         ))}
       </ul>
     </div>
@@ -19,20 +17,18 @@ export default function PostRankList() {
 
 // <section className="col-center w-full gap-4">
 // {status === "loading" ? (
-//   <PostListLoader />
+//   <____ListLoader />
 // ) : status === "error" ? (
 //   <>{error && <p>Error: {error.message}</p>}</>
 // ) : (
 //   <>
-//     {/* //! 검색 정보 헤더 */}
-//     <SearchHeader />
-
-//     {/* //! 자유게시판 검색결과 무한 스크롤 영역 */}
+//      <div className="col-center w-full gap-4">
 //     <ul className="grid w-full grid-cols-1">
-// {data.map((post) => (
-//   <TopPostItem key={post.id} post={post as IPostData} />
-// ))}
-// </ul>
+//     {data.map((post) => (
+//       <PostRankItem key={post.id} post={post as IPostData} />
+//     ))}
+//   </ul>
+// </div>
 //   </>
 // )}
 // </section>
