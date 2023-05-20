@@ -1,14 +1,13 @@
-import { topEducationKeywords } from "public/data/rankingData";
 import { Pie } from "react-chartjs-2";
 import { Chart, ChartOptions, ArcElement, Tooltip, Legend } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { round, sum } from "lodash";
+import { IRankKeywordsData } from "@type/rank";
 
-export default function PieChart() {
+export default function PieChart({ data }: { data: IRankKeywordsData[] }) {
   Chart.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
-  const data = topEducationKeywords;
-  const labels = data.map((item) => item.keywords);
+  const labels = data.map((item) => item.keyword);
   const values = data.map((item) => item.hits);
 
   const chartData = {
