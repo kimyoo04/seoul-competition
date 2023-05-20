@@ -10,7 +10,7 @@
 }
 
 .chat-textbox {
-  @apply max-w-[200px] rounded-lg px-2 py-1 shadow-sm shadow-black/20;
+  @apply flex max-w-[210px] items-center gap-2 rounded-lg px-2 py-1 shadow-sm shadow-black/20;
 }
 
 .sent-text {
@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
 }
 

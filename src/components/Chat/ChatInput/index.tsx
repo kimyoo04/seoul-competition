@@ -21,7 +21,11 @@ export default function ChatInput() {
       );
       // 답변 저장
       dispatch(
-        chatActions.getAnswer({ id: answerData.id, answer: answerData.answer })
+        chatActions.getAnswer({
+          id: answerData.id,
+          answer: answerData.answer,
+          feedback: null,
+        })
       );
     } else {
       // 알람 활성화

@@ -19,8 +19,10 @@ export default function SimilarEducationDetail({ id }: { id: TEducationId }) {
 
       {/* 데이터가 있을 경우 화면 표시 */}
       {searchCategory === "educations" && data && (
-        <div>
-          <h1 className="text-xl font-bold">이것은 어떤가요?</h1>
+        <div className="py-4">
+          <h1 className="col-center w-full text-xl font-medium text-main_color">
+            관련 교육 정보들은 어떤가요?
+          </h1>
 
           {/* 관련 교육 정보 게시글 5개 */}
           <ul className="grid w-full grid-cols-1 gap-4">

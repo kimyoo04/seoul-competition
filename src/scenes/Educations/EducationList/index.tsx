@@ -4,14 +4,15 @@ import { useInView } from "react-intersection-observer";
 
 import { IEducationData } from "@type/educations";
 
+import SimilarEducationList from "@components/SimilarEducationList";
 import SearchHeader from "@components/Search/SearchHeader";
 import SearchMore from "@components/Search/SearchMore";
+import SearchNotFound from "@components/Search/SearchNotFound";
 
 import EducationItem from "@scenes/Educations/EducationItem";
 import EducationListLoader from "./EducationListLoader";
 
 import { useInfiniteEducations } from "@api/educations/readEducations";
-import SimilarEducationList from "@components/SimilarEducationList";
 import { filterActions } from "@features/filter/filterSlice";
 
 export default function EducationList() {
@@ -52,7 +53,7 @@ export default function EducationList() {
         <EducationListLoader />
       ) : status === "error" ? (
         <>{error && <p>Error: {error.message}</p>}</>
-      ) : (
+      ) : data.pages[0].data.length !== 0 ? (
         <>
           {/* //! 검색결과가 유사한 게시물 먼저 출력 */}
           {searchKeyword !== "" && <SimilarEducationList />}
@@ -61,26 +62,26 @@ export default function EducationList() {
           <SearchHeader />
 
           {/* //! 교육정보 검색결과 무한 스크롤 영역 */}
-          <ul className="grid w-full grid-cols-1 gap-4">
-            {searchCategory === "educations" && data && (
-              <>
-                {data.pages.map((group, indx) => (
-                  <Fragment key={indx + "page" + searchCategory}>
-                    {group.data.map((education) => (
-                      <EducationItem
-                        key={education.id + searchCategory}
-                        education={education as IEducationData}
-                      />
-                    ))}
-                  </Fragment>
-                ))}
-              </>
-            )}
-          </ul>
+          {searchCategory === "educations" && (
+            <ul className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
+              {data.pages.map((group, indx) => (
+                <Fragment key={indx + "page" + searchCategory}>
+                  {group.data.map((education) => (
+                    <EducationItem
+                      key={education.id + searchCategory}
+                      education={education as IEducationData}
+                    />
+                  ))}
+                </Fragment>
+              ))}
+            </ul>
+          )}
 
           {/* //! fetchNextPage 를 트리거 하기 위한 태그 */}
           <SearchMore inViewRef={ref} hasNextPage={hasNextPage} />
         </>
+      ) : (
+        <SearchNotFound />
       )}
     </section>
   );

@@ -22,11 +22,15 @@ export const readPosts = async (
   if (endDate !== "") params.endDate = endDate;
 
   //! 요청 받기
-  const response = await axios.get(`/${searchCategory}`, {
-    params,
-  });
+  try {
+    const response = await axios.get(`/${searchCategory}`, {
+      params,
+    });
 
-  return response.data;
+    return response.data;
+  } catch (err) {
+    return { data: [], currentPage: 0, totalPages: 0, totalElements: 0 };
+  }
 };
 
 //! 검색 결과 useInfiniteQuery 함수
@@ -58,7 +62,7 @@ export const useInfinitePosts = () => {
     },
     cacheTime: 300000, // 5분
     staleTime: 240000, // 4분
-    refetchOnMount: false, //페이지 재방문시 refetch 금지
+    refetchOnMount: true, //페이지 재방문시 refetch 적용
     refetchOnWindowFocus: false, // 브라우저 포커징시 refetch 금지
   });
 };

@@ -6,15 +6,19 @@ const nextConfig = (phase) => {
     return {
       reactStrictMode: false,
       env: {
-        markdownPath: "",
+        NEXT_PUBLIC_ENV_API_DOMAIN: "http://localhost:8888",
+        NEXT_PUBLIC_ENV_API_URL: "http://localhost:8888/api/v1",
+        NEXT_PUBLIC_ENV_DOMAIN: "http://localhost:3000",
       },
     };
   }
 
   return {
     reactStrictMode: false,
-    env: {
-      markdownPath: "",
+    output: "standalone",
+    images: {
+      loader: "custom",
+      loaderFile: "./src/util/localImageLoader.ts",
     },
   };
 };

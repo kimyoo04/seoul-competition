@@ -21,7 +21,7 @@ export default function Posts() {
   }, [dispatch]);
 
   return (
-    <div className="w-full px-4">
+    <div className="w-full">
       {/* 자유게시판 fetch 결과 출력 */}
       <PostList />
 

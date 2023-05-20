@@ -25,7 +25,7 @@ export default function SimilarList() {
           <h1 className="text-xl font-bold">검색어와 관련 높은 게시물</h1>
 
           {/* 검색어 관련 교육 정보 5개 */}
-          <ul className="grid w-full grid-cols-1 gap-4">
+          <ul className="grid w-full grid-cols-1 gap-4 lg:grid-cols-2">
             {data.map((education, indx) => (
               <EducationItem
                 key={indx + education.name}
