@@ -1,5 +1,6 @@
 import ContentItem from "./ContentItem";
 import { contents } from "@constants/home/contents";
+import Rank from "@components/Rank";
 
 export default function Home() {
   return (
@@ -18,6 +19,8 @@ export default function Home() {
             <ContentItem key={index + content.title} data={content} />
           ))}
       </div>
+      {/* 인기 게시물, 교육 정보, 키워드 */}
+      <Rank />
     </div>
   );
 }

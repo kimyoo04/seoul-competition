@@ -7,6 +7,8 @@ import sidebarReducer from "@features/sidebar/sidebarSlice";
 import userFormReducer from "@features/userForm/userFormSlice";
 import commentReducer from "@features/comment/commentSlice";
 import chatReducer from "@features/chat/chatSlice";
+import interestReducer from "@features/rank/interestSlice";
+import ageReducer from "@features/rank/ageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +19,8 @@ export const store = configureStore({
     userForm: userFormReducer,
     comment: commentReducer,
     chat: chatReducer,
+    interest: interestReducer,
+    age: ageReducer,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

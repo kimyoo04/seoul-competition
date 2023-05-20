@@ -44,7 +44,6 @@ export default function CommentItem({ data, index }: ICommentProps) {
     formState: { errors },
     control,
     setError,
-    reset,
   } = useForm<IUpdateCommentOrReviewForm>({
     // 초기값 지정
     defaultValues: { nickname: data.nickname, content: data.content },
@@ -81,7 +80,6 @@ export default function CommentItem({ data, index }: ICommentProps) {
 
       // 자유게시판의 댓글 수정
       await CommentmutateAsync(commentData);
-      reset({ nickname: "", content: "" });
 
       // commentState 초기화
       dispatch(commentActions.resetComment());
@@ -102,7 +100,6 @@ export default function CommentItem({ data, index }: ICommentProps) {
 
       // 교육 정보의 리뷰 수정
       await ReviewmutateAsync(reviewData);
-      reset({ nickname: "", content: "" });
 
       // commentState 초기화
       dispatch(commentActions.resetComment());
