@@ -4,7 +4,7 @@ import { IAgesData } from "@type/userForm";
 
 const initialState: IAgesState = {
   isOpen: false,
-  selectedAgesStr: "전체",
+  selectedAgesStr: "",
   selectedAges: "",
 };
 
@@ -26,7 +26,7 @@ export const agesSlice = createSlice({
 
     // "전체" 버튼 클릭했을 때
     selectTotal: (state) => {
-      state.selectedAgesStr = "전체";
+      state.selectedAgesStr = "";
       state.selectedAges = "";
       state.isOpen = false;
     },
