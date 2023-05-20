@@ -1,17 +1,18 @@
-import { IMinMax } from "@type/rank";
+import { TAge } from "@type/userForm";
 import axios from "axios";
 
-// 교육정보 최다검색 키워드 Top5 : 연령대별 데이터
-export const readKeywordAgeRank = async ({ minAge, maxAge }: IMinMax) => {
+export const readKeywordAgeRank = async (age: TAge) => {
+  const params: { age?: string } = {};
+  if (age) params.age = age;
+
+  // 전체 혹은 연령대별 교육 정보 최다 검색 키워드 Top5
   try {
-    const response = await axios.get(
-      `/educations/topFive/keyword?minAge=${minAge}&maxAge=${maxAge}`
-    );
+    const response = await axios.get("/educations/topFive/keyword", { params });
     if (response.status === 200) {
       return response.data;
     }
   } catch (error) {
-    console.error("API 호출 오류:", error);
+    console.error("readKeywordAgeRank 오류:", error);
     return false;
   }
 };
