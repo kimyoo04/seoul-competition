@@ -5,7 +5,7 @@ import {
   agesDataArr,
   locations,
   interests,
-} from "../../constants/userForm/userFormData";
+} from "@constants/userForm/userFormData";
 import classNames from "classnames";
 import createUser from "@api/user/createUser";
 import { motion } from "framer-motion";
