@@ -116,11 +116,11 @@ export const rankEducationUserData = {
 
 export const rankEducationUserKeywords = {
   data: [
-    { keywords: "건강", hits: 50 },
-    { keywords: "취업", hits: 30 },
-    { keywords: "생애설계", hits: 30 },
-    { keywords: "교육", hits: 20 },
-    { keywords: "인문학", hits: 10 },
+    { id: 1, keyword: "건강", hits: 50 },
+    { id: 2, keyword: "취업", hits: 30 },
+    { id: 3, keyword: "생애설계", hits: 30 },
+    { id: 4, keyword: "교육", hits: 20 },
+    { id: 5, keyword: "인문학", hits: 10 },
   ],
   user: true,
 };

@@ -1,3 +1,4 @@
+// 자유게시판 최다 조회 랭킹 데이터 : 디폴트
 export interface IRankPostData {
   id: number;
   title: string;
@@ -5,28 +6,55 @@ export interface IRankPostData {
   commentsCount: number;
 }
 
+// 교육 정보 최다 조회 랭킹 데이터 : 디폴트
+export interface IRankEducationData {
+  id: number;
+  name: string;
+  status: string;
+  price: string;
+  capacity: number;
+  registerStart: string;
+  registerEnd: string;
+  educationStart: string;
+  educationEnd: string;
+  url: string;
+  hits: number;
+  reviewsCount: number;
+}
+
+// 교육 정보 최다 조회 랭킹 데이터 : 유저 정보 포함
 export interface IRankEducationUserData {
-  data: {
-    id: number;
-    name: string;
-    status: string;
-    price: string;
-    capacity: number;
-    registerStart: string;
-    registerEnd: string;
-    educationStart: string;
-    educationEnd: string;
-    url: string;
-    hits: number;
-    reviewsCount: number;
-  };
+  data: IRankEducationData;
   user: boolean;
 }
 
-export interface IRankEducationUserKeywords {
-  data: {
-    keywords: string;
-    hits: number;
-  };
+// 교육 정보 최다 검색 랭킹 데이터 : 디폴트
+export interface IRankKeywordsData {
+  id: number;
+  keyword: string;
+  hits: number;
+}
+
+// 교육 정보 최다 검색 랭킹 데이터 : 유저 정보 포함
+export interface IRankKeywordsUserData {
+  data: IRankKeywordsData;
   user: boolean;
 }
+
+// 관심사
+export interface IInterest {
+  interest: string;
+}
+
+// 연령대
+export interface IAges {
+  age: string;
+}
+
+// 연령대 : minAge, maxAge 포함
+export interface IAgesMinMax {
+  age: string;
+  minAge: number;
+  maxAge: number;
+}
+[];
