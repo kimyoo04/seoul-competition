@@ -1,6 +1,11 @@
 import { IUserForm } from "@type/userForm";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { genders, ages, locations, interests } from "./userFormData";
+import {
+  genders,
+  agesDataArr,
+  locations,
+  interests,
+} from "../../constants/userForm/userFormData";
 import classNames from "classnames";
 import createUser from "@api/user/createUser";
 import { motion } from "framer-motion";
@@ -23,24 +28,24 @@ export default function UserForm() {
 
   const onValid: SubmitHandler<IUserForm> = async (data) => {
     if (
-      !data.age ||
+      !data.ages ||
       !data.gender ||
-      data.location == "" ||
-      data.interest == "" ||
+      data.location === "" ||
+      data.interest === "" ||
       !data.confirm
     ) {
       const errMsg: { [key: string]: string } = {};
 
       if (!data.gender) errMsg.gender = "성별을 골라주세요.";
-      if (!data.age) errMsg.age = "연령대를 골라주세요.";
-      if (data.location == "") errMsg.location = "거주 지역을 골라주세요.";
-      if (data.interest == "") errMsg.interest = "관심사를 골라주세요.";
+      if (!data.ages) errMsg.age = "연령대를 골라주세요.";
+      if (data.location === "") errMsg.location = "거주 지역을 골라주세요.";
+      if (data.interest === "") errMsg.interest = "관심사를 골라주세요.";
       if (!data.confirm) errMsg.confirm = "동의를 해주세요";
 
       const setErrors = (errors: Record<string, string>) => {
         Object.entries(errors).forEach(([key, value]) => {
           setError(
-            key as "gender" | "age" | "location" | "interest" | "confirm",
+            key as "gender" | "ages" | "location" | "interest" | "confirm",
             {
               message: value,
               type: "required",
@@ -79,7 +84,7 @@ export default function UserForm() {
       ></motion.div>
 
       {/* 유저 폼 영역 */}
-      {genders && ages && locations && interests && (
+      {genders && agesDataArr && locations && interests && (
         <div className="col-center relative left-0 right-0">
           <motion.form
             initial={{ opacity: 0 }}
@@ -137,11 +142,11 @@ export default function UserForm() {
               <div className="row-start gap-4">
                 <span className="font-bold">연령대</span>
                 <span className="text-sm text-main_color">
-                  {errors.age?.message}
+                  {errors.ages?.message}
                 </span>
               </div>
               <Controller
-                name="age"
+                name="ages"
                 control={control}
                 render={({ field }) => {
                   return (
@@ -149,30 +154,30 @@ export default function UserForm() {
                       {...field}
                       className="grid w-full grid-cols-2 justify-stretch gap-3 sm:grid-cols-3"
                     >
-                      {ages.map((age) => {
+                      {agesDataArr.map((agesData) => {
                         return (
                           <label
-                            htmlFor={age}
-                            key={age}
+                            htmlFor={agesData.ages}
+                            key={agesData.ages}
                             className={`undraggable rounded-2xl border border-main_color px-3 py-0.5 transition-all ${classNames(
                               {
                                 "bg-main_color font-bold text-font_white shadow-md":
-                                  field.value == age,
+                                  field.value === agesData.ages,
                               }
                             )}`}
                           >
                             <input
                               type="radio"
-                              id={age}
-                              name={age}
-                              value={age}
-                              checked={field.value == age}
+                              id={agesData.ages}
+                              name={agesData.ages}
+                              value={agesData.ages}
+                              checked={field.value == agesData.ages}
                               onChange={(e) => {
                                 field.onChange(e.target.value);
                               }}
                               className="hidden"
                             />
-                            {age}
+                            {agesData.agesStr}
                           </label>
                         );
                       })}
