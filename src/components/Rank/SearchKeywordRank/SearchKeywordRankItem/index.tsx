@@ -6,14 +6,14 @@ export default function SearchKeywordRankItem({
   keywords: IRankKeywordsData;
 }) {
   return (
-    <div className=" border-b">
+    <li className="border-b">
       <div className="my-1 flex justify-between">
         {/* 키워드 */}
-        <div className="text-lg">{keywords.keyword}</div>
+        <span className="text-lg">{keywords.keyword}</span>
 
         {/* 조회수 */}
-        <div className=" text-md text-gray-500">조회 {keywords.hits}</div>
+        <span className=" text-md text-gray-500">조회 {keywords.hits}</span>
       </div>
-    </div>
+    </li>
   );
 }
