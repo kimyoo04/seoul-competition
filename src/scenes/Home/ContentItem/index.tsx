@@ -2,6 +2,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { chatActions } from "@features/chat/chatSlice";
 import { useAppDispatch } from "@toolkit/hook";
+import Image from "next/image";
 
 interface IContent {
   title: string;
@@ -41,8 +42,16 @@ export default function Content({ data }: { data: IContent }) {
             </div>
 
             {/* 콘텐츠 이미지 */}
-            <div className="col-center h-28 w-28 bg-slate-300 md:h-52 md:w-full lg:h-64 xl:h-80">
-              {data.img}
+            <div className="col-end h-full w-full md:items-center md:justify-center">
+              <div className="h-28 w-28 md:h-40 md:w-full lg:h-44 lg:w-52">
+                <Image
+                  src={data.img}
+                  alt={data.title}
+                  width="500"
+                  height="500"
+                  className="h-full w-full"
+                />
+              </div>
             </div>
           </motion.div>
         </div>
@@ -69,8 +78,16 @@ export default function Content({ data }: { data: IContent }) {
             </div>
 
             {/* 콘텐츠 이미지 */}
-            <div className="col-center h-28 w-28 bg-slate-300 md:h-52 md:w-full lg:h-64 xl:h-80">
-              {data.img}
+            <div className="col-end h-full w-full md:items-center md:justify-center">
+              <div className="h-28 w-28 md:h-40 md:w-full lg:h-44 lg:w-52">
+                <Image
+                  src={data.img}
+                  alt={data.title}
+                  width="500"
+                  height="500"
+                  className="h-full w-full"
+                />
+              </div>
             </div>
           </motion.div>
         </Link>
