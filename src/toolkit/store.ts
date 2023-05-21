@@ -8,7 +8,7 @@ import userFormReducer from "@features/userForm/userFormSlice";
 import commentReducer from "@features/comment/commentSlice";
 import chatReducer from "@features/chat/chatSlice";
 import interestReducer from "@features/rank/interestSlice";
-import agesReducer from "@features/rank/agesSlice";
+import ageReducer from "@features/rank/ageSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,7 +20,7 @@ export const store = configureStore({
     comment: commentReducer,
     chat: chatReducer,
     interest: interestReducer,
-    ages: agesReducer,
+    age: ageReducer,
   },
   // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });

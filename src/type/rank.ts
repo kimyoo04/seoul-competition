@@ -1,4 +1,4 @@
-import { TAges, TAgesStr, TInterest } from "./userForm";
+import { TAge, TAgeStr, TInterest } from "./userForm";
 
 // 자유게시판 최다 조회 랭킹 데이터 : 전체
 export interface IRankPostData {
@@ -37,23 +37,22 @@ export interface IRankEducationUserData {
 }
 
 // 교육 정보 최다 검색 랭킹 데이터 : 전체
-export interface IRankKeywordsData {
-  id: number;
+export interface IRankKeywordData {
   keyword: string;
   hits: number;
 }
 
 // 교육 정보 최다 검색 랭킹 데이터 : 유저 정보 포함
 export interface IRankKeywordsUserData {
-  data: IRankKeywordsData[];
+  data: IRankKeywordData[];
   user: boolean;
 }
 
-// AgesState
-export interface IAgesState {
+// AgeState
+export interface IAgeState {
   isOpen: boolean;
-  selectedAgesStr: TAgesStr | "";
-  selectedAges: TAges | "";
+  selectedageStr: TAgeStr | "";
+  selectedAge: TAge | "";
 }
 
 // InterestState

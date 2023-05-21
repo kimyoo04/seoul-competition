@@ -2,7 +2,7 @@ import { IUserForm } from "@type/userForm";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import {
   genders,
-  agesDataArr,
+  ageDataArr,
   locations,
   interests,
 } from "@constants/userForm/userFormData";
@@ -28,7 +28,7 @@ export default function UserForm() {
 
   const onValid: SubmitHandler<IUserForm> = async (data) => {
     if (
-      !data.ages ||
+      !data.age ||
       !data.gender ||
       data.location === "" ||
       data.interest === "" ||
@@ -37,7 +37,7 @@ export default function UserForm() {
       const errMsg: { [key: string]: string } = {};
 
       if (!data.gender) errMsg.gender = "성별을 골라주세요.";
-      if (!data.ages) errMsg.age = "연령대를 골라주세요.";
+      if (!data.age) errMsg.age = "연령대를 골라주세요.";
       if (data.location === "") errMsg.location = "거주 지역을 골라주세요.";
       if (data.interest === "") errMsg.interest = "관심사를 골라주세요.";
       if (!data.confirm) errMsg.confirm = "동의를 해주세요";
@@ -45,7 +45,7 @@ export default function UserForm() {
       const setErrors = (errors: Record<string, string>) => {
         Object.entries(errors).forEach(([key, value]) => {
           setError(
-            key as "gender" | "ages" | "location" | "interest" | "confirm",
+            key as "gender" | "age" | "location" | "interest" | "confirm",
             {
               message: value,
               type: "required",
@@ -84,7 +84,7 @@ export default function UserForm() {
       ></motion.div>
 
       {/* 유저 폼 영역 */}
-      {genders && agesDataArr && locations && interests && (
+      {genders && ageDataArr && locations && interests && (
         <div className="col-center relative left-0 right-0">
           <motion.form
             initial={{ opacity: 0 }}
@@ -142,11 +142,11 @@ export default function UserForm() {
               <div className="row-start gap-4">
                 <span className="font-bold">연령대</span>
                 <span className="text-sm text-main_color">
-                  {errors.ages?.message}
+                  {errors.age?.message}
                 </span>
               </div>
               <Controller
-                name="ages"
+                name="age"
                 control={control}
                 render={({ field }) => {
                   return (
@@ -154,30 +154,30 @@ export default function UserForm() {
                       {...field}
                       className="grid w-full grid-cols-2 justify-stretch gap-3 sm:grid-cols-3"
                     >
-                      {agesDataArr.map((agesData) => {
+                      {ageDataArr.map((data) => {
                         return (
                           <label
-                            htmlFor={agesData.ages}
-                            key={agesData.ages}
+                            htmlFor={data.age}
+                            key={data.age}
                             className={`undraggable rounded-2xl border border-main_color px-3 py-0.5 transition-all ${classNames(
                               {
                                 "bg-main_color font-bold text-font_white shadow-md":
-                                  field.value === agesData.ages,
+                                  field.value === data.age,
                               }
                             )}`}
                           >
                             <input
                               type="radio"
-                              id={agesData.ages}
-                              name={agesData.ages}
-                              value={agesData.ages}
-                              checked={field.value == agesData.ages}
+                              id={data.age}
+                              name={data.age}
+                              value={data.age}
+                              checked={field.value == data.age}
                               onChange={(e) => {
                                 field.onChange(e.target.value);
                               }}
                               className="hidden"
                             />
-                            {agesData.agesStr}
+                            {data.ageStr}
                           </label>
                         );
                       })}
