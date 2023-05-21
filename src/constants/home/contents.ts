@@ -12,7 +12,7 @@ export const contents = [
     img: "/images/group.png",
   },
   {
-    title: "취업 챗봇",
+    title: "도우미 챗봇",
     link: "chatbot",
     content: "웹사이트 사용방법과 질문에 답을 합니다.",
     img: "/images/chat.png",
