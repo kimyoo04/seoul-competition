@@ -2,7 +2,7 @@ import { rankEducationUserKeywords } from "public/data/rankingData";
 import SearchKeywordRankList from "./SearchKeywordRankList";
 
 export default function SearchKeywordRank() {
-  const data = rankEducationUserKeywords;
+  const data = rankEducationUserKeywords.data;
 
   return (
     <div className="mb-8 rounded-2xl bg-main_color/5 p-4 shadow-md">
@@ -12,7 +12,7 @@ export default function SearchKeywordRank() {
       </h3>
 
       {/* 리스트 */}
-      <SearchKeywordRankList data={data.data} />
+      <SearchKeywordRankList dataArr={data} />
     </div>
   );
 }

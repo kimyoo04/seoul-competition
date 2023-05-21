@@ -1,18 +1,18 @@
-import { IRankKeywordsData } from "@type/rank";
+import { IRankKeywordData } from "@type/rank";
 import SearchKeywordRankItem from "../SearchKeywordRankItem";
 
 export default function SearchKeywordRankList({
-  data,
+  dataArr,
 }: {
-  data: IRankKeywordsData[];
+  dataArr: IRankKeywordData[];
 }) {
   return (
     <div className="col-center w-full gap-4">
       <ul className="grid w-full grid-cols-1">
-        {data.map((keyword) => (
+        {dataArr.map((data, index) => (
           <SearchKeywordRankItem
-            key={keyword.id}
-            keywords={keyword as IRankKeywordsData}
+            key={`${index}.${data.keyword}`}
+            data={data as IRankKeywordData}
           />
         ))}
       </ul>
