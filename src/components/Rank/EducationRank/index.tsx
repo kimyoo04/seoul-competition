@@ -8,7 +8,7 @@ export default function EducationRank() {
   const user = rankEducationUserData.user;
 
   return (
-    <>
+    <section>
       {/* //! 유저 유무에 따른 관심사 토글 버튼 */}
       {user && <InterestDropDown />}
 
@@ -21,6 +21,6 @@ export default function EducationRank() {
         {/* 교육 정보 리스트 */}
         <EducationRankList data={data} />
       </div>
-    </>
+    </section>
   );
 }

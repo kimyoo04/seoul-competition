@@ -7,7 +7,7 @@ export default function KeywordRank() {
   const user = data.user;
 
   return (
-    <>
+    <section>
       {/* 유저 정보가 있는 경우 */}
       {user && <AgeDropDown />}
 
@@ -20,6 +20,6 @@ export default function KeywordRank() {
         {/* 파이 차트 시각화 */}
         <PieChart data={data.data} />
       </div>
-    </>
+    </section>
   );
 }
