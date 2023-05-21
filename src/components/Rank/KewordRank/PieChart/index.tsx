@@ -59,9 +59,5 @@ export default function PieChart({ data }: { data: IRankKeywordData[] }) {
     },
   };
 
-  return (
-    <div className=" bg-ma col-center w-full gap-4">
-      <Pie data={chartData} options={options} />
-    </div>
-  );
+  return <Pie data={chartData} options={options} />;
 }
