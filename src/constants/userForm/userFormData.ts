@@ -1,14 +1,14 @@
-import { IAgesData, TInterest } from "@type/userForm";
+import { IAgeData, TInterest } from "@type/userForm";
 
 export const genders = ["남성", "여성"];
 
-export const agesDataArr: IAgesData[] = [
-  { agesStr: "49세 이하", ages: "0-49" },
-  { agesStr: "50 - 54세", ages: "50-54" },
-  { agesStr: "55 - 59세", ages: "55-59" },
-  { agesStr: "60 - 64세", ages: "60-64" },
-  { agesStr: "65 - 69세", ages: "65-69" },
-  { agesStr: "70세 이상", ages: "70-100" },
+export const ageDataArr: IAgeData[] = [
+  { ageStr: "49세 이하", age: "0-49" },
+  { ageStr: "50 - 54세", age: "50-54" },
+  { ageStr: "55 - 59세", age: "55-59" },
+  { ageStr: "60 - 64세", age: "60-64" },
+  { ageStr: "65 - 69세", age: "65-69" },
+  { ageStr: "70세 이상", age: "70-100" },
 ];
 
 export const locations = [

@@ -1,15 +1,15 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IAgesState } from "@type/rank";
-import { IAgesData } from "@type/userForm";
+import { IAgeState } from "@type/rank";
+import { IAgeData } from "@type/userForm";
 
-const initialState: IAgesState = {
+const initialState: IAgeState = {
   isOpen: false,
-  selectedAgesStr: "",
-  selectedAges: "",
+  selectedageStr: "",
+  selectedAge: "",
 };
 
 export const agesSlice = createSlice({
-  name: "ages",
+  name: "age",
   initialState,
   reducers: {
     // 더보기 버튼 열고 닫을 때
@@ -18,16 +18,16 @@ export const agesSlice = createSlice({
     },
 
     // 연령별 버튼 클릭했을 때 : ages
-    selectAge: (state, actions: PayloadAction<IAgesData>) => {
-      state.selectedAgesStr = actions.payload.agesStr;
-      state.selectedAges = actions.payload.ages;
+    selectAge: (state, actions: PayloadAction<IAgeData>) => {
+      state.selectedageStr = actions.payload.ageStr;
+      state.selectedAge = actions.payload.age;
       state.isOpen = false;
     },
 
     // "전체" 버튼 클릭했을 때
     selectTotal: (state) => {
-      state.selectedAgesStr = "";
-      state.selectedAges = "";
+      state.selectedageStr = "";
+      state.selectedAge = "";
       state.isOpen = false;
     },
   },

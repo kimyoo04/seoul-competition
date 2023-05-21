@@ -1,4 +1,4 @@
-import { TAges, TAgesStr, TInterest } from "./userForm";
+import { TAge, TAgeStr, TInterest } from "./userForm";
 
 // 자유게시판 최다 조회 랭킹 데이터 : 전체
 export interface IRankPostData {
@@ -48,11 +48,11 @@ export interface IRankKeywordsUserData {
   user: boolean;
 }
 
-// AgesState
-export interface IAgesState {
+// AgeState
+export interface IAgeState {
   isOpen: boolean;
-  selectedAgesStr: TAgesStr | "";
-  selectedAges: TAges | "";
+  selectedageStr: TAgeStr | "";
+  selectedAge: TAge | "";
 }
 
 // InterestState
