@@ -12,6 +12,10 @@ export const interestSlice = createSlice({
   name: "interest",
   initialState,
   reducers: {
+    close: (state) => {
+      state.isOpen = false;
+    },
+
     // 더보기 버튼 열고 닫을 때
     toggleOpen: (state) => {
       state.isOpen = !state.isOpen;

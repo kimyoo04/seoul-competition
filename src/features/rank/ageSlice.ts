@@ -12,6 +12,10 @@ export const agesSlice = createSlice({
   name: "age",
   initialState,
   reducers: {
+    close: (state) => {
+      state.isOpen = false;
+    },
+
     // 더보기 버튼 열고 닫을 때
     toggleOpen: (state) => {
       state.isOpen = !state.isOpen;
