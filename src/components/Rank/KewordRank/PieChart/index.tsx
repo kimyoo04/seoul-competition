@@ -2,9 +2,9 @@ import { Pie } from "react-chartjs-2";
 import { Chart, ChartOptions, ArcElement, Tooltip, Legend } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { round, sum } from "lodash";
-import { IRankKeywordsData } from "@type/rank";
+import { IRankKeywordData } from "@type/rank";
 
-export default function PieChart({ data }: { data: IRankKeywordsData[] }) {
+export default function PieChart({ data }: { data: IRankKeywordData[] }) {
   Chart.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
   const labels = data.map((item) => item.keyword);
@@ -62,14 +62,6 @@ export default function PieChart({ data }: { data: IRankKeywordsData[] }) {
   return (
     <div className=" bg-ma col-center w-full gap-4">
       <Pie data={chartData} options={options} />
-      {/* <div>
-        {labels.map((label, idx) => (
-          <p key={idx}>
-            {`"${label}" : ${values[idx]} 번 검색되었어요.`}
-            <br />
-          </p>
-        ))}
-      </div> */}
     </div>
   );
 }
