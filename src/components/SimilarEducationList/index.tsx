@@ -19,7 +19,7 @@ export default function SimilarList() {
       {error && <p className="text-alert_danger">문제가 발생했습니다.</p>}
 
       {/* 데이터가 있을 경우 화면 표시 */}
-      {searchCategory === "educations" && data && (
+      {searchCategory === "educations" && data && data.length !== 0 && (
         <div className="col-center w-full gap-4">
           {/* 헤더 */}
           <h1 className="text-xl font-bold">검색어와 관련 높은 게시물</h1>

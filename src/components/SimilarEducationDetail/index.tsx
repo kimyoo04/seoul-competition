@@ -18,7 +18,7 @@ export default function SimilarEducationDetail({ id }: { id: TEducationId }) {
       {error && <p className="text-alert_danger">문제가 발생했습니다.</p>}
 
       {/* 데이터가 있을 경우 화면 표시 */}
-      {searchCategory === "educations" && data && (
+      {searchCategory === "educations" && data && data.length !== 0 && (
         <div className="py-4">
           <h1 className="col-center w-full text-xl font-medium text-main_color">
             관련 교육 정보들은 어떤가요?

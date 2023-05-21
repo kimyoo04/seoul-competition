@@ -1,14 +1,16 @@
 // 상태 슬라이스 파일 (예: interestSlice.js)
-import { readEducationInterestRank } from "@api/rank/readEducationInterestRank";
-import { readEducationRank } from "@api/rank/readEducationRank";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { IInterestState } from "@type/rank";
+import { TInterest } from "@type/userForm";
+
+const initialState: IInterestState = {
+  isOpen: false,
+  selectedInterest: "",
+};
 
 export const interestSlice = createSlice({
   name: "interest",
-  initialState: {
-    isOpen: false,
-    selectedInterest: "",
-  },
+  initialState,
   reducers: {
     // 더보기 버튼 열고 닫을 때
     toggleOpen: (state) => {
@@ -16,16 +18,14 @@ export const interestSlice = createSlice({
     },
 
     // 관심사별 버튼 클릭했을 때
-    selectInterest: (state, actions: PayloadAction<string>) => {
+    selectInterest: (state, actions: PayloadAction<TInterest>) => {
       state.selectedInterest = actions.payload;
-      readEducationInterestRank(actions.payload);
       state.isOpen = false;
     },
 
     // "전체" 버튼 클릭했을 때
-    selectTotal: (state, actions: PayloadAction<string>) => {
-      state.selectedInterest = actions.payload;
-      readEducationRank();
+    selectTotal: (state) => {
+      state.selectedInterest = "";
       state.isOpen = false;
     },
   },
